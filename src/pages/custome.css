@@ -16,3 +16,12 @@
 .footerBg{
     background-color: #A5D1C9;
 }
+.customeShadow{
+    filter: drop-shadow(10px 10px 4px #5B6866);
+}
+
+.services:hover {
+    /* transform: scale(1.05); */
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 0 0.9rem rgb(20, 220, 87));
+  }
