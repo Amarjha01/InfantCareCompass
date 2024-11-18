@@ -1,0 +1,55 @@
+name: Frontend CI/CD
+
+on:
+  push:
+    branches:
+      - main # Trigger on push to the main branch
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.11.1' # Specify the Node.js version
+
+    - name: Print working directory
+      run: pwd
+
+    - name: Install dependencies
+      run: npm install
+      working-directory: ./frontend # Specify your frontend directory
+
+    - name: Print working directory
+      run: pwd
+
+    - name: Build the project
+      run: npm run build
+      working-directory: ./frontend # Specify your frontend directory
+
+    - name: Print working directory
+      run: pwd
+
+    - name: List files 
+      run: ls -la dist
+      working-directory: ./frontend
+
+    - name: Print working directory
+      run: pwd
+    
+    
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }} # Use the default GitHub token
+        publish_dir: ./frontend/dist # Path to the build directory
+        cname: infantcarecompass.live # Replace with your custom domain
