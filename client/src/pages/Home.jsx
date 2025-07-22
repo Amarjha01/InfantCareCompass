@@ -2,16 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Heart, Shield, BookOpen, Users, Star, ArrowRight, Play, Sparkles, Baby, Phone, Calendar } from "lucide-react";
 
 const HomePage = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState({});
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   const handleIntersection = (entries) => {
     entries.forEach((entry) => {
@@ -111,16 +102,6 @@ const HomePage = () => {
         <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
         <div className="absolute bottom-1/4 left-1/3 w-48 h-48 bg-pink-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
-
-      {/* Mouse Follower Effect */}
-      <div 
-        className="fixed w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full pointer-events-none z-50 opacity-60 blur-sm transition-all duration-100"
-        style={{
-          left: mousePosition.x - 12,
-          top: mousePosition.y - 12,
-          transform: 'translate3d(0, 0, 0)'
-        }}
-      ></div>
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-6">

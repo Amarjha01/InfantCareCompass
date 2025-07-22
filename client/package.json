@@ -24,6 +24,7 @@
     "react-icons": "^5.4.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.0",
+    "react-toastify": "^11.0.5",
     "redux-persist": "^6.0.0",
     "simple-peer": "^9.11.1"
   },

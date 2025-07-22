@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { User, UserCheck, Mail, Lock, Phone, MapPin, Calendar, FileText, Award, Heart } from "lucide-react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 
 // Define InputField outside the main component to prevent re-creation on render
 const InputField = ({ icon: Icon, label, type = "text", name, value, onChange, error, ...props }) => (
@@ -96,16 +100,25 @@ export default function Registration() {
     setIsSubmitting(true);
     const payload = { ...formData, role: role.toUpperCase() };
 
-    try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log("Registration successful", payload);
-      alert("Registration successful! Redirecting to login...");
-    } catch (error) {
-      console.error("Error during registration:", error);
-      alert("Failed to register. Check your connection.");
-    } finally {
-      setIsSubmitting(false);
-    }
+  try {
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    console.log("Registration successful", payload);
+
+    toast.success("🎉 Registration successful! Redirecting to login...");
+    
+    // Optional redirect after 3 seconds
+    setTimeout(() => {
+      window.location.href = "/signin";
+    }, 3000);
+
+  } 
+  catch (error) {
+    console.error("Error during registration:", error);
+    toast.error("❌ Failed to register. Check your connection.");
+  } finally {
+    setIsSubmitting(false);
+  }
+
   };
 
   const handleInputChange = (name, value) => {
@@ -231,6 +244,8 @@ export default function Registration() {
           </p>
         </div>
       </div>
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} />
+
     </div>
   );
 }
