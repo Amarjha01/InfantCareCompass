@@ -1,10 +1,12 @@
+
 import React, { useState } from "react";
 import { User, UserCheck, Mail, Lock, Phone, MapPin, Calendar, FileText, Award, Heart,Eye,EyeOff } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
-
+// Code is already fixed in previous PR
+// Just adding comment for raising a new PR
 // Define InputField outside the main component to prevent re-creation on render
 const InputField = ({ icon: Icon, label, type = "text", name, value,onToggleShowPassword,showPassword, onChange, error, ...props }) => (
   
