@@ -251,7 +251,7 @@ const HomePage = () => {
                 </div>
               </div>
               
-              <button className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-110 hover:shadow-[0_0_24px_0_rgba(244,63,94,0.3)] focus:outline-none focus:ring-4 focus:ring-pink-400/30">
+              <button className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                 Join Our Community
               </button>
             </div>
