@@ -54,11 +54,11 @@ export default function Header() {
                 key={to}
                 to={to}
                 className={({ isActive }) =>
-                  `flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
-                    isActive
-                      ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow"
-                      : "text-gray-700 hover:bg-gray-100 hover:text-blue-600"
-                  }`
+                  `flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-300
+                  ${isActive
+                    ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow"
+                    : "text-gray-700 hover:bg-gray-100 hover:text-blue-600 hover:scale-110 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400/30"}
+                  `
                 }
               >
                 {icon}
@@ -71,13 +71,13 @@ export default function Header() {
           <div className="hidden lg:flex items-center gap-3">
             <Link
               to="/signin"
-              className="border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-4 py-1.5 rounded-md text-sm transition"
+              className="border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-4 py-1.5 rounded-md text-sm transition duration-300 hover:scale-105 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400/30"
             >
               Sign In
             </Link>
             <Link
               to="/registration"
-              className="bg-gradient-to-r from-pink-500 to-rose-500 px-5 py-1.5 rounded-full text-white font-medium text-sm hover:scale-105 transition"
+              className="bg-gradient-to-r from-pink-500 to-rose-500 px-5 py-1.5 rounded-full text-white font-medium text-sm hover:scale-110 hover:shadow-lg hover:from-pink-600 hover:to-rose-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-pink-400/30"
             >
               Get Started
             </Link>
