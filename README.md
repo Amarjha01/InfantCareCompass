@@ -108,6 +108,11 @@ Create a .env file in the root directory and add the following:
 
 ---
 
+### License
+
+This project is licensed under the [MIT License](LICENSE).  
+You’re free to use, modify, and share this software under the license terms.
+
 ### Contributing
 
 We welcome contributions to enhance the functionality and features of InfantCareCompass.
@@ -160,4 +165,3 @@ Submit a pull request detailing your changes.
 </p>
 
 <h3 align="center">🔄 Auto-Updating with New Contributors!</h3>
-
