@@ -9,7 +9,9 @@ import Registration from "../pages/Registration";
 import Signin from "../pages/SignIn";
 import HomePage from "../pages/Home";
 import ConsultationPage from "../pages/consult.jsx";
-import VideoRoom from '../pages/VideoRoom.jsx'
+import VideoRoom from "../pages/VideoRoom.jsx";
+import PersonalizedLearningHub from "../pages/LearningHub.jsx"; // Import LearningHub component
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -45,9 +47,10 @@ const router = createBrowserRouter([
           },
         ],
       },
-    
-     
-   
+      {
+        path: "learning-hub",
+        element: <PersonalizedLearningHub />,
+      },
     ],
   },
   {
