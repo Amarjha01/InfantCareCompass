@@ -1,4 +1,4 @@
-import React from "react";
+import "react";
 import { 
   Mail, 
   Phone, 
@@ -18,7 +18,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-300 overflow-hidden">
+    <footer className="relative bg-gradient-to-br from-[#502478] to-[#9157C7] text-white overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,_white_1px,_transparent_0)] bg-[size:20px_20px]"></div>
@@ -39,19 +39,19 @@ const Footer = () => {
                 HealthCare+
               </h3>
             </div>
-            <p className="text-gray-400 leading-relaxed mb-6">
+            <p className="text-gray-100 leading-relaxed mb-6">
               Providing exceptional healthcare service and care to all our patients. 
-              Your health is our priority, and we're here to help you every step of the way.
+              Your health is our priority, and We are here to help you every step of the way.
             </p>
-            <div className="flex items-center space-x-2 text-sm text-gray-500">
-              <Heart className="w-4 h-4 text-red-500" />
-              <span>Trusted by 10,000+ families</span>
+            <div className="flex items-center space-x-2 text-sm">
+              <Heart className="w-4 h-4 text-red-400" />
+              <span className="font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Trusted by 10,000+ families</span>
             </div>
           </div>
           
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-bold text-white mb-6 relative">
+            <h4 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-6 relative">
               Quick Links
               <div className="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"></div>
             </h4>
@@ -67,7 +67,7 @@ const Footer = () => {
                 <li key={index}>
                   <a 
                     href={link.href} 
-                    className="group flex items-center text-gray-400 hover:text-white transition-all duration-300 hover:translate-x-1"
+                    className="group flex items-center text-gray-100 hover:text-purple-200 transition-all duration-300 hover:translate-x-1 font-semibold"
                   >
                     <span className="w-2 h-2 bg-blue-500 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                     {link.name}
@@ -79,7 +79,7 @@ const Footer = () => {
           
           {/* Contact Information */}
           <div>
-            <h4 className="text-lg font-bold text-white mb-6 relative">
+            <h4 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-6 relative">
               Contact Info
               <div className="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"></div>
             </h4>
@@ -89,10 +89,10 @@ const Footer = () => {
                   <Mail className="w-5 h-5 text-blue-400" />
                 </div>
                 <div>
-                  <p className="text-gray-500 text-sm">Email</p>
+                  <p className="text-gray-200 text-sm">Email</p>
                   <a
                     href="mailto:help@infantcarecompass.live"
-                    className="text-gray-300 hover:text-white transition-colors"
+                    className="text-white hover:text-purple-200 transition-colors font-semibold"
                   >
                     help@infantcarecompass.live
                   </a>
@@ -103,10 +103,10 @@ const Footer = () => {
                   <Phone className="w-5 h-5 text-green-400" />
                 </div>
                 <div>
-                  <p className="text-gray-500 text-sm">Phone</p>
+                  <p className="text-gray-200 text-sm">Phone</p>
                   <a
                     href="tel:+919956****"
-                    className="text-gray-300 hover:text-white transition-colors"
+                    className="text-white hover:text-purple-200 transition-colors font-semibold"
                   >
                     +91 919956****
                   </a>
@@ -117,8 +117,8 @@ const Footer = () => {
                   <MapPin className="w-5 h-5 text-purple-400" />
                 </div>
                 <div>
-                  <p className="text-gray-500 text-sm">Address</p>
-                  <p className="text-gray-300">123 Healthcare Ave, Medical City, MC 12345</p>
+                  <p className="text-gray-200 text-sm">Address</p>
+                  <p className="text-gray-100">123 Healthcare Ave, Medical City, MC 12345</p>
                 </div>
               </li>
             </ul>
@@ -126,21 +126,21 @@ const Footer = () => {
           
           {/* Newsletter & Social */}
           <div>
-            <h4 className="text-lg font-bold text-white mb-6 relative">
+            <h4 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-6 relative">
               Stay Connected
               <div className="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"></div>
             </h4>
             
             {/* Newsletter Signup */}
             <div className="mb-6">
-              <p className="text-gray-400 text-sm mb-4">
+              <p className="text-gray-100 text-sm mb-4">
                 Subscribe to our newsletter for health tips and updates
               </p>
               <div className="flex">
                 <input
                   type="email"
                   placeholder="Your email"
-                  className="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-l-lg focus:outline-none focus:border-blue-500 transition-colors text-white placeholder-gray-500"
+                  className="flex-1 px-4 py-2 bg-white/20 border border-white/30 rounded-l-lg focus:outline-none focus:border-purple-400 transition-colors text-white placeholder-gray-200"
                 />
                 <button className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-r-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 text-white">
                   <ExternalLink className="w-4 h-4" />
@@ -150,18 +150,18 @@ const Footer = () => {
             
             {/* Social Media Links */}
             <div>
-              <p className="text-gray-400 text-sm mb-4">Follow us on social media</p>
+              <p className="text-gray-100 text-sm mb-4">Follow us on social media</p>
               <div className="flex space-x-3">
                 {[
-                  { Icon: Facebook, href: "#", color: "hover:text-blue-500" },
-                  { Icon: Twitter, href: "#", color: "hover:text-blue-400" },
-                  { Icon: Instagram, href: "#", color: "hover:text-pink-500" },
-                  { Icon: Linkedin, href: "#", color: "hover:text-blue-600" }
-                ].map(({ Icon, href, color }, index) => (
+                  { Icon: Facebook, href: "#" },
+                  { Icon: Twitter, href: "#" },
+                  { Icon: Instagram, href: "#" },
+                  { Icon: Linkedin, href: "#" }
+                ].map(({ Icon, href }, index) => (
                   <a
                     key={index}
                     href={href}
-                    className={`w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 ${color} hover:scale-110 transition-all duration-300 hover:bg-gray-700`}
+                    className={`w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-white hover:text-purple-200 hover:bg-white/20 transition-all duration-300`}
                   >
                     <Icon className="w-5 h-5" />
                   </a>
@@ -174,20 +174,20 @@ const Footer = () => {
         {/* Footer Bottom */}
         <div className="mt-12 pt-8 border-t border-gray-700/50">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex items-center space-x-6 text-sm text-gray-500">
+            <div className="flex items-center space-x-6 text-sm font-semibold text-white">
               <p>&copy; 2024 HealthCare+. All rights reserved.</p>
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+              <a href="#" className="hover:text-purple-200 transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-purple-200 transition-colors">Terms of Service</a>
+              <a href="#" className="hover:text-purple-200 transition-colors">Cookie Policy</a>
             </div>
             
             {/* Back to Top Button */}
             <button
               onClick={scrollToTop}
-              className="group flex items-center space-x-2 text-sm text-gray-400 hover:text-white transition-all duration-300 hover:translate-y-[-2px]"
+              className="group flex items-center space-x-2 text-sm text-white hover:text-purple-200 transition-all duration-300 hover:translate-y-[-2px]"
             >
               <span>Back to top</span>
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center group-hover:shadow-lg transition-all duration-300">
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center group-hover:shadow-lg transition-all duration-300">
                 <ArrowUp className="w-4 h-4 text-white" />
               </div>
             </button>

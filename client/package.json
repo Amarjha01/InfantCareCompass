@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^2.5.0",
     "@zegocloud/zego-uikit-prebuilt": "^2.14.0",
     "axios": "^1.7.9",
+    "date-fns": "^4.1.0",
     "framer-motion": "^11.15.0",
     "install": "^0.13.0",
     "lucide-react": "^0.525.0",
@@ -28,7 +29,8 @@
     "react-router-dom": "^7.1.0",
     "react-toastify": "^11.0.5",
     "redux-persist": "^6.0.0",
-    "simple-peer": "^9.11.1"
+    "simple-peer": "^9.11.1",
+    "swiper": "^11.2.10"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

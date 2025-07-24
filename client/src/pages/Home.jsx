@@ -12,10 +12,29 @@ import {
   Phone,
   Calendar,
 } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 import { Link } from "react-router-dom";
+
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+
 
 const HomePage = () => {
   const [isVisible, setIsVisible] = useState({});
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
 
   const handleIntersection = (entries) => {
     entries.forEach((entry) => {
@@ -53,11 +72,7 @@ const HomePage = () => {
       className={`
       backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl
       shadow-2xl transition-all duration-500 ease-out
-      ${
-        hover
-          ? "hover:bg-white/20 hover:scale-105 hover:shadow-3xl hover:-translate-y-2"
-          : ""
-      }
+      ${hover ? "hover:bg-white/20 hover: hover:shadow-3xl " : ""}
       ${className}
     `}
     >
@@ -75,6 +90,7 @@ const HomePage = () => {
       image:
         "https://res.cloudinary.com/dbnticsz8/image/upload/v1734934194/Infant%20care%20Compass/gheqjy0npqdkyhgqds43.png",
       link: "#",
+
     },
     {
       icon: <Phone className="w-12 h-12" />,
@@ -84,7 +100,9 @@ const HomePage = () => {
       color: "from-emerald-500 to-teal-600",
       image:
         "https://res.cloudinary.com/dbnticsz8/image/upload/v1734935048/Infant%20care%20Compass/crqtr4wfu69wmqnulmja.png",
+
       link: "#",
+
     },
     {
       icon: <BookOpen className="w-12 h-12" />,
@@ -95,6 +113,7 @@ const HomePage = () => {
       image:
         "https://res.cloudinary.com/dbnticsz8/image/upload/v1734935847/Infant%20care%20Compass/yf0tea4dqhjf4ww3hjcz.png",
       link: "/learning-hub",
+
     },
   ];
 
@@ -105,8 +124,8 @@ const HomePage = () => {
       content:
         "The AI-powered insights helped me understand my baby's needs like never before. It's like having a pediatrician in your pocket!",
       rating: 5,
-      avatar:
-        "https://images.unsplash.com/photo-1494790108755-2616b9b39d18?w=100&h=100&fit=crop&crop=face",
+      avatar:"https://images.unsplash.com/photo-1509868918748-a554ad25f858?w=100&h=100&fit=crop&crop=face",
+
     },
     {
       name: "Michael Rodriguez",
@@ -126,6 +145,24 @@ const HomePage = () => {
       avatar:
         "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&h=100&fit=crop&crop=face",
     },
+    {
+      name: "Samuel Lee",
+      role: "Father of Two",
+      content:
+        "The community support and expert consultations saved us countless sleepless nights. Truly revolutionary!",
+      rating: 5,
+      avatar:
+        "https://images.unsplash.com/photo-1545167622-3a6ac756afa4?w=100&h=100&fit=crop&crop=face",
+    },
+    {
+      name: "julie Smith",
+      role: "Pediatric Nurse",
+      content:
+        "As a healthcare professional, I'm impressed by the accuracy and quality of information. I recommend it to all my patients.",
+      rating: 5,
+      avatar:
+        "https://images.unsplash.com/photo-1512288094938-363287817259?w=100&h=100&fit=crop&crop=face",
+    },
   ];
 
   return (
@@ -142,6 +179,19 @@ const HomePage = () => {
           style={{ animationDelay: "2s" }}
         ></div>
       </div>
+
+
+      {/* Mouse Follower Effect */}
+      <div
+        className="fixed w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full pointer-events-none z-50 opacity-60 blur-sm transition-all duration-100"
+        style={{
+          left: mousePosition.x - 12,
+          top: mousePosition.y - 12,
+          transform: "translate3d(0, 0, 0)",
+        }}
+      ></div>
+
+
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-6">
@@ -236,7 +286,7 @@ const HomePage = () => {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-32 relative">
+      <section id="services" className="py-32 relative overflow-x-visible z-10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
@@ -247,8 +297,27 @@ const HomePage = () => {
               an intuitive, supported experience.
             </p>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+          <Swiper
+            effect="coverflow"
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={"auto"}
+            coverflowEffect={{
+              rotate: 30,
+              stretch: 0,
+              depth: 200,
+              modifier: 1,
+              scale: 0.9,
+              slideShadows: true,
+            }}
+            autoplay={{
+              delay: 2500, // 2.5 seconds
+              disableOnInteraction: false, // Keeps autoplay running after user swipe
+            }}
+            pagination={{ clickable: true }}
+            modules={[EffectCoverflow, Pagination, Autoplay]}
+            className="w-full max-w-6xl mx-auto"
+          >
             {services.map((service, index) => (
               <div key={index} className="group relative">
                 <GlassCard className="p-8 h-full group-hover:bg-white/15">
@@ -279,16 +348,31 @@ const HomePage = () => {
                       <Link to={service.link}>Learn More</Link>
                       <ArrowRight className="w-4 h-4" />
                     </button>
+
+              <SwiperSlide key={index} className="!w-80 !flex-shrink-0">
+                <GlassCard className="p-6 text-white text-center">
+                  <div
+                    className={`bg-gradient-to-br ${service.color} p-4 rounded-full inline-block`}
+                  >
+                    {service.icon}
                   </div>
+                  <h3 className="text-xl font-bold mt-4">{service.title}</h3>
+                  <p className="text-white-600 mt-2">{service.description}</p>
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="mt-4 rounded-xl w-full h-40 object-cover"
+                  />
+                  <p className="mt-3 text-blue-600 font-medium">Learn More →</p>
                 </GlassCard>
-              </div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </div>
       </section>
 
       {/* Experience Section */}
-      <section className="py-32 relative">
+      <section className="py-32 relative bg-black/5 overflow-x-visible">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -357,7 +441,25 @@ const HomePage = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={30}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+            }}
+            pagination={{ clickable: true }}
+            breakpoints={{
+              768: {
+                slidesPerView: 2,
+              },
+              1024: {
+                slidesPerView: 3,
+              },
+            }}
+            modules={[Autoplay, Pagination]}
+            className="w-full overflow-visible pb-10"
+          >
             {testimonials.map((testimonial, index) => (
               <GlassCard key={index} className="p-8 relative group">
                 <div className="flex items-center gap-2 mb-4">
@@ -386,11 +488,42 @@ const HomePage = () => {
                     <div className="text-gray-400 text-sm">
                       {testimonial.role}
                     </div>
+
+              <SwiperSlide key={index}>
+                <GlassCard className="p-8 relative group" hover={true}>
+                  <div className="flex items-center gap-2 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                      />
+                    ))}
+
                   </div>
-                </div>
-              </GlassCard>
+
+                  <p className="text-gray-300 mb-6 leading-relaxed italic">
+                    "{testimonial.content}"
+                  </p>
+
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-semibold text-white">
+                        {testimonial.name}
+                      </div>
+                      <div className="text-gray-400 text-sm">
+                        {testimonial.role}
+                      </div>
+                    </div>
+                  </div>
+                </GlassCard>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </div>
       </section>
 
