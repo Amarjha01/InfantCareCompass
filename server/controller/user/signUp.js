@@ -8,7 +8,7 @@ async function signup(req,res) {
 
       //added email and dob to be fetched as well to validate 
         const {email, dob, password,role, contactNumber} = req.body;
-        if(!email || !dob|| !password || !role|| !contactNumber){
+        if(!email || !dob|| !password || !contactNumber){
           return res.status(400).json({
             error: true,
             success: false,
