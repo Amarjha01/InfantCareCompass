@@ -34,6 +34,12 @@ const doctorScheme = new mongoose.Schema(
           "required": true
         },
      
+        "rating": {
+          "type": Number,
+          "required": true,
+          default : 0
+        },
+     
       }
     )
 const doctormondel = new mongoose.model('doctorsData',doctorScheme);
