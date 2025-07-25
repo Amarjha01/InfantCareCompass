@@ -339,7 +339,8 @@ const HomePage = () => {
                       <Link to={service.link}>Learn More</Link>
                       <ArrowRight className="w-4 h-4" />
                     </button>
-
+                     </div>
+                </GlassCard>
               <SwiperSlide key={index} className="!w-80 !flex-shrink-0">
                 <GlassCard className="p-6 text-white text-center">
                   <div
@@ -357,8 +358,11 @@ const HomePage = () => {
                   <p className="mt-3 text-blue-600 font-medium">Learn More →</p>
                 </GlassCard>
               </SwiperSlide>
+              </div>
             ))}
-          </Swiper>
+          
+        
+        </Swiper>
         </div>
       </section>
 
@@ -422,101 +426,69 @@ const HomePage = () => {
 
       {/* Testimonials Section */}
       <section className="py-32 relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              Voices of Trust
-            </h2>
-            <p className="text-xl text-gray-400">
-              Real stories from parents who've transformed their journey with us
+  <div className="max-w-7xl mx-auto px-6">
+    <div className="text-center mb-20">
+      <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+        Voices of Trust
+      </h2>
+      <p className="text-xl text-gray-400">
+        Real stories from parents who've transformed their journey with us
+      </p>
+    </div>
+
+    <Swiper
+      slidesPerView={1}
+      spaceBetween={30}
+      autoplay={{
+        delay: 4000,
+        disableOnInteraction: false,
+      }}
+      pagination={{ clickable: true }}
+      breakpoints={{
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+      }}
+      modules={[Autoplay, Pagination]}
+      className="w-full overflow-visible pb-10"
+    >
+      {testimonials.map((testimonial, index) => (
+        <SwiperSlide key={index}>
+          <GlassCard className="p-8 relative group" hover={true}>
+            <div className="flex items-center gap-2 mb-4">
+              {[...Array(testimonial.rating)].map((_, i) => (
+                <Star
+                  key={i}
+                  className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                />
+              ))}
+            </div>
+
+            <p className="text-gray-300 mb-6 leading-relaxed italic">
+              "{testimonial.content}"
             </p>
-          </div>
 
-          <Swiper
-            slidesPerView={1}
-            spaceBetween={30}
-            autoplay={{
-              delay: 4000,
-              disableOnInteraction: false,
-            }}
-            pagination={{ clickable: true }}
-            breakpoints={{
-              768: {
-                slidesPerView: 2,
-              },
-              1024: {
-                slidesPerView: 3,
-              },
-            }}
-            modules={[Autoplay, Pagination]}
-            className="w-full overflow-visible pb-10"
-          >
-            {testimonials.map((testimonial, index) => (
-              <GlassCard key={index} className="p-8 relative group">
-                <div className="flex items-center gap-2 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-5 h-5 fill-yellow-400 text-yellow-400"
-                    />
-                  ))}
+            <div className="flex items-center gap-4">
+              <img
+                src={testimonial.avatar}
+                alt={testimonial.name}
+                className="w-12 h-12 rounded-full object-cover"
+              />
+              <div>
+                <div className="font-semibold text-white">
+                  {testimonial.name}
                 </div>
+                <div className="text-gray-400 text-sm">
+                  {testimonial.role}
+                </div>
+              </div>
+            </div>
+          </GlassCard>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  </div>
+</section>
 
-                <p className="text-gray-300 mb-6 leading-relaxed italic">
-                  "{testimonial.content}"
-                </p>
-
-                <div className="flex items-center gap-4">
-                  <img
-                    src={testimonial.avatar}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div>
-                    <div className="font-semibold text-white">
-                      {testimonial.name}
-                    </div>
-                    <div className="text-gray-400 text-sm">
-                      {testimonial.role}
-                    </div>
-
-              <SwiperSlide key={index}>
-                <GlassCard className="p-8 relative group" hover={true}>
-                  <div className="flex items-center gap-2 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-5 h-5 fill-yellow-400 text-yellow-400"
-                      />
-                    ))}
-
-                  </div>
-
-                  <p className="text-gray-300 mb-6 leading-relaxed italic">
-                    "{testimonial.content}"
-                  </p>
-
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={testimonial.avatar}
-                      alt={testimonial.name}
-                      className="w-12 h-12 rounded-full object-cover"
-                    />
-                    <div>
-                      <div className="font-semibold text-white">
-                        {testimonial.name}
-                      </div>
-                      <div className="text-gray-400 text-sm">
-                        {testimonial.role}
-                      </div>
-                    </div>
-                  </div>
-                </GlassCard>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-32 relative">
