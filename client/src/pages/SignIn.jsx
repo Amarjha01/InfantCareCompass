@@ -1,8 +1,83 @@
 import React, { useState } from "react";
-import { Mail, Lock, User, Eye, EyeOff, Shield, Stethoscope, Baby, ArrowRight, AlertCircle } from "lucide-react";
+import { Mail, Lock, User, Eye, EyeOff, Shield, Stethoscope, Baby, ArrowRight, AlertCircle, Check, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 // --- Solution: Moved InputField outside and simplified it ---
+const PasswordStrengthIndicator = ({ password }) => {
+  const requirements = [
+    { test: (pwd) => pwd.length >= 8, label: "At least 8 characters" },
+    { test: (pwd) => /[A-Z]/.test(pwd), label: "One uppercase letter (A–Z)" },
+    { test: (pwd) => /[a-z]/.test(pwd), label: "One lowercase letter (a–z)" },
+    { test: (pwd) => /[0-9]/.test(pwd), label: "One number (0–9)" },
+    { test: (pwd) => /[!@#$%^&*]/.test(pwd), label: "One special character (!@#$%^&*)" }
+  ];
+
+  const metRequirements = requirements.filter(req => req.test(password));
+  const strength = metRequirements.length;
+  
+  const getStrengthColor = () => {
+    if (strength <= 1) return "text-red-500";
+    if (strength <= 2) return "text-orange-500";
+    if (strength <= 3) return "text-yellow-500";
+    if (strength <= 4) return "text-blue-500";
+    return "text-green-500";
+  };
+
+  const getStrengthText = () => {
+    if (strength <= 1) return "Very Weak";
+    if (strength <= 2) return "Weak";
+    if (strength <= 3) return "Fair";
+    if (strength <= 4) return "Good";
+    return "Strong";
+  };
+
+  const getStrengthBarColor = () => {
+    if (strength <= 1) return "bg-red-500";
+    if (strength <= 2) return "bg-orange-500";
+    if (strength <= 3) return "bg-yellow-500";
+    if (strength <= 4) return "bg-blue-500";
+    return "bg-green-500";
+  };
+
+  if (!password) return null;
+
+  return (
+    <div className="mt-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-sm font-medium text-gray-700">Password Strength:</span>
+        <span className={`text-sm font-semibold ${getStrengthColor()}`}>
+          {getStrengthText()}
+        </span>
+      </div>
+      
+      <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
+        <div 
+          className={`h-2 rounded-full transition-all duration-300 ${getStrengthBarColor()}`}
+          style={{ width: `${(strength / 5) * 100}%` }}
+        ></div>
+      </div>
+
+      <div className="space-y-2">
+        {requirements.map((req, index) => {
+          const isMet = req.test(password);
+          return (
+            <div key={index} className="flex items-center text-sm">
+              {isMet ? (
+                <Check className="w-4 h-4 text-green-500 mr-2" />
+              ) : (
+                <X className="w-4 h-4 text-red-400 mr-2" />
+              )}
+              <span className={isMet ? "text-green-700" : "text-gray-600"}>
+                {req.label}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
 const InputField = ({
   icon: Icon,
   name,
@@ -16,6 +91,7 @@ const InputField = ({
   onChange,
   onFocus,
   onBlur,
+  showPasswordStrength = false,
 }) => {
   return (
     <div className="relative">
@@ -54,6 +130,10 @@ const InputField = ({
           <AlertCircle className="w-4 h-4 mr-1" />
           {error}
         </p>
+      )}
+
+      {showPasswordStrength && name === 'password' && (
+        <PasswordStrengthIndicator password={value} />
       )}
     </div>
   );
@@ -114,8 +194,20 @@ export default function Signin() {
 
     if (!formData.password.trim()) {
       newErrors.password = "Password is required";
-    } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters long";
+    } else {
+      const password = formData.password;
+      const passwordRequirements = [
+        { test: password.length >= 8, message: "Password must be at least 8 characters long" },
+        { test: /[A-Z]/.test(password), message: "Password must contain at least one uppercase letter" },
+        { test: /[a-z]/.test(password), message: "Password must contain at least one lowercase letter" },
+        { test: /[0-9]/.test(password), message: "Password must contain at least one number" },
+        { test: /[!@#$%^&*]/.test(password), message: "Password must contain at least one special character (!@#$%^&*)" }
+      ];
+
+      const failedRequirements = passwordRequirements.filter(req => !req.test);
+      if (failedRequirements.length > 0) {
+        newErrors.password = failedRequirements[0].message;
+      }
     }
 
     if (!formData.role) {
@@ -194,6 +286,7 @@ export default function Signin() {
               onChange={handleChange}
               onFocus={() => setFocusedField('password')}
               onBlur={() => setFocusedField(null)}
+              showPasswordStrength={true}
             />
 
             <div className="space-y-4">

@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Clock, 
-  BookOpen, 
-  Newspaper, 
-  Heart, 
-  Shield, 
-  Users, 
+import React, { useState, useEffect } from "react";
+import {
+  Clock,
+  BookOpen,
+  Newspaper,
+  Heart,
+  Shield,
+  Users,
   Star,
   ArrowRight,
   CheckCircle,
-  Sparkles
-} from 'lucide-react';
+  Sparkles,
+} from "lucide-react";
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -25,45 +25,85 @@ const About = () => {
       id: 1,
       title: "24/7 Consultation",
       icon: <Clock className="w-8 h-8" />,
-      description: "We connect parents with pediatric experts for one-on-one virtual consultations, available around the clock. This ensures access to professional advice at any time, making it easier to handle both emergencies and routine health concerns from the comfort of your home.",
+      description:
+        "We connect parents with pediatric experts for one-on-one virtual consultations, available around the clock. This ensures access to professional advice at any time, making it easier to handle both emergencies and routine health concerns from the comfort of your home.",
       gradient: "from-amber-400 via-orange-500 to-yellow-500",
       bgColor: "bg-gradient-to-br from-amber-50 to-orange-50",
-      features: ["24/7 Availability", "Expert Pediatricians", "Virtual Consultations", "Emergency Support"]
+      features: [
+        "24/7 Availability",
+        "Expert Pediatricians",
+        "Virtual Consultations",
+        "Emergency Support",
+      ],
     },
     {
       id: 2,
       title: "Childcare Education",
       icon: <BookOpen className="w-8 h-8" />,
-      description: "Our platform offers a library of expertly curated articles and educational content, guiding parents at every stage of their child's development. From nutrition and safety to growth tips, we ensure you have the knowledge needed for excellent child care.",
+      description:
+        "Our platform offers a library of expertly curated articles and educational content, guiding parents at every stage of their child's development. From nutrition and safety to growth tips, we ensure you have the knowledge needed for excellent child care.",
       gradient: "from-blue-500 via-purple-500 to-indigo-600",
       bgColor: "bg-gradient-to-br from-blue-50 to-purple-50",
-      features: ["Curated Content", "Development Guides", "Safety Tips", "Nutrition Advice"]
+      features: [
+        "Curated Content",
+        "Development Guides",
+        "Safety Tips",
+        "Nutrition Advice",
+      ],
     },
     {
       id: 3,
       title: "News and Updates",
       icon: <Newspaper className="w-8 h-8" />,
-      description: "Stay informed with our regularly updated news section, featuring the latest developments in pediatric health, safety, and childcare practices. We make sure you're equipped with accurate and timely information to make the best decisions for your family.",
+      description:
+        "Stay informed with our regularly updated news section, featuring the latest developments in pediatric health, safety, and childcare practices. We make sure you're equipped with accurate and timely information to make the best decisions for your family.",
       gradient: "from-green-500 via-teal-500 to-cyan-600",
       bgColor: "bg-gradient-to-br from-green-50 to-teal-50",
-      features: ["Latest Updates", "Health News", "Safety Alerts", "Expert Insights"]
+      features: [
+        "Latest Updates",
+        "Health News",
+        "Safety Alerts",
+        "Expert Insights",
+      ],
     },
     {
       id: 4,
       title: "AI-Driven First Aid",
       icon: <Heart className="w-8 h-8" />,
-      description: "Our intelligent AI-powered first aid guide provides parents with step-by-step instructions for handling common infant health issues. Whether it's a fever or minor injury, you can trust our tool to guide you until professional help is available.",
+      description:
+        "Our intelligent AI-powered first aid guide provides parents with step-by-step instructions for handling common infant health issues. Whether it's a fever or minor injury, you can trust our tool to guide you until professional help is available.",
       gradient: "from-pink-500 via-rose-500 to-red-500",
       bgColor: "bg-gradient-to-br from-pink-50 to-rose-50",
-      features: ["AI-Powered", "Step-by-Step Guide", "Emergency Response", "Instant Help"]
-    }
+      features: [
+        "AI-Powered",
+        "Step-by-Step Guide",
+        "Emergency Response",
+        "Instant Help",
+      ],
+    },
   ];
 
   const stats = [
-    { number: "50K+", label: "Happy Parents", icon: <Users className="w-6 h-6" /> },
-    { number: "24/7", label: "Expert Support", icon: <Shield className="w-6 h-6" /> },
-    { number: "98%", label: "Satisfaction Rate", icon: <Star className="w-6 h-6" /> },
-    { number: "1000+", label: "Health Articles", icon: <BookOpen className="w-6 h-6" /> }
+    {
+      number: "50K+",
+      label: "Happy Parents",
+      icon: <Users className="w-6 h-6" />,
+    },
+    {
+      number: "24/7",
+      label: "Expert Support",
+      icon: <Shield className="w-6 h-6" />,
+    },
+    {
+      number: "98%",
+      label: "Satisfaction Rate",
+      icon: <Star className="w-6 h-6" />,
+    },
+    {
+      number: "1000+",
+      label: "Health Articles",
+      icon: <BookOpen className="w-6 h-6" />,
+    },
   ];
 
   return (
@@ -80,18 +120,32 @@ const About = () => {
         {/* Hero Section */}
         <section className="py-20 px-4">
           <div className="container mx-auto max-w-6xl">
-            <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div
+              className={`text-center transition-all duration-1000 ${
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }`}
+            >
               <div className="inline-flex items-center gap-2 bg-purple-500/20 backdrop-blur-sm border border-purple-500/30 rounded-full px-6 py-2 mb-6">
                 <Sparkles className="w-5 h-5 text-purple-400" />
-                <span className="text-sm font-medium text-purple-300">Welcome to InfantCareCompass</span>
+                <span className="text-sm font-medium text-purple-300">
+                  Welcome to InfantCareCompass
+                </span>
               </div>
-              
+
               <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
                 About Us
               </h1>
-              
+
               <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                At <span className="font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">InfantCareCompass</span>, we are committed to supporting parents and caregivers by offering comprehensive child care services, including 24/7 consultations, insightful news, and educational resources.
+                At{" "}
+                <span className="font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  InfantCareCompass
+                </span>
+                , we are committed to supporting parents and caregivers by
+                offering comprehensive child care services, including 24/7
+                consultations, insightful news, and educational resources.
               </p>
             </div>
           </div>
@@ -104,14 +158,20 @@ const About = () => {
               {stats.map((stat, index) => (
                 <div
                   key={index}
-                  className={`text-center group transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                  className={`text-center group transition-all duration-500 ${
+                    isVisible
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-10"
+                  }`}
                   style={{ transitionDelay: `${index * 150}ms` }}
                 >
                   <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 group-hover:scale-105">
                     <div className="text-purple-400 mb-2 flex justify-center group-hover:scale-110 transition-transform duration-300">
                       {stat.icon}
                     </div>
-                    <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.number}</div>
+                    <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+                      {stat.number}
+                    </div>
                     <div className="text-gray-300 text-sm">{stat.label}</div>
                   </div>
                 </div>
@@ -128,7 +188,8 @@ const About = () => {
                 Our Services
               </h2>
               <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                Comprehensive care solutions designed to support you at every step of your parenting journey
+                Comprehensive care solutions designed to support you at every
+                step of your parenting journey
               </p>
             </div>
 
@@ -137,22 +198,26 @@ const About = () => {
                 <div
                   key={service.id}
                   className={`group relative overflow-hidden rounded-2xl transition-all duration-700 hover:scale-105 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                    isVisible
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-10"
                   }`}
                   style={{ transitionDelay: `${index * 200}ms` }}
                   onMouseEnter={() => setActiveCard(service.id)}
                   onMouseLeave={() => setActiveCard(null)}
                 >
                   {/* Card Background */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-10 group-hover:opacity-20 transition-opacity duration-300`}></div>
-                  
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-10 group-hover:opacity-20 transition-opacity duration-300`}
+                  ></div>
+
                   {/* Card Content */}
                   <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 p-8 h-full">
                     {/* Icon */}
-                    <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r ${service.gradient} rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                      <div className="text-white">
-                        {service.icon}
-                      </div>
+                    <div
+                      className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r ${service.gradient} rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300`}
+                    >
+                      <div className="text-white">{service.icon}</div>
                     </div>
 
                     {/* Title */}
@@ -171,9 +236,9 @@ const About = () => {
                         <div
                           key={featureIndex}
                           className={`flex items-center gap-3 transition-all duration-300 ${
-                            activeCard === service.id 
-                              ? 'opacity-100 translate-x-0' 
-                              : 'opacity-70 translate-x-2'
+                            activeCard === service.id
+                              ? "opacity-100 translate-x-0"
+                              : "opacity-70 translate-x-2"
                           }`}
                           style={{ transitionDelay: `${featureIndex * 100}ms` }}
                         >
@@ -210,7 +275,8 @@ const About = () => {
                 Ready to Get Started?
               </h2>
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                Join thousands of parents who trust InfantCareCompass for their child's health and development needs.
+                Join thousands of parents who trust InfantCareCompass for their
+                child's health and development needs.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25">

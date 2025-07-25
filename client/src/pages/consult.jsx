@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import { Outlet } from "react-router-dom";
 import commnApiEndpoint from "../common/backendAPI.jsx";
 import SkeletonLoader from "../components/SkeletonLoader.jsx";
@@ -28,8 +29,20 @@ const ConsultationPage = () => {
       setLoading(false);
     }
   };
-
   useEffect(() => {
+    const doctorInfo = async () => {
+      try {
+        const response = await fetch(commnApiEndpoint.doctorInfo.url, {
+          method: "GET",
+        });
+        const data = await response.json();
+        setDoctorData(data.data);
+        console.log("doctor details:", data.data);
+      } catch (error) {
+        console.error("Something went wrong:", error);
+      }
+    };
+
     doctorInfo();
   }, []);
 
