@@ -14,10 +14,12 @@ import {
 } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
+import { Link } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+
 
 const HomePage = () => {
   const [isVisible, setIsVisible] = useState({});
@@ -87,6 +89,8 @@ const HomePage = () => {
       color: "from-blue-500 to-purple-600",
       image:
         "https://res.cloudinary.com/dbnticsz8/image/upload/v1734934194/Infant%20care%20Compass/gheqjy0npqdkyhgqds43.png",
+      link: "#",
+
     },
     {
       icon: <Phone className="w-12 h-12" />,
@@ -96,6 +100,9 @@ const HomePage = () => {
       color: "from-emerald-500 to-teal-600",
       image:
         "https://res.cloudinary.com/dbnticsz8/image/upload/v1734935048/Infant%20care%20Compass/crqtr4wfu69wmqnulmja.png",
+
+      link: "#",
+
     },
     {
       icon: <BookOpen className="w-12 h-12" />,
@@ -105,6 +112,8 @@ const HomePage = () => {
       color: "from-pink-500 to-rose-600",
       image:
         "https://res.cloudinary.com/dbnticsz8/image/upload/v1734935847/Infant%20care%20Compass/yf0tea4dqhjf4ww3hjcz.png",
+      link: "/learning-hub",
+
     },
   ];
 
@@ -115,8 +124,8 @@ const HomePage = () => {
       content:
         "The AI-powered insights helped me understand my baby's needs like never before. It's like having a pediatrician in your pocket!",
       rating: 5,
-      avatar:
-        "https://images.unsplash.com/photo-1509868918748-a554ad25f858?w=100&h=100&fit=crop&crop=face",
+      avatar:"https://images.unsplash.com/photo-1509868918748-a554ad25f858?w=100&h=100&fit=crop&crop=face",
+
     },
     {
       name: "Michael Rodriguez",
@@ -301,6 +310,36 @@ const HomePage = () => {
             className="w-full max-w-6xl mx-auto"
           >
             {services.map((service, index) => (
+              <div key={index} className="group relative">
+                <GlassCard className="p-8 h-full group-hover:bg-white/15">
+                  <div className="relative">
+                    <div
+                      className={`w-20 h-20 rounded-2xl bg-gradient-to-r ${service.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                    >
+                      {service.icon}
+                    </div>
+
+                    <h3 className="text-2xl font-bold mb-4 text-white">
+                      {service.title}
+                    </h3>
+
+                    <p className="text-gray-300 leading-relaxed mb-6">
+                      {service.description}
+                    </p>
+
+                    <div className="overflow-hidden rounded-xl mb-6">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+
+                    <button className="text-blue-400 hover:text-blue-300 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
+                      <Link to={service.link}>Learn More</Link>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+
               <SwiperSlide key={index} className="!w-80 !flex-shrink-0">
                 <GlassCard className="p-6 text-white text-center">
                   <div
@@ -413,6 +452,34 @@ const HomePage = () => {
             className="w-full overflow-visible pb-10"
           >
             {testimonials.map((testimonial, index) => (
+              <GlassCard key={index} className="p-8 relative group">
+                <div className="flex items-center gap-2 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                    />
+                  ))}
+                </div>
+
+                <p className="text-gray-300 mb-6 leading-relaxed italic">
+                  "{testimonial.content}"
+                </p>
+
+                <div className="flex items-center gap-4">
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div>
+                    <div className="font-semibold text-white">
+                      {testimonial.name}
+                    </div>
+                    <div className="text-gray-400 text-sm">
+                      {testimonial.role}
+                    </div>
+
               <SwiperSlide key={index}>
                 <GlassCard className="p-8 relative group" hover={true}>
                   <div className="flex items-center gap-2 mb-4">
@@ -422,6 +489,7 @@ const HomePage = () => {
                         className="w-5 h-5 fill-yellow-400 text-yellow-400"
                       />
                     ))}
+
                   </div>
 
                   <p className="text-gray-300 mb-6 leading-relaxed italic">
