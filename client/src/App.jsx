@@ -1,24 +1,27 @@
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
+
 import { Outlet,useLocation,useMatches } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
-function App() {
-   const matches = useMatches();
+import CustomCursor from './components/CustomCursor';
 
-  // Check if any matched route has handle.noLayout = true
+
+function App() {
+  const matches = useMatches();
   const hideLayout = matches.some((match) => match.handle?.noLayout);
+
   return (
-    <div className="w-full ">
-    
+
+    <div className="w-full">
+      <CustomCursor />
       {!hideLayout && <Header />}
       
-      <main className='mt-24'>
-        
-        <Outlet /> {/* Outlet renders nested routes */}
-        <Toaster />
+      <main className="mt-24">
+        <Outlet />
       </main>
+
       {!hideLayout && <Footer />}
     </div>
   );

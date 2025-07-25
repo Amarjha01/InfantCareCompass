@@ -3,7 +3,7 @@ name: Deploy MERN App to Hostinger VPS
 on:
   push:
     branches:
-      - master
+      - deployment
 
 jobs:
   deploy:
