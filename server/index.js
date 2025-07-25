@@ -1,6 +1,8 @@
 import express from 'express';
 // import nodemailer from 'nodemailer';
 import 'dotenv/config';
+import dotenv from 'dotenv';
+dotenv.config();
 import cors from 'cors';
 
 // import doctormodel from './models/user/doctorSchema.js'; 
