@@ -173,15 +173,6 @@ const HomePage = () => {
 
 
       {/* Mouse Follower Effect */}
-      <div
-        className="fixed w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full pointer-events-none z-50 opacity-60 blur-sm transition-all duration-100"
-        style={{
-          left: mousePosition.x - 12,
-          top: mousePosition.y - 12,
-          transform: "translate3d(0, 0, 0)",
-        }}
-      ></div>
-
 
 
       {/* Hero Section */}
