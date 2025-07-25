@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import {
   Heart,
   Shield,
@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
+
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -155,6 +156,58 @@ const HomePage = () => {
         "https://images.unsplash.com/photo-1512288094938-363287817259?w=100&h=100&fit=crop&crop=face",
     },
   ];
+
+
+//adding counter function for counting happy families dynimcally 
+  useEffect(() => {
+    const element = document.getElementById("counter");
+    let hasAnimated = false;
+
+    const animateCountUp = (start, end, duration, element, suffix = '') => {
+      let startTimestamp = null;
+
+      const step = timestamp => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const current = Math.floor(progress * (end - start) + start);
+        element.textContent = current + suffix;
+
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        } else {
+          element.textContent = end + suffix;
+          hasAnimated = true;
+        }
+      };
+
+      window.requestAnimationFrame(step);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (
+            entry.isIntersecting &&
+            entry.boundingClientRect.top > 0 &&
+            !hasAnimated
+          ) {
+            animateCountUp(40, 50, 1700, element, 'K+');
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (element) {
+      element.textContent = "40K+";
+      observer.observe(element);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
@@ -347,10 +400,16 @@ const HomePage = () => {
 
               <div className="grid grid-cols-2 gap-6 mb-8">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-400 mb-2">
-                    50K+
+                  {/* <div id='counter' className="text-3xl font-bold text-blue-400 mb-2">
+                    40K+
                   </div>
-                  <div className="text-gray-400">Happy Families</div>
+                  <div className="text-gray-400">Happy Families</div> */}
+                <div>
+                    <div id="counter" className="text-3xl font-bold text-blue-400 mb-2">
+                        39K+
+                    </div>
+                    <div className="text-gray-400">Happy Families</div>
+                </div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-emerald-400 mb-2">
