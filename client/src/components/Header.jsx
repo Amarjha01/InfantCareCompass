@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Home,
   User,
@@ -9,19 +10,39 @@ import {
   Phone,
   Menu,
   X,
+  Loader,
 } from "lucide-react";
 import navlogo from "/logo.png";
 import { motion } from "framer-motion"; // Fixed typo: from "motion/react"
+import { useAuthStore } from "../store/useAuth.js";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { authUser, checkAuth, isCheckingAuth, logout} = useAuthStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (isCheckingAuth && !authUser) return (
+    <div className='flex items-center justify-center h-screen'>
+      <Loader className='size-10 animate-spin' />
+    </div>
+  )
+
+  const handleLogOut = () => {
+    logout(navigate);
+  }
+
+  console.log("Here is the authUSer", authUser);
 
   const navItems = [
     { to: "/", label: "Home", icon: <Home className="w-5 h-5" /> },
@@ -65,10 +86,9 @@ export default function Header() {
                     key={to}
                     to={to}
                     className={({ isActive }) =>
-                      `flex items-center gap-2 px-4 py-2 text-base font-medium rounded-full transition-all duration-300 ${
-                        isActive
-                          ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-lg"
-                          : "text-gray-700 dark:text-gray-200 hover:bg-purple-100 dark:hover:bg-gray-800 hover:text-purple-600 dark:hover:text-purple-400"
+                      `flex items-center gap-2 px-4 py-2 text-base font-medium rounded-full transition-all duration-300 ${isActive
+                        ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-lg"
+                        : "text-gray-700 dark:text-gray-200 hover:bg-purple-100 dark:hover:bg-gray-800 hover:text-purple-600 dark:hover:text-purple-400"
                       }`
                     }
                   >
@@ -79,7 +99,7 @@ export default function Header() {
               </div>
 
               {/* Auth Buttons */}
-              <div className="hidden lg:flex items-center gap-3">
+              {authUser == null ? (<div className="hidden lg:flex items-center gap-3">
                 <Link
                   to="/signin"
                   className="border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-5 py-2 text-base font-medium rounded-full transition"
@@ -92,7 +112,11 @@ export default function Header() {
                 >
                   Get Started
                 </Link>
-              </div>
+              </div>) : (<button onClick={handleLogOut}
+                  className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-2 text-base font-semibold rounded-full shadow hover:scale-105 transition-transform"
+                >
+                  Logout
+                </button>)}
 
               {/* Hamburger */}
               <div className="lg:hidden">
@@ -121,10 +145,9 @@ export default function Header() {
                 to={to}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium ${
-                    isActive
-                      ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-md"
-                      : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+                  `flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium ${isActive
+                    ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-md"
+                    : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
                   }`
                 }
               >
@@ -132,7 +155,7 @@ export default function Header() {
                 {label}
               </NavLink>
             ))}
-            <div className="pt-4 flex flex-col gap-3">
+            {authUser == null ? (<div className="pt-4 flex flex-col gap-3">
               <Link
                 to="/signin"
                 className="w-full text-purple-600 border-2 border-purple-600 px-4 py-2 rounded-full text-center text-base font-medium hover:bg-purple-600 hover:text-white transition"
@@ -145,7 +168,12 @@ export default function Header() {
               >
                 Get Started
               </Link>
-            </div>
+            </div>) : (<Link
+              to="/logout"
+              className="w-full bg-gradient-to-r from-pink-500 to-purple-600 px-4 py-2 text-white rounded-full text-center text-base font-semibold hover:scale-105 transition-transform"
+            >
+              Logout
+            </Link>)}
           </motion.div>
         )}
       </header>

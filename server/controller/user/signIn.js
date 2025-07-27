@@ -21,7 +21,7 @@ async function signin(req, res) {
                     id: doctor._id,
                     email: doctor.email
                 }
-                
+
                 const token = jwt.sign(tokendata, process.env.TOKEN_SECRET_KEY, { expiresIn: 60 * 60 * 8 });
                 // const refreshtoken =  jwt.sign({tokendata}, process.env.TOKEN_SECRET_KEY, {expiresIn:"7d"});
                 const tokenOption = {
@@ -31,6 +31,7 @@ async function signin(req, res) {
                 res.cookie("token", token, tokenOption).status(200).json({
                     message: "login sucessfully",
                     data: doctor,
+                    token,
                     success: true,
                     error: false
                 })
@@ -66,6 +67,7 @@ async function signin(req, res) {
                 res.cookie("token", token, tokenOption).status(200).json({
                     message: "login sucessfully",
                     data: user,
+                    token,
                     success: true,
                     error: false
                 })
@@ -78,7 +80,8 @@ async function signin(req, res) {
         }
 
     } catch (error) {
-
+        console.log("Error while signing in",error.message);
+        return res.status(500).json({message: "Internal Server Error"});
     }
 
 }

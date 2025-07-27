@@ -1,7 +1,8 @@
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { Outlet,useLocation,useMatches } from "react-router-dom";
+import { Outlet,useMatches } from "react-router-dom";
+import { Toaster } from 'react-hot-toast';
 
 function App() {
    const matches = useMatches();
@@ -10,6 +11,8 @@ function App() {
   const hideLayout = matches.some((match) => match.handle?.noLayout);
   return (
     <div className="w-full ">
+      <Toaster position="top-center" />
+
       {!hideLayout && <Header />}
       
       <main className='mt-24'>

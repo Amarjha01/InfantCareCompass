@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { User, UserCheck, Mail, Lock, Phone, MapPin, Calendar, FileText, Award, Heart, Eye, EyeOff, Check, X } from "lucide-react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useAuthStore } from "../store/useAuth";
+import { toast, Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 // Password Strength Indicator Component
 const PasswordStrengthIndicator = ({ password }) => {
@@ -15,7 +16,7 @@ const PasswordStrengthIndicator = ({ password }) => {
 
   const metRequirements = requirements.filter(req => req.test(password));
   const strength = metRequirements.length;
-  
+
   const getStrengthColor = () => {
     if (strength <= 1) return "text-red-500";
     if (strength <= 2) return "text-orange-500";
@@ -50,9 +51,9 @@ const PasswordStrengthIndicator = ({ password }) => {
           {getStrengthText()}
         </span>
       </div>
-      
+
       <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
-        <div 
+        <div
           className={`h-2 rounded-full transition-all duration-300 ${getStrengthBarColor()}`}
           style={{ width: `${(strength / 5) * 100}%` }}
         ></div>
@@ -83,7 +84,7 @@ const PasswordStrengthIndicator = ({ password }) => {
 
 // Define InputField outside the main component to prevent re-creation on render
 const InputField = ({ icon: Icon, label, type = "text", name, value, onToggleShowPassword, showPassword, onChange, error, showPasswordStrength = false, ...props }) => (
-  
+
   <div className="group relative">
     <label className="block text-sm font-semibold text-gray-700 mb-2">{label}</label>
     <div className="relative">
@@ -99,17 +100,17 @@ const InputField = ({ icon: Icon, label, type = "text", name, value, onToggleSho
         {...props}
       />
       {name === 'password' && (
-              <button
-                type="button"
-                onClick={onToggleShowPassword}
-                className="absolute right-4 top-4 p-1 text-gray-400 hover:text-gray-600 transition-colors"
-              >
-                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-              </button>
-      )}    
-        
+        <button
+          type="button"
+          onClick={onToggleShowPassword}
+          className="absolute right-4 top-4 p-1 text-gray-400 hover:text-gray-600 transition-colors"
+        >
+          {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+        </button>
+      )}
+
     </div>
-    
+
     {error && (
       <p className="mt-2 text-sm text-red-600 animate-pulse">{error}</p>
     )}
@@ -151,8 +152,10 @@ export default function Registration() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
+  const { register } = useAuthStore();
+  const navigate = useNavigate();
 
-  const onToggleShowPassword =()=>{
+  const onToggleShowPassword = () => {
     setShowPassword(!showPassword);
   }
 
@@ -166,7 +169,7 @@ export default function Registration() {
     const newErrors = {};
 
     if (!formData.email) newErrors.email = "Email is required";
-    
+
     if (!formData.password) {
       newErrors.password = "Password is required";
     } else {
@@ -215,24 +218,18 @@ export default function Registration() {
     setIsSubmitting(true);
     const payload = { ...formData, role: role.toUpperCase() };
 
-  try {
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    console.log("Registration successful", payload);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log("Registration successful", payload);
+      await register(payload,navigate); // Zustand action
 
-    toast.success("🎉 Registration successful! Redirecting to login...");
-    
-    // Optional redirect after 3 seconds
-    setTimeout(() => {
-      window.location.href = "/signin";
-    }, 3000);
-
-  } 
-  catch (error) {
-    console.error("Error during registration:", error);
-    toast.error("❌ Failed to register. Check your connection.");
-  } finally {
-    setIsSubmitting(false);
-  }
+    }
+    catch (error) {
+      console.error("Error during registration:", error);
+      toast.error("❌ Failed to register. Check your connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
 
   };
 
@@ -270,8 +267,8 @@ export default function Registration() {
           <div className="bg-gray-100 p-1 rounded-2xl flex gap-1">
             <button
               className={`px-6 py-3 rounded-xl font-semibold flex items-center gap-2 ${role === "PARENT"
-                  ? "bg-white text-blue-600 shadow-md scale-105"
-                  : "text-gray-600 hover:text-gray-800"
+                ? "bg-white text-blue-600 shadow-md scale-105"
+                : "text-gray-600 hover:text-gray-800"
                 }`}
               onClick={() => handleRoleChange("PARENT")}
               disabled={isSubmitting}
@@ -281,8 +278,8 @@ export default function Registration() {
             </button>
             <button
               className={`px-6 py-3 rounded-xl font-semibold flex items-center gap-2 ${role === "DOCTOR"
-                  ? "bg-white text-blue-600 shadow-md scale-105"
-                  : "text-gray-600 hover:text-gray-800"
+                ? "bg-white text-blue-600 shadow-md scale-105"
+                : "text-gray-600 hover:text-gray-800"
                 }`}
               onClick={() => handleRoleChange("DOCTOR")}
               disabled={isSubmitting}
@@ -329,13 +326,13 @@ export default function Registration() {
           <InputField icon={Mail} label="Email" name="email" type="email" placeholder="Enter your email" value={formData.email} onChange={handleInputChange} error={errors.email} />
           <InputField icon={Lock} label="Password" name="password" type="password" placeholder="Create a strong password" value={formData.password} onChange={handleInputChange} showPassword={showPassword} onToggleShowPassword={onToggleShowPassword} error={errors.password} showPasswordStrength={true} />
 
-          
+
           {/* Submit */}
           <button
             type="submit"
             className={`w-full py-4 rounded-xl font-semibold text-white transition-all ${isSubmitting
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-gradient-to-r from-blue-500 to-purple-600 hover:scale-105 shadow-lg"
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-gradient-to-r from-blue-500 to-purple-600 hover:scale-105 shadow-lg"
               }`}
             disabled={isSubmitting}
           >
@@ -360,7 +357,7 @@ export default function Registration() {
           </p>
         </div>
       </div>
-      <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} />
+      {/* <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} /> */}
 
     </div>
   );
