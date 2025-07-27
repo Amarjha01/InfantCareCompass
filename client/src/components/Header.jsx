@@ -168,12 +168,12 @@ export default function Header() {
               >
                 Get Started
               </Link>
-            </div>) : (<Link
-              to="/logout"
+            </div>) : (<button
+              onClick={handleLogOut}
               className="w-full bg-gradient-to-r from-pink-500 to-purple-600 px-4 py-2 text-white rounded-full text-center text-base font-semibold hover:scale-105 transition-transform"
             >
               Logout
-            </Link>)}
+            </button>)}
           </motion.div>
         )}
       </header>
