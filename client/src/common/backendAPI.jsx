@@ -1,4 +1,4 @@
-// const backendDomain = "http://localhost:3000";
+// const backendDomain = "http://localhost:5000";
 const backendDomain = "https://api.infantcarecompass.live";
 
 
@@ -18,6 +18,10 @@ const commnApiEndpoint = {
    doctorInfo:{
     url:`${backendDomain}/api/doctorinfo`,
     method:'get'
+   },
+   newsletter:{
+    url:`${backendDomain}/api/subscribe-newsletter`,
+    method:'post'
    },
 }
 

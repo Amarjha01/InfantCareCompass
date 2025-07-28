@@ -1,21 +1,50 @@
 import "react";
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Facebook, 
-  Twitter, 
-  Instagram, 
+import { toast,ToastContainer } from "react-toastify";
+import { useState } from "react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Instagram,
   Linkedin,
   Heart,
   ArrowUp,
   ExternalLink
 } from "lucide-react";
+import { showErrorToast, showSuccessToast } from "../helpers/utils";
+import commnApiEndpoint from "../common/backendAPI";
 
 const Footer = () => {
+  const [email, setemail] = useState("")
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(commnApiEndpoint.newsletter.url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      showSuccessToast(data.message);
+      setemail("");
+    } catch (error) {
+      showErrorToast(error);
+    }
+
+
+
+  }
+  const handlechange = (e) => {
+    e.preventDefault();
+    setemail(e.target.value);
+  }
+  console.log(email);
 
   return (
     <footer className="relative bg-gradient-to-br from-[#502478] to-[#9157C7] text-white overflow-hidden">
@@ -23,12 +52,12 @@ const Footer = () => {
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,_white_1px,_transparent_0)] bg-[size:20px_20px]"></div>
       </div>
-      
+
       {/* Main Footer Content */}
       <div className="relative z-10 container mx-auto px-4 py-12">
         {/* Grid Layout for Footer */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          
+
           {/* Logo and Description */}
           <div className="lg:col-span-1">
             <div className="flex items-center mb-6">
@@ -40,7 +69,7 @@ const Footer = () => {
               </h3>
             </div>
             <p className="text-gray-100 leading-relaxed mb-6">
-              Providing exceptional healthcare service and care to all our patients. 
+              Providing exceptional healthcare service and care to all our patients.
               Your health is our priority, and We are here to help you every step of the way.
             </p>
             <div className="flex items-center space-x-2 text-sm">
@@ -48,7 +77,7 @@ const Footer = () => {
               <span className="font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Trusted by 10,000+ families</span>
             </div>
           </div>
-          
+
           {/* Quick Links */}
           <div>
             <h4 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-6 relative">
@@ -65,8 +94,8 @@ const Footer = () => {
                 { name: "Contact", href: "/contact" }
               ].map((link, index) => (
                 <li key={index}>
-                  <a 
-                    href={link.href} 
+                  <a
+                    href={link.href}
                     className="group flex items-center text-gray-100 hover:text-purple-200 transition-all duration-300 hover:translate-x-1 font-semibold"
                   >
                     <span className="w-2 h-2 bg-blue-500 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -76,7 +105,7 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-          
+
           {/* Contact Information */}
           <div>
             <h4 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-6 relative">
@@ -123,31 +152,34 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          
+
           {/* Newsletter & Social */}
           <div>
             <h4 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-6 relative">
               Stay Connected
               <div className="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"></div>
             </h4>
-            
+
             {/* Newsletter Signup */}
             <div className="mb-6">
               <p className="text-gray-100 text-sm mb-4">
                 Subscribe to our newsletter for health tips and updates
               </p>
-              <div className="flex">
+              <form onSubmit={handleSubmit} className="flex">
                 <input
                   type="email"
+                  value={email}
+                  name="email"
+                  onChange={handlechange}
                   placeholder="Your email"
                   className="flex-1 px-4 py-2 bg-white/20 border border-white/30 rounded-l-lg focus:outline-none focus:border-purple-400 transition-colors text-white placeholder-gray-200"
                 />
-                <button className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-r-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 text-white">
+                <button type="submit" className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-r-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 text-white">
                   <ExternalLink className="w-4 h-4" />
                 </button>
-              </div>
+              </form>
             </div>
-            
+
             {/* Social Media Links */}
             <div>
               <p className="text-gray-100 text-sm mb-4">Follow us on social media</p>
@@ -170,7 +202,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Footer Bottom */}
         <div className="mt-12 pt-8 border-t border-gray-700/50">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
@@ -180,7 +212,7 @@ const Footer = () => {
               <a href="#" className="hover:text-purple-200 transition-colors">Terms of Service</a>
               <a href="#" className="hover:text-purple-200 transition-colors">Cookie Policy</a>
             </div>
-            
+
             {/* Back to Top Button */}
             <button
               onClick={scrollToTop}
@@ -194,11 +226,13 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Decorative Elements */}
       <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl"></div>
+      <ToastContainer/>
     </footer>
+
   );
 };
 
