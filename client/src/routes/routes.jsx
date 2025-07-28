@@ -13,6 +13,7 @@ import VideoRoom from "../pages/VideoRoom.jsx";
 import PersonalizedLearningHub from "../pages/LearningHub.jsx";
 import VaccineReminder from "../pages/VaccineReminder.jsx";
 import NotFoundPage from "../pages/NotFoundPage.jsx";
+import Contributors from "../pages/Contributors";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "news",
         element: <News />,
+      },
+      {
+        path: "contributors",
+        element: <Contributors />,
       },
       {
         path: "consultation",
