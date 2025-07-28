@@ -128,6 +128,7 @@ const News = () => {
         style={{
           animationDelay: `${index * 0.1}s`,
         }}
+
         onMouseEnter={() => setHoveredCard(news.id)}
         onMouseLeave={() => setHoveredCard(null)}
       >
