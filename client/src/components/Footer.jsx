@@ -44,7 +44,7 @@ const Footer = () => {
     e.preventDefault();
     setemail(e.target.value);
   }
-  console.log(email);
+  // console.log(email);
 
   return (
     <footer className="relative bg-gradient-to-br from-[#502478] to-[#9157C7] text-white overflow-hidden">
