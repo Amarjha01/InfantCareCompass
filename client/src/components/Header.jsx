@@ -11,6 +11,7 @@ import {
   Menu,
   X,
   Loader,
+  Users
 } from "lucide-react";
 import navlogo from "/logo.png";
 import { motion } from "framer-motion"; // Fixed typo: from "motion/react"
@@ -45,16 +46,13 @@ export default function Header() {
   // console.log("Here is the authUSer", authUser);
 
   const navItems = [
-    { to: "/", label: "Home", icon: <Home className="w-5 h-5" /> },
-    { to: "/about", label: "About", icon: <User className="w-5 h-5" /> },
-    { to: "/blog", label: "Blog", icon: <BookOpen className="w-5 h-5" /> },
-    { to: "/contactus", label: "Contact", icon: <Mail className="w-5 h-5" /> },
-    { to: "/news", label: "News", icon: <Newspaper className="w-5 h-5" /> },
-    {
-      to: "/consultation",
-      label: "Consultation",
-      icon: <Phone className="w-5 h-5" />,
-    },
+    { to: "/", label: "Home", icon: <Home className="w-4 h-4" /> },
+    { to: "/about", label: "About", icon: <User className="w-4 h-4" /> },
+    { to: "/blog", label: "Blog", icon: <BookOpen className="w-4 h-4" /> },
+    { to: "/contactus", label: "Contact", icon: <Mail className="w-4 h-4" /> },
+    { to: "/news", label: "News", icon: <Newspaper className="w-4 h-4" /> },
+    { to: "/consultation", label: "Consultation", icon: <Phone className="w-4 h-4" /> },
+    { to: "/contributors", label: "Contributors", icon: <Users className="w-4 h-4" /> },
   ];
 
   return (
