@@ -31,7 +31,7 @@ export const useAuthStore = create((set,get) => ({
             toast.success("🎉 Registered! Redirecting to login...");
             navigate("/signin");
         } catch(error) {
-            toast.error(error.message);
+            toast.error(error.response.data.message);
         }
     },
 

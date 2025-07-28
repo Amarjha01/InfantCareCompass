@@ -6,9 +6,9 @@ export const axiosInstance = axios.create({
 })
 
 axiosInstance.interceptors.request.use((config) => {
-  // ✅ Get token before every request
+  // Get token before every request
   const token = localStorage.getItem("token");
-  console.log("Interceptor Token:", token); // For debugging
+  // console.log("Interceptor Token:", token); // For debugging
 
   if (token) {
     config.headers["Authorization"] = `Bearer ${token}`;

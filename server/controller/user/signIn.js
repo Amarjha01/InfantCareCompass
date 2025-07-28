@@ -1,8 +1,12 @@
+import { asyncHandler } from "../../utils/asyncHandler.js"; // Import the handler
 import usermodel from "../../models/user/user.js";
 import doctormondel from "../../models/user/doctorSchema.js";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-async function signin(req, res) {
+
+const signin = asyncHandler(async (req, res, next) => {
+    // The original try...catch block is removed, but the inner logic is identical.
+
     try {
         const { email, password, role } = req.body;
 
@@ -78,12 +82,10 @@ async function signin(req, res) {
             }
 
         }
-
     } catch (error) {
-        console.log("Error while signing in",error.message);
-        return res.status(500).json({message: "Internal Server Error"});
+        console.log("Error while signing in", error.message);
+        return res.status(500).json({ message: "Internal Server Error" });
     }
-
-}
+});
 
 export default signin;

@@ -1,24 +1,15 @@
-async function logOut(req, res) {
+import { asyncHandler } from "../../utils/asyncHandler.js"; 
 
-    try {
+const logOut = asyncHandler(async (req, res, next) => {
+  // The logic remains the same, but without the try...catch block.
+  res.clearCookie("token");
 
-        res.clearCookie("token");
-
-        res.status(200).json({
-            message: "User logged out successfully",
-            error: false,
-            success: true,
-            data: []
-        });
-
-    } catch (err) {
-        res.status(500).json({
-            message: err.message || err,
-            error: true,
-            sucess: false
-
-        });
-    }
-}
+  return res.status(200).json({
+    message: "User logged out successfully",
+    error: false,
+    success: true,
+    data: [],
+  });
+});
 
 export default logOut;

@@ -42,7 +42,7 @@ export default function Header() {
     logout(navigate);
   }
 
-  console.log("Here is the authUSer", authUser);
+  // console.log("Here is the authUSer", authUser);
 
   const navItems = [
     { to: "/", label: "Home", icon: <Home className="w-5 h-5" /> },

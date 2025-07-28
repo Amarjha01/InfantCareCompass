@@ -27,6 +27,8 @@ async function authtoken(req, resp, next) {
 
             })
         }
+        
+
     } catch (error) {
         return resp.status(400).json({
             message: error.message || error, // Log the error message instead of the whole error object
