@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Mail, Lock, User, Eye, EyeOff, Shield, Stethoscope, Baby, ArrowRight, AlertCircle, Check, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/useAuth";
 
 // --- Solution: Moved InputField outside and simplified it ---
 const PasswordStrengthIndicator = ({ password }) => {
@@ -178,6 +179,7 @@ export default function Signin() {
     password: '',
     role: 'PARENTS'
   });
+  const { signin } = useAuthStore();
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -225,8 +227,7 @@ export default function Signin() {
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
       console.log("Submitted Data: ", formData);
-      alert("Login successful!");
-      navigate("/")
+      signin(formData,navigate);
     } catch (error) {
       console.error("Signin error:", error);
       alert("Invalid email or password. Please try again.");
@@ -356,7 +357,7 @@ export default function Signin() {
         <div className="absolute bottom-20 right-10 w-32 h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }

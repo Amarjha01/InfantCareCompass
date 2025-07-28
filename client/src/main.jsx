@@ -8,13 +8,16 @@ import "./index.css"; // Global styles
 import { RouterProvider } from "react-router-dom"; // Correct import for RouterProvider
 import router from "./routes/routes.jsx"; // Import your routes
 import { Provider } from 'react-redux';
-import {store} from './store/store.jsx'
+import { store } from './store/store.jsx'
+import { Toaster } from "react-hot-toast";
+
 import CustomCursor from "./components/CustomCursor.jsx";
 createRoot(document.getElementById("root")).render(
-  
-<Provider store={store}>
-<RouterProvider router={router} /> {/* Provides the router configuration */} 
-<CustomCursor />
-</Provider>
- 
+
+    <Provider store={store}>
+        <RouterProvider router={router} /> {/* Provides the router configuration */}
+        <CustomCursor />
+        <Toaster position="top-center" />
+    </Provider>
+
 );

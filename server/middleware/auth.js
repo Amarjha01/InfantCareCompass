@@ -1,48 +1,41 @@
 import jwt from 'jsonwebtoken';
 
 
-async function authtoken(req,res,next) {
+async function authtoken(req, resp, next) {
     try {
-        const authheader = req.headers.authorization || req.headers.token;
-        if(!authheader){
-           return res.status(401).json({
-                message:'Authorization token missing. Please login.'
+        const authHeader = req.headers["authorization"];
+        const token = authHeader && authHeader.split(" ")[1];
+        if (!token) {
+            return resp.status(401).json({
+                message: 'please login'
             })
-        }
-            
-        const token = authheader.startsWith('Bearer ') ? authheader.split(" ")[1] : authheader
-
-            jwt.verify(token,process.env.TOKEN_SECRET_KEY,(err,decoded) => {
+        } else {
+            jwt.verify(token, process.env.TOKEN_SECRET_KEY, function (err, decoded) {
+                console.log("token veryfication error:", err);
+                console.log("token veryfication decoded:", decoded);
 
                 if (err) {
-                    console.error("token veryfication error:", err);
-                    return res.status(401).json({
-                        message:'Invalid or expired token. Please login again.'
+                    console.log("error auth", err);
+                    return resp.status(401).json({
+                        message: 'please login'
                     })
-                   }
-                else{
-                    
-                 req.id = decoded?.tokendata.id;
+                } else {
+                    req.id = decoded.id;
+                    console.log('id:', req.id)
+                    next();
+                }
 
-                     if (!req.id) {
-                     return res.status(403).json({ message: 'Token is missing user ID.' });
-                      } else {
-
-                         console.log('id:',req.id)
-                          next();
-                       }
-                     }
-                                   
             })
+        }
         
 
     } catch (error) {
-        res.status(400).json({
+        return resp.status(400).json({
             message: error.message || error, // Log the error message instead of the whole error object
-            data : [],
+            data: [],
             error: true,
             success: false,
-          });
+        });
     }
 }
 export default authtoken;

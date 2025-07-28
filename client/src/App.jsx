@@ -19,12 +19,13 @@ function App() {
   return (
 
     <div className="w-full">
-      {!hideLayout && <Header />}
+      <Toaster position="top-center" />
 
+      {!hideLayout && <Header />}
       <ScrollToTop />
       
-      <main className="mt-24">
-        <Outlet />
+      <main className='mt-24'>
+        <Outlet /> {/* Outlet renders nested routes */}
       </main>
 
       {!hideLayout && <Footer />}

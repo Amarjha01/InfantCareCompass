@@ -31,7 +31,9 @@
     "react-toastify": "^11.0.5",
     "redux-persist": "^6.0.0",
     "simple-peer": "^9.11.1",
-    "swiper": "^11.2.10"
+    "styled-jsx": "^5.1.7",
+    "swiper": "^11.2.10",
+    "zustand": "^5.0.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
