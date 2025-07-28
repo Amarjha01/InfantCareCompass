@@ -1,4 +1,8 @@
 
+# InfantCareCompass
+📜 Read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
+
+
 <div align="center">
   <h1>InfantCareCompass</h1>
   <p><strong>A digital toolkit for modern parents to manage their child's healthcare with confidence and ease.</strong></p>

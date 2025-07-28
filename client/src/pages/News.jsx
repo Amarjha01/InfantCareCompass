@@ -106,11 +106,11 @@ const News = () => {
 
     return (
       <div
-        className={`group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 ${news.featured ? 'ring-2 ring-gradient-to-r from-indigo-500 to-purple-500' : ''
-          }`}
-        style={{
-          animationDelay: `${index * 0.1}s`,
-        }}
+          className={`group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:ring-2 hover:ring-indigo-400 transition-all duration-500 transform hover:-translate-y-2 flex flex-col`}
+          style={{
+            height: '100%', // Ensure card takes full height
+            animationDelay: `${index * 0.1}s`,
+          }}
         onMouseEnter={() => setHoveredCard(news.id)}
         onMouseLeave={() => setHoveredCard(null)}
       >
