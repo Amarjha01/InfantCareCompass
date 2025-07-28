@@ -371,32 +371,33 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-5xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              <h2 className="text-5xl md:text-left text-center font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 Creating Magical Childhood Moments
               </h2>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              <p className="text-xl md:text-left text-center text-gray-300 mb-8 leading-relaxed">
                 Every smile, every milestone, every precious moment deserves to
                 be celebrated and supported with the best care possible.
               </p>
 
-              <div className="grid grid-cols-2 gap-6 mb-8">
-                <div className="text-center">
+              <div className="grid grid-cols-2 gap-6 mb-8 items-center">
+                <div className="md:text-left text-center">
                   <div className="text-3xl font-bold text-blue-400 mb-2">
                     50K+
                   </div>
                   <div className="text-gray-400">Happy Families</div>
                 </div>
-                <div className="text-center">
+                <div className="md:text-left text-center">
                   <div className="text-3xl font-bold text-emerald-400 mb-2">
                     99.9%
                   </div>
                   <div className="text-gray-400">Uptime</div>
                 </div>
               </div>
-
+              <div className="flex justify-center md:justify-start">
               <button className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                 Join Our Community
               </button>
+              </div>
             </div>
 
             <div className="grid grid-cols-2 gap-6">

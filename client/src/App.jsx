@@ -4,8 +4,10 @@ import Footer from './components/Footer';
 
 import { Outlet,useLocation,useMatches } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+
 import FloatingScrollToTop from './components/ScrollToTop';
 import CustomCursor from './components/CustomCursor';
+
 import ScrollToTop from './components/ScrollToTop';
 
 
@@ -16,7 +18,6 @@ function App() {
   return (
 
     <div className="w-full">
-      <CustomCursor />
       {!hideLayout && <Header />}
 
       <ScrollToTop />

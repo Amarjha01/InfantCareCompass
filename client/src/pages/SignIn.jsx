@@ -286,7 +286,7 @@ export default function Signin() {
               onChange={handleChange}
               onFocus={() => setFocusedField('password')}
               onBlur={() => setFocusedField(null)}
-              showPasswordStrength={true}
+              showPasswordStrength={false}
             />
 
             <div className="space-y-4">
