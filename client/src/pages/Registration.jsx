@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { User, UserCheck, Mail, Lock, Phone, MapPin, Calendar, FileText, Award, Heart, Eye, EyeOff, Check, X } from "lucide-react";
+import { User, UserCheck, Mail, Lock, Phone, MapPin, Calendar, FileText, Award, Heart, Eye, EyeOff, Check, X ,Home } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -244,7 +244,18 @@ export default function Registration() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center px-7 pb-8 flex-col">
+      <div className="w-full mb-3">
+      <button
+              onClick={() => window.location.href = "/"}
+              className={`w-3/2 mt-6 py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 transform bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 hover:scale-105 hover:shadow-xl active:scale-95
+                 focus:outline-none focus:ring-4 focus:ring-indigo-500/50`}
+            >
+              <div className="flex items-center justify-center space-x-2">
+                    <Home className="w-5 h-5" />
+              </div>
+            </button>
+      </div>
       <div className="bg-white/80 backdrop-blur-sm p-8 rounded-3xl shadow-2xl w-full max-w-2xl">
         {/* Header */}
         <div className="text-center mb-8">

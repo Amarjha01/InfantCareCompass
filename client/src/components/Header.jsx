@@ -10,6 +10,7 @@ import {
   Menu,
   X,
   Users,
+  Heart,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import navlogo from "/logo.png";
@@ -31,6 +32,7 @@ export default function Header() {
     { to: "/contactus", label: "Contact", icon: <Mail className="w-4 h-4" /> },
     { to: "/news", label: "News", icon: <Newspaper className="w-4 h-4" /> },
     { to: "/consultation", label: "Consultation", icon: <Phone className="w-4 h-4" /> },
+    { to: "/care-co-pilot", label: "Care Co-Pilot", icon: <Heart className="w-4 h-4" /> },
     { to: "/contributors", label: "Contributors", icon: <Users className="w-4 h-4" /> },
   ];
 
@@ -59,25 +61,25 @@ export default function Header() {
               </div>
             </Link>
 
-            {/* Desktop Nav */}
-            <div className="hidden lg:flex items-center gap-5">
-              {navItems.map(({ to, label, icon }) => (
-                <NavLink
-                  key={to}
-                  to={to}
-                  className={({ isActive }) =>
-                    `flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
-                      isActive
-                        ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow"
-                        : "text-gray-700 dark:text-gray-200 hover:bg-purple-100 dark:hover:bg-gray-800 hover:text-purple-600 dark:hover:text-purple-400"
-                    }`
-                  }
-                >
-                  {icon}
-                  {label}
-                </NavLink>
-              ))}
-            </div>
+                         {/* Desktop Nav */}
+             <div className="hidden lg:flex items-center gap-2">
+               {navItems.map(({ to, label, icon }) => (
+                 <NavLink
+                   key={to}
+                   to={to}
+                   className={({ isActive }) =>
+                     `flex items-center gap-1.5 px-2.5 py-1.5 text-sm font-medium rounded-full transition-all duration-300 ${
+                       isActive
+                         ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow"
+                         : "text-gray-700 dark:text-gray-200 hover:bg-purple-100 dark:hover:bg-gray-800 hover:text-purple-600 dark:hover:text-purple-400"
+                     }`
+                   }
+                 >
+                   {icon}
+                   {label}
+                 </NavLink>
+               ))}
+             </div>
 
             {/* Auth Buttons */}
             <div className="hidden lg:flex items-center gap-2">
