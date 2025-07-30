@@ -71,8 +71,9 @@ Follow these steps to set up the project locally.
 
 1.  **Clone the Repository**
     ```bash
-    git clone [https://github.com/Amarjha01/InfantCareCompass.git](https://github.com/Amarjha01/InfantCareCompass.git)
-    cd InfantCareCompass
+    # Replace <your-github-username> with your actual username
+     git clone https://github.com/<your-github-username>/InfantCareCompass.git
+     cd InfantCareCompass
     ```
 
 2.  **Install Server Dependencies**
@@ -97,7 +98,7 @@ Follow these steps to set up the project locally.
     ```
     Your `.env` file should look like this:
     ```env
-    PORT=5000
+    PORT=3000
     MONGO_URI=your_mongodb_uri
     CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
     CLOUDINARY_API_KEY=your_cloudinary_api_key
