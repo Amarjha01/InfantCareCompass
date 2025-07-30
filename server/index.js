@@ -27,6 +27,11 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Root route
+app.get("/", (req, res) => {
+  res.json({ message: "InfantCareCompass API is running!" });
+});
+
 // Routes
 app.use("/api", router);
 
@@ -37,4 +42,7 @@ dbConnect().then(() => {
   app.listen(PORT, () => {
     console.log("Server is running on port:", PORT);
   });
+}).catch((error) => {
+  console.error("Failed to start server:", error);
+  process.exit(1);
 });
