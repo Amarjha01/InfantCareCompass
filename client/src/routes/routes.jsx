@@ -12,6 +12,7 @@ import ConsultationPage from "../pages/consult.jsx";
 import VideoRoom from "../pages/VideoRoom.jsx";
 import PersonalizedLearningHub from "../pages/LearningHub.jsx";
 import VaccineReminder from "../pages/VaccineReminder.jsx";
+import CareCoPilot from "../pages/CareCoPilot.jsx";
 import NotFoundPage from "../pages/NotFoundPage.jsx";
 import Contributors from "../pages/Contributors";
 
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "vaccineReminder",
         element: <VaccineReminder />,
+      },
+      {
+        path: "care-co-pilot",
+        element: <CareCoPilot />,
       },
     
 
