@@ -60,7 +60,7 @@ const Footer = () => {
   // ==================== FUNCTIONS ====================
   const handleNewsletterSubmit = (e) => {
     e.preventDefault()
-    console.log("Newsletter subscription submitted")
+    // Newsletter subscription logic can be added here
   }
 
   // ==================== RENDER COMPONENTS ====================

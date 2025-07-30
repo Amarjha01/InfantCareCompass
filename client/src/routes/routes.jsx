@@ -54,7 +54,6 @@ const router = createBrowserRouter([
           },
         ],
       },
-
       {
         path: "learning-hub",
         element: <PersonalizedLearningHub />,
@@ -63,9 +62,7 @@ const router = createBrowserRouter([
         path: "vaccineReminder",
         element: <VaccineReminder />,
       },
-    
-
-    {
+      {
         path: "*",
         element: <NotFoundPage />,
         handle: { noLayout: true },
@@ -82,13 +79,8 @@ const router = createBrowserRouter([
   },
   {
     path: "room/:roomId",
-    element: <VideoRoom />, // Route for VideoCall component
+    element: <VideoRoom />,
   },
-  {
-        path: "*",
-        element: <NotFoundPage />,
-        handle: { noLayout: true },
-      },
 ]);
 
 export default router;
