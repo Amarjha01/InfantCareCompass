@@ -1,4 +1,6 @@
+// const backendDomain = "http://localhost:3000";
 const backendDomain = "https://api.infantcarecompass.live";
+
 
 const commnApiEndpoint = {
    register:{

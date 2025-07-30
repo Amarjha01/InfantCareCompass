@@ -1,10 +1,9 @@
-import { asyncHandler } from "../../utils/asyncHandler.js";
 
-const consultation = asyncHandler(async (req, res, next) => {
-    console.log('Consultation service called');
-    res.status(200).json({
-        message: "Consultation service is working"
-    });
-});
+const consultation = async (req,resp)=>{
+console.log('conceltation');
+resp.status(200).json({
+    message:'welcome to conseltation page'
+})
+}
 
 export default consultation;
