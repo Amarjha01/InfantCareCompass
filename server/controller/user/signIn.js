@@ -1,19 +1,18 @@
-import { asyncHandler } from "../../utils/asyncHandler.js"; // Import the handler
+import { asyncHandler } from "../../utils/asyncHandler.js";
 import usermodel from "../../models/user/user.js";
 import doctormondel from "../../models/user/doctorSchema.js";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const signin = asyncHandler(async (req, res, next) => {
-    // The original try...catch block is removed, but the inner logic is identical.
     const { email, password, role } = req.body;
 
     if (role === 'DOCTOR') {
         const doctor = await doctormondel.findOne({ email });
         if (!doctor) {
-            req.status(400).json({
+            return res.status(400).json({
                 message: 'user not found'
-            })
+            });
         }
 
         const verfyuser = await bcrypt.compare(password, doctor.password);
@@ -25,7 +24,6 @@ const signin = asyncHandler(async (req, res, next) => {
             }
             
             const token = jwt.sign(tokendata, process.env.TOKEN_SECRET_KEY, { expiresIn: 60 * 60 * 8 });
-            // const refreshtoken =  jwt.sign({tokendata}, process.env.TOKEN_SECRET_KEY, {expiresIn:"7d"});
             const tokenOption = {
                 httpOnly: true,
                 secure: true
@@ -35,22 +33,19 @@ const signin = asyncHandler(async (req, res, next) => {
                 data: doctor,
                 success: true,
                 error: false
-            })
-            navigate("/")
-            // res.status(200).json({doctor
-            // })
+            });
         } else {
             res.status(400).json({
                 message: "please enter password correctly"
-            })
+            });
         }
 
     } else {
         const user = await usermodel.findOne({ email });
         if (!user) {
-            req.status(400).json({
+            return res.status(400).json({
                 message: 'user not found'
-            })
+            });
         }
         const veryfyuser = await bcrypt.compare(password, user.password);
 
@@ -60,7 +55,6 @@ const signin = asyncHandler(async (req, res, next) => {
                 email: user.email
             }
             const token = jwt.sign(tokendata, process.env.TOKEN_SECRET_KEY, { expiresIn: 60 * 60 * 8 });
-            // const refreshtoken =  jwt.sign({tokendata}, process.env.TOKEN_SECRET_KEY, {expiresIn:"7d"});
             const tokenOption = {
                 httpOnly: true,
                 secure: true
@@ -70,11 +64,11 @@ const signin = asyncHandler(async (req, res, next) => {
                 data: user,
                 success: true,
                 error: false
-            })
+            });
         } else {
             res.status(400).json({
                 message: "please enter password correctly"
-            })
+            });
         }
     }
 });
