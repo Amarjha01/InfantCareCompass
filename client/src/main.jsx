@@ -1,18 +1,19 @@
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes/routes.jsx";
+import { Provider } from 'react-redux';
+import { store } from './store/store.jsx';
+import CustomCursor from "./components/CustomCursor.jsx";
+
+// Polyfill for global in browser environment
 if (typeof global === 'undefined') {
     window.global = window;
 }
 
-
-import { createRoot } from "react-dom/client";
-import "./index.css"; // Global styles
-import { RouterProvider } from "react-router-dom"; // Correct import for RouterProvider
-import router from "./routes/routes.jsx"; // Import your routes
-import { Provider } from 'react-redux';
-import {store} from './store/store.jsx'
 createRoot(document.getElementById("root")).render(
-  
-<Provider store={store}>
-<RouterProvider router={router} /> {/* Provides the router configuration */} 
-</Provider>
- 
+  <Provider store={store}>
+    <RouterProvider router={router} />
+    <CustomCursor />
+  </Provider>
 );
