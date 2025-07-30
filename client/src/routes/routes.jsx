@@ -55,7 +55,6 @@ const router = createBrowserRouter([
           },
         ],
       },
-
       {
         path: "learning-hub",
         element: <PersonalizedLearningHub />,
@@ -65,12 +64,14 @@ const router = createBrowserRouter([
         element: <VaccineReminder />,
       },
       {
+       feature/Copilot_Assistant#145
         path: "care-co-pilot",
         element: <CareCoPilot />,
       },
     
 
     {
+     master
         path: "*",
         element: <NotFoundPage />,
         handle: { noLayout: true },
@@ -87,13 +88,8 @@ const router = createBrowserRouter([
   },
   {
     path: "room/:roomId",
-    element: <VideoRoom />, // Route for VideoCall component
+    element: <VideoRoom />,
   },
-  {
-        path: "*",
-        element: <NotFoundPage />,
-        handle: { noLayout: true },
-      },
 ]);
 
 export default router;

@@ -1,19 +1,113 @@
-PS C:\Users\doza5\GSSoC-contribution1-\InfantCareCompass> git branch
->> 
-* add-files
-  master
-PS C:\Users\doza5\GSSoC-contribution1-\InfantCareCompass> git checkout -b add-contributing
->> 
-Switched to a new branch 'add-contributing'
-PS C:\Users\doza5\GSSoC-contribution1-\InfantCareCompass> git branch 
-* add-contributing
-  add-files
-  master
-PS C:\Users\doza5\GSSoC-contribution1-\InfantCareCompass> git status 
-On branch add-contributing
-Changes not staged for commit:
-  (use "git add/rm <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
-        deleted:    CONTRIBUTING.md
+# Contributing to InfantCareCompass
 
-no changes added to commit (use "git add" and/or "git commit -a")
+Thank you for your interest in contributing to InfantCareCompass! This document provides guidelines for contributing to this project.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18.x or higher)
+- npm or yarn
+- Git
+
+### Setting Up the Project
+
+1. **Fork the Repository**
+   ```bash
+   # Fork the repository on GitHub first, then clone your fork
+   git clone https://github.com/YOUR_USERNAME/InfantCareCompass.git
+   cd InfantCareCompass
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   # Install root dependencies
+   npm install
+   
+   # Install client dependencies
+   cd client
+   npm install
+   
+   # Install server dependencies
+   cd ../server
+   npm install
+   ```
+
+3. **Set Up Environment Variables**
+   Create a `.env` file in the root directory with the following variables:
+   ```env
+   PORT=5000
+   MONGO_URI=your_mongodb_uri
+   CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+   CLOUDINARY_API_KEY=your_cloudinary_api_key
+   CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+   TOKEN_SECRET_KEY=your_jwt_secret_key
+   ```
+
+## Making Changes
+
+### Creating a Feature Branch
+
+```bash
+git checkout -b feature/your-feature-name
+```
+
+### Development Workflow
+
+1. **Start the Development Servers**
+   ```bash
+   # Terminal 1: Start the backend server
+   npm start
+   
+   # Terminal 2: Start the frontend development server
+   cd client
+   npm run dev
+   ```
+
+2. **Make Your Changes**
+   - Follow the existing code style
+   - Add comments for complex logic
+   - Test your changes thoroughly
+
+3. **Commit Your Changes**
+   ```bash
+   git add .
+   git commit -m "feat: add your feature description"
+   ```
+
+### Code Style Guidelines
+
+- Use meaningful commit messages
+- Follow the existing code formatting
+- Add comments for complex logic
+- Test your changes before submitting
+
+## Submitting Changes
+
+1. **Push Your Branch**
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+2. **Create a Pull Request**
+   - Go to your fork on GitHub
+   - Click "New Pull Request"
+   - Select your feature branch
+   - Fill out the PR template
+   - Submit the PR
+
+## Pull Request Guidelines
+
+- Provide a clear description of your changes
+- Include screenshots if UI changes are made
+- Reference any related issues
+- Ensure all tests pass
+- Update documentation if needed
+
+## Need Help?
+
+- Check existing issues and discussions
+- Join our Discord community
+- Contact the maintainers
+
+Thank you for contributing to InfantCareCompass! 🚀
