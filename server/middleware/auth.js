@@ -1,33 +1,43 @@
 import jwt from 'jsonwebtoken';
 
 
-async function authtoken(req,resp,next) {
+async function authtoken(req,res,next) {
     try {
-        const token = req.headers?.token;
-        if(!token){
-            resp.status(401).json({
-                message:'please login'
-            })
-        }else{
-            jwt.verify(token,process.env.TOKEN_SECRET_KEY,function(err,decoded){
-                console.log("token veryfication error:", err);
-                console.log("token veryfication decoded:", decoded);
-
-                if (err) {
-                    console.log("error auth", err);
-                    resp.status(401).json({
-                        message:'please login'
-                    })
-                   }else{
-                    req.id = decoded?.tokendata.id;
-                   console.log('id:',req.id)
-                   next();
-                   }
-                   
+        const authheader = req.headers.authorization || req.headers.token;
+        if(!authheader){
+           return res.status(401).json({
+                message:'Authorization token missing. Please login.'
             })
         }
+            
+        const token = authheader.startsWith('Bearer ') ? authheader.split(" ")[1] : authheader
+
+            jwt.verify(token,process.env.TOKEN_SECRET_KEY,(err,decoded) => {
+
+                if (err) {
+                    console.error("token veryfication error:", err);
+                    return res.status(401).json({
+                        message:'Invalid or expired token. Please login again.'
+                    })
+                   }
+                else{
+                    
+                 req.id = decoded?.tokendata.id;
+
+                     if (!req.id) {
+                     return res.status(403).json({ message: 'Token is missing user ID.' });
+                      } else {
+
+                         console.log('id:',req.id)
+                          next();
+                       }
+                     }
+                                   
+            })
+        
+
     } catch (error) {
-        resp.status(400).json({
+        res.status(400).json({
             message: error.message || error, // Log the error message instead of the whole error object
             data : [],
             error: true,

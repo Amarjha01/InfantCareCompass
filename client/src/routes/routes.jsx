@@ -12,7 +12,9 @@ import ConsultationPage from "../pages/consult.jsx";
 import VideoRoom from "../pages/VideoRoom.jsx";
 import PersonalizedLearningHub from "../pages/LearningHub.jsx";
 import VaccineReminder from "../pages/VaccineReminder.jsx";
+import CareCoPilot from "../pages/CareCoPilot.jsx";
 import NotFoundPage from "../pages/NotFoundPage.jsx";
+import Contributors from "../pages/Contributors";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,10 @@ const router = createBrowserRouter([
         element: <News />,
       },
       {
+        path: "contributors",
+        element: <Contributors />,
+      },
+      {
         path: "consultation",
         element: <ConsultationPage />,
         children: [
@@ -49,7 +55,6 @@ const router = createBrowserRouter([
           },
         ],
       },
-
       {
         path: "learning-hub",
         element: <PersonalizedLearningHub />,
@@ -58,9 +63,15 @@ const router = createBrowserRouter([
         path: "vaccineReminder",
         element: <VaccineReminder />,
       },
+      {
+       feature/Copilot_Assistant#145
+        path: "care-co-pilot",
+        element: <CareCoPilot />,
+      },
     
 
     {
+     master
         path: "*",
         element: <NotFoundPage />,
         handle: { noLayout: true },
@@ -77,13 +88,8 @@ const router = createBrowserRouter([
   },
   {
     path: "room/:roomId",
-    element: <VideoRoom />, // Route for VideoCall component
+    element: <VideoRoom />,
   },
-  {
-        path: "*",
-        element: <NotFoundPage />,
-        handle: { noLayout: true },
-      },
 ]);
 
 export default router;

@@ -19,9 +19,11 @@ import { Link } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import { useNavigate } from "react-router-dom";
 
 
 const HomePage = () => {
+  const navigate = useNavigate(); // ✅ Add this if missing
   const [isVisible, setIsVisible] = useState({});
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -166,6 +168,7 @@ const HomePage = () => {
   ];
 
   return (
+    
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
@@ -230,7 +233,9 @@ const HomePage = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
-              <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30">
+              <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30"
+              onClick={() => navigate('/signin')}
+              >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
                 <div className="relative flex items-center gap-2">
                   Start Your Journey
@@ -238,7 +243,9 @@ const HomePage = () => {
                 </div>
               </button>
 
-              <button className="group flex items-center gap-3 px-6 py-4 backdrop-blur-sm bg-white/10 border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300">
+              <button className="group flex items-center gap-3 px-6 py-4 backdrop-blur-sm bg-white/10 border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300"
+              onClick={() => navigate('/signin')}
+              >
                 <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 Watch Demo
               </button>
@@ -371,32 +378,35 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-5xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              <h2 className="text-5xl md:text-left text-center font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 Creating Magical Childhood Moments
               </h2>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              <p className="text-xl md:text-left text-center text-gray-300 mb-8 leading-relaxed">
                 Every smile, every milestone, every precious moment deserves to
                 be celebrated and supported with the best care possible.
               </p>
 
-              <div className="grid grid-cols-2 gap-6 mb-8">
-                <div className="text-center">
+              <div className="grid grid-cols-2 gap-6 mb-8 items-center">
+                <div className="md:text-left text-center">
                   <div className="text-3xl font-bold text-blue-400 mb-2">
                     50K+
                   </div>
                   <div className="text-gray-400">Happy Families</div>
                 </div>
-                <div className="text-center">
+                <div className="md:text-left text-center">
                   <div className="text-3xl font-bold text-emerald-400 mb-2">
                     99.9%
                   </div>
                   <div className="text-gray-400">Uptime</div>
                 </div>
               </div>
-
-              <button className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+              <div className="flex justify-center md:justify-start">
+              <button className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+              onClick={() => navigate('/signin')}
+              >
                 Join Our Community
               </button>
+              </div>
             </div>
 
             <div className="grid grid-cols-2 gap-6">
@@ -504,7 +514,9 @@ const HomePage = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30">
+              <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30"
+              onClick={() => navigate('/signin')}
+              >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
                 <div className="relative flex justify-center items-center gap-2">
                   Get Started Free
@@ -512,7 +524,9 @@ const HomePage = () => {
                 </div>
               </button>
 
-              <button className="px-8 py-4 border-2 border-white/30 rounded-full hover:bg-white/10 transition-all duration-300">
+              <button className="px-8 py-4 border-2 border-white/30 rounded-full hover:bg-white/10 transition-all duration-300"
+              onClick={() => navigate('/signin')}
+              >
                 Schedule Demo
               </button>
             </div>

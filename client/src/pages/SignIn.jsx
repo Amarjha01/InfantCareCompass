@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Mail, Lock, User, Eye, EyeOff, Shield, Stethoscope, Baby, ArrowRight, AlertCircle, Check, X } from "lucide-react";
+import { Mail, Lock, User, Eye, EyeOff, Shield, Stethoscope, Baby , ArrowRight, AlertCircle, Check, X ,Home} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 // --- Solution: Moved InputField outside and simplified it ---
@@ -244,7 +244,19 @@ export default function Signin() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center py-12 px-4">
+    <> 
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center px-7 pb-8 flex-col">
+      <div className="w-full ">
+      <button
+              onClick={() => navigate("/")}
+              className={`w-3/2 mt-6 py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 transform bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 hover:scale-105 hover:shadow-xl active:scale-95
+                 focus:outline-none focus:ring-4 focus:ring-indigo-500/50`}
+            >
+              <div className="flex items-center justify-center space-x-2">
+                    <Home className="w-5 h-5" />
+              </div>
+            </button>
+      </div>
       <div className="w-full max-w-md">
         <div className="text-center mb-8 animate-fadeIn">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full mb-6 shadow-lg">
@@ -286,7 +298,7 @@ export default function Signin() {
               onChange={handleChange}
               onFocus={() => setFocusedField('password')}
               onBlur={() => setFocusedField(null)}
-              showPasswordStrength={true}
+              showPasswordStrength={false}
             />
 
             <div className="space-y-4">
@@ -394,5 +406,6 @@ export default function Signin() {
         }
       `}</style>
     </div>
+    </>
   );
 }

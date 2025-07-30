@@ -1,5 +1,5 @@
 import "react";
-import { toast,ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { useState } from "react";
 import {
   Mail,
@@ -10,17 +10,13 @@ import {
   Instagram,
   Linkedin,
   Heart,
-  ArrowUp,
   ExternalLink
 } from "lucide-react";
 import { showErrorToast, showSuccessToast } from "../helpers/utils";
 import commnApiEndpoint from "../common/backendAPI";
 
 const Footer = () => {
-  const [email, setemail] = useState("")
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const [email, setEmail] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,19 +28,11 @@ const Footer = () => {
       });
       const data = await res.json();
       showSuccessToast(data.message);
-      setemail("");
+      setEmail("");
     } catch (error) {
-      showErrorToast(error);
+      showErrorToast(error.message || "Something went wrong!");
     }
-
-
-
-  }
-  const handlechange = (e) => {
-    e.preventDefault();
-    setemail(e.target.value);
-  }
-  // console.log(email);
+  };
 
   return (
     <footer className="relative bg-gradient-to-br from-[#502478] to-[#9157C7] text-white overflow-hidden">
@@ -55,9 +43,7 @@ const Footer = () => {
 
       {/* Main Footer Content */}
       <div className="relative z-10 container mx-auto px-4 py-12">
-        {/* Grid Layout for Footer */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-
           {/* Logo and Description */}
           <div className="lg:col-span-1">
             <div className="flex items-center mb-6">
@@ -70,11 +56,13 @@ const Footer = () => {
             </div>
             <p className="text-gray-100 leading-relaxed mb-6">
               Providing exceptional healthcare service and care to all our patients.
-              Your health is our priority, and We are here to help you every step of the way.
+              Your health is our priority, and we are here to help you every step of the way.
             </p>
             <div className="flex items-center space-x-2 text-sm">
               <Heart className="w-4 h-4 text-red-400" />
-              <span className="font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Trusted by 10,000+ families</span>
+              <span className="font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Trusted by 10,000+ families
+              </span>
             </div>
           </div>
 
@@ -147,7 +135,9 @@ const Footer = () => {
                 </div>
                 <div>
                   <p className="text-gray-200 text-sm">Address</p>
-                  <p className="text-gray-100">123 Healthcare Ave, Medical City, MC 12345</p>
+                  <p className="text-white font-semibold">
+                    123 Healthcare Ave, Medical City
+                  </p>
                 </div>
               </li>
             </ul>
@@ -159,8 +149,6 @@ const Footer = () => {
               Stay Connected
               <div className="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"></div>
             </h4>
-
-            {/* Newsletter Signup */}
             <div className="mb-6">
               <p className="text-gray-100 text-sm mb-4">
                 Subscribe to our newsletter for health tips and updates
@@ -169,70 +157,44 @@ const Footer = () => {
                 <input
                   type="email"
                   value={email}
-                  name="email"
-                  onChange={handlechange}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email"
                   className="flex-1 px-4 py-2 bg-white/20 border border-white/30 rounded-l-lg focus:outline-none focus:border-purple-400 transition-colors text-white placeholder-gray-200"
                 />
-                <button type="submit" className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-r-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 text-white">
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-r-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 text-white"
+                >
                   <ExternalLink className="w-4 h-4" />
                 </button>
               </form>
             </div>
-
-            {/* Social Media Links */}
-            <div>
-              <p className="text-gray-100 text-sm mb-4">Follow us on social media</p>
-              <div className="flex space-x-3">
-                {[
-                  { Icon: Facebook, href: "#" },
-                  { Icon: Twitter, href: "#" },
-                  { Icon: Instagram, href: "#" },
-                  { Icon: Linkedin, href: "#" }
-                ].map(({ Icon, href }, index) => (
-                  <a
-                    key={index}
-                    href={href}
-                    className={`w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-white hover:text-purple-200 hover:bg-white/20 transition-all duration-300`}
-                  >
-                    <Icon className="w-5 h-5" />
-                  </a>
-                ))}
-              </div>
+            <div className="flex space-x-3">
+              {[Facebook, Twitter, Instagram, Linkedin].map((Icon, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-white hover:text-purple-200 hover:bg-white/20 transition-all duration-300"
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Footer Bottom */}
-        <div className="mt-12 pt-8 border-t border-gray-700/50">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex items-center space-x-6 text-sm font-semibold text-white">
-              <p>&copy; 2024 HealthCare+. All rights reserved.</p>
-              <a href="#" className="hover:text-purple-200 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-purple-200 transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-purple-200 transition-colors">Cookie Policy</a>
-            </div>
-
-            {/* Back to Top Button */}
-            <button
-              onClick={scrollToTop}
-              className="group flex items-center space-x-2 text-sm text-white hover:text-purple-200 transition-all duration-300 hover:translate-y-[-2px]"
-            >
-              <span>Back to top</span>
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center group-hover:shadow-lg transition-all duration-300">
-                <ArrowUp className="w-4 h-4 text-white" />
-              </div>
-            </button>
+        {/* Bottom Section */}
+        <div className="mt-12 pt-8 border-t border-gray-700/50 flex flex-col md:flex-row justify-between items-center text-sm text-white">
+          <p>&copy; 2024 HealthCare+. All rights reserved.</p>
+          <div className="flex space-x-6 mt-4 md:mt-0">
+            <a href="#" className="hover:text-purple-200">Privacy Policy</a>
+            <a href="#" className="hover:text-purple-200">Terms of Service</a>
+            <a href="#" className="hover:text-purple-200">Cookie Policy</a>
           </div>
         </div>
       </div>
-
-      {/* Decorative Elements */}
-      <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl"></div>
-      <ToastContainer/>
+      <ToastContainer />
     </footer>
-
   );
 };
 
