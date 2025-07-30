@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 async function dbConnect() {
   try {
@@ -17,6 +20,7 @@ async function dbConnect() {
   } catch (error) {
     console.log("error connecting to the database:", error.message);
     throw error; // Re-throw to handle in the main server file
+
   }
 }
 
