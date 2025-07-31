@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userSlice } from './slices/userSlice.jsx';
+import  userSlice  from './slices/userSlice.jsx';
 import { doctorSlice } from './slices/doctorSlice.jsx';
 import storage from 'redux-persist/lib/storage'; // Default storage is localStorage for web
 import { persistReducer, persistStore } from 'redux-persist';
