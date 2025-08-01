@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './slices/userSlice.jsx'; // Correct default import
-import doctorReducer from './slices/doctorSlice.jsx'; // Correct default import
+import userReducer from './slices/userSlice.jsx';
+import doctorReducer from './slices/doctorSlice.jsx'; // assumes default export
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { combineReducers } from 'redux';

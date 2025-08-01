@@ -172,19 +172,49 @@ const Footer = () => {
     <div className="text-center mb-12">
       <h4 className="text-2xl font-bold text-white mb-8">Connect With Us</h4>
       <div className="flex justify-center space-x-6">
-        {socialLinks.map(({ Icon, href, name }, index) => (
-          <a key={index} href={href} aria-label={`Follow us on ${name}`} className="group relative">
-            <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:shadow-xl group-hover:rotate-12">
-              <Icon className="w-8 h-8" />
-            </div>
-            <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              {name}
-            </span>
-          </a>
-        ))}
-      </div>
+ {
+  socialLinks.map(({ Icon, href, name }, index) => {
+    const isTwitter = name === 'Twitter';
+
+    return (
+      <a
+        key={index}
+        href={href}
+        aria-label={`Follow us on ${name}`}
+        className="group relative"
+      >
+        <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:shadow-xl group-hover:rotate-12">
+          { 
+          isTwitter ? (
+          <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:shadow-xl group-hover:rotate-12">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1200 1227"
+    width="32"
+    height="32"
+    fill="white"
+  >
+    <path d="M714.492 548.125 1174.73 0H1070.63L665.52 486.5 338.729 0H0L481.446 702.833 0 1226.35H104.104L537.15 711.208 881.5 1226.35H1200L714.492 548.125ZM584.896 641.396 545.812 585.583 146.771 89.25H282.917L621.417 567.521 660.5 623.333 1070.62 1138.48H934.479L584.896 641.396Z" />
+  </svg>
+</div>
+
+          ) : (
+            <Icon className="w-8 h-8" />
+          )}
+        </div>
+        <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          {name}
+        </span>
+      </a>
+    );
+  })
+}
+
+</div>
     </div>
   )
+
+
 
   const renderFooterBottom = () => (
     <div className="border-t border-white/20 pt-8">
