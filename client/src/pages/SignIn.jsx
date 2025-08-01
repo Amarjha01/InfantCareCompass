@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Mail, Lock, User, Eye, EyeOff, Shield, Stethoscope, Baby , ArrowRight, AlertCircle, Check, X ,Home} from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
+import { Toaster, toast } from 'react-hot-toast';
 // --- Solution: Moved InputField outside and simplified it ---
 const PasswordStrengthIndicator = ({ password }) => {
   const requirements = [
@@ -225,11 +225,11 @@ export default function Signin() {
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
       console.log("Submitted Data: ", formData);
-      alert("Login successful!");
+      toast.success("Login successful!");
       navigate("/")
     } catch (error) {
       console.error("Signin error:", error);
-      alert("Invalid email or password. Please try again.");
+      toast.error("Invalid email or password. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -245,6 +245,7 @@ export default function Signin() {
 
   return (
     <> 
+     <Toaster position="top-right" />
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center px-7 pb-8 flex-col">
       <div className="w-full ">
       <button
