@@ -1,4 +1,3 @@
-import React from 'react';
 import ScrollToTop from '../components/ScrollToTop';
 
 const CookiePolicy = () => {
