@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const doctorSlice = new createSlice({
+export const doctorSlice = createSlice({
     name:'doctor',
     initialState:[],
 

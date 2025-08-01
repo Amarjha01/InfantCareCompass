@@ -1,7 +1,8 @@
-const peer = new peer({
+import SimplePeer from 'simple-peer';
+
+const peer = new SimplePeer({
     initiator: true,
     trickle: false,
-    stream,
     config: {
       iceServers: [
         { urls: "stun:stun.l.google.com:19302" }, // Google's public STUN server
@@ -13,4 +14,5 @@ const peer = new peer({
       ],
     },
   });
-  export default peer;
+  
+export default peer;
