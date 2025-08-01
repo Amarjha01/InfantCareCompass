@@ -72,10 +72,6 @@ const router = createBrowserRouter([
         element: <CareCoPilot />,
       },
       {
-        path: "care-co-pilot",
-        element: <CareCoPilot />,
-      },
-      {
         path: "privacy-policy",
         element: <PrivacyPolicy />,
       },

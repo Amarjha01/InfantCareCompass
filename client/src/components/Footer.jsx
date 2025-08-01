@@ -119,8 +119,9 @@ const Footer = () => {
       </div>
 
       {/* Contact Info */}
-      <div className="text-center lg:text-left">
-        <h4 className="text-2xl font-bold text-white mb-8">Get In Touch</h4>
+      <div className="flex justify-center">
+        <div>
+        <h4 className="text-2xl text-center font-bold text-white mb-8">Get In Touch</h4>
         <div className="space-y-6">
           {contactInfo.map((contact, index) => {
             const IconComponent = contact.icon;
@@ -153,8 +154,8 @@ const Footer = () => {
             );
           })}
         </div>
+        </div>
       </div>
-
       {/* Newsletter */}
       <div className="text-center lg:text-left">
         <h4 className="text-2xl font-bold text-white mb-8">Stay Updated</h4>
