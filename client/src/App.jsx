@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 import { Outlet, useMatches } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollRestoration from "./components/ScrollRestoration";
-
+import { Toaster, toast } from 'react-hot-toast';
 function App() {
   const matches = useMatches();
   const hideLayout = matches.some((match) => match.handle?.noLayout);
@@ -22,6 +22,7 @@ function App() {
 
       {!hideLayout && <Footer />}
       <ScrollToTop />
+      <Toaster position="top-right" /> 
     </div>
   );
 }
