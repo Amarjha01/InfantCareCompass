@@ -1,21 +1,24 @@
 import App from "../App";
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter } from "react-router-dom";
 import HomePage from "../pages/Home";
-import About  from  "../pages/About";
-import Blog  from  "../pages/Blog";
-import ContactUs  from  "../pages/ContactUs";
-import News from  "../pages/News";
-import Contributors  from  "../pages/Contributors";
-import VideoRoom from  "../pages/VideoRoom";
-import Signin from  "../pages/SignIn";
-import Registration from  "../pages/Registration";
-import NotFoundPage from  "../pages/NotFoundPage";
-import CareCoPilot from  "../pages/CareCoPilot";
-import VaccineReminder from  "../pages/VaccineReminder";
-import PersonalisedLearningHub from  "../pages/LearningHub";
-import DoctorDetails from  "../pages/DoctorDetails";
+import About from "../pages/About";
+import Blog from "../pages/Blog";
+import ContactUs from "../pages/ContactUs";
+import News from "../pages/News";
+import Contributors from "../pages/Contributors";
+import VideoRoom from "../pages/VideoRoom";
+import Signin from "../pages/SignIn";
+import Registration from "../pages/Registration";
+import NotFoundPage from "../pages/NotFoundPage";
+import CareCoPilot from "../pages/CareCoPilot";
+import VaccineReminder from "../pages/VaccineReminder";
+import PersonalisedLearningHub from "../pages/LearningHub";
+import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
-import consultationPage from  "../pages/consult";
+import consultationPage from "../pages/consult";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
+import TermsOfService from "../pages/TermsOfService";
+import CookiePolicy from "../pages/CookiePolicy";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +70,22 @@ const router = createBrowserRouter([
       {
         path: "care-co-pilot",
         element: <CareCoPilot />,
+      },
+      {
+        path: "care-co-pilot",
+        element: <CareCoPilot />,
+      },
+      {
+        path: "privacy-policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "terms-of-service",
+        element: <TermsOfService />,
+      },
+      {
+        path: "cookie-policy",
+        element: <CookiePolicy />,
       },
       {
         path: "*",
