@@ -65,13 +65,16 @@ const router = createBrowserRouter([
         element: <VaccineReminder />,
       },
       {
-        path: "care-co-pilot",
-        element: <CareCoPilot />,
-      },
-      {
-        path: "*",
-        element: <NotFoundPage />,
-        handle: { noLayout: true },
+{
+  path: "care-co-pilot",
+  element: <CareCoPilot />,
+},
+{
+  path: "*",
+  element: <NotFoundPage />,
+  handle: { noLayout: true },
+}
+
       },
     ],
   },
