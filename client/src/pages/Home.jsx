@@ -243,8 +243,12 @@ const HomePage = () => {
                 </div>
               </button>
 
-              <button className="group flex items-center gap-3 px-6 py-4 backdrop-blur-sm bg-white/10 border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300"
-              onClick={() => navigate('/signin')}
+              <button 
+                className="group flex items-center gap-3 px-6 py-4 backdrop-blur-sm bg-white/10 border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300"
+                onClick={() => {
+                  const demoSection = document.getElementById('demo');
+                  demoSection.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
                 <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 Watch Demo
@@ -430,6 +434,66 @@ const HomePage = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Demo Section */}
+      <section className="py-20 relative" id="demo">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+              See It In Action
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Watch our quick demo to see how InfantCareCompass makes parenting easier
+            </p>
+          </div>
+
+          <div className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl">
+            <div className="aspect-w-16 aspect-h-9 bg-black/20">
+              <iframe
+                className="w-full h-[500px]"
+                src="https://www.youtube.com/embed/your-video-id"
+                title="InfantCareCompass Demo"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group hover:bg-white/30 transition-all duration-300 cursor-pointer">
+                <Play className="w-12 h-12 text-white ml-2 group-hover:scale-110 transition-transform" fill="currentColor" />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {[
+              {
+                icon: <Calendar className="w-8 h-8 text-blue-400" />,
+                title: "Vaccination Tracking",
+                description: "Never miss an important vaccination with our smart tracking system"
+              },
+              {
+                icon: <BookOpen className="w-8 h-8 text-purple-400" />,
+                title: "Milestone Monitoring",
+                description: "Track your baby's growth and development with ease"
+              },
+              {
+                icon: <Users className="w-8 h-8 text-pink-400" />,
+                title: "Expert Community",
+                description: "Connect with other parents and healthcare professionals"
+              }
+            ].map((feature, index) => (
+              <div key={index} className="bg-white/5 p-6 rounded-2xl backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center mb-4">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                <p className="text-gray-400">{feature.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
