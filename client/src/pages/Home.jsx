@@ -172,7 +172,7 @@ const HomePage = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-3/4 left-1/4 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
         <div
           className="absolute top-3/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "1s" }}
@@ -188,7 +188,7 @@ const HomePage = () => {
 
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-6">
+      <section className="top-0 relative min-h-screen flex items-center justify-center px-6 ">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/40"></div>
 
         <div className="relative z-10 text-center max-w-6xl mx-auto">
