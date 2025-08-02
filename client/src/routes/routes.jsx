@@ -64,7 +64,7 @@ const router = createBrowserRouter([
         path: "vaccineReminder",
         element: <VaccineReminder />,
       },
-      {
+     // {
 {
   path: "care-co-pilot",
   element: <CareCoPilot />,
@@ -75,7 +75,7 @@ const router = createBrowserRouter([
   handle: { noLayout: true },
 }
 
-      },
+   //   },
     ],
   },
   {
@@ -91,4 +91,4 @@ const router = createBrowserRouter([
     element: <VideoRoom />,
   },
 ]);
-export default router;
+export default router;     

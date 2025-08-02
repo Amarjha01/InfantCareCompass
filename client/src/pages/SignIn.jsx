@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Mail, Lock, User, Eye, EyeOff, Shield, Stethoscope, Baby , ArrowRight, AlertCircle, Check, X ,Home} from "lucide-react";
+import { Mail, Lock, User, Shield, Stethoscope, Baby , ArrowRight, AlertCircle, Check, X ,Home} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from 'react-hot-toast';
 // --- Solution: Moved InputField outside and simplified it ---
@@ -121,7 +121,7 @@ const InputField = ({
           onClick={onToggleShowPassword}
           className="absolute right-4 top-4 p-1 text-gray-400 hover:text-gray-600 transition-colors"
         >
-          {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+         
         </button>
       )}
 
