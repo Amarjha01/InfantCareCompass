@@ -11,7 +11,7 @@ import {
   CheckCircle,
   Sparkles,
 } from "lucide-react";
-
+import { motion } from "framer-motion";
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeCard, setActiveCard] = useState(null);
@@ -107,18 +107,49 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
+    <motion.div
+      className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden"
+      initial={{ opacity: 0}}
+      animate={{ opacity: 1}}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
       {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-yellow-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-1000"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
-      </div>
+      <motion.div
+        className="absolute inset-0 overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.2 }}
+      >
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.2 }}
+          transition={{ duration: 1, delay: 0.3 }}
+        ></motion.div>
+        <motion.div
+          className="absolute top-1/3 right-1/4 w-72 h-72 bg-yellow-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-1000"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.2 }}
+          transition={{ duration: 1, delay: 0.5 }}
+        ></motion.div>
+        <motion.div
+          className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.2 }}
+          transition={{ duration: 1, delay: 0.7 }}
+        ></motion.div>
+      </motion.div>
 
       {/* Main Content */}
       <div className="relative z-10">
         {/* Hero Section */}
-        <section className="py-20 px-4">
+        <motion.section
+          className="py-20 px-4"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+        >
           <div className="container mx-auto max-w-6xl">
             <div
               className={`text-center transition-all duration-1000 ${
@@ -149,14 +180,20 @@ const About = () => {
               </p>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Stats Section */}
-        <section className="py-16 px-4">
+        <motion.section
+          className="py-16 px-4"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
           <div className="container mx-auto max-w-6xl">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {stats.map((stat, index) => (
-                <div
+                <motion.div
                   key={index}
                   className={`text-center group transition-all duration-500 ${
                     isVisible
@@ -164,6 +201,10 @@ const About = () => {
                       : "opacity-0 translate-y-10"
                   }`}
                   style={{ transitionDelay: `${index * 150}ms` }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 group-hover:scale-105">
                     <div className="text-purple-400 mb-2 flex justify-center group-hover:scale-110 transition-transform duration-300">
@@ -174,14 +215,20 @@ const About = () => {
                     </div>
                     <div className="text-gray-300 text-sm">{stat.label}</div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Services Section */}
-        <section className="py-20 px-4">
+        <motion.section
+          className="py-20 px-4"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
@@ -195,7 +242,7 @@ const About = () => {
 
             <div className="grid gap-8 md:grid-cols-2">
               {services.map((service, index) => (
-                <div
+                <motion.div
                   key={service.id}
                   className={`group relative overflow-hidden rounded-2xl transition-all duration-700 hover:scale-105 ${
                     isVisible
@@ -205,6 +252,10 @@ const About = () => {
                   style={{ transitionDelay: `${index * 200}ms` }}
                   onMouseEnter={() => setActiveCard(service.id)}
                   onMouseLeave={() => setActiveCard(null)}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, delay: index * 0.15 }}
                 >
                   {/* Card Background */}
                   <div
@@ -233,7 +284,7 @@ const About = () => {
                     {/* Features */}
                     <div className="space-y-3">
                       {service.features.map((feature, featureIndex) => (
-                        <div
+                        <motion.div
                           key={featureIndex}
                           className={`flex items-center gap-3 transition-all duration-300 ${
                             activeCard === service.id
@@ -241,12 +292,16 @@ const About = () => {
                               : "opacity-70 translate-x-2"
                           }`}
                           style={{ transitionDelay: `${featureIndex * 100}ms` }}
+                          initial={{ opacity: 0, x: 10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true, amount: 0.2 }}
+                          transition={{ duration: 0.4, delay: featureIndex * 0.07 }}
                         >
                           <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
                           <span className="text-gray-300 group-hover:text-white transition-colors duration-300">
                             {feature}
                           </span>
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
 
@@ -261,14 +316,20 @@ const About = () => {
                     {/* Hover Effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out"></div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* CTA Section */}
-        <section className="py-20 px-4">
+        <motion.section
+          className="py-20 px-4"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
           <div className="container mx-auto max-w-4xl">
             <div className="text-center bg-gradient-to-r from-purple-600/20 to-pink-600/20 backdrop-blur-sm border border-purple-500/30 rounded-3xl p-12">
               <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
@@ -288,9 +349,9 @@ const About = () => {
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -15,19 +15,16 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 import { Link } from "react-router-dom";
-
+import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { useNavigate } from "react-router-dom";
 
-
 const HomePage = () => {
   const navigate = useNavigate(); // ✅ Add this if missing
   const [isVisible, setIsVisible] = useState({});
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -36,7 +33,6 @@ const HomePage = () => {
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
-
 
   const handleIntersection = (entries) => {
     entries.forEach((entry) => {
@@ -92,7 +88,6 @@ const HomePage = () => {
       image:
         "https://res.cloudinary.com/dbnticsz8/image/upload/v1734934194/Infant%20care%20Compass/gheqjy0npqdkyhgqds43.png",
       link: "#",
-
     },
     {
       icon: <Phone className="w-12 h-12" />,
@@ -104,7 +99,6 @@ const HomePage = () => {
         "https://res.cloudinary.com/dbnticsz8/image/upload/v1734935048/Infant%20care%20Compass/crqtr4wfu69wmqnulmja.png",
 
       link: "#",
-
     },
     {
       icon: <BookOpen className="w-12 h-12" />,
@@ -115,7 +109,6 @@ const HomePage = () => {
       image:
         "https://res.cloudinary.com/dbnticsz8/image/upload/v1734935847/Infant%20care%20Compass/yf0tea4dqhjf4ww3hjcz.png",
       link: "/learning-hub",
-
     },
   ];
 
@@ -126,8 +119,8 @@ const HomePage = () => {
       content:
         "The AI-powered insights helped me understand my baby's needs like never before. It's like having a pediatrician in your pocket!",
       rating: 5,
-      avatar:"https://images.unsplash.com/photo-1509868918748-a554ad25f858?w=100&h=100&fit=crop&crop=face",
-
+      avatar:
+        "https://images.unsplash.com/photo-1509868918748-a554ad25f858?w=100&h=100&fit=crop&crop=face",
     },
     {
       name: "Michael Rodriguez",
@@ -168,8 +161,12 @@ const HomePage = () => {
   ];
 
   return (
-    
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden ">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden "
+    >
       {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
@@ -183,12 +180,16 @@ const HomePage = () => {
         ></div>
       </div>
 
-
       {/* Mouse Follower Effect */}
 
-
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-6">
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.7, delay: 0.1 }}
+        className="relative min-h-screen flex items-center justify-center px-6"
+      >
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/40"></div>
 
         <div className="relative z-10 text-center max-w-6xl mx-auto">
@@ -211,7 +212,7 @@ const HomePage = () => {
             </h1>
 
             <div className="max-w-3xl mx-auto">
-              <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed">
+              <p className="text-xl md:text-2xl text-gray-300 font-light  leading-relaxed">
                 Revolutionary AI-powered platform transforming how parents
                 navigate their child's early years with
                 <span className="text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text font-semibold">
@@ -233,8 +234,9 @@ const HomePage = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
-              <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30"
-              onClick={() => navigate('/signin')}
+              <button
+                className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30"
+                onClick={() => navigate("/signin")}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
                 <div className="relative flex items-center gap-2">
@@ -243,11 +245,11 @@ const HomePage = () => {
                 </div>
               </button>
 
-              <button 
+              <button
                 className="group flex items-center gap-3 px-6 py-4 backdrop-blur-sm bg-white/10 border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300"
                 onClick={() => {
-                  const demoSection = document.getElementById('demo');
-                  demoSection.scrollIntoView({ behavior: 'smooth' });
+                  const demoSection = document.getElementById("demo");
+                  demoSection.scrollIntoView({ behavior: "smooth" });
                 }}
               >
                 <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
@@ -285,13 +287,13 @@ const HomePage = () => {
             </GlassCard>
           </FloatingElement>
         </div>
-      </section>
+      </motion.section>
 
       {/* Services Section */}
       <section id="services" className="py-32 relative overflow-x-visible z-10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            <h2 className="text-5xl md:text-6xl font-bold pb-4 mb-2 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
               Revolutionary Care Solutions
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
@@ -350,30 +352,30 @@ const HomePage = () => {
                       <Link to={service.link}>Learn More</Link>
                       <ArrowRight className="w-4 h-4" />
                     </button>
-                     </div>
-                </GlassCard>
-              <SwiperSlide key={index} className="!w-80 !flex-shrink-0">
-                <GlassCard className="p-6 text-white text-center">
-                  <div
-                    className={`bg-gradient-to-br ${service.color} p-4 rounded-full inline-block`}
-                  >
-                    {service.icon}
                   </div>
-                  <h3 className="text-xl font-bold mt-4">{service.title}</h3>
-                  <p className="text-white-600 mt-2">{service.description}</p>
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="mt-4 rounded-xl w-full h-40 object-cover"
-                  />
-                  <p className="mt-3 text-blue-600 font-medium">Learn More →</p>
                 </GlassCard>
-              </SwiperSlide>
+                <SwiperSlide key={index} className="!w-80 !flex-shrink-0">
+                  <GlassCard className="p-6 text-white text-center">
+                    <div
+                      className={`bg-gradient-to-br ${service.color} p-4 rounded-full inline-block`}
+                    >
+                      {service.icon}
+                    </div>
+                    <h3 className="text-xl font-bold mt-4">{service.title}</h3>
+                    <p className="text-white-600 mt-2">{service.description}</p>
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="mt-4 rounded-xl w-full h-40 object-cover"
+                    />
+                    <p className="mt-3 text-blue-600 font-medium">
+                      Learn More →
+                    </p>
+                  </GlassCard>
+                </SwiperSlide>
               </div>
             ))}
-          
-        
-        </Swiper>
+          </Swiper>
         </div>
       </section>
 
@@ -405,11 +407,12 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="flex justify-center md:justify-start">
-              <button className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-              onClick={() => navigate('/signin')}
-              >
-                Join Our Community
-              </button>
+                <button
+                  className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                  onClick={() => navigate("/signin")}
+                >
+                  Join Our Community
+                </button>
               </div>
             </div>
 
@@ -446,7 +449,8 @@ const HomePage = () => {
               See It In Action
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Watch our quick demo to see how InfantCareCompass makes parenting easier
+              Watch our quick demo to see how InfantCareCompass makes parenting
+              easier
             </p>
           </div>
 
@@ -463,7 +467,10 @@ const HomePage = () => {
             </div>
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group hover:bg-white/30 transition-all duration-300 cursor-pointer">
-                <Play className="w-12 h-12 text-white ml-2 group-hover:scale-110 transition-transform" fill="currentColor" />
+                <Play
+                  className="w-12 h-12 text-white ml-2 group-hover:scale-110 transition-transform"
+                  fill="currentColor"
+                />
               </div>
             </div>
           </div>
@@ -473,24 +480,32 @@ const HomePage = () => {
               {
                 icon: <Calendar className="w-8 h-8 text-blue-400" />,
                 title: "Vaccination Tracking",
-                description: "Never miss an important vaccination with our smart tracking system"
+                description:
+                  "Never miss an important vaccination with our smart tracking system",
               },
               {
                 icon: <BookOpen className="w-8 h-8 text-purple-400" />,
                 title: "Milestone Monitoring",
-                description: "Track your baby's growth and development with ease"
+                description:
+                  "Track your baby's growth and development with ease",
               },
               {
                 icon: <Users className="w-8 h-8 text-pink-400" />,
                 title: "Expert Community",
-                description: "Connect with other parents and healthcare professionals"
-              }
+                description:
+                  "Connect with other parents and healthcare professionals",
+              },
             ].map((feature, index) => (
-              <div key={index} className="bg-white/5 p-6 rounded-2xl backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+              <div
+                key={index}
+                className="bg-white/5 p-6 rounded-2xl backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300"
+              >
                 <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center mb-4">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                <h3 className="text-xl font-semibold text-white mb-2">
+                  {feature.title}
+                </h3>
                 <p className="text-gray-400">{feature.description}</p>
               </div>
             ))}
@@ -500,69 +515,68 @@ const HomePage = () => {
 
       {/* Testimonials Section */}
       <section className="py-32 relative">
-  <div className="max-w-7xl mx-auto px-6">
-    <div className="text-center mb-20">
-      <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-        Voices of Trust
-      </h2>
-      <p className="text-xl text-gray-400">
-        Real stories from parents who've transformed their journey with us
-      </p>
-    </div>
-
-    <Swiper
-      slidesPerView={1}
-      spaceBetween={30}
-      autoplay={{
-        delay: 4000,
-        disableOnInteraction: false,
-      }}
-      pagination={{ clickable: true }}
-      breakpoints={{
-        768: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 },
-      }}
-      modules={[Autoplay, Pagination]}
-      className="w-full overflow-visible pb-10"
-    >
-      {testimonials.map((testimonial, index) => (
-        <SwiperSlide key={index}>
-          <GlassCard className="p-8 relative group" hover={true}>
-            <div className="flex items-center gap-2 mb-4">
-              {[...Array(testimonial.rating)].map((_, i) => (
-                <Star
-                  key={i}
-                  className="w-5 h-5 fill-yellow-400 text-yellow-400"
-                />
-              ))}
-            </div>
-
-            <p className="text-gray-300 mb-6 leading-relaxed italic">
-              "{testimonial.content}"
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              Voices of Trust
+            </h2>
+            <p className="text-xl text-gray-400">
+              Real stories from parents who've transformed their journey with us
             </p>
+          </div>
 
-            <div className="flex items-center gap-4">
-              <img
-                src={testimonial.avatar}
-                alt={testimonial.name}
-                className="w-12 h-12 rounded-full object-cover"
-              />
-              <div>
-                <div className="font-semibold text-white">
-                  {testimonial.name}
-                </div>
-                <div className="text-gray-400 text-sm">
-                  {testimonial.role}
-                </div>
-              </div>
-            </div>
-          </GlassCard>
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  </div>
-</section>
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={30}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+            }}
+            pagination={{ clickable: true }}
+            breakpoints={{
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+            modules={[Autoplay, Pagination]}
+            className="w-full overflow-visible pb-10"
+          >
+            {testimonials.map((testimonial, index) => (
+              <SwiperSlide key={index}>
+                <GlassCard className="p-8 relative group" hover={true}>
+                  <div className="flex items-center gap-2 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                      />
+                    ))}
+                  </div>
 
+                  <p className="text-gray-300 mb-6 leading-relaxed italic">
+                    "{testimonial.content}"
+                  </p>
+
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-semibold text-white">
+                        {testimonial.name}
+                      </div>
+                      <div className="text-gray-400 text-sm">
+                        {testimonial.role}
+                      </div>
+                    </div>
+                  </div>
+                </GlassCard>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="py-32 relative">
@@ -578,8 +592,9 @@ const HomePage = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30"
-              onClick={() => navigate('/signin')}
+              <button
+                className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30"
+                onClick={() => navigate("/signin")}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
                 <div className="relative flex justify-center items-center gap-2">
@@ -588,8 +603,9 @@ const HomePage = () => {
                 </div>
               </button>
 
-              <button className="px-8 py-4 border-2 border-white/30 rounded-full hover:bg-white/10 transition-all duration-300"
-              onClick={() => navigate('/signin')}
+              <button
+                className="px-8 py-4 border-2 border-white/30 rounded-full hover:bg-white/10 transition-all duration-300"
+                onClick={() => navigate("/signin")}
               >
                 Schedule Demo
               </button>
@@ -597,7 +613,7 @@ const HomePage = () => {
           </GlassCard>
         </div>
       </section>
-    </div>
+    </motion.div>
   );
 };
 
