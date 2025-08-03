@@ -104,39 +104,50 @@ const Footer = () => {
       </div>
 
       {/* Contact Info */}
-      <div className="text-center lg:text-left">
-        <h4 className="text-2xl font-bold text-white mb-8">Get In Touch</h4>
+      <div className="flex justify-center">
+        <div>
+        <h4 className="text-2xl text-center font-bold text-white mb-8">Get In Touch</h4>
         <div className="space-y-6">
           {contactInfo.map((contact, index) => {
-            const IconComponent = contact.icon
+            const IconComponent = contact.icon;
             const content = contact.href ? (
-              <a href={contact.href} className="text-white hover:text-purple-200 transition-colors font-medium">
+              <a
+                href={contact.href}
+                className="text-white hover:text-purple-200 transition-colors font-medium"
+              >
                 {contact.value}
               </a>
             ) : (
               <p className="text-gray-200">{contact.value}</p>
-            )
+            );
 
             return (
-              <div key={index} className="flex items-center justify-center lg:justify-start space-x-4">
+              <div
+                key={index}
+                className="flex items-center justify-start space-x-4"
+              >
                 <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                   <IconComponent className="w-6 h-6 text-white" />
                 </div>
                 <div className="text-left">
-                  <p className="text-purple-200 text-sm font-medium uppercase tracking-wide">{contact.label}</p>
+                  <p className="text-purple-200 text-sm font-medium uppercase tracking-wide">
+                    {contact.label}
+                  </p>
                   <div className="text-lg">{content}</div>
                 </div>
               </div>
-            )
+            );
           })}
         </div>
+        </div>
       </div>
-
       {/* Newsletter */}
       <div className="text-center lg:text-left">
         <h4 className="text-2xl font-bold text-white mb-8">Stay Updated</h4>
         <div className="space-y-6">
-          <p className="text-gray-200 text-lg">Get health tips and updates delivered to your inbox</p>
+          <p className="text-gray-200 text-lg">
+            Get health tips and updates delivered to your inbox
+          </p>
           <form onSubmit={handleNewsletterSubmit} className="space-y-4">
             <input
               type="email"
@@ -155,7 +166,7 @@ const Footer = () => {
         </div>
       </div>
     </div>
-  )
+  );
 
   const renderSocialSection = () => (
     <div className="text-center mb-12">
