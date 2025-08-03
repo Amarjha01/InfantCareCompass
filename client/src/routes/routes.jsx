@@ -1,21 +1,20 @@
 import App from "../App";
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter } from "react-router-dom";
 import HomePage from "../pages/Home";
-import About  from  "../pages/About";
-import Blog  from  "../pages/Blog";
-import ContactUs  from  "../pages/ContactUs";
-import News from  "../pages/News";
-import Contributors  from  "../pages/Contributors";
-import VideoRoom from  "../pages/VideoRoom";
-import Signin from  "../pages/SignIn";
-import Registration from  "../pages/Registration";
-import NotFoundPage from  "../pages/NotFoundPage";
-import CareCoPilot from  "../pages/CareCoPilot";
-import VaccineReminder from  "../pages/VaccineReminder";
-import PersonalisedLearningHub from  "../pages/LearningHub";
-import DoctorDetails from  "../pages/DoctorDetails";
+import About from "../pages/About";
+import Blog from "../pages/Blog";
+import ContactUs from "../pages/ContactUs";
+import News from "../pages/News";
+import Contributors from "../pages/Contributors";
+import VideoRoom from "../pages/VideoRoom";
+import Signin from "../pages/SignIn";
+import Registration from "../pages/Registration";
+import NotFoundPage from "../pages/NotFoundPage";
+import CareCoPilot from "../pages/CareCoPilot";
+import VaccineReminder from "../pages/VaccineReminder";
+import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
-import consultationPage from  "../pages/consult";
+import ConsultationPage from "../pages/consult";
 
 const router = createBrowserRouter([
   {
@@ -48,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: "consultation",
-        element: <consultationPage />,
+        element: <ConsultationPage />,
         children: [
           {
             path: "doctordetail/:id",
@@ -64,7 +63,8 @@ const router = createBrowserRouter([
         path: "vaccineReminder",
         element: <VaccineReminder />,
       },
-     // {
+
+      {
 {
   path: "care-co-pilot",
   element: <CareCoPilot />,
@@ -75,7 +75,18 @@ const router = createBrowserRouter([
   handle: { noLayout: true },
 }
 
-   //   },
+      },
+
+      {
+        path: "care-co-pilot",
+        element: <CareCoPilot />,
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />,
+        handle: { noLayout: true },
+      },
+
     ],
   },
   {
@@ -91,4 +102,6 @@ const router = createBrowserRouter([
     element: <VideoRoom />,
   },
 ]);
-export default router;     
+     
+export default router;
+
