@@ -8,10 +8,10 @@ const signin = asyncHandler(async (req, res, next) => {
     // The original try...catch block is removed, but the inner logic is identical.
     const { email, password, role } = req.body;
 
-    if (role === 'DOCTOR') {
+    if (role.toLowerCase()==='doctor' && req) {
         const doctor = await doctormondel.findOne({ email });
         if (!doctor) {
-            req.status(400).json({
+            return res.status(400).json({
                 message: 'user not found'
             })
         }
@@ -36,11 +36,11 @@ const signin = asyncHandler(async (req, res, next) => {
                 success: true,
                 error: false
             })
-            navigate("/")
+            res.redirect("/");
             // res.status(200).json({doctor
             // })
         } else {
-            res.status(400).json({
+            return res.status(400).json({
                 message: "please enter password correctly"
             })
         }
@@ -48,7 +48,7 @@ const signin = asyncHandler(async (req, res, next) => {
     } else {
         const user = await usermodel.findOne({ email });
         if (!user) {
-            req.status(400).json({
+            res.status(400).json({
                 message: 'user not found'
             })
         }
