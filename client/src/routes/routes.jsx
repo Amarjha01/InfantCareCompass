@@ -16,7 +16,7 @@ import VaccineReminder from "../pages/VaccineReminder";
 import PersonalisedLearningHub from "../pages/LearningHub";
 import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
-import consultationPage from "../pages/consult";
+import ConsultationPage from "../pages/consult";
 
 
 const router = createBrowserRouter([

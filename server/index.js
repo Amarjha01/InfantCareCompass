@@ -1,39 +1,44 @@
-import express from "express";
-import dotenv from "dotenv";
-dotenv.config();
-import cors from "cors";
 
-import dbConnect from "./config/database/DBconnect.js";
-import router from "./routes/routes.js";
-import githubWebhook from "./routes/githubWebhook.js";
+import express from 'express';
+import 'dotenv/config';
+import cors from 'cors';
+import dbConnect from './config/database/DBconnect.js';
+import router from './routes/routes.js';
+import githubWebhook from './routes/githubWebhook.js';
 
 const PORT = process.env.PORT || 5000;
-
 const app = express();
 
-// Middleware
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:5173",
-      "https://infantcarecompass.live",
-    ], // React App URLs
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+// Allowed Origins
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://infantcarecompass.live'
+];
+
+// CORS Middleware
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+// Preflight for all routes
+app.options('*', cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Root route
-app.get("/", (req, res) => {
-  res.json({ message: "InfantCareCompass API is running!" });
-});
-
 // Routes
-app.use("/api", router);
+app.use('/api', router);
+app.use('/api/github', githubWebhook);
 
 app.use("/api/github", githubWebhook);
 //error handling 
@@ -48,9 +53,7 @@ app.use((err,req,res,next)=>{
 // Database connection and server start
 dbConnect().then(() => {
   app.listen(PORT, () => {
-    console.log("Server is running on port:", PORT);
+    console.log('Server is running on port:', PORT);
   });
-}).catch((error) => {
-  console.error("Failed to start server:", error);
-  process.exit(1);
 });
+

@@ -16,6 +16,7 @@ async function dbConnect() {
   } catch (error) {
     console.log("error connecting to the database:", error.message);
     throw error; // Re-throw to handle in the main server file
+
   }
 }
 
