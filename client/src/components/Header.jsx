@@ -40,7 +40,7 @@ export default function Header() {
     <>
       {/* HEADER */}
       <div
-        className={`fixed top-0 left-0 h-[80px] flex items-center right-0 z-50 transition-all duration-300 
+        className={`fixed top-0 left-0 h-[85px] flex items-center right-0 z-50 transition-all duration-300 
         ${isScrolled ? "shadow-md" : ""} 
         bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700`}
       >
