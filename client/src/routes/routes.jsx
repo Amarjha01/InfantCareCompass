@@ -102,6 +102,5 @@ const router = createBrowserRouter([
     element: <VideoRoom />,
   },
 ]);
-     
-export default router;
 
+export default router;
