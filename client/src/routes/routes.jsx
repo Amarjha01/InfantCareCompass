@@ -12,9 +12,12 @@ import Registration from "../pages/Registration";
 import NotFoundPage from "../pages/NotFoundPage";
 import CareCoPilot from "../pages/CareCoPilot";
 import VaccineReminder from "../pages/VaccineReminder";
+
+import PersonalisedLearningHub from "../pages/LearningHub";
 import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
-import ConsultationPage from "../pages/consult";
+import consultationPage from "../pages/consult";
+
 
 const router = createBrowserRouter([
   {
@@ -104,3 +107,4 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
+
