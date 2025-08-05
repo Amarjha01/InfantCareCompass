@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { User, UserCheck, Mail, Lock, Phone, MapPin, Calendar, FileText, Award, Heart, Eye, EyeOff, Check, X } from "lucide-react";
+import { User, UserCheck, Mail, Lock, Phone, MapPin, Calendar, FileText, Award, Heart, Eye, EyeOff, Check, X ,Home } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -217,169 +217,169 @@ export default function Registration() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center py-12 px-4">
-      <div className="w-full max-w-2xl">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-6 shadow-lg">
-            <Heart className="w-8 h-8 text-white" />
+return (
+  <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center py-12 px-4">
+    <div className="w-full max-w-2xl">
+      <div className="text-center mb-8">
+        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-6 shadow-lg">
+          <Heart className="w-8 h-8 text-white" />
+        </div>
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
+          Create Your Account
+        </h1>
+        <p className="text-gray-600">
+          Join our community and start tracking your child's health journey
+        </p>
+      </div>
+
+      <div className="bg-white rounded-3xl shadow-xl p-8">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Role Selection */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <button
+              type="button"
+              onClick={() => handleChange({ target: { name: 'role', value: 'PARENTS' } })}
+              className={`p-4 rounded-xl border-2 transition-all ${formData.role === 'PARENTS' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}
+            >
+              <Heart className="w-6 h-6 mx-auto mb-2" />
+              <span className="font-semibold">Parent</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleChange({ target: { name: 'role', value: 'DOCTOR' } })}
+              className={`p-4 rounded-xl border-2 transition-all ${formData.role === 'DOCTOR' ? 'border-purple-500 bg-purple-50' : 'border-gray-200 hover:border-gray-300'}`}
+            >
+              <UserCheck className="w-6 h-6 mx-auto mb-2" />
+              <span className="font-semibold">Doctor</span>
+            </button>
           </div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-            Create Your Account
-          </h1>
+
+          {/* Common Fields */}
+          <InputField
+            icon={Mail}
+            name="email"
+            type="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleChange}
+            error={errors.email}
+          />
+
+          <InputField
+            icon={Lock}
+            name="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            error={errors.password}
+          />
+
+          {formData.password && (
+            <PasswordStrengthIndicator password={formData.password} />
+          )}
+
+          {/* Role-specific fields */}
+          {formData.role === 'PARENTS' && (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <InputField
+                  icon={Heart}
+                  name="kidName"
+                  placeholder="Child's Name"
+                  value={formData.kidName}
+                  onChange={handleChange}
+                  error={errors.kidName}
+                />
+                <InputField
+                  icon={Calendar}
+                  name="dob"
+                  type="date"
+                  value={formData.dob}
+                  onChange={handleChange}
+                  error={errors.dob}
+                />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <InputField
+                  icon={User}
+                  name="fatherName"
+                  placeholder="Father's Name"
+                  value={formData.fatherName}
+                  onChange={handleChange}
+                  error={errors.fatherName}
+                />
+                <InputField
+                  icon={User}
+                  name="motherName"
+                  placeholder="Mother's Name"
+                  value={formData.motherName}
+                  onChange={handleChange}
+                  error={errors.motherName}
+                />
+              </div>
+              <InputField
+                icon={Phone}
+                name="contactNumber"
+                placeholder="Contact Number"
+                value={formData.contactNumber}
+                onChange={handleChange}
+                error={errors.contactNumber}
+              />
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <InputField
+                  icon={MapPin}
+                  name="city"
+                  placeholder="City"
+                  value={formData.city}
+                  onChange={handleChange}
+                  error={errors.city}
+                />
+                <InputField
+                  icon={MapPin}
+                  name="state"
+                  placeholder="State"
+                  value={formData.state}
+                  onChange={handleChange}
+                  error={errors.state}
+                />
+                <InputField
+                  icon={MapPin}
+                  name="postalCode"
+                  placeholder="Postal Code"
+                  value={formData.postalCode}
+                  onChange={handleChange}
+                  error={errors.postalCode}
+                />
+              </div>
+            </>
+          )}
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className={`w-full py-4 rounded-xl font-semibold text-white transition-all ${isSubmitting
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+            }`}
+          >
+            {isSubmitting ? "Registering..." : "Create Account"}
+          </button>
+        </form>
+
+        <div className="text-center mt-8">
           <p className="text-gray-600">
-            Join our community and start tracking your child's health journey
+            Already have an account?{" "}
+            <button
+              onClick={() => navigate("/signin")}
+              className="text-blue-600 hover:text-blue-800 font-medium"
+            >
+              Sign in here
+            </button>
           </p>
         </div>
-
-        <div className="bg-white rounded-3xl shadow-xl p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Role Selection */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <button
-                type="button"
-                onClick={() => handleChange({ target: { name: 'role', value: 'PARENTS' } })}
-                className={`p-4 rounded-xl border-2 transition-all ${formData.role === 'PARENTS' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}
-              >
-                <Heart className="w-6 h-6 mx-auto mb-2" />
-                <span className="font-semibold">Parent</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => handleChange({ target: { name: 'role', value: 'DOCTOR' } })}
-                className={`p-4 rounded-xl border-2 transition-all ${formData.role === 'DOCTOR' ? 'border-purple-500 bg-purple-50' : 'border-gray-200 hover:border-gray-300'}`}
-              >
-                <UserCheck className="w-6 h-6 mx-auto mb-2" />
-                <span className="font-semibold">Doctor</span>
-              </button>
-            </div>
-
-            {/* Common Fields */}
-            <InputField
-              icon={Mail}
-              name="email"
-              type="email"
-              placeholder="Email Address"
-              value={formData.email}
-              onChange={handleChange}
-              error={errors.email}
-            />
-
-            <InputField
-              icon={Lock}
-              name="password"
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              error={errors.password}
-            />
-
-            {formData.password && (
-              <PasswordStrengthIndicator password={formData.password} />
-            )}
-
-            {/* Role-specific fields */}
-            {formData.role === 'PARENTS' && (
-              <>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <InputField
-                    icon={Heart}
-                    name="kidName"
-                    placeholder="Child's Name"
-                    value={formData.kidName}
-                    onChange={handleChange}
-                    error={errors.kidName}
-                  />
-                  <InputField
-                    icon={Calendar}
-                    name="dob"
-                    type="date"
-                    value={formData.dob}
-                    onChange={handleChange}
-                    error={errors.dob}
-                  />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <InputField
-                    icon={User}
-                    name="fatherName"
-                    placeholder="Father's Name"
-                    value={formData.fatherName}
-                    onChange={handleChange}
-                    error={errors.fatherName}
-                  />
-                  <InputField
-                    icon={User}
-                    name="motherName"
-                    placeholder="Mother's Name"
-                    value={formData.motherName}
-                    onChange={handleChange}
-                    error={errors.motherName}
-                  />
-                </div>
-                <InputField
-                  icon={Phone}
-                  name="contactNumber"
-                  placeholder="Contact Number"
-                  value={formData.contactNumber}
-                  onChange={handleChange}
-                  error={errors.contactNumber}
-                />
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <InputField
-                    icon={MapPin}
-                    name="city"
-                    placeholder="City"
-                    value={formData.city}
-                    onChange={handleChange}
-                    error={errors.city}
-                  />
-                  <InputField
-                    icon={MapPin}
-                    name="state"
-                    placeholder="State"
-                    value={formData.state}
-                    onChange={handleChange}
-                    error={errors.state}
-                  />
-                  <InputField
-                    icon={MapPin}
-                    name="postalCode"
-                    placeholder="Postal Code"
-                    value={formData.postalCode}
-                    onChange={handleChange}
-                    error={errors.postalCode}
-                  />
-                </div>
-              </>
-            )}
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={`w-full py-4 rounded-xl font-semibold text-white transition-all ${isSubmitting
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
-              }`}
-            >
-              {isSubmitting ? "Registering..." : "Create Account"}
-            </button>
-          </form>
-
-          <div className="text-center mt-8">
-            <p className="text-gray-600">
-              Already have an account?{" "}
-              <button
-                onClick={() => navigate("/signin")}
-                className="text-blue-600 hover:text-blue-800 font-medium"
-              >
-                Sign in here
-              </button>
-            </p>
-          </div>
-        </div>
       </div>
-      <ToastContainer position="top-center" autoClose={3000} />
     </div>
-  );
-}
+    <ToastContainer position="top-center" autoClose={3000} />
+  </div>
+);
