@@ -1,20 +1,23 @@
-import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
+import { createBrowserRouter } from "react-router-dom";
+import HomePage from "../pages/Home";
 import About from "../pages/About";
 import Blog from "../pages/Blog";
 import ContactUs from "../pages/ContactUs";
 import News from "../pages/News";
-import DoctorDetails from "../pages/DoctorDetails";
-import Registration from "../pages/Registration";
-import Signin from "../pages/SignIn";
-import HomePage from "../pages/Home";
-import ConsultationPage from "../pages/consult.jsx";
-import VideoRoom from "../pages/VideoRoom.jsx";
-import PersonalizedLearningHub from "../pages/LearningHub.jsx";
-import VaccineReminder from "../pages/VaccineReminder.jsx";
-import CareCoPilot from "../pages/CareCoPilot.jsx";
-import NotFoundPage from "../pages/NotFoundPage.jsx";
 import Contributors from "../pages/Contributors";
+import VideoRoom from "../pages/VideoRoom";
+import Signin from "../pages/SignIn";
+import Registration from "../pages/Registration";
+import NotFoundPage from "../pages/NotFoundPage";
+import CareCoPilot from "../pages/CareCoPilot";
+import VaccineReminder from "../pages/VaccineReminder";
+
+import PersonalisedLearningHub from "../pages/LearningHub";
+import DoctorDetails from "../pages/DoctorDetails";
+import LearningHub from "../pages/LearningHub";
+import ConsultationPage from "../pages/consult";
+
 
 const router = createBrowserRouter([
   {
@@ -57,21 +60,17 @@ const router = createBrowserRouter([
       },
       {
         path: "learning-hub",
-        element: <PersonalizedLearningHub />,
+        element: <LearningHub />,
       },
       {
         path: "vaccineReminder",
         element: <VaccineReminder />,
       },
       {
-       feature/Copilot_Assistant#145
         path: "care-co-pilot",
         element: <CareCoPilot />,
       },
-    
-
-    {
-     master
+      {
         path: "*",
         element: <NotFoundPage />,
         handle: { noLayout: true },
@@ -93,3 +92,4 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
+

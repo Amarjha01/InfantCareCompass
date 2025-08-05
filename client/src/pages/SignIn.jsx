@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Mail, Lock, User, Eye, EyeOff, Shield, Stethoscope, Baby , ArrowRight, AlertCircle, Check, X ,Home} from "lucide-react";
+import { Mail, Lock, User, Shield, Stethoscope, Baby , ArrowRight, AlertCircle, Check, X ,Home} from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
+import { Toaster, toast } from 'react-hot-toast';
 // --- Solution: Moved InputField outside and simplified it ---
 const PasswordStrengthIndicator = ({ password }) => {
   const requirements = [
@@ -121,7 +121,7 @@ const InputField = ({
           onClick={onToggleShowPassword}
           className="absolute right-4 top-4 p-1 text-gray-400 hover:text-gray-600 transition-colors"
         >
-          {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+         
         </button>
       )}
 
@@ -225,11 +225,11 @@ export default function Signin() {
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
       console.log("Submitted Data: ", formData);
-      alert("Login successful!");
+      toast.success("Login successful!");
       navigate("/")
     } catch (error) {
       console.error("Signin error:", error);
-      alert("Invalid email or password. Please try again.");
+      toast.error("Invalid email or password. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -245,6 +245,7 @@ export default function Signin() {
 
   return (
     <> 
+     <Toaster position="top-right" />
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center px-7 pb-8 flex-col">
       <div className="w-full ">
       <button
