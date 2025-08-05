@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Mail, Lock, User, Eye, EyeOff, Shield, Stethoscope, Baby, ArrowRight, AlertCircle, Check, X } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, Shield, Stethoscope, Baby, ArrowRight, AlertCircle, Check, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 
-// --- Solution: Moved InputField outside and simplified it ---
 const PasswordStrengthIndicator = ({ password }) => {
   const requirements = [
     { test: (pwd) => pwd.length >= 8, label: "At least 8 characters" },
@@ -106,7 +107,7 @@ const InputField = ({
         onFocus={onFocus}
         onBlur={onBlur}
         placeholder={placeholder}
-        className={`w-full pl-12 pr-12 py-4 border-2 rounded-xl transition-all duration-300 bg-white ${ // Solid background
+        className={`w-full pl-12 pr-12 py-4 border-2 rounded-xl transition-all duration-300 bg-white ${
           error
             ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
             : isFocused
@@ -139,13 +140,12 @@ const InputField = ({
   );
 };
 
-// --- Solution: Moved RoleCard outside ---
 const RoleCard = ({ value, icon: Icon, title, description, isSelected, onClick }) => (
   <div
     onClick={onClick}
     className={`relative p-6 rounded-xl cursor-pointer transition-all duration-300 transform hover:scale-105 ${isSelected
         ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg'
-        : 'bg-white border-2 border-gray-200 hover:border-indigo-300 hover:shadow-md' // Solid background
+        : 'bg-white border-2 border-gray-200 hover:border-indigo-300 hover:shadow-md'
       }`}
   >
     <div className="flex items-center mb-3">
@@ -171,7 +171,6 @@ const RoleCard = ({ value, icon: Icon, title, description, isSelected, onClick }
   </div>
 );
 
-
 export default function Signin() {
   const [formData, setFormData] = useState({
     email: '',
@@ -182,7 +181,9 @@ export default function Signin() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const validateForm = () => {
     const newErrors = {};
 
@@ -223,10 +224,20 @@ export default function Signin() {
     if (!validateForm()) return;
     setIsSubmitting(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log("Submitted Data: ", formData);
-      alert("Login successful!");
-      navigate("/")
+      const response = await axios.post('http://localhost:5000/api/signin', {
+        email: formData.email,
+        password: formData.password,
+        role: formData.role
+      });
+      if (response.data && response.data.token) {
+        // Store token in localStorage or Redux
+        localStorage.setItem('token', response.data.token);
+        dispatch({ type: 'user/loginSuccess', payload: response.data });
+        alert("Login successful!");
+        navigate("/");
+      } else {
+        alert("Login failed: No token received");
+      }
     } catch (error) {
       console.error("Signin error:", error);
       alert("Invalid email or password. Please try again.");
@@ -258,7 +269,7 @@ export default function Signin() {
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-xl p-8 animate-slideUp"> {/* Solid background */}
+        <div className="bg-white rounded-3xl shadow-xl p-8 animate-slideUp">
           <div className="space-y-6">
             <InputField
               icon={Mail}
@@ -356,7 +367,7 @@ export default function Signin() {
         <div className="absolute bottom-20 right-10 w-32 h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }

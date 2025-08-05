@@ -32,6 +32,8 @@ export default function Header() {
     { to: "/news", label: "News", icon: <Newspaper className="w-4 h-4" /> },
     { to: "/consultation", label: "Consultation", icon: <Phone className="w-4 h-4" /> },
     { to: "/contributors", label: "Contributors", icon: <Users className="w-4 h-4" /> },
+    { to: "/babyfeeder", label: "Baby Feeder", icon: <User className="w-4 h-4" /> },
+    { to: "/sleeper", label: "Sleeper", icon: <User className="w-4 h-4" /> },
   ];
 
   return (
@@ -57,13 +59,13 @@ export default function Header() {
             {/* Right Side */}
             <div className="flex items-center gap-4">
               {/* Desktop Navigation */}
-              <div className="hidden lg:flex items-center space-x-4">
+              <div className="hidden lg:flex items-center space-x-2 flex-wrap max-w-full overflow-x-auto">
                 {navItems.map(({ to, label, icon }) => (
                   <NavLink
                     key={to}
                     to={to}
                     className={({ isActive }) =>
-                      `flex items-center gap-2 px-4 py-2 text-base font-medium rounded-full transition-all duration-300 ${
+                      `flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-full transition-all duration-300 whitespace-nowrap ${
                         isActive
                           ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-lg"
                           : "text-gray-700 dark:text-gray-200 hover:bg-purple-100 dark:hover:bg-gray-800 hover:text-purple-600 dark:hover:text-purple-400"

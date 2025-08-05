@@ -14,6 +14,8 @@ import PersonalizedLearningHub from "../pages/LearningHub.jsx";
 import VaccineReminder from "../pages/VaccineReminder.jsx";
 import NotFoundPage from "../pages/NotFoundPage.jsx";
 import Contributors from "../pages/Contributors";
+import BabyFeeder from "../components/BabyFeeder";
+import Sleeper from "../components/Sleeper";
 
 const router = createBrowserRouter([
   {
@@ -63,7 +65,14 @@ const router = createBrowserRouter([
         path: "vaccineReminder",
         element: <VaccineReminder />,
       },
-    
+      {
+        path: "babyfeeder",
+        element: <BabyFeeder />,
+      },
+      {
+        path: "sleeper",
+        element: <Sleeper />,
+      },
 
     {
         path: "*",
