@@ -323,11 +323,11 @@ const Contributors = () => {
                 className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
-                <div className="relative flex items-center gap-2">
+                <div className="relative flex justify-center items-center gap-2">
                   Contribute Now
                   <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
-              </a>
+              </a> 
               
               <button className="px-8 py-4 border-2 border-white/30 rounded-full hover:bg-white/10 transition-all duration-300">
                 Learn More
