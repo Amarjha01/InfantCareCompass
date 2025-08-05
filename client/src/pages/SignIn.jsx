@@ -1,20 +1,35 @@
 import React, { useState } from "react";
-import { Mail, Lock, User, Eye, EyeOff, Shield, Stethoscope, Baby , ArrowRight, AlertCircle, Check, X ,Home} from "lucide-react";
+import {
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  Shield,
+  Stethoscope,
+  Baby,
+  ArrowRight,
+  AlertCircle,
+  Check,
+  X,
+  Home,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { Toaster, toast } from 'react-hot-toast';
-// --- Solution: Moved InputField outside and simplified it ---
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { Toaster, toast } from "react-hot-toast";
+
 const PasswordStrengthIndicator = ({ password }) => {
   const requirements = [
     { test: (pwd) => pwd.length >= 8, label: "At least 8 characters" },
     { test: (pwd) => /[A-Z]/.test(pwd), label: "One uppercase letter (A–Z)" },
     { test: (pwd) => /[a-z]/.test(pwd), label: "One lowercase letter (a–z)" },
     { test: (pwd) => /[0-9]/.test(pwd), label: "One number (0–9)" },
-    { test: (pwd) => /[!@#$%^&*]/.test(pwd), label: "One special character (!@#$%^&*)" }
+    { test: (pwd) => /[!@#$%^&*]/.test(pwd), label: "One special character (!@#$%^&*)" },
   ];
 
-  const metRequirements = requirements.filter(req => req.test(password));
+  const metRequirements = requirements.filter((req) => req.test(password));
   const strength = metRequirements.length;
-  
+
   const getStrengthColor = () => {
     if (strength <= 1) return "text-red-500";
     if (strength <= 2) return "text-orange-500";
@@ -49,9 +64,9 @@ const PasswordStrengthIndicator = ({ password }) => {
           {getStrengthText()}
         </span>
       </div>
-      
+
       <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
-        <div 
+        <div
           className={`h-2 rounded-full transition-all duration-300 ${getStrengthBarColor()}`}
           style={{ width: `${(strength / 5) * 100}%` }}
         ></div>
@@ -95,8 +110,11 @@ const InputField = ({
 }) => {
   return (
     <div className="relative">
-      <Icon className={`absolute left-4 top-4 w-5 h-5 transition-colors duration-300 ${isFocused ? 'text-indigo-600' : error ? 'text-red-500' : 'text-gray-400'
-        }`} />
+      <Icon
+        className={`absolute left-4 top-4 w-5 h-5 transition-colors duration-300 ${
+          isFocused ? "text-indigo-600" : error ? "text-red-500" : "text-gray-400"
+        }`}
+      />
 
       <input
         name={name}
@@ -106,16 +124,16 @@ const InputField = ({
         onFocus={onFocus}
         onBlur={onBlur}
         placeholder={placeholder}
-        className={`w-full pl-12 pr-12 py-4 border-2 rounded-xl transition-all duration-300 bg-white ${ // Solid background
+        className={`w-full pl-12 pr-12 py-4 border-2 rounded-xl transition-all duration-300 bg-white ${
           error
-            ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
+            ? "border-red-300 focus:border-red-500 focus:ring-red-500/20"
             : isFocused
-              ? 'border-indigo-500 focus:border-indigo-600 focus:ring-indigo-500/20 shadow-lg'
-              : 'border-gray-200 hover:border-gray-300'
-          } focus:outline-none focus:ring-4`}
+            ? "border-indigo-500 focus:border-indigo-600 focus:ring-indigo-500/20 shadow-lg"
+            : "border-gray-200 hover:border-gray-300"
+        } focus:outline-none focus:ring-4`}
       />
 
-      {name === 'password' && (
+      {name === "password" && (
         <button
           type="button"
           onClick={onToggleShowPassword}
@@ -132,32 +150,35 @@ const InputField = ({
         </p>
       )}
 
-      {showPasswordStrength && name === 'password' && (
+      {showPasswordStrength && name === "password" && (
         <PasswordStrengthIndicator password={value} />
       )}
     </div>
   );
 };
 
-// --- Solution: Moved RoleCard outside ---
 const RoleCard = ({ value, icon: Icon, title, description, isSelected, onClick }) => (
   <div
     onClick={onClick}
-    className={`relative p-6 rounded-xl cursor-pointer transition-all duration-300 transform hover:scale-105 ${isSelected
-        ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg'
-        : 'bg-white border-2 border-gray-200 hover:border-indigo-300 hover:shadow-md' // Solid background
-      }`}
+    className={`relative p-6 rounded-xl cursor-pointer transition-all duration-300 transform hover:scale-105 ${
+      isSelected
+        ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg"
+        : "bg-white border-2 border-gray-200 hover:border-indigo-300 hover:shadow-md"
+    }`}
   >
     <div className="flex items-center mb-3">
-      <div className={`p-3 rounded-full ${isSelected ? 'bg-white/20' : 'bg-gradient-to-r from-indigo-500 to-purple-500'
-        }`}>
+      <div
+        className={`p-3 rounded-full ${
+          isSelected ? "bg-white/20" : "bg-gradient-to-r from-indigo-500 to-purple-500"
+        }`}
+      >
         <Icon className={"w-6 h-6 text-white"} />
       </div>
-      <h3 className={`ml-3 font-semibold ${isSelected ? 'text-white' : 'text-gray-800'}`}>
+      <h3 className={`ml-3 font-semibold ${isSelected ? "text-white" : "text-gray-800"}`}>
         {title}
       </h3>
     </div>
-    <p className={`text-sm ${isSelected ? 'text-white/90' : 'text-gray-600'}`}>
+    <p className={`text-sm ${isSelected ? "text-white/90" : "text-gray-600"}`}>
       {description}
     </p>
 
@@ -171,18 +192,19 @@ const RoleCard = ({ value, icon: Icon, title, description, isSelected, onClick }
   </div>
 );
 
-
 export default function Signin() {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    role: 'PARENTS'
+    email: "",
+    password: "",
+    role: "PARENTS",
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const validateForm = () => {
     const newErrors = {};
 
@@ -201,10 +223,13 @@ export default function Signin() {
         { test: /[A-Z]/.test(password), message: "Password must contain at least one uppercase letter" },
         { test: /[a-z]/.test(password), message: "Password must contain at least one lowercase letter" },
         { test: /[0-9]/.test(password), message: "Password must contain at least one number" },
-        { test: /[!@#$%^&*]/.test(password), message: "Password must contain at least one special character (!@#$%^&*)" }
+        {
+          test: /[!@#$%^&*]/.test(password),
+          message: "Password must contain at least one special character (!@#$%^&*)",
+        },
       ];
 
-      const failedRequirements = passwordRequirements.filter(req => !req.test);
+      const failedRequirements = passwordRequirements.filter((req) => !req.test);
       if (failedRequirements.length > 0) {
         newErrors.password = failedRequirements[0].message;
       }
@@ -223,10 +248,20 @@ export default function Signin() {
     if (!validateForm()) return;
     setIsSubmitting(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log("Submitted Data: ", formData);
-      toast.success("Login successful!");
-      navigate("/")
+      const response = await axios.post("http://localhost:5000/api/signin", {
+        email: formData.email,
+        password: formData.password,
+        role: formData.role,
+      });
+
+      if (response.data && response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        dispatch({ type: "user/loginSuccess", payload: response.data });
+        toast.success("Login successful!");
+        navigate("/");
+      } else {
+        toast.error("Login failed: No token received");
+      }
     } catch (error) {
       console.error("Signin error:", error);
       toast.error("Invalid email or password. Please try again.");
@@ -237,12 +272,12 @@ export default function Signin() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
-
+  
   return (
     <> 
      <Toaster position="top-right" />
@@ -271,7 +306,7 @@ export default function Signin() {
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-xl p-8 animate-slideUp"> {/* Solid background */}
+        <div className="bg-white rounded-3xl shadow-xl p-8 animate-slideUp">
           <div className="space-y-6">
             <InputField
               icon={Mail}
@@ -369,7 +404,7 @@ export default function Signin() {
         <div className="absolute bottom-20 right-10 w-32 h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }

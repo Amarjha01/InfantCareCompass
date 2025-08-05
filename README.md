@@ -50,6 +50,14 @@ We are actively working to enhance the Infant Care Compass platform with feature
 
 ### Installation
 
+
+1.  **Clone the Repository**
+    ```bash
+    # Replace <your-github-username> with your actual username
+     git clone https://github.com/<your-github-username>/InfantCareCompass.git
+     cd InfantCareCompass
+    ```
+
 1. **Clone the repository:**
 
    ```bash
@@ -58,6 +66,7 @@ We are actively working to enhance the Infant Care Compass platform with feature
 
 2. **Install dependencies:**
 
+
     ```bash
     # Install server dependencies
     npm install
@@ -65,6 +74,99 @@ We are actively working to enhance the Infant Care Compass platform with feature
     # Navigate to the client directory and install dependencies
     cd client
     npm install
+
+    ```
+
+4.  **Set Up Environment Variables**
+    Go back to the root directory, create a `.env` file, and add the following keys.
+    ```bash
+    # Navigate back to the root directory if you are in /client
+    cd ..
+    touch .env
+    ```
+    Your `.env` file should look like this:
+    ```env
+    PORT=3000
+    MONGO_URI=your_mongodb_uri
+    CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+    CLOUDINARY_API_KEY=your_cloudinary_api_key
+    CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+    ```
+
+5.  **Run the Application**
+    You'll need two separate terminal windows for this step.
+
+    * **Terminal 1: Start the Backend Server** (from the root directory)
+        ```bash
+        npm start
+        ```
+
+    * **Terminal 2: Start the Frontend Development Server**
+        ```bash
+        # Navigate to the client directory
+        cd client
+        npm run dev
+        ```
+
+The application should now be running on your local machine!
+
+### Project Structure
+
+
+  ```bash
+  INFANTCARECOMPASS/
+  ├── .github/
+  │   ├── ISSUE_TEMPLATE/
+  │   └── workflows/
+  │       └── FUNDING.yml
+  ├── client/
+  │   ├── public/
+  │   │   └── logo.png
+  │   ├── src/
+  │   │   ├── api/
+  │   │   ├── common/
+  │   │   ├── components/
+  │   │   ├── helpers/
+  │   │   ├── pages/
+  │   │   ├── routes/
+  │   │   ├── store/
+  │   │   ├── App.css
+  │   │   ├── App.jsx
+  │   │   ├── iceServers.js
+  │   │   ├── index.css
+  │   │   └── main.jsx
+  │   ├── .env
+  │   ├── .gitignore
+  │   ├── eslint.config.js
+  │   ├── index.html
+  │   ├── package-lock.json
+  │   ├── package.json
+  │   ├── postcss.config.js
+  │   ├── README.md
+  │   ├── tailwind.config.js
+  │   └── vite.config.js
+  ├── server/
+  │   ├── config/
+  │   ├── controller/
+  │   ├── middleware/
+  │   ├── models/
+  │   ├── routes/
+  │   ├── utils/
+  │   ├── .gitignore
+  │   ├── index.js
+  │   ├── package-lock.json
+  │   └── package.json
+  ├── .gitignore
+  ├── LICENSE
+  ├── package-lock.json
+  ├── package.json
+  ├── PULL_REQUEST_TEMPLATE.md
+  └── README.md
+
+  ```
+### 🤝 Contributing
+
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**
 
 3. **Set up environment variables:**
 Create a .env file in the root directory and add the following:

@@ -1,5 +1,8 @@
 "use client";
 
+import "react";
+import { toast, ToastContainer } from "react-toastify";
+import { useState } from "react";
 import {
   Mail,
   Phone,
@@ -12,8 +15,13 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { showErrorToast, showSuccessToast } from "../helpers/utils";
+import commnApiEndpoint from "../common/backendAPI";
 
 const Footer = () => {
+  // ==================== STATE ====================
+  const [email, setEmail] = useState("");
+
   // ==================== DATA & CONSTANTS ====================
   const companyInfo = {
     name: "HealthCare+",
@@ -30,7 +38,7 @@ const Footer = () => {
     { name: "Appointments", href: "/appointments" },
     { name: "Contact", href: "/contact" },
   ];
-
+  
   const contactInfo = [
     {
       type: "email",
@@ -69,9 +77,20 @@ const Footer = () => {
   ];
 
   // ==================== FUNCTIONS ====================
-  const handleNewsletterSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Newsletter subscription logic can be added here
+    try {
+      const res = await fetch(commnApiEndpoint.newsletter.url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      showSuccessToast(data.message);
+      setEmail("");
+    } catch (error) {
+      showErrorToast(error.message || "Something went wrong!");
+    }
   };
 
   // ==================== RENDER COMPONENTS ====================
@@ -163,10 +182,12 @@ const Footer = () => {
           <p className="text-gray-200 text-lg">
             Get health tips and updates delivered to your inbox
           </p>
-          <form onSubmit={handleNewsletterSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="email"
               placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
               className="w-full px-4 py-3 bg-white/15 backdrop-blur-sm border border-white/30 rounded-xl focus:outline-none focus:border-purple-400 focus:bg-white/25 transition-all text-white placeholder-gray-300 text-lg"
             />
@@ -252,22 +273,165 @@ const Footer = () => {
 
   // ==================== MAIN RENDER ====================
   return (
-    <footer className="relative bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] text-white overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_rgba(139,92,246,0.15),_transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,_rgba(236,72,153,0.15),_transparent_50%)]"></div>
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-l from-pink-500/10 to-transparent rounded-full blur-3xl"></div>
+    <footer className="relative bg-gradient-to-br from-[#502478] to-[#9157C7] text-white overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,_white_1px,_transparent_0)] bg-[size:20px_20px]"></div>
       </div>
 
       {/* Main Footer Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
-        {renderTopSection()}
-        {renderMainContent()}
-        {renderSocialSection()}
-        {renderFooterBottom()}
+      <div className="relative z-10 container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Logo and Description */}
+          <div className="lg:col-span-1">
+            <div className="flex items-center mb-6">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mr-3">
+                <Heart className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                HealthCare+
+              </h3>
+            </div>
+            <p className="text-gray-100 leading-relaxed mb-6">
+              Providing exceptional healthcare service and care to all our patients.
+              Your health is our priority, and we are here to help you every step of the way.
+            </p>
+            <div className="flex items-center space-x-2 text-sm">
+              <Heart className="w-4 h-4 text-red-400" />
+              <span className="font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Trusted by 10,000+ families
+              </span>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-6 relative">
+              Quick Links
+              <div className="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"></div>
+            </h4>
+            <ul className="space-y-3">
+              {[
+                { name: "Home", href: "/" },
+                { name: "About Us", href: "/about" },
+                { name: "Services", href: "/services" },
+                { name: "Doctors", href: "/doctors" },
+                { name: "Appointments", href: "/appointments" },
+                { name: "Contact", href: "/contact" }
+              ].map((link, index) => (
+                <li key={index}>
+                  <a
+                    href={link.href}
+                    className="group flex items-center text-gray-100 hover:text-purple-200 transition-all duration-300 hover:translate-x-1 font-semibold"
+                  >
+                    <span className="w-2 h-2 bg-blue-500 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Information */}
+          <div>
+            <h4 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-6 relative">
+              Contact Info
+              <div className="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"></div>
+            </h4>
+            <ul className="space-y-4">
+              <li className="flex items-start group">
+                <div className="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center mr-3 group-hover:bg-blue-500/20 transition-colors">
+                  <Mail className="w-5 h-5 text-blue-400" />
+                </div>
+                <div>
+                  <p className="text-gray-200 text-sm">Email</p>
+                  <a
+                    href="mailto:help@infantcarecompass.live"
+                    className="text-white hover:text-purple-200 transition-colors font-semibold"
+                  >
+                    help@infantcarecompass.live
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-start group">
+                <div className="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center mr-3 group-hover:bg-green-500/20 transition-colors">
+                  <Phone className="w-5 h-5 text-green-400" />
+                </div>
+                <div>
+                  <p className="text-gray-200 text-sm">Phone</p>
+                  <a
+                    href="tel:+919956****"
+                    className="text-white hover:text-purple-200 transition-colors font-semibold"
+                  >
+                    +91 919956****
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-start group">
+                <div className="w-10 h-10 bg-purple-500/10 rounded-lg flex items-center justify-center mr-3 group-hover:bg-purple-500/20 transition-colors">
+                  <MapPin className="w-5 h-5 text-purple-400" />
+                </div>
+                <div>
+                  <p className="text-gray-200 text-sm">Address</p>
+                  <p className="text-white font-semibold">
+                    123 Healthcare Ave, Medical City
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          {/* Newsletter & Social */}
+          <div>
+            <h4 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-6 relative">
+              Stay Connected
+              <div className="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"></div>
+            </h4>
+            <div className="mb-6">
+              <p className="text-gray-100 text-sm mb-4">
+                Subscribe to our newsletter for health tips and updates
+              </p>
+              <form onSubmit={handleSubmit} className="flex">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Your email"
+                  className="flex-1 px-4 py-2 bg-white/20 border border-white/30 rounded-l-lg focus:outline-none focus:border-purple-400 transition-colors text-white placeholder-gray-200"
+                />
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-r-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 text-white"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                </button>
+              </form>
+            </div>
+            <div className="flex space-x-3">
+              {[Facebook, Twitter, Instagram, Linkedin].map((Icon, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-white hover:text-purple-200 hover:bg-white/20 transition-all duration-300"
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Section */}
+        <div className="mt-12 pt-8 border-t border-gray-700/50 flex flex-col md:flex-row justify-between items-center text-sm text-white">
+          <p>&copy; 2024 HealthCare+. All rights reserved.</p>
+          <div className="flex space-x-6 mt-4 md:mt-0">
+            <a href="#" className="hover:text-purple-200">Privacy Policy</a>
+            <a href="#" className="hover:text-purple-200">Terms of Service</a>
+            <a href="#" className="hover:text-purple-200">Cookie Policy</a>
+          </div>
+        </div>
       </div>
+      <ToastContainer />
     </footer>
   );
 };

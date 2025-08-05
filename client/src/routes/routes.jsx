@@ -6,6 +6,8 @@ import Blog from "../pages/Blog";
 import ContactUs from "../pages/ContactUs";
 import News from "../pages/News";
 import Contributors from "../pages/Contributors";
+import BabyFeeder from "../components/BabyFeeder";
+import Sleeper from "../components/Sleeper";
 import VideoRoom from "../pages/VideoRoom";
 import Signin from "../pages/SignIn";
 import Registration from "../pages/Registration";
@@ -15,7 +17,7 @@ import VaccineReminder from "../pages/VaccineReminder";
 import PersonalisedLearningHub from "../pages/LearningHub";
 import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
-import consultationPage from "../pages/consult";
+import ConsultationPage from "../pages/consult";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import TermsOfService from "../pages/TermsOfService";
 import CookiePolicy from "../pages/CookiePolicy";
@@ -51,7 +53,7 @@ const router = createBrowserRouter([
       },
       {
         path: "consultation",
-        element: <consultationPage />,
+        element: <ConsultationPage />,
         children: [
           {
             path: "doctordetail/:id",
@@ -71,6 +73,15 @@ const router = createBrowserRouter([
         path: "care-co-pilot",
         element: <CareCoPilot />,
       },
+      {
+        path: "babyfeeder",
+        element: <BabyFeeder />,
+      },
+      {
+        path: "sleeper",
+        element: <Sleeper />,
+      },
+      // Policy pages (from your footer policy links functionality)
       {
         path: "privacy-policy",
         element: <PrivacyPolicy />,
@@ -103,4 +114,5 @@ const router = createBrowserRouter([
     element: <VideoRoom />,
   },
 ]);
+
 export default router;
