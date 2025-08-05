@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './slices/userSlice.jsx';
-import doctorReducer from './slices/doctorSlice.jsx'; // assumes default export
-import storage from 'redux-persist/lib/storage';
+import userSlice from './slices/userSlice.jsx';
+import { doctorSlice } from './slices/doctorSlice.jsx';
+import storage from 'redux-persist/lib/storage'; // Default storage is localStorage for web
 import { persistReducer, persistStore } from 'redux-persist';
 import { combineReducers } from 'redux';
 
@@ -13,8 +13,8 @@ const persistConfig = {
 
 // ✅ Use the correct reducer variables
 const appReducer = combineReducers({
-  user: userReducer,
-  doctor: doctorReducer,
+  user: userSlice,
+  doctor: doctorSlice.reducer,
 });
 
 // Resettable root reducer

@@ -18,7 +18,7 @@ import VaccineReminder from "../pages/VaccineReminder";
 import PersonalisedLearningHub from "../pages/LearningHub";
 import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
-import consultationPage from "../pages/consult";
+import ConsultationPage from "../pages/consult";
 
 
 const router = createBrowserRouter([
@@ -68,6 +68,20 @@ const router = createBrowserRouter([
         path: "vaccineReminder",
         element: <VaccineReminder />,
       },
+
+      {
+{
+  path: "care-co-pilot",
+  element: <CareCoPilot />,
+},
+{
+  path: "*",
+  element: <NotFoundPage />,
+  handle: { noLayout: true },
+}
+
+      },
+
       {
         path: "babyfeeder",
         element: <BabyFeeder />,
@@ -85,6 +99,7 @@ const router = createBrowserRouter([
         element: <NotFoundPage />,
         handle: { noLayout: true },
       },
+
     ],
   },
   {
