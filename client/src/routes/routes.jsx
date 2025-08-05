@@ -6,6 +6,8 @@ import Blog from "../pages/Blog";
 import ContactUs from "../pages/ContactUs";
 import News from "../pages/News";
 import Contributors from "../pages/Contributors";
+import BabyFeeder from "../components/BabyFeeder";
+import Sleeper from "../components/Sleeper";
 import VideoRoom from "../pages/VideoRoom";
 import Signin from "../pages/SignIn";
 import Registration from "../pages/Registration";
@@ -81,6 +83,14 @@ const router = createBrowserRouter([
       },
 
       {
+        path: "babyfeeder",
+        element: <BabyFeeder />,
+      },
+      {
+        path: "sleeper",
+        element: <Sleeper />,
+      },
+      {
         path: "care-co-pilot",
         element: <CareCoPilot />,
       },
@@ -107,4 +117,3 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
-

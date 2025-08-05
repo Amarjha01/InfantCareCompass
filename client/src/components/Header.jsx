@@ -34,6 +34,8 @@ export default function Header() {
     { to: "/consultation", label: "Consultation", icon: <Phone className="w-4 h-4" /> },
     { to: "/care-co-pilot", label: "Care Co-Pilot", icon: <Heart className="w-4 h-4" /> },
     { to: "/contributors", label: "Contributors", icon: <Users className="w-4 h-4" /> },
+    { to: "/babyfeeder", label: "Baby Feeder", icon: <User className="w-4 h-4" /> },
+    { to: "/sleeper", label: "Sleeper", icon: <User className="w-4 h-4" /> },
   ];
 
   return (
@@ -61,51 +63,54 @@ export default function Header() {
               </div>
             </Link>
 
-                         {/* Desktop Nav */}
-             <div className="hidden lg:flex items-center gap-2">
-               {navItems.map(({ to, label, icon }) => (
-                 <NavLink
-                   key={to}
-                   to={to}
-                   className={({ isActive }) =>
-                     `flex items-center gap-1.5 px-2.5 py-1.5 text-sm font-medium rounded-full transition-all duration-300 ${
-                       isActive
-                         ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow"
-                         : "text-gray-700 dark:text-gray-200 hover:bg-purple-100 dark:hover:bg-gray-800 hover:text-purple-600 dark:hover:text-purple-400"
-                     }`
-                   }
-                 >
-                   {icon}
-                   {label}
-                 </NavLink>
-               ))}
-             </div>
+            {/* Right Side */}
+            <div className="flex items-center gap-4">
+              {/* Desktop Navigation */}
+              <div className="hidden lg:flex items-center space-x-2 flex-wrap max-w-full overflow-x-auto">
+                {navItems.map(({ to, label, icon }) => (
+                  <NavLink
+                    key={to}
+                    to={to}
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-full transition-all duration-300 whitespace-nowrap ${
+                        isActive
+                          ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-lg"
+                          : "text-gray-700 dark:text-gray-200 hover:bg-purple-100 dark:hover:bg-gray-800 hover:text-purple-600 dark:hover:text-purple-400"
+                      }`
+                    }
+                  >
+                    {icon}
+                    {label}
+                  </NavLink>
+                ))}
+              </div>
 
-            {/* Auth Buttons */}
-            <div className="hidden lg:flex items-center gap-2">
-              <Link
-                to="/signin"
-                className="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-4 py-1.5 text-sm font-medium rounded-full transition"
-              >
-                Sign In
-              </Link>
-              <Link
-                to="/registration"
-                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-1.5 text-sm font-semibold rounded-full shadow hover:scale-105 transition-transform"
-              >
-                Get Started
-              </Link>
-            </div>
+              {/* Auth Buttons */}
+              <div className="hidden lg:flex items-center gap-2">
+                <Link
+                  to="/signin"
+                  className="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-4 py-1.5 text-sm font-medium rounded-full transition"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/registration"
+                  className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-1.5 text-sm font-semibold rounded-full shadow hover:scale-105 transition-transform"
+                >
+                  Get Started
+                </Link>
+              </div>
 
-            {/* Hamburger */}
-            <div className="lg:hidden">
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                aria-label="Toggle mobile menu"
-                className="p-2 rounded-md bg-purple-100 dark:bg-gray-800 hover:bg-purple-200 dark:hover:bg-gray-700"
-              >
-                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
+              {/* Hamburger */}
+              <div className="lg:hidden">
+                <button
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  aria-label="Toggle mobile menu"
+                  className="p-2 rounded-md bg-purple-100 dark:bg-gray-800 hover:bg-purple-200 dark:hover:bg-gray-700"
+                >
+                  {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -153,5 +158,5 @@ export default function Header() {
         )}
       </div>
     </>
- );
+  );
 }
