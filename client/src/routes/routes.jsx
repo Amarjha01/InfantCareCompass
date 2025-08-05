@@ -14,12 +14,13 @@ import Registration from "../pages/Registration";
 import NotFoundPage from "../pages/NotFoundPage";
 import CareCoPilot from "../pages/CareCoPilot";
 import VaccineReminder from "../pages/VaccineReminder";
-
 import PersonalisedLearningHub from "../pages/LearningHub";
 import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
 import ConsultationPage from "../pages/consult";
-
+import PrivacyPolicy from "../pages/PrivacyPolicy";
+import TermsOfService from "../pages/TermsOfService";
+import CookiePolicy from "../pages/CookiePolicy";
 
 const router = createBrowserRouter([
   {
@@ -68,20 +69,10 @@ const router = createBrowserRouter([
         path: "vaccineReminder",
         element: <VaccineReminder />,
       },
-
       {
-{
-  path: "care-co-pilot",
-  element: <CareCoPilot />,
-},
-{
-  path: "*",
-  element: <NotFoundPage />,
-  handle: { noLayout: true },
-}
-
+        path: "care-co-pilot",
+        element: <CareCoPilot />,
       },
-
       {
         path: "babyfeeder",
         element: <BabyFeeder />,
@@ -90,16 +81,24 @@ const router = createBrowserRouter([
         path: "sleeper",
         element: <Sleeper />,
       },
+      // Policy pages (from your footer policy links functionality)
       {
-        path: "care-co-pilot",
-        element: <CareCoPilot />,
+        path: "privacy-policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "terms-of-service",
+        element: <TermsOfService />,
+      },
+      {
+        path: "cookie-policy",
+        element: <CookiePolicy />,
       },
       {
         path: "*",
         element: <NotFoundPage />,
         handle: { noLayout: true },
       },
-
     ],
   },
   {
