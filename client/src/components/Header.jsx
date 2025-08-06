@@ -165,7 +165,7 @@ export default function Header() {
                 </button>
               </div>
             </div>
-            
+
             <div className="flex-1 overflow-y-auto p-4">
               {navItems.map(({ to, label, icon }) => (
                 <NavLink
@@ -179,17 +179,17 @@ export default function Header() {
                 </NavLink>
               ))}
             </div>
-            
+
             <div className="p-4 border-t space-y-2">
-              <Link 
-                to="/signin" 
+              <Link
+                to="/signin"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block w-full text-center p-2 border border-purple-600 text-purple-600 rounded-full"
               >
                 Sign In
               </Link>
-              <Link 
-                to="/registration" 
+              <Link
+                to="/registration"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block w-full text-center p-2 bg-purple-600 text-white rounded-full"
               >
@@ -201,3 +201,4 @@ export default function Header() {
       )}
     </>
   );
+}
