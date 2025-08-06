@@ -14,15 +14,20 @@ import {
 } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import { useNavigate } from "react-router-dom";
+
 
 const HomePage = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // ✅ Add this if missing
   const [isVisible, setIsVisible] = useState({});
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -31,6 +36,7 @@ const HomePage = () => {
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
+
 
   const handleIntersection = (entries) => {
     entries.forEach((entry) => {
@@ -68,7 +74,7 @@ const HomePage = () => {
       className={`
       backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl
       shadow-2xl transition-all duration-500 ease-out
-      ${hover ? "hover:bg-white/20 hover:shadow-3xl " : ""}
+      ${hover ? "hover:bg-white/20 hover: hover:shadow-3xl " : ""}
       ${className}
     `}
     >
@@ -86,6 +92,7 @@ const HomePage = () => {
       image:
         "https://res.cloudinary.com/dbnticsz8/image/upload/v1734934194/Infant%20care%20Compass/gheqjy0npqdkyhgqds43.png",
       link: "#",
+
     },
     {
       icon: <Phone className="w-12 h-12" />,
@@ -95,7 +102,9 @@ const HomePage = () => {
       color: "from-emerald-500 to-teal-600",
       image:
         "https://res.cloudinary.com/dbnticsz8/image/upload/v1734935048/Infant%20care%20Compass/crqtr4wfu69wmqnulmja.png",
+
       link: "#",
+
     },
     {
       icon: <BookOpen className="w-12 h-12" />,
@@ -106,6 +115,7 @@ const HomePage = () => {
       image:
         "https://res.cloudinary.com/dbnticsz8/image/upload/v1734935847/Infant%20care%20Compass/yf0tea4dqhjf4ww3hjcz.png",
       link: "/learning-hub",
+
     },
   ];
 
@@ -116,8 +126,8 @@ const HomePage = () => {
       content:
         "The AI-powered insights helped me understand my baby's needs like never before. It's like having a pediatrician in your pocket!",
       rating: 5,
-      avatar:
-        "https://images.unsplash.com/photo-1509868918748-a554ad25f858?w=100&h=100&fit=crop&crop=face",
+      avatar:"https://images.unsplash.com/photo-1509868918748-a554ad25f858?w=100&h=100&fit=crop&crop=face",
+
     },
     {
       name: "Michael Rodriguez",
@@ -158,6 +168,7 @@ const HomePage = () => {
   ];
 
   return (
+    
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden ">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
@@ -171,6 +182,10 @@ const HomePage = () => {
           style={{ animationDelay: "2s" }}
         ></div>
       </div>
+
+
+      {/* Mouse Follower Effect */}
+
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-6">
@@ -218,9 +233,8 @@ const HomePage = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
-              <button
-                className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30"
-                onClick={() => navigate("/signin")}
+              <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30"
+              onClick={() => navigate('/signin')}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
                 <div className="relative flex items-center gap-2">
@@ -229,11 +243,11 @@ const HomePage = () => {
                 </div>
               </button>
 
-              <button
+              <button 
                 className="group flex items-center gap-3 px-6 py-4 backdrop-blur-sm bg-white/10 border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300"
                 onClick={() => {
-                  const demoSection = document.getElementById("demo");
-                  demoSection.scrollIntoView({ behavior: "smooth" });
+                  const demoSection = document.getElementById('demo');
+                  demoSection.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
                 <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
@@ -299,15 +313,15 @@ const HomePage = () => {
               slideShadows: true,
             }}
             autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
+              delay: 2500, // 2.5 seconds
+              disableOnInteraction: false, // Keeps autoplay running after user swipe
             }}
             pagination={{ clickable: true }}
             modules={[EffectCoverflow, Pagination, Autoplay]}
             className="w-full max-w-6xl mx-auto"
           >
             {services.map((service, index) => (
-              <SwiperSlide key={index} className="!w-80 !flex-shrink-0">
+              <div key={index} className="group relative">
                 <GlassCard className="p-8 h-full group-hover:bg-white/15">
                   <div className="relative">
                     <div
@@ -315,12 +329,15 @@ const HomePage = () => {
                     >
                       {service.icon}
                     </div>
+
                     <h3 className="text-2xl font-bold mb-4 text-white">
                       {service.title}
                     </h3>
+
                     <p className="text-gray-300 leading-relaxed mb-6">
                       {service.description}
                     </p>
+
                     <div className="overflow-hidden rounded-xl mb-6">
                       <img
                         src={service.image}
@@ -328,17 +345,35 @@ const HomePage = () => {
                         className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
-                    <Link
-                      to={service.link}
-                      className="text-blue-400 hover:text-blue-300 font-medium flex items-center gap-2 group-hover:gap-3 transition-all"
-                    >
-                      Learn More <ArrowRight className="w-4 h-4" />
-                    </Link>
+
+                    <button className="text-blue-400 hover:text-blue-300 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
+                      <Link to={service.link}>Learn More</Link>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                     </div>
+                </GlassCard>
+              <SwiperSlide key={index} className="!w-80 !flex-shrink-0">
+                <GlassCard className="p-6 text-white text-center">
+                  <div
+                    className={`bg-gradient-to-br ${service.color} p-4 rounded-full inline-block`}
+                  >
+                    {service.icon}
                   </div>
+                  <h3 className="text-xl font-bold mt-4">{service.title}</h3>
+                  <p className="text-white-600 mt-2">{service.description}</p>
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="mt-4 rounded-xl w-full h-40 object-cover"
+                  />
+                  <p className="mt-3 text-blue-600 font-medium">Learn More →</p>
                 </GlassCard>
               </SwiperSlide>
+              </div>
             ))}
-          </Swiper>
+          
+        
+        </Swiper>
         </div>
       </section>
 
@@ -354,6 +389,7 @@ const HomePage = () => {
                 Every smile, every milestone, every precious moment deserves to
                 be celebrated and supported with the best care possible.
               </p>
+
               <div className="grid grid-cols-2 gap-6 mb-8 items-center">
                 <div className="md:text-left text-center">
                   <div className="text-3xl font-bold text-blue-400 mb-2">
@@ -369,14 +405,14 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="flex justify-center md:justify-start">
-                <button
-                  className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-                  onClick={() => navigate("/signin")}
-                >
-                  Join Our Community
-                </button>
+              <button className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+              onClick={() => navigate('/signin')}
+              >
+                Join Our Community
+              </button>
               </div>
             </div>
+
             <div className="grid grid-cols-2 gap-6">
               {[
                 "https://res.cloudinary.com/dbnticsz8/image/upload/v1734936845/Infant%20care%20Compass/rrhakzuhcryo7dewe57i.png",
@@ -413,6 +449,7 @@ const HomePage = () => {
               Watch our quick demo to see how InfantCareCompass makes parenting easier
             </p>
           </div>
+
           <div className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl">
             <div className="aspect-w-16 aspect-h-9 bg-black/20">
               <iframe
@@ -430,6 +467,7 @@ const HomePage = () => {
               </div>
             </div>
           </div>
+
           <div className="mt-12 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
               {
@@ -462,65 +500,69 @@ const HomePage = () => {
 
       {/* Testimonials Section */}
       <section className="py-32 relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              Voices of Trust
-            </h2>
-            <p className="text-xl text-gray-400">
-              Real stories from parents who've transformed their journey with us
+  <div className="max-w-7xl mx-auto px-6">
+    <div className="text-center mb-20">
+      <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+        Voices of Trust
+      </h2>
+      <p className="text-xl text-gray-400">
+        Real stories from parents who've transformed their journey with us
+      </p>
+    </div>
+
+    <Swiper
+      slidesPerView={1}
+      spaceBetween={30}
+      autoplay={{
+        delay: 4000,
+        disableOnInteraction: false,
+      }}
+      pagination={{ clickable: true }}
+      breakpoints={{
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+      }}
+      modules={[Autoplay, Pagination]}
+      className="w-full overflow-visible pb-10"
+    >
+      {testimonials.map((testimonial, index) => (
+        <SwiperSlide key={index}>
+          <GlassCard className="p-8 relative group" hover={true}>
+            <div className="flex items-center gap-2 mb-4">
+              {[...Array(testimonial.rating)].map((_, i) => (
+                <Star
+                  key={i}
+                  className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                />
+              ))}
+            </div>
+
+            <p className="text-gray-300 mb-6 leading-relaxed italic">
+              "{testimonial.content}"
             </p>
-          </div>
-          <Swiper
-            slidesPerView={1}
-            spaceBetween={30}
-            autoplay={{
-              delay: 4000,
-              disableOnInteraction: false,
-            }}
-            pagination={{ clickable: true }}
-            breakpoints={{
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-            modules={[Autoplay, Pagination]}
-            className="w-full overflow-visible pb-10"
-          >
-            {testimonials.map((testimonial, index) => (
-              <SwiperSlide key={index}>
-                <GlassCard className="p-8 relative group" hover={true}>
-                  <div className="flex items-center gap-2 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-5 h-5 fill-yellow-400 text-yellow-400"
-                      />
-                    ))}
-                  </div>
-                  <p className="text-gray-300 mb-6 leading-relaxed italic">
-                    "{testimonial.content}"
-                  </p>
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={testimonial.avatar}
-                      alt={testimonial.name}
-                      className="w-12 h-12 rounded-full object-cover"
-                    />
-                    <div>
-                      <div className="font-semibold text-white">
-                        {testimonial.name}
-                      </div>
-                      <div className="text-gray-400 text-sm">
-                        {testimonial.role}
-                      </div>
-                    </div>
-                  </div>
-                </GlassCard>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </section>
+
+            <div className="flex items-center gap-4">
+              <img
+                src={testimonial.avatar}
+                alt={testimonial.name}
+                className="w-12 h-12 rounded-full object-cover"
+              />
+              <div>
+                <div className="font-semibold text-white">
+                  {testimonial.name}
+                </div>
+                <div className="text-gray-400 text-sm">
+                  {testimonial.role}
+                </div>
+              </div>
+            </div>
+          </GlassCard>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  </div>
+</section>
+
 
       {/* CTA Section */}
       <section className="py-32 relative">
@@ -534,10 +576,10 @@ const HomePage = () => {
               Join thousands of parents who've discovered the confidence,
               support, and joy of modern childcare.
             </p>
+
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button
-                className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30"
-                onClick={() => navigate("/signin")}
+              <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30"
+              onClick={() => navigate('/signin')}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
                 <div className="relative flex justify-center items-center gap-2">
@@ -545,9 +587,9 @@ const HomePage = () => {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </button>
-              <button
-                className="px-8 py-4 border-2 border-white/30 rounded-full hover:bg-white/10 transition-all duration-300"
-                onClick={() => navigate("/signin")}
+
+              <button className="px-8 py-4 border-2 border-white/30 rounded-full hover:bg-white/10 transition-all duration-300"
+              onClick={() => navigate('/signin')}
               >
                 Schedule Demo
               </button>
