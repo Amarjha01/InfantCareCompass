@@ -19,3 +19,27 @@
 * {
   cursor: none !important;
 }
+
+body.menu-open {
+  overflow: hidden !important;
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background-color: #f3f4f6;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 0.375rem;
+}
+
+@media (max-width: 1023px) {
+  body.menu-open {
+    position: fixed;
+    width: 100%;
+  }
+}

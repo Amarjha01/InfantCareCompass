@@ -1,6 +1,17 @@
-"use client"
+"use client";
 
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Heart, ExternalLink } from "lucide-react"
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Heart,
+  ExternalLink,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   // ==================== DATA & CONSTANTS ====================
@@ -9,7 +20,7 @@ const Footer = () => {
     description:
       "Providing exceptional healthcare service and care to all our patients. Your health is our priority, and we are here to help you every step of the way.",
     trustBadge: "Trusted by 10,000+ families",
-  }
+  };
 
   const quickLinks = [
     { name: "Home", href: "/" },
@@ -18,7 +29,7 @@ const Footer = () => {
     { name: "Doctors", href: "/doctors" },
     { name: "Appointments", href: "/appointments" },
     { name: "Contact", href: "/contact" },
-  ]
+  ];
 
   const contactInfo = [
     {
@@ -42,26 +53,26 @@ const Footer = () => {
       href: null,
       icon: MapPin,
     },
-  ]
+  ];
 
   const socialLinks = [
     { Icon: Facebook, href: "#", name: "Facebook" },
     { Icon: Twitter, href: "#", name: "Twitter" },
     { Icon: Instagram, href: "#", name: "Instagram" },
     { Icon: Linkedin, href: "#", name: "LinkedIn" },
-  ]
+  ];
 
   const legalLinks = [
-    { name: "Privacy Policy", href: "#" },
-    { name: "Terms of Service", href: "#" },
-    { name: "Cookie Policy", href: "#" },
-  ]
+    { name: "Privacy Policy", href: "/privacy-policy" },
+    { name: "Terms of Service", href: "/terms-of-service" },
+    { name: "Cookie Policy", href: "/cookie-policy" },
+  ];
 
   // ==================== FUNCTIONS ====================
   const handleNewsletterSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // Newsletter subscription logic can be added here
-  }
+  };
 
   // ==================== RENDER COMPONENTS ====================
   const renderTopSection = () => (
@@ -75,15 +86,19 @@ const Footer = () => {
       </div>
 
       {/* Company Description */}
-      <p className="text-gray-200 leading-relaxed text-xl max-w-2xl mx-auto mb-8">{companyInfo.description}</p>
+      <p className="text-gray-200 leading-relaxed text-xl max-w-2xl mx-auto mb-8">
+        {companyInfo.description}
+      </p>
 
       {/* Trust Badge */}
       <div className="inline-flex items-center space-x-3 bg-white/15 backdrop-blur-sm rounded-full px-6 py-3">
         <Heart className="w-6 h-6 text-red-400" />
-        <span className="text-white font-semibold text-lg">{companyInfo.trustBadge}</span>
+        <span className="text-white font-semibold text-lg">
+          {companyInfo.trustBadge}
+        </span>
       </div>
     </div>
-  )
+  );
 
   const renderMainContent = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
@@ -104,9 +119,8 @@ const Footer = () => {
       </div>
 
       {/* Contact Info */}
-      <div className="flex justify-center">
-        <div>
-        <h4 className="text-2xl text-center font-bold text-white mb-8">Get In Touch</h4>
+      <div className="text-center lg:text-left">
+        <h4 className="text-2xl font-bold text-white mb-8">Get In Touch</h4>
         <div className="space-y-6">
           {contactInfo.map((contact, index) => {
             const IconComponent = contact.icon;
@@ -124,7 +138,7 @@ const Footer = () => {
             return (
               <div
                 key={index}
-                className="flex items-center justify-start space-x-4"
+                className="flex items-center justify-center lg:justify-start space-x-4"
               >
                 <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                   <IconComponent className="w-6 h-6 text-white" />
@@ -139,8 +153,8 @@ const Footer = () => {
             );
           })}
         </div>
-        </div>
       </div>
+
       {/* Newsletter */}
       <div className="text-center lg:text-left">
         <h4 className="text-2xl font-bold text-white mb-8">Stay Updated</h4>
@@ -172,73 +186,68 @@ const Footer = () => {
     <div className="text-center mb-12">
       <h4 className="text-2xl font-bold text-white mb-8">Connect With Us</h4>
       <div className="flex justify-center space-x-6">
- {
-  socialLinks.map(({ Icon, href, name }, index) => {
-    const isTwitter = name === 'Twitter';
+        {socialLinks.map(({ Icon, href, name }, index) => {
+          const isTwitter = name === "Twitter";
 
-    return (
-      <a
-        key={index}
-        href={href}
-        aria-label={`Follow us on ${name}`}
-        className="group relative"
-      >
-        <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:shadow-xl group-hover:rotate-12">
-          { 
-          isTwitter ? (
-          <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:shadow-xl group-hover:rotate-12">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 1200 1227"
-    width="32"
-    height="32"
-    fill="white"
-  >
-    <path d="M714.492 548.125 1174.73 0H1070.63L665.52 486.5 338.729 0H0L481.446 702.833 0 1226.35H104.104L537.15 711.208 881.5 1226.35H1200L714.492 548.125ZM584.896 641.396 545.812 585.583 146.771 89.25H282.917L621.417 567.521 660.5 623.333 1070.62 1138.48H934.479L584.896 641.396Z" />
-  </svg>
-</div>
-
-          ) : (
-            <Icon className="w-8 h-8" />
-          )}
-        </div>
-        <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          {name}
-        </span>
-      </a>
-    );
-  })
-}
-
-</div>
+          return (
+            <a
+              key={index}
+              href={href}
+              aria-label={`Follow us on ${name}`}
+              className="group relative"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:shadow-xl group-hover:rotate-12">
+                {isTwitter ? (
+                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:shadow-xl group-hover:rotate-12">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 1200 1227"
+                      width="32"
+                      height="32"
+                      fill="white"
+                    >
+                      <path d="M714.492 548.125 1174.73 0H1070.63L665.52 486.5 338.729 0H0L481.446 702.833 0 1226.35H104.104L537.15 711.208 881.5 1226.35H1200L714.492 548.125ZM584.896 641.396 545.812 585.583 146.771 89.25H282.917L621.417 567.521 660.5 623.333 1070.62 1138.48H934.479L584.896 641.396Z" />
+                    </svg>
+                  </div>
+                ) : (
+                  <Icon className="w-8 h-8" />
+                )}
+              </div>
+              <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {name}
+              </span>
+            </a>
+          );
+        })}
+      </div>
     </div>
-  )
-
-
+  );
 
   const renderFooterBottom = () => (
     <div className="border-t border-white/20 pt-8">
       <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
         {/* Copyright */}
         <div className="text-center md:text-left">
-          <p className="text-gray-300 text-lg">&copy; 2024 {companyInfo.name}. All rights reserved.</p>
+          <p className="text-gray-300 text-lg">
+            &copy; 2024 {companyInfo.name}. All rights reserved.
+          </p>
         </div>
 
         {/* Legal Links */}
         <div className="flex flex-wrap justify-center md:justify-end space-x-8">
           {legalLinks.map((link, index) => (
-            <a
+            <Link
               key={index}
-              href={link.href}
+              to={link.href}
               className="text-gray-300 hover:text-white transition-colors text-lg hover:underline"
             >
               {link.name}
-            </a>
+            </Link>
           ))}
         </div>
       </div>
     </div>
-  )
+  );
 
   // ==================== MAIN RENDER ====================
   return (
@@ -259,7 +268,7 @@ const Footer = () => {
         {renderFooterBottom()}
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
