@@ -20,7 +20,6 @@ import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
 import ConsultationPage from "../pages/consult";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -70,16 +69,13 @@ const router = createBrowserRouter([
       },
 
       {
-{
-  path: "care-co-pilot",
-  element: <CareCoPilot />,
-},
-{
-  path: "*",
-  element: <NotFoundPage />,
-  handle: { noLayout: true },
-}
-
+        path: "care-co-pilot",
+        element: <CareCoPilot />,
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />,
+        handle: { noLayout: true },
       },
 
       {
@@ -99,7 +95,6 @@ const router = createBrowserRouter([
         element: <NotFoundPage />,
         handle: { noLayout: true },
       },
-
     ],
   },
   {
