@@ -194,20 +194,28 @@ const HomePage = () => {
         <div className="relative z-10 text-center max-w-6xl mx-auto">
           <FloatingElement>
             <div className="mb-8">
-              <Sparkles
-                className="w-16 h-16 mx-auto mb-4 text-yellow-400 animate-spin"
+              <Baby
+                className="w-16 h-16 mx-auto mb-4 text-blue-400 animate-pulse"
                 style={{ animationDuration: "4s" }}
               />
             </div>
           </FloatingElement>
 
           <div className="space-y-6">
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent leading-tight">
-              InfantCare
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black leading-tight">
+              <div className="inline-block relative">
+                <span className="inline-block bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent transition-all duration-300 hover:text-shadow-glow hover:scale-110 cursor-pointer">
+                  InfantCare
+                </span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-white via-blue-200 to-purple-200 hover:w-full transition-all duration-500"></span>
+              </div>
               <br />
-              <span className="text-5xl md:text-7xl lg:text-8xl bg-gradient-to-r from-yellow-400 to-pink-400 bg-clip-text text-transparent">
-                Compass
-              </span>
+              <div className="inline-block relative">
+                <span className="text-5xl md:text-7xl lg:text-8xl bg-gradient-to-r from-yellow-400 to-pink-400 bg-clip-text text-transparent inline-block transition-all duration-300 hover:text-shadow-glow-pink hover:scale-110 cursor-pointer">
+                  Compass
+                </span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-pink-400 hover:w-full transition-all duration-500"></span>
+              </div>
             </h1>
 
             <div className="max-w-3xl mx-auto">
