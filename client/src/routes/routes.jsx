@@ -12,10 +12,9 @@ import Registration from "../pages/Registration";
 import NotFoundPage from "../pages/NotFoundPage";
 import CareCoPilot from "../pages/CareCoPilot";
 import VaccineReminder from "../pages/VaccineReminder";
-// import PersonalisedLearningHub from "../pages/LearningHub"; // Remove if unused
 import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
-import ConsultationPage from "../pages/consult"; // <-- Fix import name
+import ConsultationPage from "../pages/consult";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import TermsOfService from "../pages/TermsOfService";
 import CookiePolicy from "../pages/CookiePolicy";
@@ -43,7 +42,7 @@ const router = createBrowserRouter([
       },
       { path: "learning-hub", element: <LearningHub /> },
       { path: "vaccineReminder", element: <VaccineReminder /> },
-      { path: "care-co-pilot", element: <CareCoPilot /> }, // Only ONE instance
+      { path: "care-co-pilot", element: <CareCoPilot /> },
       { path: "privacy-policy", element: <PrivacyPolicy /> },
       { path: "terms-of-service", element: <TermsOfService /> },
       { path: "cookie-policy", element: <CookiePolicy /> },
