@@ -1,25 +1,26 @@
-import App from "../App";
 import { createBrowserRouter } from "react-router-dom";
+import App from "../App";
+
+// Pages
 import HomePage from "../pages/Home";
 import About from "../pages/About";
 import Blog from "../pages/Blog";
 import ContactUs from "../pages/ContactUs";
 import News from "../pages/News";
 import Contributors from "../pages/Contributors";
-import BabyFeeder from "../components/BabyFeeder";
-import Sleeper from "../components/Sleeper";
-import VideoRoom from "../pages/VideoRoom";
 import Signin from "../pages/SignIn";
 import Registration from "../pages/Registration";
 import NotFoundPage from "../pages/NotFoundPage";
 import CareCoPilot from "../pages/CareCoPilot";
 import VaccineReminder from "../pages/VaccineReminder";
-
-import PersonalisedLearningHub from "../pages/LearningHub";
-import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
+import DoctorDetails from "../pages/DoctorDetails";
 import ConsultationPage from "../pages/consult";
+import VideoRoom from "../pages/VideoRoom";
 
+// Components
+import BabyFeeder from "../components/BabyFeeder";
+import Sleeper from "../components/Sleeper";
 
 const router = createBrowserRouter([
   {
@@ -51,38 +52,6 @@ const router = createBrowserRouter([
         element: <Contributors />,
       },
       {
-        path: "consultation",
-        element: <ConsultationPage />,
-        children: [
-          {
-            path: "doctordetail/:id",
-            element: <DoctorDetails />,
-          },
-        ],
-      },
-      {
-        path: "learning-hub",
-        element: <LearningHub />,
-      },
-      {
-        path: "vaccineReminder",
-        element: <VaccineReminder />,
-      },
-
-      {
-{
-  path: "care-co-pilot",
-  element: <CareCoPilot />,
-},
-{
-  path: "*",
-  element: <NotFoundPage />,
-  handle: { noLayout: true },
-}
-
-      },
-
-      {
         path: "babyfeeder",
         element: <BabyFeeder />,
       },
@@ -95,11 +64,28 @@ const router = createBrowserRouter([
         element: <CareCoPilot />,
       },
       {
+        path: "vaccineReminder",
+        element: <VaccineReminder />,
+      },
+      {
+        path: "learning-hub",
+        element: <LearningHub />,
+      },
+      {
+        path: "consultation",
+        element: <ConsultationPage />,
+        children: [
+          {
+            path: "doctordetail/:id",
+            element: <DoctorDetails />,
+          },
+        ],
+      },
+      {
         path: "*",
         element: <NotFoundPage />,
         handle: { noLayout: true },
       },
-
     ],
   },
   {
@@ -111,7 +97,7 @@ const router = createBrowserRouter([
     element: <Signin />,
   },
   {
-    path: "room/:roomId",
+    path: "/room/:roomId",
     element: <VideoRoom />,
   },
 ]);
