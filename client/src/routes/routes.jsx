@@ -14,10 +14,13 @@ import CareCoPilot from "../pages/CareCoPilot";
 import VaccineReminder from "../pages/VaccineReminder";
 import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
+
 import ConsultationPage from "../pages/consult";
+
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import TermsOfService from "../pages/TermsOfService";
 import CookiePolicy from "../pages/CookiePolicy";
+
 
 const router = createBrowserRouter([
   {
@@ -40,12 +43,33 @@ const router = createBrowserRouter([
           },
         ],
       },
+
+      {
+        path: "care-co-pilot",
+        element: <CareCoPilot />,
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />,
+        handle: { noLayout: true },
+      },
+
+      {
+        path: "babyfeeder",
+        element: <BabyFeeder />,
+      },
+      {
+        path: "sleeper",
+        element: <Sleeper />,
+      },
+
       { path: "learning-hub", element: <LearningHub /> },
       { path: "vaccine-reminder", element: <VaccineReminder /> }, // Use kebab-case
       { path: "care-co-pilot", element: <CareCoPilot /> }, // Only ONE instance
       { path: "privacy-policy", element: <PrivacyPolicy /> },
       { path: "terms-of-service", element: <TermsOfService /> },
       { path: "cookie-policy", element: <CookiePolicy /> },
+
       {
         path: "*",
         element: <NotFoundPage />,
