@@ -249,6 +249,7 @@ export default function Registration() {
   };
 
   return (
+
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center py-12 px-4">
       <div className="w-full max-w-2xl">
         <div className="text-center mb-8">
@@ -261,6 +262,7 @@ export default function Registration() {
           <p className="text-gray-600">
             Join our community and start tracking your child's health journey
           </p>
+
         </div>
 
         <div className="bg-white rounded-3xl shadow-xl p-8">
@@ -426,5 +428,9 @@ export default function Registration() {
       </div>
       <ToastContainer position="top-center" autoClose={3000} />
     </div>
-  );
+
+    <ToastContainer position="top-center" autoClose={3000} />
+  </div>
+);
+
 }
