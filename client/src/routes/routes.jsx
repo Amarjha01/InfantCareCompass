@@ -6,20 +6,19 @@ import Blog from "../pages/Blog";
 import ContactUs from "../pages/ContactUs";
 import News from "../pages/News";
 import Contributors from "../pages/Contributors";
-import BabyFeeder from "../components/BabyFeeder";
-import Sleeper from "../components/Sleeper";
 import VideoRoom from "../pages/VideoRoom";
 import Signin from "../pages/SignIn";
 import Registration from "../pages/Registration";
 import NotFoundPage from "../pages/NotFoundPage";
 import CareCoPilot from "../pages/CareCoPilot";
 import VaccineReminder from "../pages/VaccineReminder";
-
 import PersonalisedLearningHub from "../pages/LearningHub";
 import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
-import ConsultationPage from "../pages/consult";
-
+import consultationPage from "../pages/consult";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
+import TermsOfService from "../pages/TermsOfService";
+import CookiePolicy from "../pages/CookiePolicy";
 
 const router = createBrowserRouter([
   {
@@ -52,7 +51,7 @@ const router = createBrowserRouter([
       },
       {
         path: "consultation",
-        element: <ConsultationPage />,
+        element: <consultationPage />,
         children: [
           {
             path: "doctordetail/:id",
@@ -68,38 +67,31 @@ const router = createBrowserRouter([
         path: "vaccineReminder",
         element: <VaccineReminder />,
       },
-
       {
-{
-  path: "care-co-pilot",
-  element: <CareCoPilot />,
-},
-{
-  path: "*",
-  element: <NotFoundPage />,
-  handle: { noLayout: true },
-}
-
-      },
-
-      {
-        path: "babyfeeder",
-        element: <BabyFeeder />,
-      },
-      {
-        path: "sleeper",
-        element: <Sleeper />,
+        path: "care-co-pilot",
+        element: <CareCoPilot />,
       },
       {
         path: "care-co-pilot",
         element: <CareCoPilot />,
       },
       {
+        path: "privacy-policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "terms-of-service",
+        element: <TermsOfService />,
+      },
+      {
+        path: "cookie-policy",
+        element: <CookiePolicy />,
+      },
+      {
         path: "*",
         element: <NotFoundPage />,
         handle: { noLayout: true },
       },
-
     ],
   },
   {
@@ -115,5 +107,4 @@ const router = createBrowserRouter([
     element: <VideoRoom />,
   },
 ]);
-
 export default router;
