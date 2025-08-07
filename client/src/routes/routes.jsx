@@ -14,7 +14,7 @@ import CareCoPilot from "../pages/CareCoPilot";
 import VaccineReminder from "../pages/VaccineReminder";
 import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
-import consultationPage from  "../pages/consult";
+import ConsultationPage from  "../pages/consult";
 
 const router = createBrowserRouter([
   {
@@ -46,18 +46,15 @@ const router = createBrowserRouter([
         element: <VaccineReminder />,
       },
       {
-{
-  path: "care-co-pilot",
-  element: <CareCoPilot />,
-},
-{
-  path: "*",
-  element: <NotFoundPage />,
-  handle: { noLayout: true },
-}
-
+        path: "care-co-pilot",
+        element: <CareCoPilot />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
+    handle: { noLayout: true },
   },
   { path: "/registration", element: <Registration /> },
   { path: "/signin", element: <Signin /> },
