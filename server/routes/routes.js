@@ -5,10 +5,11 @@ import signUp from '../controller/user/signUp.js';
 import signIn from '../controller/user/signIn.js';
 import authtoken from "../middleware/auth.js";
 import consultation from '../controller/services/consultation.js';
-import doctorinfo from "../controller/user/doctorInfo.js';
+import doctorinfo from "../controller/user/doctorInfo.js";
 import logout from '../controller/user/logOut.js';
 import roomIdNotification from '../controller/notification/mail_roomId.js';
 import sendContactUsEmail from "../controller/notification/mail_contactUs.js";
+import subscribeController from '../controller/notification/subscribeController.js';
 
 import {
   createFeedLog,
@@ -27,6 +28,7 @@ import { careCoPilot, healthCheck } from '../controller/services/careCoPilot.js'
 router.post('/signin', signIn);
 router.post('/signup', signUp);
 router.post('/logout', logout);
+router.post('/subscribe', subscribeController);
 
 // Doctor and consultation
 router.post('/consultation', authtoken, consultation);
@@ -51,5 +53,7 @@ router.delete('/sleeplogs/:id', authtoken, deleteSleepLog);
 // Care Co-Pilot AI Medicine Finder routes
 router.post('/care-co-pilot', careCoPilot);
 router.get('/care-co-pilot/health', healthCheck);
+
+// Newsletter subscription
 
 export default router;

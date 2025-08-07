@@ -12,6 +12,8 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 const Footer = () => {
   // ==================== DATA & CONSTANTS ====================
@@ -67,11 +69,38 @@ const Footer = () => {
     { name: "Terms of Service", href: "/terms-of-service" },
     { name: "Cookie Policy", href: "/cookie-policy" },
   ];
+  // ==================== NEWSLETTER STATE VARIABLES ====================
+  const [email, setEmail] = useState('');
+  const [confirmation, setConfirmation] = useState('');
+  const [error, setError] = useState('');
 
   // ==================== FUNCTIONS ====================
-  const handleNewsletterSubmit = (e) => {
+
+  // Function to validate email format
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Function to handle newsletter subscription
+  const  handleNewsletterSubmit =async (e) => {
     e.preventDefault();
-    // Newsletter subscription logic can be added here
+    if (!isValidEmail(email)) {
+      setError('Please enter a valid email address.');
+      setConfirmation('');
+      return;
+    }
+     try {
+      const response = await axios.post('http://localhost:5000/api/subscribe', { email });
+      alert(response.data.message);
+      setEmail('');
+    } catch (error) {
+      console.log(error);
+      
+    }
+    setError('');
+    setConfirmation('Thank you for subscribing to our newsletter!');
+    setEmail('');
   };
 
   // ==================== RENDER COMPONENTS ====================
@@ -156,29 +185,26 @@ const Footer = () => {
       </div>
 
       {/* Newsletter */}
-      <div className="text-center lg:text-left">
-        <h4 className="text-2xl font-bold text-white mb-8">Stay Updated</h4>
-        <div className="space-y-6">
-          <p className="text-gray-200 text-lg">
-            Get health tips and updates delivered to your inbox
-          </p>
-          <form onSubmit={handleNewsletterSubmit} className="space-y-4">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              required
-              className="w-full px-4 py-3 bg-white/15 backdrop-blur-sm border border-white/30 rounded-xl focus:outline-none focus:border-purple-400 focus:bg-white/25 transition-all text-white placeholder-gray-300 text-lg"
-            />
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-xl hover:scale-105 flex items-center justify-center space-x-2"
-            >
-              <span>Subscribe Now</span>
-              <ExternalLink className="w-5 h-5" />
-            </button>
-          </form>
-        </div>
-      </div>
+      <div className="max-w-md mx-auto text-center">
+      <form onSubmit={handleNewsletterSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '300px' }}>
+        <input
+          type="email"
+          value={email}
+          placeholder="Enter your email"
+          onChange={(e) => setEmail(e.target.value)}
+          style={{ padding: '8px', borderRadius: '10px', border: '1px solid #ccc' , color: '#333'}}
+          required
+        />
+        <button
+          type="submit"
+          className="w-25 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:shadow-xl group-hover:rotate-12"
+        >
+          Subscribe
+        </button>
+      </form>
+      {error && <p className="mt-4 text-red-400 font-medium">{error}</p>}
+      {confirmation && <p className="mt-4 text-green-400 font-medium">{confirmation}</p>}
+    </div>
     </div>
   );
 
