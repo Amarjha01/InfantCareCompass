@@ -25,6 +25,10 @@ const commnApiEndpoint = {
     url:`${backendDomain}/api/questions`,
     method:'get'
    },
+   newsletter:{
+    url:`${backendDomain}/api/subscribe-newsletter`,
+    method:'post'
+   },
 }
 
 export default commnApiEndpoint;

@@ -38,7 +38,7 @@ function App() {
 
       <ScrollToTop />
 
-      <main className="mt-24">
+      <main className="mt-20">
         <Outlet />
       </main>
 
