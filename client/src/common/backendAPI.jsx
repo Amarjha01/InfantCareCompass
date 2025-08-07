@@ -1,4 +1,4 @@
-const backendDomain = "https://api.infantcarecompass.live";
+const backendDomain = "http://localhost:5000";
 
 const commnApiEndpoint = {
    register:{
@@ -15,6 +15,14 @@ const commnApiEndpoint = {
    },
    doctorInfo:{
     url:`${backendDomain}/api/doctorinfo`,
+    method:'get'
+   },
+   submitQuestion:{
+    url:`${backendDomain}/api/questions`,
+    method:'post'
+   },
+   getQuestions:{
+    url:`${backendDomain}/api/questions`,
     method:'get'
    },
 }

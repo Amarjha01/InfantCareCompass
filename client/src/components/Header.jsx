@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../store/slices/userSlice.jsx";
 import {
   Home,
   User,
@@ -11,6 +13,8 @@ import {
   X,
   Users,
   Heart,
+  LogOut,
+  UserCircle,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import navlogo from "/logo.png";
@@ -18,12 +22,22 @@ import navlogo from "/logo.png";
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { user, isAuthenticated } = useSelector(state => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userData');
+    dispatch(logout());
+    navigate('/');
+  };
 
   const navItems = [
     { to: "/", label: "Home", icon: <Home className="w-4 h-4" /> },
@@ -83,18 +97,38 @@ export default function Header() {
 
             {/* Auth Buttons */}
             <div className="hidden lg:flex items-center gap-2">
-              <Link
-                to="/signin"
-                className="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-4 py-1.5 text-sm font-medium rounded-full transition"
-              >
-                Sign In
-              </Link>
-              <Link
-                to="/registration"
-                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-1.5 text-sm font-semibold rounded-full shadow hover:scale-105 transition-transform"
-              >
-                Get Started
-              </Link>
+              {isAuthenticated && user ? (
+                <>
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-full">
+                    <UserCircle className="w-4 h-4 text-purple-600" />
+                    <span className="text-sm font-medium text-purple-800">
+                      {user.name} ({user.role === 'doctor' ? 'Doctor' : 'Patient'})
+                    </span>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-1 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-4 py-1.5 text-sm font-medium rounded-full transition"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/signin"
+                    className="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-4 py-1.5 text-sm font-medium rounded-full transition"
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    to="/registration"
+                    className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-1.5 text-sm font-semibold rounded-full shadow hover:scale-105 transition-transform"
+                  >
+                    Get Started
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* Hamburger */}
@@ -136,18 +170,38 @@ export default function Header() {
               </NavLink>
             ))}
             <div className="pt-4 flex flex-col gap-2">
-              <Link
-                to="/signin"
-                className="w-full text-purple-600 border border-purple-600 px-4 py-2 rounded-full text-center text-sm font-medium hover:bg-purple-600 hover:text-white transition"
-              >
-                Sign In
-              </Link>
-              <Link
-                to="/registration"
-                className="w-full bg-gradient-to-r from-pink-500 to-purple-600 px-4 py-2 text-white rounded-full text-center text-sm font-semibold hover:scale-105 transition-transform"
-              >
-                Get Started
-              </Link>
+              {isAuthenticated && user ? (
+                <>
+                  <div className="flex items-center gap-2 px-4 py-2 bg-purple-50 rounded-full mb-2">
+                    <UserCircle className="w-4 h-4 text-purple-600" />
+                    <span className="text-sm font-medium text-purple-800">
+                      {user.name} ({user.role === 'doctor' ? 'Doctor' : 'Patient'})
+                    </span>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center justify-center gap-2 text-red-600 border border-red-600 px-4 py-2 rounded-full text-center text-sm font-medium hover:bg-red-600 hover:text-white transition"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/signin"
+                    className="w-full text-purple-600 border border-purple-600 px-4 py-2 rounded-full text-center text-sm font-medium hover:bg-purple-600 hover:text-white transition"
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    to="/registration"
+                    className="w-full bg-gradient-to-r from-pink-500 to-purple-600 px-4 py-2 text-white rounded-full text-center text-sm font-semibold hover:scale-105 transition-transform"
+                  >
+                    Get Started
+                  </Link>
+                </>
+              )}
             </div>
           </motion.div>
         )}

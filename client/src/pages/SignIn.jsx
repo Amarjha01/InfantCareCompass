@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Mail, Lock, User, Eye, EyeOff, Shield, Stethoscope, Baby , ArrowRight, AlertCircle, Check, X ,Home} from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../store/slices/userSlice.jsx";
 import { Toaster, toast } from 'react-hot-toast';
+import commnApiEndpoint from "../common/backendAPI.jsx";
 // --- Solution: Moved InputField outside and simplified it ---
 const PasswordStrengthIndicator = ({ password }) => {
   const requirements = [
@@ -182,7 +185,8 @@ export default function Signin() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const validateForm = () => {
     const newErrors = {};
 
@@ -221,15 +225,80 @@ export default function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
+    
     setIsSubmitting(true);
+    
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log("Submitted Data: ", formData);
-      toast.success("Login successful!");
-      navigate("/")
+      console.log("Attempting login with:", { 
+        email: formData.email, 
+        role: formData.role 
+      });
+      
+      const response = await fetch(commnApiEndpoint.signin.url, {
+        method: commnApiEndpoint.signin.method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+          role: formData.role
+        }),
+        credentials: 'include', // Include cookies in the request
+      });
+
+      const data = await response.json();
+      console.log("Login response:", data);
+
+      if (response.ok && data.success) {
+        // Store the token if it exists
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+        }
+        
+        // Determine user role based on the login type and data structure
+        let userRole;
+        if (formData.role === 'DOCTOR') {
+          userRole = 'doctor';
+        } else if (formData.role === 'PARENTS') {
+          userRole = 'patient';
+        } else {
+          userRole = 'patient'; // default
+        }
+        
+        // Create user object for Redux
+        const userData = {
+          id: data.data._id,
+          email: data.data.email,
+          name: data.data.firstName ? `${data.data.firstName} ${data.data.lastName}` : data.data.kidName || data.data.email,
+          role: userRole,
+          token: data.token,
+          ...data.data
+        };
+        
+        console.log("Setting user data in Redux:", userData);
+        
+        // Store user data in localStorage for persistence
+        localStorage.setItem('userData', JSON.stringify(userData));
+        
+        // Set user data in Redux
+        dispatch(setUser(userData));
+        
+        toast.success(`Welcome ${userData.name}! Login successful.`);
+        
+        // Navigate to home page
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+        
+      } else {
+        console.error("Login failed:", data);
+        toast.error(data.message || "Login failed. Please check your credentials.");
+      }
+      
     } catch (error) {
-      console.error("Signin error:", error);
-      toast.error("Invalid email or password. Please try again.");
+      console.error("Login error:", error);
+      toast.error("Network error. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
     }
