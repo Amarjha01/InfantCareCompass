@@ -7,6 +7,13 @@ import jwt from 'jsonwebtoken';
 const signin = asyncHandler(async (req, res, next) => {
     const { email, password, role } = req.body;
 
+    if (role.toLowerCase()==='doctor' && req) {
+        const doctor = await doctormondel.findOne({ email });
+        if (!doctor) {
+            return res.status(400).json({
+                message: 'user not found'
+            })
+        }
     // Check required fields
     if (!email || !password || !role) {
         return res.status(400).json({
@@ -68,6 +75,24 @@ const signin = asyncHandler(async (req, res, next) => {
                 token: token,
                 success: true,
                 error: false
+            })
+            res.redirect("/");
+            // res.status(200).json({doctor
+            // })
+        } else {
+            return res.status(400).json({
+                message: "please enter password correctly"
+            })
+        }
+
+    } else {
+        const user = await usermodel.findOne({ email });
+        if (!user) {
+            res.status(400).json({
+                message: 'user not found'
+            })
+        }
+        const veryfyuser = await bcrypt.compare(password, user.password);
             });
         } else if (role === 'USER') {
             const user = await usermodel.findOne({ email: normalizedEmail });

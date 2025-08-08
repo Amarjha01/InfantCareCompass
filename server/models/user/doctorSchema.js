@@ -15,6 +15,10 @@ const doctorScheme = new mongoose.Schema(
           "type": String,
           "required": true
         },
+        'document':{
+          "type":String,
+          "required":true
+        },
         'about': {
           "type": String,
           "required": true
@@ -39,6 +43,12 @@ const doctorScheme = new mongoose.Schema(
           "required": true,
           default : 0
         },
+        status: {
+        type: String,
+        enum: ['pending', 'approved', 'rejected'],
+        default: 'pending'
+        }
+
      
       }
     )
