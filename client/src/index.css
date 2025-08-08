@@ -15,10 +15,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 } */
- 
+/*  
 * {
   cursor: none !important;
-}
+} */
 
 body.menu-open {
   overflow: hidden !important;
