@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userSlice } from './slices/userSlice.jsx';
+import userSlice from './slices/userSlice.jsx';
 import { doctorSlice } from './slices/doctorSlice.jsx';
 import storage from 'redux-persist/lib/storage'; // Default storage is localStorage for web
 import { persistReducer, persistStore } from 'redux-persist';
@@ -7,35 +7,32 @@ import { combineReducers } from 'redux';
 
 // Persist Configuration
 const persistConfig = {
-  key: 'root', // The key for the persisted state
-  storage, // Use localStorage
+  key: 'root',
+  storage,
 };
 
-// Combine Reducers
+// ✅ Use the correct reducer variables
 const appReducer = combineReducers({
-  user: userSlice.reducer,
+  user: userSlice,
   doctor: doctorSlice.reducer,
 });
 
-// Root reducer with reset functionality
+// Resettable root reducer
 const rootReducer = (state, action) => {
   if (action.type === 'RESET_STATE') {
-    state = undefined; // Reset the state to initial values
+    state = undefined;
   }
   return appReducer(state, action);
 };
 
-// Create a persisted reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// Configure Store
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // Disable checks for non-serializable values in middleware
+      serializableCheck: false,
     }),
 });
 
-// Create Persistor
 export const persistor = persistStore(store);

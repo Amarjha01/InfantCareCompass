@@ -19,9 +19,11 @@ import { Link } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import { useNavigate } from "react-router-dom";
 
 
 const HomePage = () => {
+  const navigate = useNavigate(); // ✅ Add this if missing
   const [isVisible, setIsVisible] = useState({});
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -166,7 +168,8 @@ const HomePage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
+    
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden ">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
@@ -191,20 +194,28 @@ const HomePage = () => {
         <div className="relative z-10 text-center max-w-6xl mx-auto">
           <FloatingElement>
             <div className="mb-8">
-              <Sparkles
-                className="w-16 h-16 mx-auto mb-4 text-yellow-400 animate-spin"
+              <Baby
+                className="w-16 h-16 mx-auto mb-4 text-blue-400 animate-pulse"
                 style={{ animationDuration: "4s" }}
               />
             </div>
           </FloatingElement>
 
           <div className="space-y-6">
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent leading-tight">
-              InfantCare
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black leading-tight">
+              <div className="inline-block relative">
+                <span className="inline-block bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent transition-all duration-300 hover:text-shadow-glow hover:scale-110 cursor-pointer">
+                  InfantCare
+                </span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-white via-blue-200 to-purple-200 hover:w-full transition-all duration-500"></span>
+              </div>
               <br />
-              <span className="text-5xl md:text-7xl lg:text-8xl bg-gradient-to-r from-yellow-400 to-pink-400 bg-clip-text text-transparent">
-                Compass
-              </span>
+              <div className="inline-block relative">
+                <span className="text-5xl md:text-7xl lg:text-8xl bg-gradient-to-r from-yellow-400 to-pink-400 bg-clip-text text-transparent inline-block transition-all duration-300 hover:text-shadow-glow-pink hover:scale-110 cursor-pointer">
+                  Compass
+                </span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-pink-400 hover:w-full transition-all duration-500"></span>
+              </div>
             </h1>
 
             <div className="max-w-3xl mx-auto">
@@ -230,7 +241,9 @@ const HomePage = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
-              <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30">
+              <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30"
+              onClick={() => navigate('/signin')}
+              >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
                 <div className="relative flex items-center gap-2">
                   Start Your Journey
@@ -238,7 +251,13 @@ const HomePage = () => {
                 </div>
               </button>
 
-              <button className="group flex items-center gap-3 px-6 py-4 backdrop-blur-sm bg-white/10 border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300">
+              <button 
+                className="group flex items-center gap-3 px-6 py-4 backdrop-blur-sm bg-white/10 border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300"
+                onClick={() => {
+                  const demoSection = document.getElementById('demo');
+                  demoSection.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
                 <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 Watch Demo
               </button>
@@ -371,32 +390,35 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-5xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              <h2 className="text-5xl md:text-left text-center font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 Creating Magical Childhood Moments
               </h2>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              <p className="text-xl md:text-left text-center text-gray-300 mb-8 leading-relaxed">
                 Every smile, every milestone, every precious moment deserves to
                 be celebrated and supported with the best care possible.
               </p>
 
-              <div className="grid grid-cols-2 gap-6 mb-8">
-                <div className="text-center">
+              <div className="grid grid-cols-2 gap-6 mb-8 items-center">
+                <div className="md:text-left text-center">
                   <div className="text-3xl font-bold text-blue-400 mb-2">
                     50K+
                   </div>
                   <div className="text-gray-400">Happy Families</div>
                 </div>
-                <div className="text-center">
+                <div className="md:text-left text-center">
                   <div className="text-3xl font-bold text-emerald-400 mb-2">
                     99.9%
                   </div>
                   <div className="text-gray-400">Uptime</div>
                 </div>
               </div>
-
-              <button className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+              <div className="flex justify-center md:justify-start">
+              <button className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+              onClick={() => navigate('/signin')}
+              >
                 Join Our Community
               </button>
+              </div>
             </div>
 
             <div className="grid grid-cols-2 gap-6">
@@ -420,6 +442,66 @@ const HomePage = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Demo Section */}
+      <section className="py-20 relative" id="demo">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+              See It In Action
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Watch our quick demo to see how InfantCareCompass makes parenting easier
+            </p>
+          </div>
+
+          <div className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl">
+            <div className="aspect-w-16 aspect-h-9 bg-black/20">
+              <iframe
+                className="w-full h-[500px]"
+                src="https://www.youtube.com/embed/your-video-id"
+                title="InfantCareCompass Demo"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group hover:bg-white/30 transition-all duration-300 cursor-pointer">
+                <Play className="w-12 h-12 text-white ml-2 group-hover:scale-110 transition-transform" fill="currentColor" />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {[
+              {
+                icon: <Calendar className="w-8 h-8 text-blue-400" />,
+                title: "Vaccination Tracking",
+                description: "Never miss an important vaccination with our smart tracking system"
+              },
+              {
+                icon: <BookOpen className="w-8 h-8 text-purple-400" />,
+                title: "Milestone Monitoring",
+                description: "Track your baby's growth and development with ease"
+              },
+              {
+                icon: <Users className="w-8 h-8 text-pink-400" />,
+                title: "Expert Community",
+                description: "Connect with other parents and healthcare professionals"
+              }
+            ].map((feature, index) => (
+              <div key={index} className="bg-white/5 p-6 rounded-2xl backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center mb-4">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                <p className="text-gray-400">{feature.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -504,7 +586,9 @@ const HomePage = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30">
+              <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30"
+              onClick={() => navigate('/signin')}
+              >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
                 <div className="relative flex justify-center items-center gap-2">
                   Get Started Free
@@ -512,7 +596,9 @@ const HomePage = () => {
                 </div>
               </button>
 
-              <button className="px-8 py-4 border-2 border-white/30 rounded-full hover:bg-white/10 transition-all duration-300">
+              <button className="px-8 py-4 border-2 border-white/30 rounded-full hover:bg-white/10 transition-all duration-300"
+              onClick={() => navigate('/signin')}
+              >
                 Schedule Demo
               </button>
             </div>
