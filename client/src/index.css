@@ -19,6 +19,8 @@
 * {
   cursor: none !important;
 } */
+  /* cursor: none !important; */
+/* } */
 
 body.menu-open {
   overflow: hidden !important;
