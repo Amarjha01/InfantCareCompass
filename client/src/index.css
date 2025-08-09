@@ -15,7 +15,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 } */
- 
+
 /* Custom Scrollbar Styles */
 .custom-scrollbar {
   scrollbar-width: thin;
@@ -38,6 +38,10 @@
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(99, 102, 241, 0.7);
+
+* {
+  /* cursor: none !important; */
+
 }
 
 body.menu-open {
