@@ -138,7 +138,7 @@ const Footer = () => {
             return (
               <div
                 key={index}
-                className="flex items-center justify-center lg:justify-start space-x-4"
+                className="flex lg:justify-start space-x-4"
               >
                 <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                   <IconComponent className="w-6 h-6 text-white" />
