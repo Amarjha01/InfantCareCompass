@@ -4,7 +4,7 @@ dotenv.config();
 
 async function dbConnect() {
   try {
-    const mongoUri = process.env.MONGODB_URI || process.env.MONGODB_CONNECTION_STRING;
+    const mongoUri = process.env.MONGO_URI || process.env.MONGODB_CONNECTION_STRING;
     
     if (!mongoUri) {
       throw new Error(
@@ -12,10 +12,7 @@ async function dbConnect() {
       );
     }
     
-    await mongoose.connect(mongoUri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(mongoUri);
     
     console.log("Successfully connected to MongoDB");
   } catch (error) {
