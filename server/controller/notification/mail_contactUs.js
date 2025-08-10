@@ -38,7 +38,7 @@ export const sendContactUsEmail = asyncHandler(async (req, res, next) => {
   await transporter.sendMail(mailOptions);
 
   // If the email sends successfully, send the success response.
-  res.status(200).json({ message: "Message sent successfully!" });
+  res.status(200).json({ success: true, message: "Message sent successfully!" });
 });
 
 export default sendContactUsEmail;
