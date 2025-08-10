@@ -6,17 +6,17 @@ import jwt from 'jsonwebtoken';
 
 const signin = asyncHandler(async (req, res, next) => {
     const { email, password, role } = req.body;
-
+    
     // Check required fields
     if (!email || !password || !role) {
         return res.status(400).json({
             message: 'Missing required fields: email, password, and role are required'
         });
     }
-
+    
     // Normalize email to lowercase and trim
-    const normalizedEmail = email.toLowerCase().trim();
-
+    // const normalizedEmail = email.toLowerCase().trim();
+    
     // Validate TOKEN_SECRET_KEY
     if (!process.env.TOKEN_SECRET_KEY) {
         console.error("TOKEN_SECRET_KEY is not configured in environment variables");
@@ -28,6 +28,7 @@ const signin = asyncHandler(async (req, res, next) => {
 
     try {
         if (role === 'DOCTOR') {
+            console.log("Reached as: ",role);
             const doctor = await doctormondel.findOne({ email: normalizedEmail });
             if (!doctor) {
                 return res.status(400).json({
@@ -69,8 +70,8 @@ const signin = asyncHandler(async (req, res, next) => {
                 success: true,
                 error: false
             });
-        } else if (role === 'USER') {
-            const user = await usermodel.findOne({ email: normalizedEmail });
+        } else if (role === 'PARENTS') {
+            const user = await usermodel.findOne({ email: email });
             if (!user) {
                 return res.status(400).json({
                     message: 'Incorrect email or password'
@@ -87,7 +88,7 @@ const signin = asyncHandler(async (req, res, next) => {
             const tokendata = {
                 id: user._id,
                 email: user.email,
-                role: 'USER'
+                role: 'PARENTS'
             };
 
             const token = jwt.sign(tokendata, process.env.TOKEN_SECRET_KEY, { expiresIn: 60 * 60 * 8 });

@@ -247,6 +247,8 @@ export default function Signin() {
     e.preventDefault();
     if (!validateForm()) return;
     setIsSubmitting(true);
+    const token = localStorage.getItem("token");
+
     try {
       const response = await axios.post("http://localhost:5000/api/signin", {
         email: formData.email,

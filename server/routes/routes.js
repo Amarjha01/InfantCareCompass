@@ -5,7 +5,7 @@ import signUp from '../controller/user/signUp.js';
 import signIn from '../controller/user/signIn.js';
 import authtoken from "../middleware/auth.js";
 import consultation from '../controller/services/consultation.js';
-import doctorinfo from "../controller/user/doctorInfo.js';
+import doctorinfo from "../controller/user/doctorInfo.js";
 import logout from '../controller/user/logOut.js';
 import roomIdNotification from '../controller/notification/mail_roomId.js';
 import sendContactUsEmail from "../controller/notification/mail_contactUs.js";
