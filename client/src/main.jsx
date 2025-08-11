@@ -37,6 +37,7 @@ const AppWithLoader = () => {
   }
 
   return (
+    
     <Provider store={store}>
       <RouterProvider router={router} />
       <CustomCursor />

@@ -1,5 +1,7 @@
-import App from "../App";
 import { createBrowserRouter } from "react-router-dom";
+import App from "../App";
+
+// Pages
 import HomePage from "../pages/Home";
 import About from "../pages/About";
 import Blog from "../pages/Blog";
@@ -17,6 +19,11 @@ import LearningHub from "../pages/LearningHub";
 
 import ConsultationPage from "../pages/consult";
 
+
+// Components
+import BabyFeeder from "../components/BabyFeeder";
+import Sleeper from "../components/Sleeper";
+
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import TermsOfService from "../pages/TermsOfService";
 import CookiePolicy from "../pages/CookiePolicy";
@@ -27,12 +34,15 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { index: true, element: <HomePage /> }, // Use index for home
+      { index: true, element: <HomePage /> },
       { path: "about", element: <About /> },
       { path: "blog", element: <Blog /> },
       { path: "contactus", element: <ContactUs /> },
       { path: "news", element: <News /> },
       { path: "contributors", element: <Contributors /> },
+      { path: "babyfeeder", element: <BabyFeeder /> },
+      { path: "sleeper", element: <Sleeper /> },
+      { path: "care-co-pilot", element: <CareCoPilot /> },
       {
         path: "consultation",
         element: <ConsultationPage />,
@@ -64,17 +74,13 @@ const router = createBrowserRouter([
       },
 
       { path: "learning-hub", element: <LearningHub /> },
-      { path: "vaccine-reminder", element: <VaccineReminder /> }, // Use kebab-case
-      { path: "care-co-pilot", element: <CareCoPilot /> }, // Only ONE instance
+      { path: "vaccine-reminder", element: <VaccineReminder /> },
       { path: "privacy-policy", element: <PrivacyPolicy /> },
       { path: "terms-of-service", element: <TermsOfService /> },
       { path: "cookie-policy", element: <CookiePolicy /> },
 
-      {
-        path: "*",
-        element: <NotFoundPage />,
-        handle: { noLayout: true },
-      },
+      { path: "*", element: <NotFoundPage />, handle: { noLayout: true } },
+
     ],
   },
   { path: "/registration", element: <Registration /> },

@@ -248,7 +248,24 @@ export default function Registration() {
     setShowPassword(!showPassword);
   };
 
+
   return (
+
+
+  <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center py-12 px-4">
+    <div className="w-full max-w-2xl">
+      <div className="text-center mb-8">
+        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-6 shadow-lg">
+          <Heart className="w-8 h-8 text-white" />
+        </div>
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
+          Create Your Account
+        </h1>
+        <p className="text-gray-600">
+          Join our community and start tracking your child's health journey
+        </p>
+      </div>
+
 
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center py-12 px-4">
       <div className="w-full max-w-2xl">
