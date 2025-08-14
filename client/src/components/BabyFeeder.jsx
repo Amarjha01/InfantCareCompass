@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Loader2, Baby, Clock, Droplet } from 'lucide-react';
 
 let apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 if (!apiBaseUrl.endsWith('/api')) {
@@ -21,26 +23,23 @@ const BabyFeeder = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!token) {
-      console.log('No token found');
-      return;
-    }
-    
+    if (!token) return;
+
     setLoading(true);
     setError(null);
-    
-    axios.get(`${API_BASE_URL}/feedlogs`, { 
-      headers: { 
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      } 
-    })
-      .then(response => {
+
+    axios
+      .get(`${API_BASE_URL}/feedlogs`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
         setFeedings(response.data);
         setLoading(false);
       })
-      .catch(error => {
-        console.error('Error fetching feed logs:', error);
+      .catch(() => {
         setError('Failed to load feed logs. Please check your connection.');
         setLoading(false);
       });
@@ -48,31 +47,26 @@ const BabyFeeder = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!feedingTime || !amount) {
-      alert('Please fill in all fields');
-      return;
-    }
-    
-    if (!token) {
-      alert('Please login first');
-      return;
-    }
+    if (!feedingTime || !amount) return alert('Please fill in all fields');
+
+    if (!token) return alert('Please login first');
 
     const newFeeding = {
       feedingTime,
       amount: parseInt(amount),
       feedingType,
     };
-    
+
     setLoading(true);
-    
-    axios.post(`${API_BASE_URL}/feedlogs`, newFeeding, { 
-      headers: { 
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      } 
-    })
-      .then(response => {
+
+    axios
+      .post(`${API_BASE_URL}/feedlogs`, newFeeding, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
         setFeedings([response.data, ...feedings]);
         setFeedingTime('');
         setAmount('');
@@ -80,75 +74,103 @@ const BabyFeeder = () => {
         setLoading(false);
         setError(null);
       })
-      .catch(error => {
-        console.error('Error adding feed log:', error);
+      .catch(() => {
         setError('Failed to add feed log. Please try again.');
         setLoading(false);
       });
   };
 
   return (
-    <div className="baby-feeder p-4 max-w-md mx-auto bg-white rounded shadow">
-      <h2 className="text-xl font-semibold mb-4">Baby Feeder</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="p-6 m-10 mt-20 max-w-lg mx-auto bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-lg">
+      <h2 className="flex items-center gap-2 text-2xl font-bold mb-6 text-blue-700">
+        <Baby className="w-6 h-6" /> Baby Feeder
+      </h2>
+
+      <form onSubmit={handleSubmit} className="space-y-4 bg-white p-4 rounded-xl shadow">
         <div>
-          <label htmlFor="feedingTime" className="block mb-1 font-medium">Feeding Time:</label>
+          <label htmlFor="feedingTime" className="block mb-1 font-medium text-gray-700">
+            Feeding Time
+          </label>
           <input
             type="datetime-local"
             id="feedingTime"
             value={feedingTime}
             onChange={(e) => setFeedingTime(e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2"
-            required
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
           />
         </div>
+
         <div>
-          <label htmlFor="amount" className="block mb-1 font-medium">Amount (ml):</label>
+          <label htmlFor="amount" className="block mb-1 font-medium text-gray-700">
+            Amount (ml)
+          </label>
           <input
             type="number"
             id="amount"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
             min="1"
-            required
           />
         </div>
+
         <div>
-          <label htmlFor="feedingType" className="block mb-1 font-medium">Feeding Type:</label>
+          <label htmlFor="feedingType" className="block mb-1 font-medium text-gray-700">
+            Feeding Type
+          </label>
           <select
             id="feedingType"
             value={feedingType}
             onChange={(e) => setFeedingType(e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
           >
             <option value="bottle">Bottle</option>
             <option value="breastfeed">Breastfeed</option>
             <option value="solid">Solid Food</option>
           </select>
         </div>
+
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
         >
-          Add Feeding
+          {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Add Feeding'}
         </button>
       </form>
 
-      {feedings.length > 0 && (
-        <div className="mt-6">
-          <h3 className="text-lg font-semibold mb-2">Feeding Log</h3>
-          <ul className="space-y-2 max-h-48 overflow-y-auto">
-            {feedings.map((feed) => (
-              <li key={feed._id} className="border border-gray-200 rounded p-2">
-                <div><strong>Time:</strong> {new Date(feed.feedingTime).toLocaleString()}</div>
-                <div><strong>Amount:</strong> {feed.amount} ml</div>
-                <div><strong>Type:</strong> {feed.feedingType}</div>
-              </li>
-            ))}
+      {error && <p className="text-red-500 mt-3">{error}</p>}
+
+      <div className="mt-8">
+        <h3 className="text-lg font-semibold mb-3">Feeding Log</h3>
+        {feedings.length === 0 ? (
+          <p className="text-gray-500">No feedings logged yet. Add your first one above!</p>
+        ) : (
+          <ul className="space-y-3 max-h-60 overflow-y-auto">
+            <AnimatePresence>
+              {feedings.map((feed) => (
+                <motion.li
+                  key={feed._id}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  className="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-3 shadow-sm"
+                >
+                  <div>
+                    <div className="flex items-center gap-1 text-sm text-gray-700">
+                      <Clock className="w-4 h-4" />
+                      {new Date(feed.feedingTime).toLocaleString()}
+                    </div>
+                    <div className="flex items-center gap-1 text-sm text-gray-700">
+                      <Droplet className="w-4 h-4" />
+                      {feed.amount} ml ({feed.feedingType})
+                    </div>
+                  </div>
+                </motion.li>
+              ))}
+            </AnimatePresence>
           </ul>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
