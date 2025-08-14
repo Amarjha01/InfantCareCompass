@@ -16,9 +16,6 @@ import CareCoPilot from "../pages/CareCoPilot";
 import VaccineReminder from "../pages/VaccineReminder";
 import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
-
-import ConsultationPage from  "../pages/consult";
-
 import ConsultationPage from "../pages/consult";
 
 // Components
