@@ -14,9 +14,10 @@ import {
   Home,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useDispatch } from "react-redux";
-import { Toaster, toast } from "react-hot-toast";
+import { setUser } from "../store/slices/userSlice.jsx";
+import { Toaster, toast } from 'react-hot-toast';
+import commnApiEndpoint from "../common/backendAPI.jsx";
 
 const PasswordStrengthIndicator = ({ password }) => {
   const requirements = [
@@ -246,25 +247,80 @@ export default function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
+    
     setIsSubmitting(true);
+    
     try {
-      const response = await axios.post("http://localhost:5000/api/signin", {
-        email: formData.email,
-        password: formData.password,
-        role: formData.role,
+      console.log("Attempting login with:", { 
+        email: formData.email, 
+        role: formData.role 
+      });
+      
+      const response = await fetch(commnApiEndpoint.signin.url, {
+        method: commnApiEndpoint.signin.method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+          role: formData.role
+        }),
+        credentials: 'include', // Include cookies in the request
       });
 
-      if (response.data && response.data.token) {
-        localStorage.setItem("token", response.data.token);
-        dispatch({ type: "user/loginSuccess", payload: response.data });
-        toast.success("Login successful!");
-        navigate("/");
+      const data = await response.json();
+      console.log("Login response:", data);
+
+      if (response.ok && data.success) {
+        // Store the token if it exists
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+        }
+        
+        // Determine user role based on the login type and data structure
+        let userRole;
+        if (formData.role === 'DOCTOR') {
+          userRole = 'doctor';
+        } else if (formData.role === 'PARENTS') {
+          userRole = 'patient';
+        } else {
+          userRole = 'patient'; // default
+        }
+        
+        // Create user object for Redux
+        const userData = {
+          id: data.data._id,
+          email: data.data.email,
+          name: data.data.firstName ? `${data.data.firstName} ${data.data.lastName}` : data.data.kidName || data.data.email,
+          role: userRole,
+          token: data.token,
+          ...data.data
+        };
+        
+        console.log("Setting user data in Redux:", userData);
+        
+        // Store user data in localStorage for persistence
+        localStorage.setItem('userData', JSON.stringify(userData));
+        
+        // Set user data in Redux
+        dispatch(setUser(userData));
+        
+        toast.success(`Welcome ${userData.name}! Login successful.`);
+        
+        // Navigate to home page
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+        
       } else {
-        toast.error("Login failed: No token received");
+        console.error("Login failed:", data);
+        toast.error(data.message || "Login failed. Please check your credentials.");
       }
+      
     } catch (error) {
-      console.error("Signin error:", error);
-      toast.error("Invalid email or password. Please try again.");
+      console.error("Login error:", error);
+      toast.error("Network error. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
     }
