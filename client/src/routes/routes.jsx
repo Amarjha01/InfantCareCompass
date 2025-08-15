@@ -55,6 +55,7 @@ const router = createBrowserRouter([
       },
 
       {
+
         path: "care-co-pilot",
         element: <CareCoPilot />,
       },
@@ -71,6 +72,7 @@ const router = createBrowserRouter([
       {
         path: "sleeper",
         element: <Sleeper />,
+
       },
 
       { path: "learning-hub", element: <LearningHub /> },
@@ -82,6 +84,11 @@ const router = createBrowserRouter([
       { path: "*", element: <NotFoundPage />, handle: { noLayout: true } },
 
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
+    handle: { noLayout: true },
   },
   { path: "/registration", element: <Registration /> },
   { path: "/signin", element: <Signin /> },
