@@ -39,6 +39,7 @@ const InputField = ({
             ? 'border-indigo-500 focus:border-indigo-600 focus:ring-indigo-500/20 shadow-lg'
             : 'border-gray-200 hover:border-gray-300'
           } focus:outline-none focus:ring-4 ${rows ? 'resize-none' : ''}`}
+        style={{ backgroundColor: value === '' ? '#f3e8ff' : 'white' }} // Light placeholder color when empty
       />
 
       {error && (
@@ -47,7 +48,6 @@ const InputField = ({
     </div>
   );
 };
-
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -144,7 +144,7 @@ const ContactUs = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white py-12 px-4">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 animate-fadeIn">
@@ -154,13 +154,13 @@ const ContactUs = () => {
           <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-4">
             Let's Connect
           </h1>
-          <p className="text-lg text-gray-600 max-w-md mx-auto">
+          <p className="text-lg text-white max-w-md mx-auto">
             Have questions or need assistance? We'd love to hear from you.
           </p>
         </div>
 
         {/* Form */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 animate-slideUp">
+        <div className="bg-gradient-to-br from-purple-900 to-slate-900 rounded-3xl shadow-xl p-8 animate-slideUp">
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <InputField

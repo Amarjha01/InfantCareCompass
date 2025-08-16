@@ -1,6 +1,5 @@
 import nodemailer from "nodemailer";
-
-import asyncHandler from "express-async-handler";
+import { asyncHandler } from "../../utils/asyncHandler.js";
 
 
 export const sendContactUsEmail = asyncHandler(async (req, res, next) => {

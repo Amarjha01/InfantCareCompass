@@ -25,6 +25,7 @@ import PrivacyPolicy from "../pages/PrivacyPolicy";
 import TermsOfService from "../pages/TermsOfService";
 import CookiePolicy from "../pages/CookiePolicy";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,13 +50,33 @@ const router = createBrowserRouter([
           },
         ],
       },
+
+      {
+        path: "learning-hub",
+        element: <LearningHub />,
+      },
+      {
+        path: "vaccineReminder",
+        element: <VaccineReminder />,
+      },
+      {
+        path: "care-co-pilot",
+        element: <CareCoPilot />,
+      },
+
       { path: "learning-hub", element: <LearningHub /> },
       { path: "vaccine-reminder", element: <VaccineReminder /> },
       { path: "privacy-policy", element: <PrivacyPolicy /> },
       { path: "terms-of-service", element: <TermsOfService /> },
       { path: "cookie-policy", element: <CookiePolicy /> },
       { path: "*", element: <NotFoundPage />, handle: { noLayout: true } },
+
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
+    handle: { noLayout: true },
   },
   { path: "/registration", element: <Registration /> },
   { path: "/signin", element: <Signin /> },
