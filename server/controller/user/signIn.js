@@ -1,19 +1,12 @@
 import { asyncHandler } from "../../utils/asyncHandler.js";
 import usermodel from "../../models/user/user.js";
-import doctormondel from "../../models/user/doctorSchema.js";
+import doctormodel from "../../models/user/doctorSchema.js";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const signin = asyncHandler(async (req, res, next) => {
     const { email, password, role } = req.body;
 
-    if (role.toLowerCase()==='doctor' && req) {
-        const doctor = await doctormondel.findOne({ email });
-        if (!doctor) {
-            return res.status(400).json({
-                message: 'user not found'
-            })
-        }
     // Check required fields
     if (!email || !password || !role) {
         return res.status(400).json({
@@ -34,35 +27,30 @@ const signin = asyncHandler(async (req, res, next) => {
     }
 
     try {
-        if (role === 'DOCTOR') {
-            const doctor = await doctormondel.findOne({ email: normalizedEmail });
+        if (role.toUpperCase() === 'DOCTOR') {
+            const doctor = await doctormodel.findOne({ email: normalizedEmail });
             if (!doctor) {
                 return res.status(400).json({
                     message: 'Incorrect email or password'
                 });
             }
-
             const isPasswordValid = await bcrypt.compare(password, doctor.password);
             if (!isPasswordValid) {
                 return res.status(400).json({
                     message: "Incorrect email or password"
                 });
             }
-
             const tokendata = {
                 id: doctor._id,
                 email: doctor.email,
                 role: 'DOCTOR'
             };
-
             const token = jwt.sign(tokendata, process.env.TOKEN_SECRET_KEY, { expiresIn: 60 * 60 * 8 });
-
             const tokenOption = {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 sameSite: 'strict'
             };
-
             return res.cookie("token", token, tokenOption).status(200).json({
                 message: "Login successful",
                 data: {
@@ -75,54 +63,31 @@ const signin = asyncHandler(async (req, res, next) => {
                 token: token,
                 success: true,
                 error: false
-            })
-            res.redirect("/");
-            // res.status(200).json({doctor
-            // })
-        } else {
-            return res.status(400).json({
-                message: "please enter password correctly"
-            })
-        }
-
-    } else {
-        const user = await usermodel.findOne({ email });
-        if (!user) {
-            res.status(400).json({
-                message: 'user not found'
-            })
-        }
-        const veryfyuser = await bcrypt.compare(password, user.password);
             });
-        } else if (role === 'USER') {
+        } else if (role.toUpperCase() === 'USER') {
             const user = await usermodel.findOne({ email: normalizedEmail });
             if (!user) {
                 return res.status(400).json({
                     message: 'Incorrect email or password'
                 });
             }
-
             const isPasswordValid = await bcrypt.compare(password, user.password);
             if (!isPasswordValid) {
                 return res.status(400).json({
                     message: "Incorrect email or password"
                 });
             }
-
             const tokendata = {
                 id: user._id,
                 email: user.email,
                 role: 'USER'
             };
-
             const token = jwt.sign(tokendata, process.env.TOKEN_SECRET_KEY, { expiresIn: 60 * 60 * 8 });
-
             const tokenOption = {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 sameSite: 'strict'
             };
-
             return res.cookie("token", token, tokenOption).status(200).json({
                 message: "Login successful",
                 data: {
@@ -141,7 +106,7 @@ const signin = asyncHandler(async (req, res, next) => {
             });
         }
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             message: "An error occurred during sign-in",
             error: error.message
         });
