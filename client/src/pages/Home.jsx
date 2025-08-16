@@ -20,6 +20,8 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { useNavigate } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const HomePage = () => {
   const navigate = useNavigate(); // ✅ Add this if missing
@@ -178,7 +180,7 @@ const HomePage = () => {
       {/* Mouse Follower Effect */}
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-6">
+      <section className="relative min-h-screen flex items-center justify-center px-6" data-aos="fade-up">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/40"></div>
 
         <div className="relative z-10 text-center max-w-6xl mx-auto">
@@ -287,7 +289,7 @@ const HomePage = () => {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-32 relative overflow-x-visible z-10">
+      <section id="services" className="py-32 relative overflow-x-visible z-10" data-aos="fade-up">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
@@ -303,6 +305,12 @@ const HomePage = () => {
             grabCursor={true}
             centeredSlides={true}
             slidesPerView={"auto"}
+            onSlideChange={() => AOS.refresh()}
+            onSwiper={(swiper) => {
+              swiper.on("slideChangeTransitionEnd", () => {
+                AOS.refreshHard(); // force re-check
+              });
+            }}
             coverflowEffect={{
               rotate: 30,
               stretch: 0,
@@ -320,8 +328,15 @@ const HomePage = () => {
             className="w-full max-w-6xl mx-auto"
           >
             {services.map((service, index) => (
-              <div key={index} className="group relative">
-                <GlassCard className="p-8 h-full group-hover:bg-white/15">
+              <div
+                key={index}
+                className="group relative"
+                data-aos="fade-up"
+                data-aos-delay={index * 200}
+                data-aos-duration="900"
+                data-aos-easing="ease-out-cubic"
+              >
+                <GlassCard className="p-8 h-full group-hover:bg-white/15" data-aos="zoom-in" data-aos-delay={index * 200 + 100} data-aos-duration="700">
                   <div className="relative">
                     <div
                       className={`w-20 h-20 rounded-2xl bg-gradient-to-r ${service.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
@@ -329,15 +344,15 @@ const HomePage = () => {
                       {service.icon}
                     </div>
 
-                    <h3 className="text-2xl font-bold mb-4 text-white">
+                    <h3 className="text-2xl font-bold mb-4 text-white" data-aos="fade-right" data-aos-delay={index * 200 + 200} data-aos-duration="600">
                       {service.title}
                     </h3>
 
-                    <p className="text-gray-300 leading-relaxed mb-6">
+                    <p className="text-gray-300 leading-relaxed mb-6" data-aos="fade-left" data-aos-delay={index * 200 + 300} data-aos-duration="600">
                       {service.description}
                     </p>
 
-                    <div className="overflow-hidden rounded-xl mb-6">
+                    <div className="overflow-hidden rounded-xl mb-6" data-aos="zoom-in-up" data-aos-delay={index * 200 + 400} data-aos-duration="700">
                       <img
                         src={service.image}
                         alt={service.title}
@@ -345,30 +360,38 @@ const HomePage = () => {
                       />
                     </div>
 
-                    <button className="text-blue-400 hover:text-blue-300 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
+                    <button className="text-blue-400 hover:text-blue-300 font-medium flex items-center gap-2 group-hover:gap-3 transition-all" data-aos="fade-up" data-aos-delay={index * 200 + 500} data-aos-duration="500">
                       <Link to={service.link}>Learn More</Link>
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>
                 </GlassCard>
                 <SwiperSlide key={index} className="!w-80 !flex-shrink-0">
-                  <GlassCard className="p-6 text-white text-center">
-                    <div
-                      className={`bg-gradient-to-br ${service.color} p-4 rounded-full inline-block`}
-                    >
-                      {service.icon}
-                    </div>
-                    <h3 className="text-xl font-bold mt-4">{service.title}</h3>
-                    <p className="text-white-600 mt-2">{service.description}</p>
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="mt-4 rounded-xl w-full h-40 object-cover"
-                    />
-                    <p className="mt-3 text-blue-600 font-medium">
-                      Learn More →
-                    </p>
-                  </GlassCard>
+                  <div
+                    className="group relative"
+                    data-aos="fade-up"
+                    data-aos-delay={index * 200}
+                    data-aos-duration="900"
+                    data-aos-easing="ease-out-cubic"
+                  >
+                    <GlassCard className="p-6 text-white text-center">
+                      <div
+                        className={`bg-gradient-to-br ${service.color} p-4 rounded-full inline-block`}
+                      >
+                        {service.icon}
+                      </div>
+                      <h3 className="text-xl font-bold mt-4">{service.title}</h3>
+                      <p className="text-white-600 mt-2">{service.description}</p>
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="mt-4 rounded-xl w-full h-40 object-cover"
+                      />
+                      <p className="mt-3 text-blue-600 font-medium">
+                        Learn More →
+                      </p>
+                    </GlassCard>
+                  </div>
                 </SwiperSlide>
               </div>
             ))}
@@ -377,10 +400,10 @@ const HomePage = () => {
       </section>
 
       {/* Experience Section */}
-      <section className="py-32 relative bg-black/5 overflow-x-visible">
+      <section className="py-32 relative bg-black/5 overflow-x-visible" data-aos="fade-up">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
+            <div data-aos="fade-right">
               <h2 className="text-5xl md:text-left text-center font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 Creating Magical Childhood Moments
               </h2>
@@ -415,17 +438,29 @@ const HomePage = () => {
 
             <div className="grid grid-cols-2 gap-6">
               {[
-                "https://res.cloudinary.com/dbnticsz8/image/upload/v1734936845/Infant%20care%20Compass/rrhakzuhcryo7dewe57i.png",
-                "https://res.cloudinary.com/dbnticsz8/image/upload/v1734936923/Infant%20care%20Compass/rx6c2iojkbym0u0nm8ph.png",
-                "https://res.cloudinary.com/dbnticsz8/image/upload/v1734937330/Infant%20care%20Compass/ffktzdwhwkarwjhtvmnn.png",
-              ].map((src, index) => (
+                {
+                  src: "https://res.cloudinary.com/dbnticsz8/image/upload/v1734936845/Infant%20care%20Compass/rrhakzuhcryo7dewe57i.png",
+                  aos: "fade-down",
+                },
+                {
+                  src: "https://res.cloudinary.com/dbnticsz8/image/upload/v1734936923/Infant%20care%20Compass/rx6c2iojkbym0u0nm8ph.png",
+                  aos: "fade-left",
+                },
+                {
+                  src: "https://res.cloudinary.com/dbnticsz8/image/upload/v1734937330/Infant%20care%20Compass/ffktzdwhwkarwjhtvmnn.png",
+                  aos: "fade-up",
+                },
+              ].map((item, index) => (
                 <div
                   key={index}
-                  className={`${index === 2 ? "col-span-2" : ""}`}
+                  className={`${item.fullWidth ? "col-span-2" : ""}`}
+                  data-aos={item.aos}
+                  data-aos-delay={index * 200} // staggered delay for smoother entry
+                  data-aos-duration="800"
                 >
                   <div className="group relative overflow-hidden rounded-2xl">
                     <img
-                      src={src}
+                      src={item.src}
                       alt={`Happy moment ${index + 1}`}
                       className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                     />
@@ -439,9 +474,9 @@ const HomePage = () => {
       </section>
 
       {/* Demo Section */}
-      <section className="py-20 relative" id="demo">
+      <section className="py-20 relative" id="demo" data-aos="fade-up">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16" data-aos="fade-up">
             <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
               See It In Action
             </h2>
@@ -452,7 +487,7 @@ const HomePage = () => {
           </div>
 
           <div className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl">
-            <div className="aspect-w-16 aspect-h-9 bg-black/20">
+            <div className="aspect-w-16 aspect-h-9 bg-black/20" data-aos="zoom-in">
               <iframe
                 className="w-full h-[500px]"
                 src="https://www.youtube.com/embed/your-video-id"
@@ -496,6 +531,9 @@ const HomePage = () => {
               <div
                 key={index}
                 className="bg-white/5 p-6 rounded-2xl backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300"
+                data-aos="fade-up"
+                data-aos-delay={index * 200} // 👈 Staggered delay (0ms, 200ms, 400ms)
+                data-aos-duration="800"
               >
                 <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center mb-4">
                   {feature.icon}
@@ -511,7 +549,7 @@ const HomePage = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-32 relative">
+      <section className="py-32 relative" data-aos="fade-up">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
             <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
@@ -576,7 +614,9 @@ const HomePage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 relative">
+      <section className="py-32 relative" data-aos="fade-right"
+        data-aos-duration="1000"
+        data-aos-easing="ease-out-cubic">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <GlassCard className="p-12">
             <Baby className="w-16 h-16 mx-auto mb-6 text-blue-400" />
