@@ -123,26 +123,6 @@ const signup =async(req,res)=>{
             message: err
         });
 
-    } else {
-        try {
-            const userData = new usermodel(payload);
-            const saveUser = await userData.save();
-            return res.status(200).json({
-                data: saveUser,
-                error: false,
-                success: true,
-                message: "User created successfully"
-            });
-        } catch (error) {
-            if (error.code === 11000) {
-                return res.status(400).json({
-                    error: true,
-                    success: false,
-                    message: "Email already exists. Please use a different email address."
-                });
-            }
-            throw error;
-        }
     }
 }
 
