@@ -1,150 +1,137 @@
-import { asyncHandler } from "../../utils/asyncHandler.js"; // Adjust path as needed
 import usermodel from '../../models/user/user.js';
 import doctormodel from '../../models/user/doctorSchema.js';
 import bcrypt from 'bcryptjs';
 import validator from 'validator';
-import path from 'path';
 
+const signup = async (req, res) => {
+    try {
+        console.log("controller hit");
+        const { ...data } = req.body;
+        console.log(req.body);
 
-const signup =async(req,res)=>{
-    try{
-    console.log("controller hit");
-    const {...data} = req.body;
-    console.log(req.body);
-    
-
-    //   added email and dob to be fetched as well to validate 
-    if (!data.email) {
-        return res.status(400).json({
-            error: true,
-            success: false,
-            message: "all fields are mandatory to fill"
-        });
-    }
-    if (!validator.isEmail(data.email)) {
-        return res.status(400).json({
-            error: true,
-            success: false,
-            message: "please enter a valid email address"
-        });
-    }
-
-
-    // validating password
-    if (!validator.isLength(data.password, { min: 8 })) {
-        return res.status(400).json({
-            error: true,
-            success: false,
-            message: "password length must be 8 letters"
-        });
-    }
-
-    const hasLetters = /[a-zA-Z]/.test(data.password);
-    const hasNumbers = /[0-9]/.test(data.password);
-    const hasSpecialChar = /[^a-zA-Z0-9]/.test(data.password);
-
-    if (!(hasLetters && hasNumbers && hasSpecialChar)) {
-        return res.status(400).json({
-            error: true,
-            success: false,
-            message: "password must contain atleast 1 number, 1 special character, 1 alphabet"
-        });
-    }
-
-
-    const hashedPassword = await bcrypt.hash(data.password,10);
-    if(data.role === 'doctor'){
-        // console.log(req.file);
-        const doctordata = new doctormodel({
-            role:'doctor',
-            firstName:data.firstName,
-            lastName:data.lastName,
-            document:req.file.path,
-            about:data.about,
-            email:data.email,
-            password:hashedPassword,
-            experience:data.experience,
-            rating:data.rating,
-            status:'pending'
-        });
-        await doctordata.save();
-        return res.status(200).json({
-            data: doctordata,
-            error: false,
-            sucess: true,
-            message: "your doctor profile verification pending..."
-        });
-    }else{
-        const today = new Date();
-        if (new Date(data.dob) > today) {
+       
+        if (!data.email) {
             return res.status(400).json({
                 error: true,
                 success: false,
-                message: "date cant be in future"
+                message: "all fields are mandatory to fill"
             });
         }
 
-
-        // validating contact number to make sure the length doesnt exceed ten
-        if (!validator.isLength(data.contactNumber, { min: 10, max: 10 })) {
+       
+        if (!validator.isEmail(data.email)) {
             return res.status(400).json({
                 error: true,
                 success: false,
-                message: "contact number must be 10 numbers"
+                message: "please enter a valid email address"
             });
         }
-        const userdata = new usermodel({
-    
-            role:'parent',
-            kidName:data.kidName,
-            dob:data.dob,
-            fatherName:data.fatherName,
-            motherName:data.motherName,
-            email:data.email,
-            contactNumber:data.contactNumber,
-            city:data.city,
-            state:data.state,
-            postalCode:data.postalCode,
-            password:data.password
-        });
-        await userdata.save();
-        return res.status(200).json({
-            data: userdata,
-            error: false,
-            sucess: true,
-            message: "user created successfully"
-        });
-    }
-    }catch(err){
-        console.log(err);
-        return res.status(400).json({
-            error: true,
-            success: false,
-            message: err
-        });
 
-    } else {
-        try {
-            const userData = new usermodel(payload);
-            const saveUser = await userData.save();
+       
+        if (!validator.isLength(data.password, { min: 8 })) {
+            return res.status(400).json({
+                error: true,
+                success: false,
+                message: "password length must be 8 letters"
+            });
+        }
+
+        const hasLetters = /[a-zA-Z]/.test(data.password);
+        const hasNumbers = /[0-9]/.test(data.password);
+        const hasSpecialChar = /[^a-zA-Z0-9]/.test(data.password);
+
+        if (!(hasLetters && hasNumbers && hasSpecialChar)) {
+            return res.status(400).json({
+                error: true,
+                success: false,
+                message: "password must contain at least 1 number, 1 special character, 1 alphabet"
+            });
+        }
+
+     
+        const hashedPassword = await bcrypt.hash(data.password, 10);
+
+        if (data.role === 'doctor') {
+            const doctordata = new doctormodel({
+                role: 'doctor',
+                firstName: data.firstName,
+                lastName: data.lastName,
+                document: req.file?.path,
+                about: data.about,
+                email: data.email,
+                password: hashedPassword,
+                experience: data.experience,
+                rating: data.rating,
+                status: 'pending'
+            });
+
+            await doctordata.save();
             return res.status(200).json({
-                data: saveUser,
+                data: doctordata,
                 error: false,
                 success: true,
-                message: "User created successfully"
+                message: "your doctor profile verification pending..."
             });
-        } catch (error) {
-            if (error.code === 11000) {
+
+        } else {
+            const today = new Date();
+            if (new Date(data.dob) > today) {
                 return res.status(400).json({
                     error: true,
                     success: false,
-                    message: "Email already exists. Please use a different email address."
+                    message: "date can't be in future"
                 });
             }
-            throw error;
+
+            if (!validator.isLength(data.contactNumber, { min: 10, max: 10 })) {
+                return res.status(400).json({
+                    error: true,
+                    success: false,
+                    message: "contact number must be 10 numbers"
+                });
+            }
+
+            const userdata = new usermodel({
+                role: 'parent',
+                kidName: data.kidName,
+                dob: data.dob,
+                fatherName: data.fatherName,
+                motherName: data.motherName,
+                email: data.email,
+                contactNumber: data.contactNumber,
+                city: data.city,
+                state: data.state,
+                postalCode: data.postalCode,
+                password: hashedPassword
+            });
+
+            await userdata.save();
+            return res.status(200).json({
+                data: userdata,
+                error: false,
+                success: true,
+                message: "user created successfully"
+            });
         }
+
+    } catch (err) {
+        console.log(err);
+
+        if (err.code === 11000) {
+            return res.status(400).json({
+                error: true,
+                success: false,
+                message: "Email already exists. Please use a different email address."
+            });
+        }
+
+        return res.status(400).json({
+            error: true,
+            success: false,
+            message: err.message || "Something went wrong"
+        });
     }
-}
+};
 
 export default signup;
 
