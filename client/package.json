@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
     "@zegocloud/zego-uikit-prebuilt": "^2.14.0",
+    "aos": "^2.3.4",
     "axios": "^1.7.9",
     "client": "^0.0.1",
     "date-fns": "^4.1.0",

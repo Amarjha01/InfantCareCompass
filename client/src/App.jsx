@@ -8,6 +8,9 @@ import { setUser } from "./store/slices/userSlice.jsx";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollRestoration from "./components/ScrollRestoration";
 import { Toaster, toast } from 'react-hot-toast';
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 function App() {
   const matches = useMatches();
   const hideLayout = matches.some((match) => match.handle?.noLayout);
@@ -17,7 +20,7 @@ function App() {
     // Restore user session on app load
     const token = localStorage.getItem('token');
     const userData = localStorage.getItem('userData');
-    
+
     if (token && userData) {
       try {
         const parsedUserData = JSON.parse(userData);
@@ -29,6 +32,13 @@ function App() {
         localStorage.removeItem('userData');
       }
     }
+
+    // ✅ Initialize AOS
+    AOS.init({
+      duration: 1000,   // animation duration in ms
+      once: true,       // whether animation happens only once
+      easing: "ease-in-out", // default easing
+    });
   }, [dispatch]);
 
   return (
@@ -44,7 +54,7 @@ function App() {
 
       {!hideLayout && <Footer />}
       <ScrollToTop />
-      <Toaster position="top-right" /> 
+      <Toaster position="top-right" />
     </div>
   );
 }
