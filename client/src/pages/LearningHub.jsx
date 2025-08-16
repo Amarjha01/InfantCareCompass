@@ -29,7 +29,7 @@ const PersonalizedLearningHub = () => {
         <Articles />
       </main>
 
-      <style jsx>{`
+      <style>{`
         @keyframes fadeIn {
           from {
             opacity: 0;

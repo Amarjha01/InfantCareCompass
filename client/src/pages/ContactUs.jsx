@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Mail, User, MessageCircle, Send, CheckCircle } from "lucide-react";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 // Simplified InputField for a classic form experience
 const InputField = ({
@@ -32,10 +34,10 @@ const InputField = ({
         onBlur={onBlur}
         placeholder={placeholder}
         className={`w-full pl-12 pr-4 py-4 border-2 rounded-xl transition-all duration-300 bg-white ${error
-            ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
-            : isFocused
-              ? 'border-indigo-500 focus:border-indigo-600 focus:ring-indigo-500/20 shadow-lg'
-              : 'border-gray-200 hover:border-gray-300'
+          ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
+          : isFocused
+            ? 'border-indigo-500 focus:border-indigo-600 focus:ring-indigo-500/20 shadow-lg'
+            : 'border-gray-200 hover:border-gray-300'
           } focus:outline-none focus:ring-4 ${rows ? 'resize-none' : ''}`}
         style={{ backgroundColor: value === '' ? '#f3e8ff' : 'white' }} // Light placeholder color when empty
       />
@@ -92,16 +94,28 @@ const ContactUs = () => {
     setIsSubmitting(true);
 
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      const response = await axios.post("http://localhost:5000/api/contact-us", formData);
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
+      if (response.data && response.data.success) {
+        toast.success("Message sent successfully!");
+        setIsSuccess(true);
 
-    // Reset form after success
-    setTimeout(() => {
-      setIsSuccess(false);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 3000);
+        // Reset form after success
+        setTimeout(() => {
+          setIsSuccess(false);
+          setFormData({ name: '', email: '', subject: '', message: '' });
+        }, 3000);
+      } else {
+        toast.error(response.data?.message || "Failed to send message.");
+      }
+
+    } catch (error) {
+      console.error("Contact form error:", error);
+      toast.error("Something went wrong. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -206,8 +220,8 @@ const ContactUs = () => {
                 onClick={handleSubmit}
                 disabled={isSubmitting}
                 className={`w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 transform ${isSubmitting
-                    ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 hover:scale-105 hover:shadow-xl active:scale-95'
+                  ? 'bg-gray-400 cursor-not-allowed'
+                  : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 hover:scale-105 hover:shadow-xl active:scale-95'
                   } focus:outline-none focus:ring-4 focus:ring-indigo-500/50`}
               >
                 <div className="flex items-center justify-center space-x-2">
@@ -233,7 +247,7 @@ const ContactUs = () => {
         <div className="absolute bottom-20 right-10 w-32 h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }

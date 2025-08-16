@@ -256,8 +256,11 @@ const News = () => {
         </button>
       </div>
 
+
+      <style>{`
+
       {/* Animations */}
-      <style jsx>{`
+
         @keyframes fadeIn {
           from {
             opacity: 0;

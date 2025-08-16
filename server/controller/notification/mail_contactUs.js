@@ -22,24 +22,22 @@ export const sendContactUsEmail = asyncHandler(async (req, res, next) => {
   // Define email content
   const mailOptions = {
     from: process.env.EMAIL_USER, // Sender email address
-    to: "amarjha.tech@gmail.com", // Recipient email address
+    to: "support@infantcarecompass.live", // Recipient email address
     subject: `Contact Us Query: ${subject}`,
     text: `
       You have received a new message from the Contact Us form:
       
       Name: ${name}
-      Email: ${email}
-      Subject: ${subject}
-      Message:
-      ${message}
+      Message: ${message}
     `,
+    replyTo: email,
   };
 
   // Send the email. If this fails, asyncHandler will catch the error.
   await transporter.sendMail(mailOptions);
 
   // If the email sends successfully, send the success response.
-  res.status(200).json({ message: "Message sent successfully!" });
+  res.status(200).json({ success: true, message: "Message sent successfully!" });
 });
 
 export default sendContactUsEmail;

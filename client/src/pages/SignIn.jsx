@@ -249,7 +249,8 @@ export default function Signin() {
     if (!validateForm()) return;
     
     setIsSubmitting(true);
-    
+
+    const token = localStorage.getItem("token");
     try {
       console.log("Attempting login with:", { 
         email: formData.email, 
