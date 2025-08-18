@@ -1,30 +1,22 @@
 import { asyncHandler } from "../../utils/asyncHandler.js";
 import usermodel from "../../models/user/user.js";
-import doctormondel from "../../models/user/doctorSchema.js";
+import doctormodel from "../../models/user/doctorSchema.js";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-const signin = asyncHandler(async (req, res, next) => {
+const signin = asyncHandler(async (req, res) => {
     const { email, password, role } = req.body;
 
-    if (role.toLowerCase()==='doctor' && req) {
-        const doctor = await doctormondel.findOne({ email });
-        if (!doctor) {
-            return res.status(400).json({
-                message: 'user not found'
-            })
-        }
-    // Check required fields
+    // Validate fields
     if (!email || !password || !role) {
         return res.status(400).json({
             message: 'Missing required fields: email, password, and role are required'
         });
     }
 
-    // Normalize email to lowercase and trim
     const normalizedEmail = email.toLowerCase().trim();
+    const normalizedRole = role.toUpperCase();
 
-    // Validate TOKEN_SECRET_KEY
     if (!process.env.TOKEN_SECRET_KEY) {
         console.error("TOKEN_SECRET_KEY is not configured in environment variables");
         return res.status(500).json({
@@ -34,113 +26,65 @@ const signin = asyncHandler(async (req, res, next) => {
     }
 
     try {
-        if (role === 'DOCTOR') {
-            const doctor = await doctormondel.findOne({ email: normalizedEmail });
-            if (!doctor) {
-                return res.status(400).json({
-                    message: 'Incorrect email or password'
-                });
-            }
+        let userData;
 
-            const isPasswordValid = await bcrypt.compare(password, doctor.password);
-            if (!isPasswordValid) {
-                return res.status(400).json({
-                    message: "Incorrect email or password"
-                });
-            }
-
-            const tokendata = {
-                id: doctor._id,
-                email: doctor.email,
-                role: 'DOCTOR'
-            };
-
-            const token = jwt.sign(tokendata, process.env.TOKEN_SECRET_KEY, { expiresIn: 60 * 60 * 8 });
-
-            const tokenOption = {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict'
-            };
-
-            return res.cookie("token", token, tokenOption).status(200).json({
-                message: "Login successful",
-                data: {
-                    id: doctor._id,
-                    email: doctor.email,
-                    firstName: doctor.firstName,
-                    lastName: doctor.lastName,
-                    role: 'DOCTOR'
-                },
-                token: token,
-                success: true,
-                error: false
-            })
-            res.redirect("/");
-            // res.status(200).json({doctor
-            // })
+        if (normalizedRole === 'DOCTOR') {
+            userData = await doctormodel.findOne({ email: normalizedEmail });
+        } else if (normalizedRole === 'USER') {
+            userData = await usermodel.findOne({ email: normalizedEmail });
         } else {
-            return res.status(400).json({
-                message: "please enter password correctly"
-            })
+            return res.status(400).json({ message: "Invalid role provided" });
         }
 
-    } else {
-        const user = await usermodel.findOne({ email });
-        if (!user) {
-            res.status(400).json({
-                message: 'user not found'
-            })
+        if (!userData) {
+            return res.status(400).json({ message: 'Incorrect email or password' });
         }
-        const veryfyuser = await bcrypt.compare(password, user.password);
-            });
-        } else if (role === 'USER') {
-            const user = await usermodel.findOne({ email: normalizedEmail });
-            if (!user) {
-                return res.status(400).json({
-                    message: 'Incorrect email or password'
-                });
-            }
 
-            const isPasswordValid = await bcrypt.compare(password, user.password);
-            if (!isPasswordValid) {
-                return res.status(400).json({
-                    message: "Incorrect email or password"
-                });
-            }
+        const isPasswordValid = await bcrypt.compare(password, userData.password);
+        if (!isPasswordValid) {
+            return res.status(400).json({ message: "Incorrect email or password" });
+        }
 
-            const tokendata = {
-                id: user._id,
-                email: user.email,
-                role: 'USER'
-            };
+        const tokendata = {
+            id: userData._id,
+            email: userData.email,
+            role: normalizedRole
+        };
 
-            const token = jwt.sign(tokendata, process.env.TOKEN_SECRET_KEY, { expiresIn: 60 * 60 * 8 });
+        const token = jwt.sign(tokendata, process.env.TOKEN_SECRET_KEY, { expiresIn: 60 * 60 * 8 });
 
-            const tokenOption = {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict'
-            };
+        const tokenOptions = {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict'
+        };
 
-            return res.cookie("token", token, tokenOption).status(200).json({
+        const responseData = {
+            id: userData._id,
+            email: userData.email,
+            role: normalizedRole
+        };
+
+        if (normalizedRole === 'DOCTOR') {
+            responseData.firstName = userData.firstName;
+            responseData.lastName = userData.lastName;
+        } else if (normalizedRole === 'USER') {
+            responseData.kidName = userData.kidName;
+        }
+
+        return res
+            .cookie("token", token, tokenOptions)
+            .status(200)
+            .json({
                 message: "Login successful",
-                data: {
-                    id: user._id,
-                    email: user.email,
-                    kidName: user.kidName,
-                    role: 'USER'
-                },
+                data: responseData,
                 token: token,
                 success: true,
                 error: false
             });
-        } else {
-            return res.status(400).json({
-                message: "Invalid role provided"
-            });
-        }
+
     } catch (error) {
+        console.error(error);
         res.status(500).json({
             message: "An error occurred during sign-in",
             error: error.message
