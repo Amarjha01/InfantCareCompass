@@ -412,9 +412,8 @@ export default function Registration() {
             </p>
           </div>
         </div>
+        <ToastContainer position="top-center" autoClose={3000} />
       </div>
-      <ToastContainer position="top-center" autoClose={3000} />
     </div>
-  </div>
   );
 }
