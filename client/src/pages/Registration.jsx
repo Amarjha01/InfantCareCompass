@@ -7,8 +7,6 @@ import {
   Phone,
   MapPin,
   Calendar,
-  FileText,
-  Award,
   Heart,
   Eye,
   EyeOff,
@@ -65,7 +63,6 @@ const PasswordStrengthIndicator = ({ password }) => {
           {getStrengthText()}
         </span>
       </div>
-
       <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
         <div
           className={`h-2 rounded-full transition-all duration-300 ${getStrengthColor().replace(
@@ -75,7 +72,6 @@ const PasswordStrengthIndicator = ({ password }) => {
           style={{ width: `${(strength / 5) * 100}%` }}
         ></div>
       </div>
-
       <div className="space-y-2">
         {requirements.map((req, index) => {
           const isMet = req.test(password);
@@ -248,25 +244,7 @@ export default function Registration() {
     setShowPassword(!showPassword);
   };
 
-
   return (
-
-
-  <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center py-12 px-4">
-    <div className="w-full max-w-2xl">
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-6 shadow-lg">
-          <Heart className="w-8 h-8 text-white" />
-        </div>
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-          Create Your Account
-        </h1>
-        <p className="text-gray-600">
-          Join our community and start tracking your child's health journey
-        </p>
-      </div>
-
-
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center py-12 px-4">
       <div className="w-full max-w-2xl">
         <div className="text-center mb-8">
@@ -279,9 +257,7 @@ export default function Registration() {
           <p className="text-gray-600">
             Join our community and start tracking your child's health journey
           </p>
-
         </div>
-
         <div className="bg-white rounded-3xl shadow-xl p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Role Selection */}
@@ -315,7 +291,6 @@ export default function Registration() {
                 <span className="font-semibold">Doctor</span>
               </button>
             </div>
-
             {/* Common Fields */}
             <InputField
               icon={Mail}
@@ -326,7 +301,6 @@ export default function Registration() {
               onChange={handleChange}
               error={errors.email}
             />
-
             <InputField
               icon={Lock}
               name="password"
@@ -336,11 +310,9 @@ export default function Registration() {
               onChange={handleChange}
               error={errors.password}
             />
-
             {formData.password && (
               <PasswordStrengthIndicator password={formData.password} />
             )}
-
             {/* Role-specific fields */}
             {formData.role === "PARENTS" && (
               <>
@@ -416,7 +388,6 @@ export default function Registration() {
                 </div>
               </>
             )}
-
             <button
               type="submit"
               disabled={isSubmitting}
@@ -429,7 +400,6 @@ export default function Registration() {
               {isSubmitting ? "Registering..." : "Create Account"}
             </button>
           </form>
-
           <div className="text-center mt-8">
             <p className="text-gray-600">
               Already have an account?{" "}
@@ -445,9 +415,6 @@ export default function Registration() {
       </div>
       <ToastContainer position="top-center" autoClose={3000} />
     </div>
-
-    <ToastContainer position="top-center" autoClose={3000} />
   </div>
-);
-
+  );
 }
