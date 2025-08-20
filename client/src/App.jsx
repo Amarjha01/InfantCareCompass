@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "./store/slices/userSlice.jsx";
 import ScrollToTop from "./components/ScrollToTop";
+import ScrollToBottom from "./components/ScrollToBottom";
 import ScrollRestoration from "./components/ScrollRestoration";
 import { Toaster, toast } from 'react-hot-toast';
 function App() {
@@ -37,6 +38,9 @@ function App() {
       {!hideLayout && <Header />}
 
       <ScrollToTop />
+      <ScrollToBottom />
+
+      {/* Main content area */}
 
       <main className="mt-20">
         <Outlet />
@@ -44,6 +48,10 @@ function App() {
 
       {!hideLayout && <Footer />}
       <ScrollToTop />
+      <ScrollToBottom />
+
+      {/* Toast notifications */}
+
       <Toaster position="top-right" /> 
     </div>
   );
