@@ -112,9 +112,8 @@ const InputField = ({
   return (
     <div className="relative">
       <Icon
-        className={`absolute left-4 top-4 w-5 h-5 transition-colors duration-300 ${
-          isFocused ? "text-indigo-600" : error ? "text-red-500" : "text-gray-400"
-        }`}
+        className={`absolute left-4 top-4 w-5 h-5 transition-colors duration-300 ${isFocused ? "text-indigo-600" : error ? "text-red-500" : "text-gray-400"
+          }`}
       />
 
       <input
@@ -125,13 +124,12 @@ const InputField = ({
         onFocus={onFocus}
         onBlur={onBlur}
         placeholder={placeholder}
-        className={`w-full pl-12 pr-12 py-4 border-2 rounded-xl transition-all duration-300 bg-white ${
-          error
+        className={`w-full pl-12 pr-12 py-4 border-2 rounded-xl transition-all duration-300 bg-white ${error
             ? "border-red-300 focus:border-red-500 focus:ring-red-500/20"
             : isFocused
-            ? "border-indigo-500 focus:border-indigo-600 focus:ring-indigo-500/20 shadow-lg"
-            : "border-gray-200 hover:border-gray-300"
-        } focus:outline-none focus:ring-4`}
+              ? "border-indigo-500 focus:border-indigo-600 focus:ring-indigo-500/20 shadow-lg"
+              : "border-gray-200 hover:border-gray-300"
+          } focus:outline-none focus:ring-4`}
       />
 
       {name === "password" && (
@@ -161,17 +159,15 @@ const InputField = ({
 const RoleCard = ({ value, icon: Icon, title, description, isSelected, onClick }) => (
   <div
     onClick={onClick}
-    className={`relative p-6 rounded-xl cursor-pointer transition-all duration-300 transform hover:scale-105 ${
-      isSelected
+    className={`relative p-6 rounded-xl cursor-pointer transition-all duration-300 transform hover:scale-105 ${isSelected
         ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg"
         : "bg-white border-2 border-gray-200 hover:border-indigo-300 hover:shadow-md"
-    }`}
+      }`}
   >
     <div className="flex items-center mb-3">
       <div
-        className={`p-3 rounded-full ${
-          isSelected ? "bg-white/20" : "bg-gradient-to-r from-indigo-500 to-purple-500"
-        }`}
+        className={`p-3 rounded-full ${isSelected ? "bg-white/20" : "bg-gradient-to-r from-indigo-500 to-purple-500"
+          }`}
       >
         <Icon className={"w-6 h-6 text-white"} />
       </div>
@@ -247,16 +243,19 @@ export default function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    
+
     setIsSubmitting(true);
 
+<<<<<<< Updated upstream
     const token = localStorage.getItem("token");
+=======
+>>>>>>> Stashed changes
     try {
-      console.log("Attempting login with:", { 
-        email: formData.email, 
-        role: formData.role 
+      console.log("Attempting login with:", {
+        email: formData.email,
+        role: formData.role
       });
-      
+
       const response = await fetch(commnApiEndpoint.signin.url, {
         method: commnApiEndpoint.signin.method,
         headers: {
@@ -278,7 +277,7 @@ export default function Signin() {
         if (data.token) {
           localStorage.setItem('token', data.token);
         }
-        
+
         // Determine user role based on the login type and data structure
         let userRole;
         if (formData.role === 'DOCTOR') {
@@ -288,7 +287,7 @@ export default function Signin() {
         } else {
           userRole = 'patient'; // default
         }
-        
+
         // Create user object for Redux
         const userData = {
           id: data.data._id,
@@ -298,27 +297,27 @@ export default function Signin() {
           token: data.token,
           ...data.data
         };
-        
+
         console.log("Setting user data in Redux:", userData);
-        
+
         // Store user data in localStorage for persistence
         localStorage.setItem('userData', JSON.stringify(userData));
-        
+
         // Set user data in Redux
         dispatch(setUser(userData));
-        
+
         toast.success(`Welcome ${userData.name}! Login successful.`);
-        
+
         // Navigate to home page
         setTimeout(() => {
           navigate("/");
         }, 1000);
-        
+
       } else {
         console.error("Login failed:", data);
         toast.error(data.message || "Login failed. Please check your credentials.");
       }
-      
+
     } catch (error) {
       console.error("Login error:", error);
       toast.error("Network error. Please check your connection and try again.");
@@ -334,134 +333,152 @@ export default function Signin() {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
-  
+
+   const handleGitHubLogin = () => {
+  // Store the fact we came from signup
+  localStorage.setItem("oauth_redirect", "/signup");
+
+  // Redirect to your backend OAuth start point
+  const githubOAuthUrl = `${import.meta.env.VITE_API_BASE_URL}/api/auth/github`;
+  window.location.href = githubOAuthUrl;
+};
+
   return (
-    <> 
-     <Toaster position="top-right" />
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center px-7 pb-8 flex-col">
-      <div className="w-full ">
-      <button
-              onClick={() => navigate("/")}
-              className={`w-3/2 mt-6 py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 transform bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 hover:scale-105 hover:shadow-xl active:scale-95
+    <>
+      <Toaster position="top-right" />
+      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center px-7 pb-8 flex-col">
+        <div className="w-full ">
+          <button
+            onClick={() => navigate("/")}
+            className={`w-3/2 mt-6 py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 transform bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 hover:scale-105 hover:shadow-xl active:scale-95
                  focus:outline-none focus:ring-4 focus:ring-indigo-500/50`}
-            >
-              <div className="flex items-center justify-center space-x-2">
-                    <Home className="w-5 h-5" />
-              </div>
-            </button>
-      </div>
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8 animate-fadeIn">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full mb-6 shadow-lg">
-            <Shield className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
-            Welcome Back
-          </h1>
-          <p className="text-gray-600">
-            Sign in to your account to continue
-          </p>
-        </div>
-
-        <div className="bg-white rounded-3xl shadow-xl p-8 animate-slideUp">
-          <div className="space-y-6">
-            <InputField
-              icon={Mail}
-              name="email"
-              type="email"
-              placeholder="Email Address"
-              value={formData.email}
-              error={errors.email}
-              isFocused={focusedField === 'email'}
-              onChange={handleChange}
-              onFocus={() => setFocusedField('email')}
-              onBlur={() => setFocusedField(null)}
-            />
-
-            <InputField
-              icon={Lock}
-              name="password"
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              value={formData.password}
-              error={errors.password}
-              isFocused={focusedField === 'password'}
-              showPassword={showPassword}
-              onToggleShowPassword={() => setShowPassword(!showPassword)}
-              onChange={handleChange}
-              onFocus={() => setFocusedField('password')}
-              onBlur={() => setFocusedField(null)}
-              showPasswordStrength={false}
-            />
-
-            <div className="space-y-4">
-              <label className="block text-sm font-medium text-gray-700 mb-3">
-                Select Your Role
-              </label>
-
-              <div className="grid grid-cols-1 gap-3">
-                <RoleCard
-                  value="PARENTS"
-                  icon={Baby}
-                  title="Parents"
-                  description="Access parental resources and child care information"
-                  isSelected={formData.role === 'PARENTS'}
-                  onClick={() => setFormData(prev => ({ ...prev, role: 'PARENTS' }))}
-                />
-
-                <RoleCard
-                  value="DOCTOR"
-                  icon={Stethoscope}
-                  title="Doctor"
-                  description="Professional dashboard for healthcare providers"
-                  isSelected={formData.role === 'DOCTOR'}
-                  onClick={() => setFormData(prev => ({ ...prev, role: 'DOCTOR' }))}
-                />
-              </div>
+          >
+            <div className="flex items-center justify-center space-x-2">
+              <Home className="w-5 h-5" />
             </div>
+          </button>
+        </div>
+        <div className="w-full max-w-md">
+          <div className="text-center mb-8 animate-fadeIn">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full mb-6 shadow-lg">
+              <Shield className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
+              Welcome Back
+            </h1>
+            <p className="text-gray-600">
+              Sign in to your account to continue
+            </p>
+          </div>
 
+          <div className="bg-white rounded-3xl shadow-xl p-8 animate-slideUp">
             <button
-              onClick={handleSubmit}
-              disabled={isSubmitting}
-              className={`w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 transform ${isSubmitting
+          onClick={handleGitHubLogin}
+          className="w-full mb-4 bg-gray-900 hover:bg-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 text-white py-3 px-4 rounded-lg flex items-center justify-center gap-3 transition-all duration-300 shadow-lg hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+        >
+          <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clipRule="evenodd" />
+          </svg>
+          Continue with GitHub
+        </button>
+            <div className="space-y-6">
+              <InputField
+                icon={Mail}
+                name="email"
+                type="email"
+                placeholder="Email Address"
+                value={formData.email}
+                error={errors.email}
+                isFocused={focusedField === 'email'}
+                onChange={handleChange}
+                onFocus={() => setFocusedField('email')}
+                onBlur={() => setFocusedField(null)}
+              />
+
+              <InputField
+                icon={Lock}
+                name="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={formData.password}
+                error={errors.password}
+                isFocused={focusedField === 'password'}
+                showPassword={showPassword}
+                onToggleShowPassword={() => setShowPassword(!showPassword)}
+                onChange={handleChange}
+                onFocus={() => setFocusedField('password')}
+                onBlur={() => setFocusedField(null)}
+                showPasswordStrength={false}
+              />
+
+              <div className="space-y-4">
+                <label className="block text-sm font-medium text-gray-700 mb-3">
+                  Select Your Role
+                </label>
+
+                <div className="grid grid-cols-1 gap-3">
+                  <RoleCard
+                    value="PARENTS"
+                    icon={Baby}
+                    title="Parents"
+                    description="Access parental resources and child care information"
+                    isSelected={formData.role === 'PARENTS'}
+                    onClick={() => setFormData(prev => ({ ...prev, role: 'PARENTS' }))}
+                  />
+
+                  <RoleCard
+                    value="DOCTOR"
+                    icon={Stethoscope}
+                    title="Doctor"
+                    description="Professional dashboard for healthcare providers"
+                    isSelected={formData.role === 'DOCTOR'}
+                    onClick={() => setFormData(prev => ({ ...prev, role: 'DOCTOR' }))}
+                  />
+                </div>
+              </div>
+
+              <button
+                onClick={handleSubmit}
+                disabled={isSubmitting}
+                className={`w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 transform ${isSubmitting
                   ? 'bg-gray-400 cursor-not-allowed'
                   : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 hover:scale-105 hover:shadow-xl active:scale-95'
-                } focus:outline-none focus:ring-4 focus:ring-indigo-500/50`}
-            >
-              <div className="flex items-center justify-center space-x-2">
-                {isSubmitting ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    <span>Signing In...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Sign In</span>
-                    <ArrowRight className="w-5 h-5" />
-                  </>
-                )}
-              </div>
-            </button>
+                  } focus:outline-none focus:ring-4 focus:ring-indigo-500/50`}
+              >
+                <div className="flex items-center justify-center space-x-2">
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span>Signing In...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Sign In</span>
+                      <ArrowRight className="w-5 h-5" />
+                    </>
+                  )}
+                </div>
+              </button>
+            </div>
           </div>
+
+          <div className="text-center mt-8 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
+            <p className="text-gray-600">
+              Don't have an account?{' '}
+              <a
+                href="/registration"
+                className="text-indigo-600 hover:text-indigo-800 font-medium transition-colors duration-300"
+              >
+                Register here
+              </a>
+            </p>
+          </div>
+
+          <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full opacity-20 animate-float"></div>
+          <div className="absolute bottom-20 right-10 w-32 h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
         </div>
 
-        <div className="text-center mt-8 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
-          <p className="text-gray-600">
-            Don't have an account?{' '}
-            <a
-              href="/registration"
-              className="text-indigo-600 hover:text-indigo-800 font-medium transition-colors duration-300"
-            >
-              Register here
-            </a>
-          </p>
-        </div>
-
-        <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full opacity-20 animate-float"></div>
-        <div className="absolute bottom-20 right-10 w-32 h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
-      </div>
-
-      <style>{`
+        <style>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
@@ -498,7 +515,7 @@ export default function Signin() {
           animation: float 6s ease-in-out infinite;
         }
       `}</style>
-    </div>
+      </div>
     </>
   );
 }
