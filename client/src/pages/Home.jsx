@@ -15,7 +15,7 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 import { Link } from "react-router-dom";
-
+import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -511,69 +511,111 @@ const HomePage = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-32 relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              Voices of Trust
-            </h2>
-            <p className="text-xl text-gray-400">
-              Real stories from parents who've transformed their journey with us
+<section className="py-32 relative">
+  <div className="max-w-7xl mx-auto px-6">
+    <div className="text-center mb-20">
+      <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+        Voices of Trust
+      </h2>
+      <p className="text-xl text-gray-400">
+        Real stories from parents who've transformed their journey with us
+      </p>
+    </div>
+
+   <Swiper
+  slidesPerView={1}
+  spaceBetween={30}
+  autoplay={{
+    delay: 4000,
+    disableOnInteraction: false,
+  }}
+  pagination={{ clickable: true }}
+  breakpoints={{
+    768: { slidesPerView: 2 },
+    1024: { slidesPerView: 3 },
+  }}
+  modules={[Autoplay, Pagination, Navigation]}   // ✅ Navigation added safely
+  navigation={{
+    nextEl: ".custom-next",
+    prevEl: ".custom-prev",
+  }}
+  className="w-full overflow-visible pb-10"
+>
+
+      {testimonials.map((testimonial, index) => (
+        <SwiperSlide key={index}>
+          <GlassCard className="p-8 relative group" hover={true}>
+            <div className="flex items-center gap-2 mb-4">
+              {[...Array(testimonial.rating)].map((_, i) => (
+                <Star
+                  key={i}
+                  className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                />
+              ))}
+            </div>
+
+            <p className="text-gray-300 mb-6 leading-relaxed italic">
+              "{testimonial.content}"
             </p>
-          </div>
 
-          <Swiper
-            slidesPerView={1}
-            spaceBetween={30}
-            autoplay={{
-              delay: 4000,
-              disableOnInteraction: false,
-            }}
-            pagination={{ clickable: true }}
-            breakpoints={{
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-            modules={[Autoplay, Pagination]}
-            className="w-full overflow-visible pb-10"
-          >
-            {testimonials.map((testimonial, index) => (
-              <SwiperSlide key={index}>
-                <GlassCard className="p-8 relative group" hover={true}>
-                  <div className="flex items-center gap-2 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-5 h-5 fill-yellow-400 text-yellow-400"
-                      />
-                    ))}
-                  </div>
+            <div className="flex items-center gap-4">
+              <img
+                src={testimonial.avatar}
+                alt={testimonial.name}
+                className="w-12 h-12 rounded-full object-cover"
+              />
+              <div>
+                <div className="font-semibold text-white">
+                  {testimonial.name}
+                </div>
+                <div className="text-gray-400 text-sm">
+                  {testimonial.role}
+                </div>
+              </div>
+            </div>
+          </GlassCard>
+        </SwiperSlide>
+      ))}
+    </Swiper>
 
-                  <p className="text-gray-300 mb-6 leading-relaxed italic">
-                    "{testimonial.content}"
-                  </p>
+   {/* Custom Prev Button */}
+<button className="custom-prev absolute left-6 top-1/2 -translate-y-1/2 z-20">
+  <div className="relative group">
+    <svg className="w-14 h-14 transform -rotate-90" viewBox="0 0 56 56">
+      <circle cx="28" cy="28" r="24" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="3" />
+      <circle cx="28" cy="28" r="24" fill="none" stroke="url(#grad)" strokeWidth="3" strokeLinecap="round" />
+      <defs>
+        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#8B5CF6" />
+          <stop offset="100%" stopColor="#EC4899" />
+        </linearGradient>
+      </defs>
+    </svg>
+    <div className="absolute inset-0 flex items-center justify-center">
+      <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
+        <span className="text-white text-lg font-bold">‹</span>
+      </div>
+    </div>
+  </div>
+</button>
 
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={testimonial.avatar}
-                      alt={testimonial.name}
-                      className="w-12 h-12 rounded-full object-cover"
-                    />
-                    <div>
-                      <div className="font-semibold text-white">
-                        {testimonial.name}
-                      </div>
-                      <div className="text-gray-400 text-sm">
-                        {testimonial.role}
-                      </div>
-                    </div>
-                  </div>
-                </GlassCard>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </section>
+{/* Custom Next Button */}
+<button className="custom-next absolute right-6 top-1/2 -translate-y-1/2 z-20">
+  <div className="relative group">
+    <svg className="w-14 h-14 transform -rotate-90" viewBox="0 0 56 56">
+      <circle cx="28" cy="28" r="24" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="3" />
+      <circle cx="28" cy="28" r="24" fill="none" stroke="url(#grad)" strokeWidth="3" strokeLinecap="round" />
+    </svg>
+    <div className="absolute inset-0 flex items-center justify-center">
+      <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
+        <span className="text-white text-lg font-bold">›</span>
+      </div>
+    </div>
+  </div>
+</button>
+
+  </div>
+</section>
 
       {/* CTA Section */}
       <section className="py-32 relative">

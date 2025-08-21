@@ -39,6 +39,7 @@ function App() {
 
       <ScrollToTop />
       <ScrollToBottom />
+ 
 
       {/* Main content area */}
 
@@ -49,6 +50,7 @@ function App() {
       {!hideLayout && <Footer />}
       <ScrollToTop />
       <ScrollToBottom />
+      
 
       {/* Toast notifications */}
 
