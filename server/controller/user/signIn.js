@@ -7,12 +7,25 @@ import jwt from 'jsonwebtoken';
 const signin = asyncHandler(async (req, res) => {
     const { email, password, role } = req.body;
 
-    // Validate fields
+
+
+    if (role.toLowerCase()==='doctor' && req) {
+        const doctor = await doctormondel.findOne({ email });
+        if (!doctor) {
+            return res.status(400).json({
+                message: 'user not found'
+            })
+        }
+    }
+
+    // Check required fields
+
     if (!email || !password || !role) {
         return res.status(400).json({
             message: 'Missing required fields: email, password, and role are required'
         });
     }
+
 
     const normalizedEmail = email.toLowerCase().trim();
     const normalizedRole = role.toUpperCase();
@@ -39,7 +52,6 @@ const signin = asyncHandler(async (req, res) => {
         if (!userData) {
             return res.status(400).json({ message: 'Incorrect email or password' });
         }
-
         const isPasswordValid = await bcrypt.compare(password, userData.password);
         if (!isPasswordValid) {
             return res.status(400).json({ message: "Incorrect email or password" });
