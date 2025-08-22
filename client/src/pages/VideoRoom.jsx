@@ -21,7 +21,7 @@ const VideoRoom = () => {
  
 
   return (
-    <div className=" flex justify-center items-center py-2 ">
+    <div className="min-h-screen bg-white dark:bg-gray-900 flex justify-center items-center py-2 transition-colors duration-300">
       <div className="w-9/12" ref={myMeeting} />
     </div>
   );
