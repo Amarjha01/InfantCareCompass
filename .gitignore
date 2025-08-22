@@ -1,1 +1,3 @@
 .env
+client/.env
+clinet/src/.env
