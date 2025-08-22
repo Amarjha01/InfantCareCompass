@@ -64,9 +64,7 @@ const githubCallback = asyncHandler(async (req, res) => {
     }
 
     // 5. If not found in either
-    if (!userData) {
-        //  res.status(400).json({ message: "Account not found. Please sign up first." });
-
+    if (!userData) {  
         return res.redirect(
             `${process.env.FRONTEND_URL}/registration`
         )
@@ -102,16 +100,13 @@ const githubCallback = asyncHandler(async (req, res) => {
     }
 
     // 8. Send response
+    console.log(responseData);
     return res
         .cookie("token", token, tokenOptions)
         .status(200)
-        .json({
-            message: "Login successful via GitHub",
-            data: responseData,
-            token: token,
-            success: true,
-            error: false
-        });
+        .redirect(
+            `${process.env.FRONTEND_URL}/`
+        )        
 });
 
 export default githubCallback;
