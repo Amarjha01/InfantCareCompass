@@ -5,7 +5,7 @@ const NotFoundPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen top-0 bg-gradient-to-b from-[#0c002b] to-[#1a0035] flex flex-col items-center justify-center text-center relative overflow-hidden text-white px-4">
+    <div className="min-h-screen top-0 bg-gradient-to-b from-[#0c002b] to-[#1a0035] dark:from-gray-900 dark:to-gray-800 flex flex-col items-center justify-center text-center relative overflow-hidden text-white px-4">
     
       {/* Main content */}
       <div className="z-10">
