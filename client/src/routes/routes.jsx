@@ -27,6 +27,7 @@ import Sleeper from "../components/Sleeper";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import TermsOfService from "../pages/TermsOfService";
 import CookiePolicy from "../pages/CookiePolicy";
+import OAuthSuccess from "../pages/OAuthSuccess";
 
 
 const router = createBrowserRouter([
@@ -93,6 +94,7 @@ const router = createBrowserRouter([
   { path: "/registration", element: <Registration /> },
   { path: "/signin", element: <Signin /> },
   { path: "room/:roomId", element: <VideoRoom /> },
+  { path: "/oauth-success", element: <OAuthSuccess />}
 ]);
 
 export default router;

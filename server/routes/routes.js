@@ -29,6 +29,8 @@ import {
 } from '../controller/feedLog.js';
 
 import { careCoPilot, healthCheck } from '../controller/services/careCoPilot.js';
+import githubCallback from "../controller/user/githubCallback.js";
+import githubLoginRedirect from "../controller/user/githubLoginRedirect.js";
 
 // Auth routes
 router.post('/signin', signIn);
@@ -60,6 +62,10 @@ router.delete('/sleeplogs/:id', authtoken, deleteSleepLog);
 // Care Co-Pilot AI Medicine Finder routes
 router.post('/care-co-pilot', careCoPilot);
 router.get('/care-co-pilot/health', healthCheck);
+
+//Github oauth routes
+router.get('/auth/github/callback', githubCallback)
+router.get('/auth/github', githubLoginRedirect)
 
 export default router;
 
