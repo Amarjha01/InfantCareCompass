@@ -41,10 +41,10 @@ const DoctorDetails = () => {
   }, [navigate, id]);
 
   return (
-    <div>
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white p-8 transition-colors duration-300">
       <h2 className="text-2xl font-bold mb-4">Doctor Details for: {id}</h2>
       <span
-        className="text-blue-700 text-3xl cursor-pointer"
+        className="text-blue-700 dark:text-blue-400 text-3xl cursor-pointer"
         onClick={handleJoinRoom}
       >
         {loading ? "Starting Call..." : <FaVideo />}

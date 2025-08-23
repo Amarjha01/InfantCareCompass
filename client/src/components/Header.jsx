@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import navlogo from "/logo.png";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -120,6 +121,11 @@ export default function Header() {
               ))}
             </div>
 
+            {/* Theme Toggle */}
+            <div className="hidden lg:flex items-center">
+              <ThemeToggle />
+            </div>
+
             {/* Auth Buttons */}
             <div className="hidden lg:flex items-center gap-2">
               {isAuthenticated && user ? (
@@ -212,6 +218,11 @@ export default function Header() {
                   {label}
                 </NavLink>
               ))}
+              
+              {/* Theme Toggle in Mobile Menu */}
+              <div className="flex items-center justify-center p-3 mt-4">
+                <ThemeToggle />
+              </div>
             </div>
 
             <div className="p-4 border-t space-y-2">
@@ -249,20 +260,6 @@ export default function Header() {
                   </Link>
                 </>
               )}
-              <Link
-                to="/signin"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block w-full text-center p-2 border border-purple-600 text-purple-600 rounded-full"
-              >
-                Sign In
-              </Link>
-              <Link
-                to="/registration"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block w-full text-center p-2 bg-purple-600 text-white rounded-full"
-              >
-                Get Started
-              </Link>
             </div>
           </div>
         </motion.div>

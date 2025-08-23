@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   // ==================== DATA & CONSTANTS ====================
   const companyInfo = {
-    name: "HealthCare+",
+    name: "InfantCare Compass",
     description:
       "Providing exceptional healthcare service and care to all our patients. Your health is our priority, and we are here to help you every step of the way.",
     trustBadge: "Trusted by 10,000+ families",
@@ -251,7 +251,7 @@ const Footer = () => {
 
   // ==================== MAIN RENDER ====================
   return (
-    <footer className="relative bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] text-white overflow-hidden">
+    <footer className="relative bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-white overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_rgba(139,92,246,0.15),_transparent_50%)]"></div>

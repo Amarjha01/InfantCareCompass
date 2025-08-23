@@ -336,7 +336,7 @@ const ConsultationPage = () => {
   }, [currentUser, isPatient, isDoctor]);
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-gray-300 font-sans overflow-hidden">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-300 font-sans overflow-hidden">
       
       {/* Sidebar */}
       <div className="w-full md:w-1/3 lg:w-1/4 bg-slate-950/50 backdrop-blur-xl border-r border-slate-800/50">
