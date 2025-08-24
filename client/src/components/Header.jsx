@@ -164,9 +164,9 @@ export default function Header() {
                 className="p-2 rounded-md bg-purple-100 dark:bg-gray-800 hover:bg-purple-200 dark:hover:bg-gray-700"
               >
                 {isMobileMenuOpen ? (
-                  <X className="w-6 h-6" />
+                  <X className="w-6 h-6 " />
                 ) : (
-                  <Menu className="w-6 h-6" />
+                  <Menu className="w-6 h-6 " />
                 )}
               </button>
             </div>
@@ -193,9 +193,9 @@ export default function Header() {
           <div className="h-full flex flex-col">
             <div className="p-4 border-b">
               <div className="flex justify-between items-center">
-                <span className="font-bold">Menu</span>
+                <span className="font-bold text-white">Menu</span>
                 <button onClick={() => setIsMobileMenuOpen(false)}>
-                  <X className="w-6 h-6" />
+                  <X className="w-6 h-6 text-white" />
                 </button>
               </div>
             </div>
