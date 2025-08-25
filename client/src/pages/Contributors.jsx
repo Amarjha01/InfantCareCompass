@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Counter from '../helpers/Counter';
 import { 
   Github, 
   Star, 
@@ -237,7 +238,12 @@ const Contributors = () => {
                   <div className={`${stat.color} mb-2 flex justify-center group-hover:scale-110 transition-transform duration-300`}>
                     {stat.icon}
                   </div>
-                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.number}</div>
+                  <div className=" text-3xl font-bold text-white mb-2">
+  <Counter 
+    targetNumber={stat.number} 
+    duration={2000} 
+  />
+</div>
                   <div className="text-gray-300 text-sm">{stat.label}</div>
                 </GlassCard>
               </div>
