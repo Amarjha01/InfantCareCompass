@@ -16,6 +16,7 @@ import CareCoPilot from "../pages/CareCoPilot";
 import VaccineReminder from "../pages/VaccineReminder";
 import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
+import Services from "../pages/Services";
 
 import ConsultationPage from "../pages/consult";
 
@@ -81,6 +82,7 @@ const router = createBrowserRouter([
       { path: "privacy-policy", element: <PrivacyPolicy /> },
       { path: "terms-of-service", element: <TermsOfService /> },
       { path: "cookie-policy", element: <CookiePolicy /> },
+      { path: "services", element: <Services /> },
 
       { path: "*", element: <NotFoundPage />, handle: { noLayout: true } },
 
