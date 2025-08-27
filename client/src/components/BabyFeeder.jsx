@@ -81,7 +81,7 @@ const BabyFeeder = () => {
   };
 
   return (
-    <div className="p-6 m-10 mt-20 max-w-lg mx-auto bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-lg">
+    <div className="p-6 m-10 mt-20 max-w-lg mx-auto bg-gradient-to-br from-blue-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-lg transition-colors duration-300">
       <h2 className="flex items-center gap-2 text-2xl font-bold mb-6 text-blue-700">
         <Baby className="w-6 h-6" /> Baby Feeder
       </h2>

@@ -8,6 +8,22 @@ import CustomCursor from "./components/CustomCursor.jsx";
 import Loader from "./components/Loader.jsx";
 import { useState, useEffect } from "react";
 
+// Ensure initial theme is applied before React mounts to avoid flashes
+(function applyInitialTheme() {
+  try {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const shouldUseDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+    if (shouldUseDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  } catch (_) {
+    // no-op
+  }
+})();
+
 // Polyfill for global in browser environment
 if (typeof global === 'undefined') {
     window.global = window;

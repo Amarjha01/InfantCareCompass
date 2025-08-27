@@ -4,7 +4,7 @@ import { Book } from "lucide-react";
 
 const PersonalizedLearningHub = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1e103a] via-[#2a1a4c] to-[#3c2a6c] text-white font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#1e103a] via-[#2a1a4c] to-[#3c2a6c] dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-white font-sans relative overflow-hidden">
       <div className="absolute top-20 -left-10 w-48 h-48 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full opacity-20 animate-float"></div>
       <div
         className="absolute bottom-10 -right-10 w-64 h-64 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-20 animate-float"

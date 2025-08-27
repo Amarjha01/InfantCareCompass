@@ -87,7 +87,7 @@ const Loader = ({ onComplete }) => {
   }, [onComplete, icons.length]);
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 z-[9999] flex items-center justify-center cursor-default">
+    <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 z-[9999] flex items-center justify-center cursor-default">
       <div className="text-center max-w-md mx-auto px-6">
         {/* Logo/Brand */}
         <div className="mb-12">

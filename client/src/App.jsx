@@ -9,6 +9,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import ScrollToBottom from "./components/ScrollToBottom";
 import ScrollRestoration from "./components/ScrollRestoration";
 import { Toaster, toast } from 'react-hot-toast';
+import { ThemeProvider } from "./contexts/ThemeContext";
 function App() {
   const matches = useMatches();
   const hideLayout = matches.some((match) => match.handle?.noLayout);
@@ -33,29 +34,31 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="w-full">
-      <ScrollRestoration />
-      {!hideLayout && <Header />}
+    <ThemeProvider>
+      <div className="w-full min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+        <ScrollRestoration />
+        {!hideLayout && <Header />}
 
-      <ScrollToTop />
-      <ScrollToBottom />
- 
+        <ScrollToTop />
+        <ScrollToBottom />
+     
 
-      {/* Main content area */}
+        {/* Main content area */}
 
-      <main className="mt-20">
-        <Outlet />
-      </main>
+        <main className="mt-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+          <Outlet />
+        </main>
 
-      {!hideLayout && <Footer />}
-      <ScrollToTop />
-      <ScrollToBottom />
-      
+        {!hideLayout && <Footer />}
+        <ScrollToTop />
+        <ScrollToBottom />
+        
 
-      {/* Toast notifications */}
+        {/* Toast notifications */}
 
-      <Toaster position="top-right" /> 
-    </div>
+        <Toaster position="top-right" /> 
+      </div>
+    </ThemeProvider>
   );
 }
 

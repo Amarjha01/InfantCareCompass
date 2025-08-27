@@ -344,7 +344,7 @@ export default function Signin() {
    return (
     <> 
      <Toaster position="top-right" />
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center px-7 pb-8 flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center px-7 pb-8 flex-col">
       <div className="w-full ">
       <button
               onClick={() => navigate("/")}
