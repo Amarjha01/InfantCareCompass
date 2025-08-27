@@ -17,6 +17,7 @@ import VaccineReminder from "../pages/VaccineReminder";
 import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
 import Services from "../pages/Services";
+import Appointments from "../pages/Appointments";
 
 import ConsultationPage from "../pages/consult";
 
@@ -83,6 +84,7 @@ const router = createBrowserRouter([
       { path: "terms-of-service", element: <TermsOfService /> },
       { path: "cookie-policy", element: <CookiePolicy /> },
       { path: "services", element: <Services /> },
+      { path: "appointments", element: <Appointments /> },
 
       { path: "*", element: <NotFoundPage />, handle: { noLayout: true } },
 

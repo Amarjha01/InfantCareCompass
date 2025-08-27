@@ -7,7 +7,10 @@ const doctorinfo = asyncHandler(async (req, res, next) => {
   const doctorData = await doctormodel.find({});
 
   // Send a success response to the client
-  res.status(200).json({ success: true, data: doctorData });
+  res.status(200).json({ 
+    success: true, 
+    doctors: doctorData 
+  });
 });
 
 export default doctorinfo;

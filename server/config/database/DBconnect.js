@@ -4,7 +4,7 @@ dotenv.config();
 
 async function dbConnect() {
   try {
-    const mongoUri = process.env.MONGO_URI || process.env.MONGODB_CONNECTION_STRING;
+    const mongoUri = process.env.MONGODB_CONNECTION_STRING;
     
     if (!mongoUri) {
       throw new Error(

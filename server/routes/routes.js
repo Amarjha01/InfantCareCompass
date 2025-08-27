@@ -14,8 +14,16 @@ import { reviewDoctor } from '../controller/user/adminDashboard.js';
 import isAdmin from '../middleware/isAdmin.js'; 
 import { create } from "domain";
 
-router.post('/signin', authtoken, signIn);
-router.post('/signup', upload.single('document'), signUp);
+// Appointment controller imports
+import {
+  createAppointment,
+  getUserAppointments,
+  getDoctorAppointments,
+  updateAppointmentStatus,
+  cancelAppointment,
+  deleteAppointment,
+  getAvailableTimeSlots
+} from '../controller/appointmentController.js';
 
 import {
   createFeedLog,
@@ -62,6 +70,15 @@ router.delete('/sleeplogs/:id', authtoken, deleteSleepLog);
 // Care Co-Pilot AI Medicine Finder routes
 router.post('/care-co-pilot', careCoPilot);
 router.get('/care-co-pilot/health', healthCheck);
+
+// Appointment routes
+router.post('/appointments', authtoken, createAppointment);
+router.get('/appointments/user/:patientId', authtoken, getUserAppointments);
+router.get('/appointments/doctor/:doctorId', authtoken, getDoctorAppointments);
+router.patch('/appointments/:appointmentId/status', authtoken, updateAppointmentStatus);
+router.patch('/appointments/:appointmentId/cancel', authtoken, cancelAppointment);
+router.delete('/appointments/:appointmentId', authtoken, isAdmin, deleteAppointment);
+router.get('/appointments/available-slots', getAvailableTimeSlots);
 
 //Github oauth routes
 router.get('/auth/github/callback', githubCallback)
