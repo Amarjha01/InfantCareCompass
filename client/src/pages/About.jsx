@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import AnimatedCounter from "../components/AnimatedCounter";
 import {
   Clock,
   BookOpen,
@@ -83,6 +84,24 @@ const About = () => {
     },
   ];
 
+  // Improved stat parser for K, +, %
+  const parseStat = (str) => {
+    if (str === "24/7") return { value: 24, suffix: "/7", raw: str };
+    // e.g. 50K+, 98%, 1000+
+    const match = str.match(/([\d,.]+)(K)?([%+])?/i);
+    if (!match) return { value: str, suffix: "", raw: str };
+    let value = parseFloat(match[1].replace(/,/g, ""));
+    let suffix = "";
+    if (match[2]) {
+      value = value * 1000;
+      suffix += "K";
+    }
+    if (match[3]) {
+      suffix += match[3];
+    }
+    return { value, suffix, raw: str };
+  };
+
   const stats = [
     {
       number: "50K+",
@@ -155,27 +174,42 @@ const About = () => {
         <section className="py-16 px-4">
           <div className="container mx-auto max-w-6xl">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {stats.map((stat, index) => (
-                <div
-                  key={index}
-                  className={`text-center group transition-all duration-500 ${
-                    isVisible
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-10"
-                  }`}
-                  style={{ transitionDelay: `${index * 150}ms` }}
-                >
-                  <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 group-hover:scale-105">
-                    <div className="text-purple-400 mb-2 flex justify-center group-hover:scale-110 transition-transform duration-300">
-                      {stat.icon}
+              {stats.map((stat, index) => {
+                const { value, suffix } = parseStat(stat.number);
+                return (
+                  <div
+                    key={index}
+                    className={`text-center group transition-all duration-500 ${
+                      isVisible
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-10"
+                    }`}
+                    style={{ transitionDelay: `${index * 150}ms` }}
+                  >
+                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 group-hover:scale-105">
+                      <div className="text-purple-400 mb-2 flex justify-center group-hover:scale-110 transition-transform duration-300">
+                        {stat.icon}
+                      </div>
+                      <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+                        <AnimatedCounter
+                          target={value}
+                          duration={1200 + index * 300}
+                          format={n => {
+                            if (suffix === "K+") return `${Math.round(n / 1000)}K+`;
+                            if (suffix === "K") return `${Math.round(n / 1000)}K`;
+                            if (suffix === "%") return `${Math.round(n)}%`;
+                            if (suffix === "+") return `${Math.round(n)}+`;
+                            if (suffix === "/7") return `${Math.round(n)}/7`;
+                            return Math.round(n);
+                          }}
+                          start={isVisible}
+                        />
+                      </div>
+                      <div className="text-gray-300 text-sm">{stat.label}</div>
                     </div>
-                    <div className="text-3xl md:text-4xl font-bold text-white mb-2">
-                      {stat.number}
-                    </div>
-                    <div className="text-gray-300 text-sm">{stat.label}</div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
