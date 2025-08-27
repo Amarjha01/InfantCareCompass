@@ -15,6 +15,7 @@ import {
   Heart,
   LogOut,
   UserCircle,
+  TrendingUp,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import navlogo from "/logo.png";
@@ -66,6 +67,11 @@ export default function Header() {
       to: "/care-co-pilot",
       label: "Care Co-Pilot",
       icon: <Heart className="w-4 h-4" />,
+    },
+    {
+      to: "/growth-tracker",
+      label: "Growth Tracker",
+      icon: <TrendingUp className="w-4 h-4" />,
     },
     {
       to: "/contributors",
