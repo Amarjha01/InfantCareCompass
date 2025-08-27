@@ -10,7 +10,7 @@ const signin = asyncHandler(async (req, res) => {
 
 
     if (role.toLowerCase()==='doctor' && req) {
-        const doctor = await doctormondel.findOne({ email });
+        const doctor = await doctormodel.findOne({ email });
         if (!doctor) {
             return res.status(400).json({
                 message: 'user not found'
@@ -43,10 +43,11 @@ const signin = asyncHandler(async (req, res) => {
 
         if (normalizedRole === 'DOCTOR') {
             userData = await doctormodel.findOne({ email: normalizedEmail });
-        } else if (normalizedRole === 'USER') {
+        } else if (normalizedRole === 'USER' || normalizedRole === 'PARENTS') {
+            // Map PARENTS role to USER for database lookup
             userData = await usermodel.findOne({ email: normalizedEmail });
         } else {
-            return res.status(400).json({ message: "Invalid role provided" });
+            return res.status(400).json({ message: "Invalid role provided. Please use 'USER', 'PARENTS', or 'DOCTOR'" });
         }
 
         if (!userData) {
@@ -80,7 +81,7 @@ const signin = asyncHandler(async (req, res) => {
         if (normalizedRole === 'DOCTOR') {
             responseData.firstName = userData.firstName;
             responseData.lastName = userData.lastName;
-        } else if (normalizedRole === 'USER') {
+        } else if (normalizedRole === 'USER' || normalizedRole === 'PARENTS') {
             responseData.kidName = userData.kidName;
         }
 

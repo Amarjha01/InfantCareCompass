@@ -14,7 +14,6 @@ import { reviewDoctor } from '../controller/user/adminDashboard.js';
 import isAdmin from '../middleware/isAdmin.js'; 
 import { create } from "domain";
 
-router.post('/signin', authtoken, signIn);
 router.post('/signup', upload.single('document'), signUp);
 
 import {
@@ -31,6 +30,16 @@ import {
 import { careCoPilot, healthCheck } from '../controller/services/careCoPilot.js';
 import githubCallback from "../controller/user/githubCallback.js";
 import githubLoginRedirect from "../controller/user/githubLoginRedirect.js";
+
+import {
+  createGrowthLog,
+  getGrowthLogs,
+  getGrowthLogById,
+  updateGrowthLog,
+  deleteGrowthLog,
+  updateReminderSettings,
+  getGrowthStats
+} from '../controller/growthTracker.js';
 
 // Auth routes
 router.post('/signin', signIn);
@@ -62,6 +71,15 @@ router.delete('/sleeplogs/:id', authtoken, deleteSleepLog);
 // Care Co-Pilot AI Medicine Finder routes
 router.post('/care-co-pilot', careCoPilot);
 router.get('/care-co-pilot/health', healthCheck);
+
+// Growth Tracker routes
+router.post('/growth-logs', authtoken, createGrowthLog);
+router.get('/growth-logs', authtoken, getGrowthLogs);
+router.get('/growth-logs/:id', authtoken, getGrowthLogById);
+router.put('/growth-logs/:id', authtoken, updateGrowthLog);
+router.delete('/growth-logs/:id', authtoken, deleteGrowthLog);
+router.patch('/growth-logs/reminder-settings', authtoken, updateReminderSettings);
+router.get('/growth-logs/stats', authtoken, getGrowthStats);
 
 //Github oauth routes
 router.get('/auth/github/callback', githubCallback)

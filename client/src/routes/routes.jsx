@@ -14,6 +14,7 @@ import Registration from "../pages/Registration";
 import NotFoundPage from "../pages/NotFoundPage";
 import CareCoPilot from "../pages/CareCoPilot";
 import VaccineReminder from "../pages/VaccineReminder";
+import GrowthTracker from "../pages/GrowthTracker";
 import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
 import Services from "../pages/Services";
@@ -79,6 +80,7 @@ const router = createBrowserRouter([
 
       { path: "learning-hub", element: <LearningHub /> },
       { path: "vaccine-reminder", element: <VaccineReminder /> },
+      { path: "growth-tracker", element: <GrowthTracker /> },
       { path: "privacy-policy", element: <PrivacyPolicy /> },
       { path: "terms-of-service", element: <TermsOfService /> },
       { path: "cookie-policy", element: <CookiePolicy /> },

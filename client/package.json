@@ -31,7 +31,9 @@
     "redux-persist": "^6.0.0",
     "simple-peer": "^9.11.1",
     "swiper": "^11.2.10",
-    "toaster-js": "^2.2.3"
+    "toaster-js": "^2.2.3",
+    "chart.js": "^4.4.0",
+    "react-chartjs-2": "^5.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
