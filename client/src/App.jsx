@@ -10,6 +10,7 @@ import ScrollToBottom from "./components/ScrollToBottom";
 import ScrollRestoration from "./components/ScrollRestoration";
 import { Toaster, toast } from 'react-hot-toast';
 import { ThemeProvider } from "./contexts/ThemeContext";
+import FirstAidChatbotButton from "./components/FirstAidChatbotButton";
 function App() {
   const matches = useMatches();
   const hideLayout = matches.some((match) => match.handle?.noLayout);
@@ -53,6 +54,8 @@ function App() {
         <ScrollToTop />
         <ScrollToBottom />
         
+        {/* First Aid AI Chatbot Button */}
+        {!hideLayout && <FirstAidChatbotButton />}
 
         {/* Toast notifications */}
 

@@ -177,6 +177,8 @@ Create a .env file in the root directory and add the following:
    CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
    CLOUDINARY_API_KEY=your_cloudinary_api_key
    CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+   GEMINI_API_KEY=your_gemini_api_key
+   TOKEN_SECRET_KEY=infantcarecompass_jwt_secret_key_2024_secure_random_stringecure_random_string
 
 4. **Run the application:**
    ```bash

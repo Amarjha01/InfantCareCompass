@@ -29,6 +29,7 @@ import {
 } from '../controller/feedLog.js';
 
 import { careCoPilot, healthCheck } from '../controller/services/careCoPilot.js';
+import { firstAidChatbot, healthCheck as firstAidHealthCheck } from '../controller/services/firstAidChatbot.js';
 import githubCallback from "../controller/user/githubCallback.js";
 import githubLoginRedirect from "../controller/user/githubLoginRedirect.js";
 
@@ -62,6 +63,10 @@ router.delete('/sleeplogs/:id', authtoken, deleteSleepLog);
 // Care Co-Pilot AI Medicine Finder routes
 router.post('/care-co-pilot', careCoPilot);
 router.get('/care-co-pilot/health', healthCheck);
+
+// First Aid Chatbot routes
+router.post('/first-aid-chatbot', firstAidChatbot);
+router.get('/first-aid-chatbot/health', firstAidHealthCheck);
 
 //Github oauth routes
 router.get('/auth/github/callback', githubCallback)
