@@ -13,6 +13,7 @@ import Signin from "../pages/SignIn";
 import Registration from "../pages/Registration";
 import NotFoundPage from "../pages/NotFoundPage";
 import CareCoPilot from "../pages/CareCoPilot";
+import FirstAidChatbot from "../pages/FirstAidChatbot";
 import VaccineReminder from "../pages/VaccineReminder";
 import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
       { path: "babyfeeder", element: <BabyFeeder /> },
       { path: "sleeper", element: <Sleeper /> },
       { path: "care-co-pilot", element: <CareCoPilot /> },
+      { path: "first-aid-chatbot", element: <FirstAidChatbot /> },
       {
         path: "consultation",
         element: <ConsultationPage />,
