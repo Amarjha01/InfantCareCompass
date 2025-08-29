@@ -5,18 +5,19 @@ import { Outlet, useMatches } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "./store/slices/userSlice.jsx";
-import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTop from "./components/ScrollToTop"; 
 import ScrollToBottom from "./components/ScrollToBottom";
 import ScrollRestoration from "./components/ScrollRestoration";
-import { Toaster, toast } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from "./contexts/ThemeContext";
+import MagicCursorTrail from "./components/magiccursortrail.jsx";
+
 function App() {
   const matches = useMatches();
   const hideLayout = matches.some((match) => match.handle?.noLayout);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Restore user session on app load
     const token = localStorage.getItem('token');
     const userData = localStorage.getItem('userData');
     
@@ -36,26 +37,20 @@ function App() {
   return (
     <ThemeProvider>
       <div className="w-full min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+        <MagicCursorTrail />   {/* cursor trail effect */}
         <ScrollRestoration />
         {!hideLayout && <Header />}
 
         <ScrollToTop />
         <ScrollToBottom />
-     
-
-        {/* Main content area */}
 
         <main className="mt-20 bg-white dark:bg-gray-900 transition-colors duration-300">
           <Outlet />
         </main>
 
         {!hideLayout && <Footer />}
-        <ScrollToTop />
-        <ScrollToBottom />
-        
 
         {/* Toast notifications */}
-
         <Toaster position="top-right" /> 
       </div>
     </ThemeProvider>
