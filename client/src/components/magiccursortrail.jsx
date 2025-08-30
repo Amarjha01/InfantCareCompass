@@ -14,17 +14,18 @@ const MagicCursorTrail = () => {
       trailDots.push(dot);
     }
 
-    let mouseX = 0,
-      mouseY = 0;
-    let trailX = Array(trailCount).fill(0);
-    let trailY = Array(trailCount).fill(0);
+    // Initialize mouse position to center of the viewport
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let trailX = Array(trailCount).fill(mouseX);
+    let trailY = Array(trailCount).fill(mouseY);
 
     const onMouseMove = (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
     };
 
-    // Trail animation
+    // Trail animation function
     const animateTrail = () => {
       trailX[0] += (mouseX - trailX[0]) * 0.3;
       trailY[0] += (mouseY - trailY[0]) * 0.3;
@@ -39,8 +40,8 @@ const MagicCursorTrail = () => {
       requestAnimationFrame(animateTrail);
     };
 
-    // 🎇 Burst effect on click
-    const colors = ["#ec4899", "#6366f1", "#22c55e", "#f97316", "#eab308"]; // pink, indigo, green, orange, yellow
+    // Burst effect on click
+    const colors = ["#ec4899", "#6366f1", "#22c55e", "#f97316", "#eab308"];
     const onClick = (e) => {
       for (let i = 0; i < 10; i++) {
         const burst = document.createElement("div");
@@ -51,13 +52,11 @@ const MagicCursorTrail = () => {
         burst.style.top = `${e.clientY}px`;
         document.body.appendChild(burst);
 
-        // random angle + distance
         const angle = Math.random() * 2 * Math.PI;
         const distance = 30 + Math.random() * 50;
         const x = Math.cos(angle) * distance;
         const y = Math.sin(angle) * distance;
 
-        // animate burst
         burst.animate(
           [
             { transform: "translate(0,0)", opacity: 1 },
@@ -70,7 +69,6 @@ const MagicCursorTrail = () => {
           }
         );
 
-        // remove after animation
         setTimeout(() => burst.remove(), 1000);
       }
     };
@@ -86,7 +84,7 @@ const MagicCursorTrail = () => {
     };
   }, []);
 
-  return null; // pure DOM manipulation
+  return null; // This component only manipulates DOM directly
 };
 
 export default MagicCursorTrail;
