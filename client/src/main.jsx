@@ -4,7 +4,7 @@ import { RouterProvider } from "react-router-dom";
 import router from "./routes/routes.jsx";
 import { Provider } from 'react-redux';
 import { store } from './store/store.jsx';
-import CustomCursor from "./components/CustomCursor.jsx";
+import MagicCursorTrail from "./components/magiccursortrail.jsx"
 import Loader from "./components/Loader.jsx";
 import { useState, useEffect } from "react";
 
@@ -56,7 +56,7 @@ const AppWithLoader = () => {
     
     <Provider store={store}>
       <RouterProvider router={router} />
-      <CustomCursor />
+      <MagicCursorTrail />
     </Provider>
   );
 };
