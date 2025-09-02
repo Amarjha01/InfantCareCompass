@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   User,
   UserCheck,
@@ -15,7 +15,6 @@ import {
   Home,
 } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -101,19 +100,29 @@ const InputField = ({
   value,
   error,
   onChange,
+  endIcon: EndIcon,
+  onEndIconClick,
   ...props
 }) => (
   <div className="relative">
-    <Icon className="absolute left-4 top-4 w-5 h-5 text-gray-400" />
+    <Icon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
     <input
       name={name}
       type={type}
       value={value || ""}
       onChange={onChange}
       placeholder={placeholder}
-      className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 focus:bg-white"
+      className={`w-full pl-12 py-3 border border-gray-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 focus:bg-white ${
+        EndIcon ? "pr-12" : "pr-4"
+      }`}
       {...props}
     />
+    {EndIcon && (
+       <EndIcon
+          className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 cursor-pointer hover:text-gray-700"
+          onClick={onEndIconClick}
+        />
+    )}
     {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
   </div>
 );
@@ -143,9 +152,22 @@ const TextAreaField = ({
 );
 
 export default function Registration() {
+  // Effect to load CSS dynamically
+  useEffect(() => {
+    const styleId = 'react-toastify-css';
+    if (!document.getElementById(styleId)) {
+        const link = document.createElement('link');
+        link.id = styleId;
+        link.rel = 'stylesheet';
+        link.href = 'https://cdn.jsdelivr.net/npm/react-toastify@9.1.3/dist/ReactToastify.min.css';
+        document.head.appendChild(link);
+    }
+  }, []);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    confirmPassword: "", // New state for confirm password
     role: "PARENTS",
     kidName: "",
     dob: "",
@@ -159,6 +181,7 @@ export default function Registration() {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // State for confirm password visibility
   const navigate = useNavigate();
 
   const validateForm = () => {
@@ -177,6 +200,13 @@ export default function Registration() {
       newErrors.password = "Password is required";
     } else if (formData.password.length < 8) {
       newErrors.password = "Password must be at least 8 characters";
+    }
+
+    // New validation for confirm password
+    if (!formData.confirmPassword.trim()) {
+      newErrors.confirmPassword = "Please confirm your password";
+    } else if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
     }
 
     if (!formData.role) {
@@ -218,9 +248,10 @@ export default function Registration() {
     setIsSubmitting(true);
 
     try {
+      const { confirmPassword, ...dataToSend } = formData; // Exclude confirmPassword from submission
       const response = await axios.post(
         "http://localhost:5000/api/signup",
-        formData
+        dataToSend
       );
 
       if (response.data.success) {
@@ -238,10 +269,6 @@ export default function Registration() {
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const onToggleShowPassword = () => {
-    setShowPassword(!showPassword);
   };
 
   return (
@@ -309,8 +336,22 @@ export default function Registration() {
               value={formData.password}
               onChange={handleChange}
               error={errors.password}
+              endIcon={showPassword ? EyeOff : Eye}
+              onEndIconClick={() => setShowPassword(!showPassword)}
             />
-            {formData.password && (
+             <InputField
+              icon={Lock}
+              name="confirmPassword"
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="Confirm Password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              error={errors.confirmPassword}
+              endIcon={showConfirmPassword ? EyeOff : Eye}
+              onEndIconClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            />
+
+            {formData.password && !errors.password && !errors.confirmPassword && (
               <PasswordStrengthIndicator password={formData.password} />
             )}
             {/* Role-specific fields */}
