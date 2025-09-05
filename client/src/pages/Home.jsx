@@ -417,7 +417,7 @@ const HomePage = () => {
               {[
                 "https://www.tallengestore.com/cdn/shop/products/Adorable_Cute_Baby_Boy_In_Blue_d6eaa4b1-d93f-4508-9add-696840810960.jpg?v=1481882925",
                 "https://images.squarespace-cdn.com/content/v1/5b9343ce4611a05bc46ea084/ebfb128d-2704-458b-b68a-b1f22f72768f/baby+mom+blocks.jpeg",
-                "https://res.cloudinary.com/dbnticsz8/image/upload/v1734937330/Infant%20care%20Compass/ffktzdwhwkarwjhtvmnn.png",
+                "https://img.freepik.com/premium-photo/happy-family-with-newborn-baby_52137-18298.jpg",
               ].map((src, index) => (
                 <div
                   key={index}
