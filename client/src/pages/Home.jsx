@@ -416,13 +416,23 @@ const HomePage = () => {
 
               </div>
               <div className="flex justify-center md:justify-start">
-                <button
-                  className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-                  onClick={() => navigate("/signin")}
-                >
-                  Join Our Community
-                </button>
-              </div>
+  <button
+    onClick={() => navigate("/signin")}
+    className="
+      bg-gradient-to-r from-pink-500 to-rose-500
+      px-8 py-4 rounded-full font-semibold text-white
+      shadow-md
+      transition duration-300 ease-in-out
+      hover:scale-105
+      hover:shadow-lg
+      hover:from-pink-600 hover:to-rose-600
+      focus:outline-none focus:ring-4 focus:ring-pink-300/50
+    "
+  >
+    Join Our Community
+  </button>
+</div>
+
             </div>
 
             <div className="grid grid-cols-2 gap-6">
