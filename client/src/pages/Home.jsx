@@ -381,9 +381,14 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-5xl md:text-left text-center font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                Creating Magical Childhood Moments
-              </h2>
+              <h2 className="text-5xl md:text-left text-center font-bold mb-8
+  bg-gradient-to-r from-pink-400 via-pink-300 to-purple-400
+  bg-clip-text text-transparent
+  drop-shadow-[0_0_8px_rgba(255,105,180,0.7)]"
+>
+  Creating Magical Childhood Moments
+</h2>
+<br/>
               <p className="text-xl md:text-left text-center text-gray-300 mb-8 leading-relaxed">
                 Every smile, every milestone, every precious moment deserves to
                 be celebrated and supported with the best care possible.
@@ -415,23 +420,23 @@ const HomePage = () => {
               </div>
 
               </div>
-              <div className="flex justify-center md:justify-start">
-  <button
-    onClick={() => navigate("/signin")}
-    className="
-      bg-gradient-to-r from-pink-500 to-rose-500
-      px-8 py-4 rounded-full font-semibold text-white
-      shadow-md
-      transition duration-300 ease-in-out
-      hover:scale-105
-      hover:shadow-lg
-      hover:from-pink-600 hover:to-rose-600
-      focus:outline-none focus:ring-4 focus:ring-pink-300/50
-    "
-  >
-    Join Our Community
-  </button>
-</div>
+          <div className="flex justify-center md:justify-start">
+            <button
+              onClick={() => navigate("/signin")}
+              className="
+              bg-gradient-to-r from-pink-500 to-rose-500
+              px-8 py-4 rounded-full font-semibold text-white
+              shadow-md
+              transition duration-300 ease-in-out
+              hover:scale-105
+              hover:shadow-lg
+               hover:from-pink-600 hover:to-rose-600
+                focus:outline-none focus:ring-4 focus:ring-pink-300/50
+              "
+              >
+                Join Our Community
+              </button>
+          </div>
 
             </div>
 
