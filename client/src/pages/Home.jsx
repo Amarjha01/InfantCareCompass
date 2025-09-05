@@ -415,7 +415,7 @@ const HomePage = () => {
 
             <div className="grid grid-cols-2 gap-6">
               {[
-                "https://res.cloudinary.com/dbnticsz8/image/upload/v1734936845/Infant%20care%20Compass/rrhakzuhcryo7dewe57i.png",
+                "https://www.tallengestore.com/cdn/shop/products/Adorable_Cute_Baby_Boy_In_Blue_d6eaa4b1-d93f-4508-9add-696840810960.jpg?v=1481882925",
                 "https://res.cloudinary.com/dbnticsz8/image/upload/v1734936923/Infant%20care%20Compass/rx6c2iojkbym0u0nm8ph.png",
                 "https://res.cloudinary.com/dbnticsz8/image/upload/v1734937330/Infant%20care%20Compass/ffktzdwhwkarwjhtvmnn.png",
               ].map((src, index) => (
