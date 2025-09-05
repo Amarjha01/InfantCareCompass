@@ -382,13 +382,13 @@ const HomePage = () => {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-5xl md:text-left text-center font-bold mb-8
-  bg-gradient-to-r from-pink-400 via-pink-300 to-purple-400
-  bg-clip-text text-transparent
-  drop-shadow-[0_0_8px_rgba(255,105,180,0.7)]"
->
-  Creating Magical Childhood Moments
-</h2>
-<br/>
+               bg-gradient-to-r from-pink-400 via-pink-300 to-purple-400
+               bg-clip-text text-transparent
+               drop-shadow-[0_0_8px_rgba(255,105,180,0.7)]"
+              >
+                Creating Magical Childhood Moments
+              </h2>
+                <br/>
               <p className="text-xl md:text-left text-center text-gray-300 mb-8 leading-relaxed">
                 Every smile, every milestone, every precious moment deserves to
                 be celebrated and supported with the best care possible.
