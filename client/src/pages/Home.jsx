@@ -381,43 +381,70 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-5xl md:text-left text-center font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              <h2 className="text-5xl md:text-left text-center font-bold mb-8
+               bg-gradient-to-r from-pink-400 via-pink-300 to-purple-400
+               bg-clip-text text-transparent
+               drop-shadow-[0_0_8px_rgba(255,105,180,0.7)]"
+              >
                 Creating Magical Childhood Moments
               </h2>
+                <br/>
               <p className="text-xl md:text-left text-center text-gray-300 mb-8 leading-relaxed">
                 Every smile, every milestone, every precious moment deserves to
                 be celebrated and supported with the best care possible.
               </p>
 
               <div className="grid grid-cols-2 gap-6 mb-8 items-center">
-                <div className="md:text-left text-center">
-                  <div className="text-3xl font-bold text-blue-400 mb-2">
+                <div className="grid grid-cols-2 gap-4 w-fit mx-auto">
+
+  {/* Stat Block 1 */}
+              <div className="md:text-left text-center bg-white/5 border border-transparent rounded-xl p-4 transition-all duration-300 hover:scale-105 hover:border-blue-400 hover:shadow-lg">
+                  <div className="text-3xl font-bold text-blue-400 mb-2 whitespace-nowrap">
                     50K+
                   </div>
-                  <div className="text-gray-400">Happy Families</div>
-                </div>
-                <div className="md:text-left text-center">
-                  <div className="text-3xl font-bold text-emerald-400 mb-2">
-                    99.9%
+                  <div className="text-sm text-gray-300 uppercase tracking-wide">
+                    Happy Families
                   </div>
-                  <div className="text-gray-400">Uptime</div>
-                </div>
               </div>
-              <div className="flex justify-center md:justify-start">
-                <button
-                  className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-                  onClick={() => navigate("/signin")}
-                >
-                  Join Our Community
-                </button>
+
+  {/* Stat Block 2 */}
+              <div className="md:text-left text-center bg-white/5 border border-transparent rounded-xl p-4 transition-all duration-300 hover:scale-105 hover:border-emerald-400 hover:shadow-lg">
+                  <div className="text-3xl font-bold text-emerald-400 mb-2 whitespace-nowrap">
+                      99.9%
+                  </div>
+                  <div className="text-sm text-gray-300 uppercase tracking-wide">
+                      Uptime
+                  </div>
               </div>
+
+              </div>
+
+              </div>
+          <div className="flex justify-center md:justify-start">
+            <button
+              onClick={() => navigate("/signin")}
+              className="
+              bg-gradient-to-r from-pink-500 to-rose-500
+              px-8 py-4 rounded-full font-semibold text-white
+              shadow-md
+              transition duration-300 ease-in-out
+              hover:scale-105
+              hover:shadow-lg
+               hover:from-pink-600 hover:to-rose-600
+                focus:outline-none focus:ring-4 focus:ring-pink-300/50
+              "
+              >
+                Join Our Community
+              </button>
+          </div>
+
             </div>
 
             <div className="grid grid-cols-2 gap-6">
               {[
-                "https://res.cloudinary.com/dbnticsz8/image/upload/v1734936845/Infant%20care%20Compass/rrhakzuhcryo7dewe57i.png",
-                "https://res.cloudinary.com/dbnticsz8/image/upload/v1734936923/Infant%20care%20Compass/rx6c2iojkbym0u0nm8ph.png",
-                "https://res.cloudinary.com/dbnticsz8/image/upload/v1734937330/Infant%20care%20Compass/ffktzdwhwkarwjhtvmnn.png",
+                "https://www.tallengestore.com/cdn/shop/products/Adorable_Cute_Baby_Boy_In_Blue_d6eaa4b1-d93f-4508-9add-696840810960.jpg?v=1481882925",
+                "https://images.squarespace-cdn.com/content/v1/5b9343ce4611a05bc46ea084/ebfb128d-2704-458b-b68a-b1f22f72768f/baby+mom+blocks.jpeg",
+                "https://img.freepik.com/premium-photo/happy-family-with-newborn-baby_52137-18298.jpg",
               ].map((src, index) => (
                 <div
                   key={index}
