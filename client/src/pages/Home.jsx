@@ -390,18 +390,30 @@ const HomePage = () => {
               </p>
 
               <div className="grid grid-cols-2 gap-6 mb-8 items-center">
-                <div className="md:text-left text-center">
-                  <div className="text-3xl font-bold text-blue-400 mb-2">
-                    50K+
-                  </div>
-                  <div className="text-gray-400">Happy Families</div>
-                </div>
-                <div className="md:text-left text-center">
-                  <div className="text-3xl font-bold text-emerald-400 mb-2">
-                    99.9%
-                  </div>
-                  <div className="text-gray-400">Uptime</div>
-                </div>
+                <div className="grid grid-cols-2 gap-4 w-fit mx-auto">
+
+  {/* Stat Block 1 */}
+  <div className="md:text-left text-center bg-white/5 border border-transparent rounded-xl p-4 transition-all duration-300 hover:scale-105 hover:border-blue-400 hover:shadow-lg">
+    <div className="text-3xl font-bold text-blue-400 mb-2 whitespace-nowrap">
+      50K+
+    </div>
+    <div className="text-sm text-gray-300 uppercase tracking-wide">
+      Happy Families
+    </div>
+  </div>
+
+  {/* Stat Block 2 */}
+  <div className="md:text-left text-center bg-white/5 border border-transparent rounded-xl p-4 transition-all duration-300 hover:scale-105 hover:border-emerald-400 hover:shadow-lg">
+    <div className="text-3xl font-bold text-emerald-400 mb-2 whitespace-nowrap">
+      99.9%
+    </div>
+    <div className="text-sm text-gray-300 uppercase tracking-wide">
+      Uptime
+    </div>
+  </div>
+
+</div>
+
               </div>
               <div className="flex justify-center md:justify-start">
                 <button
