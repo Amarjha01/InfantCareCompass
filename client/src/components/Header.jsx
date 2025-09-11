@@ -24,7 +24,7 @@ import ThemeToggle from "./ThemeToggle";
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { user, isAuthenticated } = useSelector(state => state.user);
+  const { user, isAuthenticated } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -35,10 +35,10 @@ export default function Header() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userData');
+    localStorage.removeItem("token");
+    localStorage.removeItem("userData");
     dispatch(logout());
-    navigate('/');
+    navigate("/");
   };
 
   useEffect(() => {
@@ -98,7 +98,7 @@ export default function Header() {
                 className="h-12 w-12 rounded-full shadow-lg"
               />
               <div className="leading-tight">
-                <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                <h1 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
                   InfantCare
                 </h1>
                 <p className="text-xs text-gray-600 dark:text-gray-400">
@@ -108,7 +108,7 @@ export default function Header() {
             </Link>
 
             {/* Desktop Nav */}
-            <div className="hidden lg:flex items-center gap-2">
+            <div className="hidden lg:flex items-center gap-2 ml-10">
               {navItems.map(({ to, label, icon }) => (
                 <NavLink
                   key={to}
@@ -139,7 +139,8 @@ export default function Header() {
                   <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-full">
                     <UserCircle className="w-4 h-4 text-purple-600" />
                     <span className="text-sm font-medium text-purple-800">
-                      {user.name} ({user.role === 'doctor' ? 'Doctor' : 'Patient'})
+                      {user.name} (
+                      {user.role === "doctor" ? "Doctor" : "Patient"})
                     </span>
                   </div>
                   <button
@@ -224,7 +225,7 @@ export default function Header() {
                   {label}
                 </NavLink>
               ))}
-              
+
               {/* Theme Toggle in Mobile Menu */}
               <div className="flex items-center justify-center p-3 mt-4">
                 <ThemeToggle />
@@ -237,7 +238,8 @@ export default function Header() {
                   <div className="flex items-center gap-2 px-4 py-2 bg-purple-50 rounded-full mb-2">
                     <UserCircle className="w-4 h-4 text-purple-600" />
                     <span className="text-sm font-medium text-purple-800">
-                      {user.name} ({user.role === 'doctor' ? 'Doctor' : 'Patient'})
+                      {user.name} (
+                      {user.role === "doctor" ? "Doctor" : "Patient"})
                     </span>
                   </div>
                   <button
