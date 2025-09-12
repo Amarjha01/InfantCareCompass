@@ -18,6 +18,7 @@ const CareCoPilot = () => {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
+  const [errors, setErrors] = useState({}); // For custom validation errors
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,14 +26,56 @@ const CareCoPilot = () => {
       ...prev,
       [name]: value,
     }));
+    setErrors((prev) => ({ ...prev, [name]: null })); // Clear error on change
+  };
+
+  const validate = () => {
+    const newErrors = {};
+
+    // Validate Age
+    if (!formData.childAge.trim()) {
+      newErrors.childAge = "Child's age is required.";
+    } else if (
+      isNaN(formData.childAge) ||
+      +formData.childAge < 0 ||
+      +formData.childAge > 90
+    ) {
+      newErrors.childAge = "Age must be a number between 0 and 90.";
+    }
+
+    // Validate Weight (optional)
+    if (formData.childWeight.trim()) {
+      if (
+        isNaN(formData.childWeight) ||
+        +formData.childWeight <= 0 ||
+        +formData.childWeight > 200
+      ) {
+        newErrors.childWeight = "Weight must be between 0 and 200 kg.";
+      }
+    }
+
+    // Validate Symptoms
+    if (!formData.symptoms.trim()) {
+      newErrors.symptoms = "Symptoms description is required.";
+    } else if (formData.symptoms.trim().length < 10) {
+      newErrors.symptoms = "Please provide more detailed symptoms.";
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError(null);
     setResponse(null);
 
+    if (!validate()) {
+      return; // Stop submission on validation fail
+    }
+
+    setLoading(true);
     try {
       const res = await fetch("http://localhost:5000/api/care-co-pilot", {
         method: "POST",
@@ -41,13 +84,10 @@ const CareCoPilot = () => {
         },
         body: JSON.stringify(formData),
       });
-
       const data = await res.json();
-
       if (!res.ok) {
         throw new Error(data.message || "Something went wrong");
       }
-
       setResponse(data.data);
     } catch (err) {
       setError(err.message);
@@ -57,34 +97,17 @@ const CareCoPilot = () => {
   };
 
   const formatResponse = (text) => {
-    // Convert markdown-style formatting to HTML with better styling for user-friendly format
     return text
-      .replace(
-        /\*\*(.*?)\*\*/g,
-        '<strong class="font-semibold text-gray-900">$1</strong>'
-      )
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
       .replace(/\*(.*?)\*/g, '<em class="italic text-gray-800">$1</em>')
-      .replace(
-        /^# (.*?)$/gm,
-        '<h1 class="text-2xl font-bold text-blue-600 mt-6 mb-4">$1</h1>'
-      )
-      .replace(
-        /^## (.*?)$/gm,
-        '<h2 class="text-xl font-bold text-gray-800 mt-6 mb-3 border-b border-gray-200 pb-2">$1</h2>'
-      )
-      .replace(
-        /^### (.*?)$/gm,
-        '<h3 class="text-lg font-semibold text-gray-700 mt-4 mb-2">$1</h3>'
-      )
-      .replace(/• (.*?)$/gm, '<li class="ml-4 mb-1">• $1</li>')
+      .replace(/^# (.*?)$/gm, '<h1 class="text-2xl font-bold text-blue-600 mt-6 mb-4">$1</h1>')
+      .replace(/^## (.*?)$/gm, '<h2 class="text-xl font-bold text-gray-800 mt-6 mb-3 border-b border-gray-200 pb-2">$1</h2>')
+      .replace(/^### (.*?)$/gm, '<h3 class="text-lg font-semibold text-gray-700 mt-4 mb-2">$1</h3>')
+      .replace(/• (.*?)$/gm, '<li class="ml-4 mb-2 text-gray-700">• $1</li>')
       .replace(/(\n\n)/g, '</p><p class="mb-4 leading-relaxed">')
       .replace(/\n/g, "<br />")
       .replace(/^/, '<p class="mb-4 leading-relaxed">')
-      .replace(/$/, "</p>")
-      .replace(
-        /<li class="ml-4 mb-1">• (.*?)<\/li>/g,
-        '<li class="ml-4 mb-2 text-gray-700">• $1</li>'
-      );
+      .replace(/$/, "</p>");
   };
 
   return (
@@ -94,21 +117,19 @@ const CareCoPilot = () => {
         <div className="text-center mb-8">
           <div className="flex flex-col gap-6 items-center justify-center mb-16">
             <MdHealthAndSafety className="text-7xl text-blue-400 mr-3" />
-            <h1 className="text-6xl md:text-7xl font-black bg-gradient-to-r from-white via-blue-200 to-purple-200  bg-clip-text text-transparent">
+            <h1 className="text-6xl md:text-7xl font-black bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
               Care Co-Pilot
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed ">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               AI-Powered Medicine Finder for All Ages
             </p>
           </div>
-
           <div className="flex items-center justify-center">
             <div className="relative bg-white/10 border border-white/20 rounded-2xl mb-6 ">
               {/* Card Background */}
               <div
                 className={`absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-800 opacity-10 rounded-2xl`}
               ></div>
-
               <div className="flex relative p-4 rounded-2xl backdrop-blur-sm justify-center items-center z-10">
                 <div>
                   <p className="text-white font-semibold text-lg">
@@ -123,20 +144,17 @@ const CareCoPilot = () => {
             </div>
           </div>
         </div>
-
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Form Section */}
           <div className="relative border border-white/20 rounded-2xl shadow-lg overflow-hidden">
-            {/* Background gradient (very subtle, like the card) */}
+            {/* Background gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 opacity-10"></div>
-
             <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 p-8 rounded-2xl">
               <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
                 <FaBaby className="mr-2 text-blue-500" />
                 Patient Information
               </h2>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                 {/* Age Input */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-300 mb-2">
@@ -147,15 +165,18 @@ const CareCoPilot = () => {
                     name="childAge"
                     value={formData.childAge}
                     onChange={handleInputChange}
-                    min="0"
-                    max="90"
-                    step="0.1"
-                    required
-                    className="w-full px-3 py-2 bg-white/10 border border-white/20 text-white rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full px-3 py-2 bg-white/10 border text-white rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 ${
+                      errors.childAge
+                        ? "border-red-500 focus:ring-red-400"
+                        : "border-white/20 focus:ring-blue-500"
+                    }`}
                     placeholder="e.g., 5"
+                    step="0.1"
                   />
+                  {errors.childAge && (
+                    <p className="mt-1 text-xs text-red-400">{errors.childAge}</p>
+                  )}
                 </div>
-
                 {/* Weight Input */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-300 mb-2">
@@ -166,14 +187,18 @@ const CareCoPilot = () => {
                     name="childWeight"
                     value={formData.childWeight}
                     onChange={handleInputChange}
-                    min="0"
-                    max="200"
-                    step="0.1"
-                    className="w-full px-3 py-2 bg-white/10 border border-white/20 text-white rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full px-3 py-2 bg-white/10 border text-white rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 ${
+                      errors.childWeight
+                        ? "border-red-500 focus:ring-red-400"
+                        : "border-white/20 focus:ring-blue-500"
+                    }`}
                     placeholder="e.g., 20.5"
+                    step="0.1"
                   />
+                  {errors.childWeight && (
+                    <p className="mt-1 text-xs text-red-400">{errors.childWeight}</p>
+                  )}
                 </div>
-
                 {/* Symptoms Input */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-300 mb-2">
@@ -183,13 +208,18 @@ const CareCoPilot = () => {
                     name="symptoms"
                     value={formData.symptoms}
                     onChange={handleInputChange}
-                    required
                     rows="4"
-                    className="w-full px-3 py-2 bg-white/10 border border-white/20 text-white rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full px-3 py-2 bg-white/10 border text-white rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 ${
+                      errors.symptoms
+                        ? "border-red-500 focus:ring-red-400"
+                        : "border-white/20 focus:ring-blue-500"
+                    }`}
                     placeholder="Describe the symptoms in detail (e.g., fever 38°C, runny nose, sore throat)"
                   />
+                  {errors.symptoms && (
+                    <p className="mt-1 text-xs text-red-400">{errors.symptoms}</p>
+                  )}
                 </div>
-
                 {/* Additional Notes */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-300 mb-2">
@@ -204,14 +234,12 @@ const CareCoPilot = () => {
                     placeholder="Any additional information that might be helpful (e.g., allergies, recent medications)"
                   />
                 </div>
-
                 {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={loading}
                   className="w-full group relative bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-4 rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                 >
-                  {/* <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-md blur opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div> */}
                   {loading ? (
                     <>
                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
@@ -225,7 +253,6 @@ const CareCoPilot = () => {
                   )}
                 </button>
               </form>
-
               {/* Safety Information */}
               <div className="mt-6 p-5 bg-white/10 border border-white/20 rounded-md">
                 <div className="flex items-start">
@@ -254,16 +281,13 @@ const CareCoPilot = () => {
               </div>
             </div>
           </div>
-
           {/* Response Section */}
           <div className="relative border border-white/20 rounded-2xl shadow-lg overflow-hidden p-8 bg-white/10 backdrop-blur-sm">
             <div className="absolute inset-0 bg-gradient-to-br from-amber-400 via-orange-500 to-yellow-500 opacity-10"></div>
-
             <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
               <FaThermometerHalf className="mr-2 text-amber-400 text-3xl rounded-full p-1" />
               AI Guidance
             </h2>
-
             {loading && (
               <div className="space-y-6">
                 <div className="bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-500 border border-white/20 rounded-2xl p-6 opacity-10">
@@ -286,7 +310,6 @@ const CareCoPilot = () => {
                 </div>
               </div>
             )}
-
             {error && (
               <div className="bg-white/10 border border-white/20 rounded-2xl p-4">
                 <div className="flex items-center">
@@ -298,7 +321,6 @@ const CareCoPilot = () => {
                 </div>
               </div>
             )}
-
             {response && (
               <div className="space-y-6">
                 {/* Child Info Summary */}
@@ -324,7 +346,6 @@ const CareCoPilot = () => {
                     </div>
                   </div>
                 </div>
-
                 {/* AI Response */}
                 <div className="bg-white/10 border border-white/20 rounded-2xl p-6">
                   <div className="flex items-center justify-between mb-4">
@@ -343,7 +364,6 @@ const CareCoPilot = () => {
                     }}
                   />
                 </div>
-
                 {/* Timestamp and Disclaimer */}
                 <div className="bg-white/10 border border-white/20 rounded-2xl p-4">
                   <div className="text-xs text-gray-400 text-center mb-2">
@@ -358,7 +378,6 @@ const CareCoPilot = () => {
                 </div>
               </div>
             )}
-
             {!loading && !error && !response && (
               <div className="text-center py-12">
                 <div className="bg-white/10 border border-white/20 rounded-2xl p-8">
@@ -375,18 +394,13 @@ const CareCoPilot = () => {
             )}
           </div>
         </div>
-
         {/* Additional Safety Information */}
         <div className="mt-16 relative border border-white/20 rounded-2xl shadow-lg overflow-hidden p-6 bg-white/10 backdrop-blur-sm">
-          {/* Gradient background layer - blue-purple-indigo now */}
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 opacity-10"></div>
-
-          {/* Your content below... */}
           <h3 className="text-xl font-semibold text-white mb-4 flex items-center relative z-10">
             <FaExclamationTriangle className="mr-2 text-red-400" />
             When to Seek Immediate Medical Attention
           </h3>
-
           <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-300 relative z-10">
             <div>
               <h4 className="font-semibold text-green-400 mb-2">
@@ -401,9 +415,7 @@ const CareCoPilot = () => {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-red-400 mb-2">
-                Call Doctor If:
-              </h4>
+              <h4 className="font-semibold text-red-400 mb-2">Call Doctor If:</h4>
               <ul className="space-y-1 list-disc list-inside">
                 <li>Symptoms persist for more than 3 days</li>
                 <li>Child is under 3 months old</li>
