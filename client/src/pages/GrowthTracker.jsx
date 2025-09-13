@@ -99,7 +99,6 @@ const GrowthTracker = () => {
       toast.error('Height and weight are required');
       return;
     }
-
     try {
       setLoading(true);
       await growthTrackerAPI.createGrowthLog(formData);
@@ -167,15 +166,15 @@ const GrowthTracker = () => {
       {
         label: 'Height (cm)',
         data: growthLogs.map(log => log.height_cm),
-        borderColor: 'rgb(75, 192, 192)',
-        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+        borderColor: 'rgb(121, 39, 202)', // Purple gradient colors from hero
+        backgroundColor: 'rgba(121, 39, 202, 0.5)',
         yAxisID: 'y',
       },
       {
         label: 'Weight (kg)',
         data: growthLogs.map(log => log.weight_kg),
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        borderColor: 'rgb(245, 194, 255)', // Light pastel pink accent
+        backgroundColor: 'rgba(245, 194, 255, 0.5)',
         yAxisID: 'y1',
       },
     ],
@@ -192,7 +191,9 @@ const GrowthTracker = () => {
         display: true,
         title: {
           display: true,
-          text: 'Date'
+          text: 'Date',
+          color: '#b7fae9',
+          font: { size: 14, weight: 'bold' },
         }
       },
       y: {
@@ -201,8 +202,13 @@ const GrowthTracker = () => {
         position: 'left',
         title: {
           display: true,
-          text: 'Height (cm)'
-        }
+          text: 'Height (cm)',
+          color: '#7948c9',
+          font: { size: 14, weight: 'bold' },
+        },
+        grid: {
+          color: 'rgba(121, 39, 202, 0.2)'
+        },
       },
       y1: {
         type: 'linear',
@@ -210,13 +216,28 @@ const GrowthTracker = () => {
         position: 'right',
         title: {
           display: true,
-          text: 'Weight (kg)'
+          text: 'Weight (kg)',
+          color: '#f5c2ff',
+          font: { size: 14, weight: 'bold' },
         },
         grid: {
           drawOnChartArea: false,
         },
       },
     },
+    plugins: {
+      legend: {
+        labels: {
+          color: '#bfafff'
+        }
+      },
+      tooltip: {
+        backgroundColor: '#3a005caa',
+        titleFont: { size: 14, weight: 'bold' },
+        bodyFont: { size: 13 },
+        cornerRadius: 8,
+      }
+    }
   };
 
   // Growth insights
@@ -277,108 +298,6 @@ const GrowthTracker = () => {
             </div>
           </div>
         </div>
-        
-        <style>
-          {`
-          .auth-prompt {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 60vh;
-          }
-          
-          .auth-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 3rem;
-            border-radius: 20px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            max-width: 500px;
-          }
-          
-          .auth-card h2 {
-            color: #ffd6f5;
-            margin-bottom: 1rem;
-            font-size: 2rem;
-          }
-          
-          .auth-card p {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-            line-height: 1.6;
-          }
-          
-          .auth-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-          }
-          
-          .signin-button, .register-button {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-          }
-          
-          .signin-button {
-            background: linear-gradient(45deg, #ff79c6, #ff95dd);
-            color: white;
-          }
-          
-          .register-button {
-            background: linear-gradient(45deg, #50fa7b, #69ff94);
-            color: #333;
-          }
-          
-          .signin-button:hover, .register-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-          }
-          
-          .feature-preview {
-            text-align: left;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 12px;
-          }
-          
-          .feature-preview h3 {
-            color: #ffd6f5;
-            margin-bottom: 1rem;
-            text-align: center;
-          }
-          
-          .feature-preview ul {
-            list-style: none;
-            padding: 0;
-          }
-          
-          .feature-preview li {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 0.5rem;
-            padding-left: 1rem;
-          }
-          
-          @media (max-width: 768px) {
-            .auth-card {
-              padding: 2rem;
-              margin: 1rem;
-            }
-            
-            .auth-buttons {
-              flex-direction: column;
-            }
-          }
-          `}
-        </style>
       </div>
     );
   }
@@ -405,7 +324,7 @@ const GrowthTracker = () => {
           <option value="child2">Child 2</option>
         </select>
       </div>
-
+      
       {/* Add New Entry Button */}
       <div className="add-entry-section">
         <button
@@ -624,385 +543,201 @@ const GrowthTracker = () => {
       {/* Cute decoration */}
       <div className="footer-decoration">🌈👶✨</div>
 
-      <style>
-        {`
+      <style>{`
         body {
-          margin: 0;
-          padding: 0;
-          font-family: 'Inter', sans-serif;
-          background: linear-gradient(135deg, #0f0c29, #3a005c, #4c2269);
+          font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
           min-height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow-x: hidden;
+          background: linear-gradient(135deg, #22004c, #7927ca 70%);
         }
 
+        /* Container styling */
         .growth-container {
-          background: linear-gradient(135deg, #1b1a42, #4c2269);
+          background: rgba(33, 7, 63, 0.95);
           color: #fff;
-          padding: 2rem;
-          border-radius: 1rem;
-          width: 95%;
-          margin: 2rem auto;
-          box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-          box-sizing: border-box;
+          padding: 2.5rem;
+          border-radius: 2rem;
+          width: 100%;
+          max-width: 900px;
+          margin: 2.5rem auto;
+          box-shadow: 0 12px 48px rgba(42, 0, 50, 0.30);
+          position: relative;
         }
 
-                 .title {
-           text-align: center;
-           font-size: 2.5rem;
-           color: #ffd6f5;
-           margin-bottom: 1rem;
-         }
+        .title {
+          text-align: center;
+          font-size: 3.2rem;
+          font-weight: 700;
+          background: linear-gradient(90deg, #ffd6f5, #b7fae9 80%);
+          -webkit-background-clip: text;
+          color: transparent;
+          margin-bottom: 1.5rem;
+        }
 
-         .welcome-message {
-           text-align: center;
-           margin-bottom: 2rem;
-         }
+        .welcome-message p {
+          color: #b7fae9;
+          font-size: 1.25rem;
+          text-align: center;
+          margin-bottom: 2rem;
+        }
 
-         .welcome-message p {
-           color: rgba(255, 255, 255, 0.8);
-           font-size: 1.1rem;
-           font-style: italic;
-         }
+        /* Card-like sections */
+        .auth-card, .insight-card, .reminder-settings, .entry-form, .chart-container {
+          background: rgba(255,255,255,0.11);
+          box-shadow: 0 6px 24px rgba(65, 22, 151, 0.35);
+          border-radius: 22px;
+          padding: 2rem;
+          margin-bottom: 2rem;
+          backdrop-filter: blur(14px);
+          border: 1.5px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .auth-card h2, .insight-card h3, .chart-controls h3, .logs-section h3 {
+          font-size: 2.1rem;
+          background: linear-gradient(90deg, #f5c2ff 40%, #b2f5ea 80%);
+          -webkit-background-clip: text;
+          color: transparent;
+        }
+
+        .auth-buttons, .chart-buttons {
+          display: flex;
+          justify-content: center;
+          gap: 1.2rem;
+          flex-wrap: wrap;
+          margin-bottom: 2rem;
+        }
+
+        /* Unified button styling */
+        .signin-button, .register-button, .add-button, .save-settings, .chart-button {
+          padding: 1rem 2rem;
+          font-size: 1.18rem;
+          font-weight: 600;
+          border-radius: 20px;
+          border: none;
+          transition: all 0.23s;
+          background: linear-gradient(90deg, #9d64e4 10%, #fb87ff 80%);
+          color: #fff;
+          box-shadow: 0 6px 22px rgba(115, 57, 159, 0.16);
+          cursor: pointer;
+        }
+
+        .chart-button.active, .register-button {
+          background: linear-gradient(90deg, #50fa7b, #69ff94 80%);
+          color: #32184c;
+        }
+
+        .add-button:hover, .signin-button:hover, .register-button:hover, .chart-button:hover {
+          filter: brightness(1.15);
+          transform: translateY(-3px) scale(1.03);
+        }
 
         .child-selector {
+          gap: 1.1rem;
+          justify-content: center;
+          margin-bottom: 2rem;
           display: flex;
           align-items: center;
-          gap: 1rem;
-          margin-bottom: 2rem;
-          justify-content: center;
-        }
-
-        .child-selector label {
-          font-size: 1.1rem;
-          font-weight: bold;
         }
 
         .child-selector select {
-          padding: 0.5rem 1rem;
-          border-radius: 8px;
-          border: none;
-          background: white;
-          color: #333;
-          font-size: 1rem;
-        }
-
-        .add-entry-section {
-          text-align: center;
-          margin-bottom: 2rem;
-        }
-
-        .add-button {
-          padding: 1rem 2rem;
-          background: linear-gradient(45deg, #ff79c6, #ff95dd);
-          border: none;
-          border-radius: 8px;
-          color: white;
-          font-weight: bold;
-          font-size: 1.1rem;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 15px rgba(255, 121, 198, 0.3);
-        }
-
-        .add-button:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(255, 121, 198, 0.4);
-        }
-
-        .entry-form {
-          background: rgba(255, 255, 255, 0.1);
-          padding: 2rem;
+          padding: 0.7rem 1rem;
+          font-size: 1.03rem;
           border-radius: 12px;
-          margin-bottom: 2rem;
-          backdrop-filter: blur(10px);
+          background: #faf6ff;
+          color: #5d2fc6;
+          border: 1px solid #e5e5e5;
         }
 
-        .form-row {
-          display: flex;
-          gap: 1rem;
-          margin-bottom: 1rem;
-          flex-wrap: wrap;
-        }
-
-        .form-group {
-          flex: 1;
-          min-width: 200px;
-        }
-
-        .form-group.full-width {
-          flex: 100%;
-        }
-
-        .form-group label {
-          display: block;
-          margin-bottom: 0.5rem;
-          font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        /* Form styles */
+        .entry-form label { font-weight: 500; color: #ffd6f5; }
+        .form-group input, .form-group select, .form-group textarea {
+          border-radius: 14px;
+          background: #3a005c1a;
+          border: none;
+          padding: 0.85rem;
+          color: #fff;
+          font-size: 1.08rem;
+          margin-bottom: 0.7rem;
           width: 100%;
-          padding: 0.75rem;
-          border-radius: 8px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          background: rgba(255, 255, 255, 0.1);
-          color: white;
-          font-size: 1rem;
           box-sizing: border-box;
         }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-          color: rgba(255, 255, 255, 0.6);
+        .form-group input::placeholder, .form-group textarea::placeholder {
+          color: #d4d4d4;
         }
 
-        .submit-button {
-          width: 100%;
-          padding: 1rem;
-          background: linear-gradient(45deg, #50fa7b, #69ff94);
-          border: none;
-          border-radius: 8px;
-          color: #333;
-          font-weight: bold;
-          font-size: 1.1rem;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .submit-button:hover:not(:disabled) {
-          transform: translateY(-2px);
-        }
-
-        .submit-button:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
-        }
-
-        .insight-card {
-          background: rgba(255, 255, 255, 0.1);
-          padding: 1.5rem;
-          border-radius: 12px;
-          margin-bottom: 2rem;
-          backdrop-filter: blur(10px);
-          border-left: 4px solid;
-        }
-
-        .insight-card.excellent {
-          border-left-color: #50fa7b;
-        }
-
-        .insight-card.good {
-          border-left-color: #8be9fd;
-        }
-
-        .insight-card.normal {
-          border-left-color: #f1fa8c;
-        }
-
-        .insight-card.concern {
-          border-left-color: #ff5555;
-        }
-
-        .insight-card h3 {
-          margin-top: 0;
-          color: #ffd6f5;
-        }
-
-        .stats-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-          gap: 1rem;
-          margin-top: 1rem;
-        }
-
-        .stat-item {
-          text-align: center;
-          padding: 1rem;
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 8px;
-        }
-
-        .stat-label {
-          display: block;
-          font-size: 0.9rem;
-          color: rgba(255, 255, 255, 0.7);
-          margin-bottom: 0.5rem;
-        }
-
-        .stat-value {
-          display: block;
-          font-size: 1.2rem;
-          font-weight: bold;
-          color: #ffd6f5;
-        }
-
-        .chart-controls {
-          margin-bottom: 2rem;
-        }
-
-        .chart-controls h3 {
-          text-align: center;
-          color: #ffd6f5;
-          margin-bottom: 1rem;
-        }
-
-        .chart-buttons {
-          display: flex;
-          justify-content: center;
-          gap: 1rem;
-        }
-
-        .chart-button {
-          padding: 0.75rem 1.5rem;
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 8px;
-          color: white;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .chart-button.active {
-          background: linear-gradient(45deg, #ff79c6, #ff95dd);
-          border-color: transparent;
-        }
-
-        .chart-button:hover {
-          background: rgba(255, 255, 255, 0.2);
-        }
-
+        /* Chart container enhancements */
         .chart-container {
-          background: white;
-          padding: 2rem;
-          border-radius: 12px;
-          margin-bottom: 2rem;
-          min-height: 400px;
+          background: rgba(255,255,255,0.12);
+          border-radius: 22px;
+          min-height: 380px;
+          margin-bottom: 2.2rem;
+          box-shadow: 0 6px 18px rgba(115, 57, 159, 0.13);
           display: flex;
           align-items: center;
           justify-content: center;
         }
 
-        .no-data {
-          text-align: center;
-          color: #666;
-          font-size: 1.1rem;
-        }
-
-        .reminder-settings {
-          background: rgba(255, 255, 255, 0.1);
-          padding: 1.5rem;
-          border-radius: 12px;
-          margin-bottom: 2rem;
-          backdrop-filter: blur(10px);
-        }
-
-        .reminder-settings h3 {
-          margin-top: 0;
-          color: #ffd6f5;
-          margin-bottom: 1rem;
-        }
-
-        .reminder-controls {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          flex-wrap: wrap;
-        }
-
-        .reminder-controls label {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          cursor: pointer;
-        }
-
-        .reminder-controls input[type="checkbox"] {
-          width: auto;
-        }
-
-        .reminder-controls select {
-          padding: 0.5rem;
-          border-radius: 6px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          background: rgba(255, 255, 255, 0.1);
-          color: white;
-        }
-
-        .save-settings {
-          padding: 0.5rem 1rem;
-          background: linear-gradient(45deg, #50fa7b, #69ff94);
-          border: none;
-          border-radius: 6px;
-          color: #333;
-          font-weight: bold;
-          cursor: pointer;
-        }
-
-        .logs-section h3 {
-          color: #ffd6f5;
-          margin-bottom: 1rem;
-        }
-
+        /* Tables and logs */
         .table-wrapper {
           overflow-x: auto;
-          border-radius: 10px;
+          border-radius: 18px;
         }
-
         table {
           width: 100%;
-          border-collapse: collapse;
-          background: white;
-          color: #333;
-          border-radius: 10px;
+          border-radius: 18px;
+          background: #fff;
+          color: #32184c;
+          font-size: 1.07rem;
+          box-shadow: 0 2px 12px rgba(78, 27, 119, 0.09);
+          border-collapse: separate;
+          border-spacing: 0;
           overflow: hidden;
-          min-width: 600px;
         }
-
-        th, td {
+        th {
+          background: #f5c2ff;
+          color: #4c2269;
+          font-weight: 700;
+          border-bottom: 2px solid #ecf2ff;
           padding: 1rem;
           text-align: left;
-          border-bottom: 1px solid #ddd;
         }
-
-        th {
-          background: #ffe0f0;
-          color: #5e2a5c;
-          font-weight: bold;
+        td {
+          padding: 1rem;
+          border-bottom: 1px solid #f3ecfe;
         }
-
         tr:hover {
           background-color: #f9f2ff;
+          transition: background-color 0.3s ease;
         }
-
         .delete-button {
           background: none;
           border: none;
           cursor: pointer;
-          font-size: 1.2rem;
+          font-size: 1.3rem;
           padding: 0.25rem;
-          border-radius: 4px;
+          border-radius: 6px;
           transition: background-color 0.3s ease;
+          color: #8a008a;
         }
-
         .delete-button:hover {
-          background-color: rgba(255, 0, 0, 0.1);
+          background-color: rgba(255, 0, 0, 0.15);
         }
 
         .loading {
           text-align: center;
           padding: 2rem;
           color: #ffd6f5;
+          font-size: 1.1rem;
         }
 
         .footer-decoration {
-          margin-top: 2rem;
           text-align: center;
-          font-size: 2rem;
+          font-size: 2.1rem;
+          margin-top: 1.5rem;
+          background: -webkit-linear-gradient(#ff79c6,#50fa7b);
+          -webkit-background-clip: text;
+          color: transparent;
           animation: bounce 2s infinite;
+          user-select: none;
         }
 
         @keyframes bounce {
@@ -1017,40 +752,16 @@ const GrowthTracker = () => {
           }
         }
 
-        @media (max-width: 768px) {
-          .growth-container {
-            padding: 1rem;
-            margin: 1rem auto;
-          }
-
-          .title {
-            font-size: 2rem;
-          }
-
-          .form-row {
-            flex-direction: column;
-          }
-
-          .form-group {
-            min-width: auto;
-          }
-
-          .stats-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-
-          .reminder-controls {
-            flex-direction: column;
-            align-items: flex-start;
-          }
-
-          .chart-container {
-            padding: 1rem;
-            min-height: 300px;
-          }
+        @media (max-width: 900px) {
+          .growth-container { padding: 1rem; max-width: 100%; }
+          .auth-card, .insight-card, .entry-form, .chart-container { padding: 1rem; }
+          .stats-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+          table { min-width: 400px; }
+          .child-selector { flex-direction: column; gap: 0.75rem; }
+          .add-button, .signin-button, .register-button { width: 100%; }
+          .form-row { flex-direction: column; }
         }
-        `}
-      </style>
+      `}</style>
     </div>
   );
 };
