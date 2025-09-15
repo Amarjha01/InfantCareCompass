@@ -82,14 +82,27 @@ export default function Header() {
 
   return (
     <>
-      {/* HEADER */}
-      <div
-        className={`fixed top-0 left-0 h-[80px] flex items-center right-0 z-50 transition-all duration-300 
-        ${isScrolled ? "shadow-md" : ""} 
-        bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700`}
-      >
-        <div className="w-full px-4 py-2">
-          <div className="max-w-screen-xl mx-auto flex items-center justify-between">
+      {/* MOBILE HEADER */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 h-[80px] flex items-center justify-between px-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-50">
+        <Link to="/" className="flex items-center gap-3">
+          <img src={navlogo} alt="Logo" className="h-12 w-12 rounded-full shadow-lg" />
+          <div className="leading-tight">
+            <h1 className="text-xl font-bold text-gray-900 dark:text-white">InfantCare</h1>
+            <p className="text-xs text-gray-600 dark:text-gray-400">Compass</p>
+          </div>
+        </Link>
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle mobile menu"
+          className="p-2 rounded-md bg-purple-100 dark:bg-gray-100 hover:bg-purple-200 dark:hover:bg-gray-200"
+        >
+          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+      </div>
+
+      {/* DESKTOP SIDEBAR */}
+      <div className="hidden lg:flex fixed top-0 left-0 h-screen w-64 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-r border-gray-200 dark:border-gray-700 flex-col items-center z-50 p-4 space-y-12">
+        <div className="w-full px-4 py-2 flex flex-col">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3">
               <img
@@ -108,13 +121,13 @@ export default function Header() {
             </Link>
 
             {/* Desktop Nav */}
-            <div className="hidden lg:flex items-center gap-2">
+            <div className="flex flex-col gap-1 mt-8 mb-8">
               {navItems.map(({ to, label, icon }) => (
                 <NavLink
                   key={to}
                   to={to}
                   className={({ isActive }) =>
-                    `flex items-center gap-1.5 px-2.5 py-1.5 text-sm font-medium rounded-full transition-all duration-300 ${
+                    `w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-300 ${
                       isActive
                         ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow"
                         : "text-gray-700 dark:text-gray-200 hover:bg-purple-100 dark:hover:bg-gray-800 hover:text-purple-600 dark:hover:text-purple-400"
@@ -128,12 +141,12 @@ export default function Header() {
             </div>
 
             {/* Theme Toggle */}
-            <div className="hidden lg:flex items-center">
+            <div className="flex flex-col items-center mb-8">
               <ThemeToggle />
             </div>
 
             {/* Auth Buttons */}
-            <div className="hidden lg:flex items-center gap-2">
+            <div className="flex flex-col items-start gap-2 mt-auto">
               {isAuthenticated && user ? (
                 <>
                   <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-full">
@@ -144,7 +157,7 @@ export default function Header() {
                   </div>
                   <button
                     onClick={handleLogout}
-                    className="flex items-center gap-1 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-4 py-1.5 text-sm font-medium rounded-full transition"
+                    className="w-full flex items-center justify-center gap-1 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-4 py-1.5 text-sm font-medium rounded-full transition"
                   >
                     <LogOut className="w-4 h-4" />
                     Logout
@@ -154,65 +167,40 @@ export default function Header() {
                 <>
                   <Link
                     to="/signin"
-                    className="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-4 py-1.5 text-sm font-medium rounded-full transition"
+                    className="w-full border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-4 py-1.5 text-sm font-medium rounded-full transition text-center"
                   >
                     Sign In
                   </Link>
                   <Link
                     to="/registration"
-                    className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-1.5 text-sm font-semibold rounded-full shadow hover:scale-105 transition-transform"
+                    className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-1.5 text-sm font-semibold rounded-full shadow hover:scale-105 transition-transform text-center"
                   >
                     Get Started
                   </Link>
                 </>
               )}
             </div>
-
-            {/* Hamburger */}
-            <div className="lg:hidden">
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                aria-label="Toggle mobile menu"
-                className="p-2 rounded-md bg-purple-100 dark:bg-gray-100 hover:bg-purple-200 dark:hover:bg-gray-200"
-              >
-                {isMobileMenuOpen ? (
-                  <X className="w-6 h-6 " />
-                ) : (
-                  <Menu className="w-6 h-6 " />
-                )}
-              </button>
-            </div>
-          </div>
         </div>
       </div>
 
-      {/* Mobile Menu - OUTSIDE header container */}
-      {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
-
+      {/* Mobile Menu - DRAWER */}
       {isMobileMenuOpen && (
         <motion.div
-          initial={{ x: "100%" }}
+          initial={{ x: "-100%" }}
           animate={{ x: "0%" }}
-          exit={{ x: "100%" }}
+          exit={{ x: "-100%" }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-y-0 right-0 z-50 w-80 bg-white dark:bg-gray-900 shadow-xl lg:hidden"
+          className="lg:hidden fixed inset-y-0 left-0 z-50 w-80 bg-white dark:bg-gray-900 shadow-xl"
         >
-          <div className="h-full flex flex-col">
-            <div className="p-4 border-b">
-              <div className="flex justify-between items-center">
-                <span className="font-bold text-white">Menu</span>
-                <button onClick={() => setIsMobileMenuOpen(false)}>
-                  <X className="w-6 h-6 text-white" />
-                </button>
-              </div>
+          <div className="h-full flex flex-col p-4 space-y-4">
+            <div className="flex justify-between items-center">
+              <span className="font-bold text-white">Menu</span>
+              <button onClick={() => setIsMobileMenuOpen(false)}>
+                <X className="w-6 h-6 text-white" />
+              </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4">
+            <div className="flex-1 overflow-y-auto">
               {navItems.map(({ to, label, icon }) => (
                 <NavLink
                   key={to}

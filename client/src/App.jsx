@@ -44,7 +44,7 @@ function App() {
         <ScrollToTop />
         <ScrollToBottom />
 
-        <main className="mt-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+        <main className="lg:ml-64 bg-white dark:bg-gray-900 transition-colors duration-300">
           <Outlet />
         </main>
 
