@@ -11,6 +11,7 @@ import ScrollRestoration from "./components/ScrollRestoration";
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from "./contexts/ThemeContext";
 import MagicCursorTrail from "./components/magiccursortrail.jsx";
+import InfantCareChatbot from "./pages/Chatbot.jsx";
 
 function App() {
   const matches = useMatches();
