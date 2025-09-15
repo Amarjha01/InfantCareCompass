@@ -1,0 +1,2 @@
+cd client
+npm install
