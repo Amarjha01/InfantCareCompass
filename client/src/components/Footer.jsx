@@ -101,11 +101,9 @@ const Footer = () => {
   );
 
   const renderMainContent = () => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
       {/* Quick Links */}
       <div className="text-center lg:text-left">
-        <h4 className="text-2xl font-bold text-white mb-8">Quick Links</h4>
-        <div className="grid grid-cols-2 gap-4">
           {quickLinks.map((link, index) => (
             <a
               key={index}
@@ -116,7 +114,6 @@ const Footer = () => {
             </a>
           ))}
         </div>
-      </div>
 
       {/* Contact Info */}
       <div className="text-center lg:text-left">
@@ -138,7 +135,7 @@ const Footer = () => {
             return (
               <div
                 key={index}
-                className="flex lg:justify-start space-x-4"
+                className="flex sm:justify-center lg:justify-start space-x-4"
               >
                 <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                   <IconComponent className="w-6 h-6 text-white" />
@@ -261,7 +258,7 @@ const Footer = () => {
       </div>
 
       {/* Main Footer Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
+      <div className="relative z-40 max-w-7xl mx-auto px-6 py-20 mt-20 lg:ml-64">
         {renderTopSection()}
         {renderMainContent()}
         {renderSocialSection()}
