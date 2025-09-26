@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
+import BabyImg from "./Baby.png"; 
 import {
   Mail,
   Lock,
@@ -270,7 +271,6 @@ export default function Registration() {
       newErrors.role = "Role is required";
     }
 
-    // Role-specific validations
     if (formData.role === "PARENTS") {
       if (!formData.kidName.trim())
         newErrors.kidName = "Child's name is required";
@@ -335,25 +335,23 @@ export default function Registration() {
   return (
     <>
       <Toaster position="top-right" />
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center px-7 pb-8 flex-col">
-        <div className="w-full max-w-2xl">
-          <button
-            onClick={() => navigate("/")}
-            className={`w-3/2 mt-6 py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 transform bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 hover:scale-105 hover:shadow-xl active:scale-95
-                          focus:outline-none focus:ring-4 focus:ring-indigo-500/50`}
-          >
-            <div className="flex items-center justify-center space-x-2">
-              <Home className="w-5 h-5" />
-            </div>
-          </button>
+      <div className="main-body flex">
+        {/* Left Section */}
+        <div className="w-2/5 h-screen fixed flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600">
+          <img
+            src={BabyImg}
+            alt="Baby"
+            className="max-w-xs md:max-w-sm lg:max-w-md"
+          />
         </div>
 
-        <div className="w-full max-w-2xl mt-4">
-          <div className="text-center mb-8 animate-fadeIn">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full mb-6 shadow-lg">
+        {/* Right Section */}
+        <div className="w-3/5 ml-[40%] bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center py-12 px-4">
+          <div className="w-1/2 max-w-2xl text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-6 shadow-lg">
               <Heart className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
               Create Your Account
             </h1>
             <p className="text-gray-600">
@@ -362,7 +360,7 @@ export default function Registration() {
             </p>
           </div>
 
-          <div className="bg-white rounded-3xl shadow-xl p-8 animate-slideUp">
+          <div className="bg-white rounded-3xl shadow-xl p-8 animate-slideUp w-full max-w-2xl">
             <div className="space-y-6">
               <div className="space-y-4">
                 <label className="block text-sm font-medium text-gray-700 mb-3">
