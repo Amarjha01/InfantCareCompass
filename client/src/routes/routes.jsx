@@ -20,7 +20,7 @@ import LearningHub from "../pages/LearningHub";
 import Services from "../pages/Services";
 
 import ConsultationPage from "../pages/consult";
-
+import InfantCareChatbot from "../pages/Chatbot.jsx";
 
 // Components
 import BabyFeeder from "../components/BabyFeeder";
@@ -46,6 +46,8 @@ const router = createBrowserRouter([
       { path: "babyfeeder", element: <BabyFeeder /> },
       { path: "sleeper", element: <Sleeper /> },
       { path: "care-co-pilot", element: <CareCoPilot /> },
+       { path: "chatbot", element: <InfantCareChatbot /> },
+
       {
         path: "consultation",
         element: <ConsultationPage />,

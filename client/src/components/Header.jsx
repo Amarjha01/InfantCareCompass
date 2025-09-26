@@ -20,6 +20,7 @@ import {
 import { motion } from "framer-motion";
 import navlogo from "/logo.png";
 import ThemeToggle from "./ThemeToggle";
+import InfantCareChatbot from "../pages/Chatbot.jsx";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -58,6 +59,7 @@ export default function Header() {
     { to: "/blog", label: "Blog", icon: <BookOpen className="w-4 h-4" /> },
     { to: "/contactus", label: "Contact", icon: <Mail className="w-4 h-4" /> },
     { to: "/news", label: "News", icon: <Newspaper className="w-4 h-4" /> },
+    {to:"/chatbot",label:"",icon:"AI chat"},
     {
       to: "/consultation",
       label: "Consultation",
