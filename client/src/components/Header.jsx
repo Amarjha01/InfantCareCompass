@@ -108,7 +108,7 @@ export default function Header() {
             </Link>
 
             {/* Desktop Nav */}
-            <div className="hidden lg:flex items-center gap-2 ml-10">
+            <div className="hidden lg:flex items-center gap-2 w-400">
               {navItems.map(({ to, label, icon }) => (
                 <NavLink
                   key={to}
