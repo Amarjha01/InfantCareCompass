@@ -113,7 +113,7 @@ const InputField = ({
       value={value || ""}
       onChange={onChange}
       placeholder={placeholder}
-      className={`w-full pl-12 py-3 border border-gray-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 focus:bg-white ${
+      className={`w-full pl-12 py-3 border border-gray-200  text-black rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 focus:bg-white ${
         EndIcon ? "pr-12" : "pr-4"
       }`}
       {...props}
@@ -306,8 +306,8 @@ export default function Registration() {
                 }
                 className={`p-4 rounded-xl border-2 transition-all ${
                   formData.role === "PARENTS"
-                    ? "border-blue-500 bg-blue-50"
-                    : "border-gray-200 hover:border-gray-300"
+                    ? "border-blue-500 bg-blue-50 text-blue-400"
+                    : "border-gray-200 hover:border-gray-300 text-gray-400"
                 }`}
               >
                 <Heart className="w-6 h-6 mx-auto mb-2" />
@@ -320,8 +320,8 @@ export default function Registration() {
                 }
                 className={`p-4 rounded-xl border-2 transition-all ${
                   formData.role === "DOCTOR"
-                    ? "border-purple-500 bg-purple-50"
-                    : "border-gray-200 hover:border-gray-300"
+                    ? "border-purple-500 bg-purple-50 text-purple-400"
+                    : "border-gray-200 hover:border-gray-300 text-gray-400"
                 }`}
               >
                 <UserCheck className="w-6 h-6 mx-auto mb-2" />
