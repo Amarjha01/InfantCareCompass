@@ -84,7 +84,7 @@ export default function Header() {
     <>
       {/* HEADER */}
       <div
-        className={`fixed top-0 left-0 h-[80px] flex items-center right-0 z-50 transition-all duration-300 
+        className={`fixed top-0 left-0 h-[80px] flex right-0 z-50 transition-all duration-300 
         ${isScrolled ? "shadow-md" : ""} 
         bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700`}
       >
@@ -133,7 +133,7 @@ export default function Header() {
             </div>
 
             {/* Auth Buttons */}
-            <div className="hidden lg:flex items-center gap-2">
+            <div className="hidden lg:flex items-center w-150">
               {isAuthenticated && user ? (
                 <>
                   <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-full">
