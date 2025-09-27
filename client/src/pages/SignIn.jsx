@@ -125,7 +125,7 @@ const InputField = ({
         onFocus={onFocus}
         onBlur={onBlur}
         placeholder={placeholder}
-        className={`w-full pl-12 pr-12 py-4 border-2 rounded-xl transition-all duration-300 bg-white ${
+        className={`w-full pl-12 pr-12 py-4 border-2 rounded-xl transition-all duration-300  text-black bg-white ${
           error
             ? "border-red-300 focus:border-red-500 focus:ring-red-500/20"
             : isFocused
