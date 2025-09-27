@@ -335,11 +335,7 @@ export default function Signin() {
     }
   };
 
-   const handleGitHubLogin = () => {    
-        localStorage.setItem("oauth_redirect", "/signup");
-        const githubOAuthUrl = `${import.meta.env.VITE_API_BASE_URL}/api/auth/github`; 
-        window.location.href = githubOAuthUrl;
-       };
+  
   
    return (
     <> 
@@ -370,7 +366,6 @@ export default function Signin() {
         </div>
 
         <div className="bg-white rounded-3xl shadow-xl p-8 animate-slideUp">
-          {/* Github button */}
           <div className="space-y-6">
             <InputField
               icon={Mail}
