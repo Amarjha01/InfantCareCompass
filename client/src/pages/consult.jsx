@@ -317,7 +317,7 @@ const ConsultationPage = () => {
       {
         id: 2,
         question: "Should I be concerned about this rash on my infant's skin?",
-        images: ['https://via.placeholder.com/200x150'],
+        images: ['https://github.com/VanshGarg06/InfantCareCompass/blob/new-bug-fixed/client/src/pages/Baby%20Rashes.jpg'],
         audioUrl: null,
         timestamp: new Date(Date.now() - 7200000),
         status: 'pending',
@@ -440,7 +440,7 @@ const ConsultationPage = () => {
                         
                         <p className="text-gray-300 mb-3">{q.question}</p>
                         
-                        {q.images.length > 0 && (
+                        {/* {q.images.length > 0 && (
                           <div className="flex gap-2 mb-3">
                             {q.images.map((img, idx) => (
                               <img
@@ -451,7 +451,7 @@ const ConsultationPage = () => {
                               />
                             ))}
                           </div>
-                        )}
+                        )} */}
                         
                         {q.audioUrl && (
                           <div className="mb-3">
@@ -780,7 +780,7 @@ const ConsultationPage = () => {
                           
                           {q.images.length > 0 && (
                             <div className="mb-4">
-                              <h5 className="text-gray-300 font-medium mb-2">Attachments:</h5>
+                              {/* <h5 className="text-gray-300 font-medium mb-2">Attachments:</h5>
                               <div className="flex gap-3">
                                 {q.images.map((img, idx) => (
                                   <img
@@ -790,7 +790,7 @@ const ConsultationPage = () => {
                                     className="w-20 h-20 object-cover rounded-lg border border-slate-600 cursor-pointer hover:border-blue-400 transition-colors"
                                   />
                                 ))}
-                              </div>
+                              </div> */}
                             </div>
                           )}
                           
@@ -925,7 +925,7 @@ const ConsultationPage = () => {
                       
                       <p className="text-gray-300 mb-3">{q.question}</p>
                       
-                      {q.images.length > 0 && (
+                      {/* {q.images.length > 0 && (
                         <div className="flex gap-2 mb-3">
                           {q.images.map((img, idx) => (
                             <img
@@ -937,7 +937,7 @@ const ConsultationPage = () => {
                           ))}
                         </div>
                       )}
-                      
+                       */}
                       {q.audioUrl && (
                         <div className="mb-3">
                           <audio controls className="w-full h-8">
