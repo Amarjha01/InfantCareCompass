@@ -10,16 +10,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@reduxjs/toolkit": "^2.5.0",
     "@zegocloud/zego-uikit-prebuilt": "^2.15.1",
     "axios": "^1.7.9",
+    "chart.js": "^4.4.0",
     "client": "^0.0.1",
     "date-fns": "^4.1.0",
+    "dotenv": "^17.2.2",
     "framer-motion": "^11.15.0",
     "lucide-react": "^0.525.0",
     "motion": "^12.23.6",
+    "openai": "^5.20.2",
     "path": "^0.12.7",
     "react": "^18.3.1",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.2",
     "react-hot-toast": "^2.6.0",
@@ -31,16 +36,14 @@
     "redux-persist": "^6.0.0",
     "simple-peer": "^9.11.1",
     "swiper": "^11.2.10",
-    "toaster-js": "^2.2.3",
-    "chart.js": "^4.4.0",
-    "react-chartjs-2": "^5.2.0"
+    "toaster-js": "^2.2.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
     "@types/node": "^22.10.2",
     "@types/react": "^18.3.17",
     "@types/react-dom": "^18.3.5",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@vitejs/plugin-react": "^5.0.2",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.17.0",
     "eslint-plugin-react": "^7.37.2",
@@ -48,7 +51,8 @@
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.13.0",
     "postcss": "^8.4.49",
+    "react-refresh": "^0.17.0",
     "tailwindcss": "^3.4.17",
-    "vite": "^6.0.3"
+    "vite": "^7.1.5"
   }
 }
