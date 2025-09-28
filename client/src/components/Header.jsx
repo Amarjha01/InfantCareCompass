@@ -84,14 +84,16 @@ export default function Header() {
     <>
       {/* HEADER */}
       <div
-        className={`fixed top-0 left-0 h-[80px] flex items-center right-0 z-50 transition-all duration-300 
+        className={`fixed top-0 left-0 h-[80px] flex right-0 z-50 transition-all duration-300 
         ${isScrolled ? "shadow-md" : ""} 
         bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700`}
       >
+
         <div className="w-full  flex items-center px-4 py-2">
           <div className="flex items-center gap-5 flex-shrink-0">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3 ">
+
               <img
                 src={navlogo}
                 alt="Logo"
@@ -108,13 +110,15 @@ export default function Header() {
             </Link>
 
             {/* Desktop Nav */}
+
             <div className="hidden lg:flex items-center gap-2 mx-auto">
+
               {navItems.map(({ to, label, icon }) => (
                 <NavLink
                   key={to}
                   to={to}
                   className={({ isActive }) =>
-                    `flex items-center gap-1.5 px-2.5 py-1.5 text-sm font-medium rounded-full transition-all duration-300 ${
+                    `flex items-center gap-1.5 px-2.5 py-1.5 text-sm font-medium rounded-full transition-all duration-300 whitespace-nowrap ${
                       isActive
                         ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow"
                         : "text-gray-700 dark:text-gray-200 hover:bg-purple-100 dark:hover:bg-gray-800 hover:text-purple-600 dark:hover:text-purple-400"
@@ -128,12 +132,14 @@ export default function Header() {
             </div>
 
             {/* Theme Toggle */}
+
             <div className="hidden lg:flex items-center gap-3 ml-auto">
+
               <ThemeToggle />
             </div>
 
             {/* Auth Buttons */}
-            <div className="hidden lg:flex items-center gap-2">
+            <div className="hidden lg:flex items-center w-150">
               {isAuthenticated && user ? (
                 <>
                   <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-full">
@@ -154,13 +160,13 @@ export default function Header() {
                 <>
                   <Link
                     to="/signin"
-                    className="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-4 py-1.5 text-sm font-medium rounded-full transition"
+                    className="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-4 py-1.5 text-sm font-medium rounded-full transition whitespace-nowrap"
                   >
                     Sign In
                   </Link>
                   <Link
                     to="/registration"
-                    className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-1.5 text-sm font-semibold rounded-full shadow hover:scale-105 transition-transform"
+                    className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-1.5 ml-2 text-sm font-semibold rounded-full shadow hover:scale-105 transition-transform whitespace-nowrap"
                   >
                     Get Started
                   </Link>
