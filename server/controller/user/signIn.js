@@ -7,29 +7,17 @@ import jwt from 'jsonwebtoken';
 const signin = asyncHandler(async (req, res) => {
     const { email, password, role } = req.body;
 
-
-
-    if (role.toLowerCase()==='doctor' && req) {
-        const doctor = await doctormodel.findOne({ email });
-        if (!doctor) {
-            return res.status(400).json({
-                message: 'user not found'
-            })
-        }
-    }
-
-    // Check required fields
-
+    // Validate required fields
     if (!email || !password || !role) {
         return res.status(400).json({
             message: 'Missing required fields: email, password, and role are required'
         });
     }
 
-
     const normalizedEmail = email.toLowerCase().trim();
     const normalizedRole = role.toUpperCase();
 
+    // Validate JWT secret key configuration
     if (!process.env.TOKEN_SECRET_KEY) {
         console.error("TOKEN_SECRET_KEY is not configured in environment variables");
         return res.status(500).json({
@@ -41,6 +29,7 @@ const signin = asyncHandler(async (req, res) => {
     try {
         let userData;
 
+        // Determine user model based on role
         if (normalizedRole === 'DOCTOR') {
             userData = await doctormodel.findOne({ email: normalizedEmail });
         } else if (normalizedRole === 'USER' || normalizedRole === 'PARENTS') {
@@ -58,14 +47,17 @@ const signin = asyncHandler(async (req, res) => {
             return res.status(400).json({ message: "Incorrect email or password" });
         }
 
+        // Prepare JWT payload with user data
         const tokendata = {
             id: userData._id,
             email: userData.email,
             role: normalizedRole
         };
 
+        // Generate JWT token with 8-hour expiration
         const token = jwt.sign(tokendata, process.env.TOKEN_SECRET_KEY, { expiresIn: 60 * 60 * 8 });
 
+        // Set secure cookie options for production environment
         const tokenOptions = {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',

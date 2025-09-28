@@ -15,7 +15,7 @@
 ---------
   
   <div style="margin: 15px 0;">
-    <img src="https://readme-typing-svg.herokuapp.com?size=35&color=FF69B4&width=800&lines=Welcome+to++InfantCareCompass+Grounds;Your+AI+Powered+Health+Companion;Monitors+|+Safeguarding+Future+steps;Smart+Insights+for+Parents+for+monitoring" />
+    <img src="https://readme-typing-svg.herokuapp.com?size=35&color=FF69B4&width=800&lines=Welcome+to+InfantCareCompass+Grounds;Your+AI+Powered+Health+Companion;Monitors+and+Safeguarding+Future+steps;Smart+Insights+for+Parents+and+Monitoring" />
   </div>
   
   <div style="margin: 15px 0;">
@@ -127,16 +127,14 @@ Before you begin, ensure you have the following installed and set up:
 
 2. **Install dependencies:**
 
+   ```bash
+   # Install server dependencies
+   npm install
 
-    ```bash
-    # Install server dependencies
-    npm install
-
-    # Navigate to the client directory and install dependencies
-    cd client
-    npm install
-
-    ```
+   # Navigate to the client directory and install dependencies
+   cd client
+   npm install
+   ```
 
 4.  **Set Up Environment Variables**
     Go back to the root directory, create a `.env` file, and add the following keys.
@@ -147,7 +145,7 @@ Before you begin, ensure you have the following installed and set up:
     ```
     Your `.env` file should look like this:
     ```env
-    PORT=3000
+    PORT=5000
     MONGO_URI=your_mongodb_uri
     CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
     CLOUDINARY_API_KEY=your_cloudinary_api_key
@@ -175,7 +173,7 @@ The application should now be running on your local machine!
 
 
   ```bash
-  INFANTCARECOMPASS/
+  InfantCareCompass/
   ├── .github/
   │   ├── ISSUE_TEMPLATE/
   │   └── workflows/
@@ -256,7 +254,7 @@ You’re free to use, modify, and share this software under the license terms.
 <details>	
  <summary><b> View </b></summary><br>
 <div style='display:flex; align-items:center; gap: 10px;' align='center'>
-<img width="1920" height="5177" alt="screencapture-infantcarecompass-live-2025-07-20-10_41_19-min" src="https://github.com/user-attachments/assets/edecafaf-4f96-4969-835d-ca81720253e7" />
+<img width="1920" height="5177" alt="InfantCareCompass application screenshot showing the main interface and features" src="https://github.com/user-attachments/assets/edecafaf-4f96-4969-835d-ca81720253e7" />
 
 
 
@@ -271,7 +269,7 @@ You’re free to use, modify, and share this software under the license terms.
   <!-- Vaunt.dev (auto-updating SVG contributors graph) -->
   <a href="https://github.com/Amarjha01/InfantCareCompass/graphs/contributors">
     <img 
-      src="https://api.vaunt.dev/v1/github/entities/Amarjha01/repositories/InfantCareCompass/contributors?format=svg&limit=54" 
+      src="https://api.vaunt.dev/v1/github/entities/Amarjha01/repositories/InfantCareCompass/contributors?format=svg&limit=54"  
       width="700" 
       height="250" 
       alt="Contributors Graph by Vaunt.dev" 

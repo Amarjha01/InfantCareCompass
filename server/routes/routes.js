@@ -85,5 +85,13 @@ router.get('/growth-logs/stats', authtoken, getGrowthStats);
 router.get('/auth/github/callback', githubCallback)
 router.get('/auth/github', githubLoginRedirect)
 
+// Admin routes
+import { getDashboardAnalytics, getAllUsers, getAllDoctors, updateUserStatus } from '../controller/user/adminDashboard.js';
+router.get('/admin/analytics', authtoken, isAdmin, getDashboardAnalytics);
+router.get('/admin/users', authtoken, isAdmin, getAllUsers);
+router.get('/admin/doctors', authtoken, isAdmin, getAllDoctors);
+router.put('/admin/users/:userId/status', authtoken, isAdmin, updateUserStatus);
+router.put('/admin/doctors/:doctorId/review', authtoken, isAdmin, reviewDoctor);
+
 export default router;
 

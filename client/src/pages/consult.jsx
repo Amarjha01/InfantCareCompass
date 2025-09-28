@@ -52,8 +52,8 @@ const ConsultationPage = () => {
   // Get user from Redux store
   const { user, isAuthenticated } = useSelector(state => state.user);
   
-  // TEMPORARY: Override user for testing doctor view
-  // Remove this after testing
+  // TEMPORARY: Override user role for testing doctor view during development
+  // TODO: Remove this override once doctor authentication is fully implemented
   const testDoctorUser = {
     id: "test-doctor-id",
     name: "Dr. John Smith",
@@ -61,9 +61,10 @@ const ConsultationPage = () => {
     role: "doctor"
   };
   
-  // Use test user if no real user is logged in
+  // TEMPORARY: Use mock user data for testing when no real user is authenticated
+  // TODO: Remove this fallback once proper authentication flow is complete
   const currentUser = user || testDoctorUser;
-  const currentIsAuthenticated = isAuthenticated || true; // Force authenticated for testing
+  const currentIsAuthenticated = isAuthenticated || true; // TEMPORARY: Force authenticated state for testing - remove after auth implementation
   
   // Check if user is patient or doctor
   const isPatient = currentUser?.role === 'patient' || !currentUser?.role; // Default to patient if no role
@@ -173,7 +174,7 @@ const ConsultationPage = () => {
     setIsSubmitting(true);
     try {
       // For now, we'll handle this locally since the backend endpoint doesn't exist yet
-      // TODO: Implement proper API endpoint on backend
+      // TODO: Replace local state management with proper API call to backend consultation endpoint
       
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -446,7 +447,7 @@ const ConsultationPage = () => {
                               <img
                                 key={idx}
                                 src={img}
-                                alt="Question attachment"
+                                alt="User uploaded image attachment for consultation question"
                                 className="w-16 h-16 object-cover rounded-lg border border-slate-600"
                               />
                             ))}
@@ -616,11 +617,12 @@ const ConsultationPage = () => {
                         <div key={img.id} className="relative">
                           <img
                             src={img.url}
-                            alt="Upload preview"
+                            alt="Preview of uploaded image for consultation"
                             className="w-full h-20 object-cover rounded-lg"
                           />
                           <button
                             onClick={() => removeImage(img.id)}
+                            aria-label="Remove uploaded image"
                             className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white hover:bg-red-600 transition-colors"
                           >
                             <X className="w-4 h-4" />
