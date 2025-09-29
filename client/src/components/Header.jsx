@@ -67,6 +67,7 @@ const Header = () => {
 
   return (
     <div className="relative">
+      {/* HEADER */}
       <div
         className={`fixed top-0 left-0 h-[80px] flex items-center right-0 z-50 transition-all duration-300 
         ${isScrolled ? "shadow-md" : ""} 
@@ -74,6 +75,7 @@ const Header = () => {
       >
         <div className="w-full px-4 py-2">
           <div className="max-w-screen-xl mx-auto flex items-center justify-between">
+            {/* Logo on left */}
             <Link to="/" className="flex items-center gap-4">
               <img
                 src={navlogo}
@@ -90,67 +92,47 @@ const Header = () => {
               </div>
             </Link>
 
-            <div className="hidden lg:flex items-center gap-2 ml-20">
-              {navItems.map(({ to, label, icon }) => (
-                <NavLink
-                  key={to}
-                  to={to}
-                  className={({ isActive }) =>
-                    `flex items-center gap-1.5 px-2.5 py-1.5 text-sm font-medium rounded-full transition-all duration-300 whitespace-nowrap ${
-                      isActive
-                        ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow"
-                        : "text-gray-700 dark:text-gray-200 hover:bg-purple-100 dark:hover:bg-gray-800 hover:text-purple-600 dark:hover:text-purple-400"
-                    }`
-                  }
-                >
-                  {icon}
-                  {label}
-                </NavLink>
-              ))}
-            </div>
 
-                        
+            {/* Right side - Theme + Auth + Hamburger */}
             <div className="flex items-center gap-6">
-              <div className="hidden lg:flex items-center">
-                <ThemeToggle />
-              </div>
+              {/* Theme Toggle */}
+              <ThemeToggle />
 
-              {/* Auth Buttons */}
-              <div className="hidden lg:flex items-center w-150">
-                {isAuthenticated && user ? (
-                  <div className="hidden md:flex items-center gap-3">
-                    <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-full">
-                      <UserCircle className="w-5 h-5 text-purple-600" />
-                      <span className="text-sm font-medium text-purple-800">
-                        {user.name} ({user.role === "doctor" ? "Doctor" : "Patient"})
-                      </span>
-                    </div>
-                    <button
-                      onClick={handleLogout}
-                      className="flex items-center gap-1 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-3 py-1 text-sm font-medium rounded-full transition"
-                    >
-                      <LogOut className="w-5 h-5" />
-                      Logout
-                    </button>
+              {/* Desktop Auth */}
+              {isAuthenticated && user ? (
+                <div className="hidden md:flex items-center gap-3">
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-full">
+                    <UserCircle className="w-5 h-5 text-purple-600" />
+                    <span className="text-sm font-medium text-purple-800">
+                      {user.name} ({user.role === "doctor" ? "Doctor" : "Patient"})
+                    </span>
                   </div>
-                ) : (
-                  <div className="hidden md:flex items-center gap-4">
-                    <Link
-                      to="/signin"
-                      className="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-3 py-1.5 text-sm font-medium rounded-full transition"
-                    >
-                      Sign In
-                    </Link>
-                    <Link
-                      to="/registration"
-                      className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-1.5 text-sm font-semibold rounded-full shadow hover:scale-105 transition-transform"
-                    >
-                      Get Started
-                    </Link>
-                  </div>
-                )}
-              </div>
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-1 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-3 py-1 text-sm font-medium rounded-full transition"
+                  >
+                    <LogOut className="w-5 h-5" />
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <div className="hidden md:flex items-center gap-4">
+                  <Link
+                    to="/signin"
+                    className="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-3 py-1.5 text-sm font-medium rounded-full transition"
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    to="/registration"
+                    className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-1.5 text-sm font-semibold rounded-full shadow hover:scale-105 transition-transform"
+                  >
+                    Get Started
+                  </Link>
+                </div>
+              )}
 
+              {/* Hamburger icon */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle menu"
@@ -174,6 +156,8 @@ const Header = () => {
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
+
+      {/* Slide-in Menu (right side) */}
       {isMobileMenuOpen && (
         <motion.div
           initial={{ x: "100%" }}
