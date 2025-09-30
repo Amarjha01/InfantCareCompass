@@ -1,73 +1,87 @@
-
 import React, { useState, useEffect } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/slices/userSlice.jsx";
 import {
-  Home,
-  User,
-  BookOpen,
-  Mail,
-  Newspaper,
-  Phone,
-  Menu,
-  X,
-  Users,
-  Heart,
-  LogOut,
-  UserCircle,
-  TrendingUp,
+	Home,
+	User,
+	BookOpen,
+	Mail,
+	Newspaper,
+	Phone,
+	Menu,
+	X,
+	Users,
+	Heart,
+	LogOut,
+	UserCircle,
+	TrendingUp,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import navlogo from "/logo.png";
 import ThemeToggle from "./ThemeToggle";
 
-const Header = () => {
+function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { user, isAuthenticated } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+	useEffect(() => {
+		const handleScroll = () => setIsScrolled(window.scrollY > 10);
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userData");
-    dispatch(logout());
-    navigate("/");
-  };
+	const handleLogout = () => {
+		localStorage.removeItem("token");
+		localStorage.removeItem("userData");
+		dispatch(logout());
+		navigate("/");
+	};
 
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isMobileMenuOpen]);
+	useEffect(() => {
+		if (isMobileMenuOpen) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "unset";
+		}
+		return () => {
+			document.body.style.overflow = "unset";
+		};
+	}, [isMobileMenuOpen]);
 
-  const navItems = [
-    { to: "/", label: "Home", icon: <Home className="w-4 h-4" /> },
-    { to: "/about", label: "About", icon: <User className="w-4 h-4" /> },
-    { to: "/blog", label: "Blog", icon: <BookOpen className="w-4 h-4" /> },
-    { to: "/contactus", label: "Contact", icon: <Mail className="w-4 h-4" /> },
-    { to: "/news", label: "News", icon: <Newspaper className="w-4 h-4" /> },
-    { to: "/consultation", label: "Consultation", icon: <Phone className="w-4 h-4" /> },
-    { to: "/care-co-pilot", label: "Care Co-Pilot", icon: <Heart className="w-4 h-4" /> },
-    { to: "/growth-tracker", label: "Growth Tracker", icon: <TrendingUp className="w-4 h-4" /> },
-    { to: "/contributors", label: "Contributors", icon: <Users className="w-4 h-4" /> },
-  ];
+	const navItems = [
+		{ to: "/", label: "Home", icon: <Home className="w-4 h-4" /> },
+		{ to: "/about", label: "About", icon: <User className="w-4 h-4" /> },
+		{ to: "/blog", label: "Blog", icon: <BookOpen className="w-4 h-4" /> },
+		{ to: "/contactus", label: "Contact", icon: <Mail className="w-4 h-4" /> },
+		{ to: "/news", label: "News", icon: <Newspaper className="w-4 h-4" /> },
+		{
+			to: "/consultation",
+			label: "Consultation",
+			icon: <Phone className="w-4 h-4" />,
+		},
+		{
+			to: "/care-co-pilot",
+			label: "Care Co-Pilot",
+			icon: <Heart className="w-4 h-4" />,
+		},
+		{
+			to: "/growth-tracker",
+			label: "Growth Tracker",
+			icon: <TrendingUp className="w-4 h-4" />,
+		},
+		{
+			to: "/contributors",
+			label: "Contributors",
+			icon: <Users className="w-4 h-4" />,
+		},
+	];
 
   return (
-    <div className="relative">
-      {/* HEADER */}
+    <>
       <div
         className={`fixed top-0 left-0 h-[80px] flex items-center right-0 z-50 transition-all duration-300 
         ${isScrolled ? "shadow-md" : ""} 
@@ -75,7 +89,7 @@ const Header = () => {
       >
         <div className="w-full px-4 py-2">
           <div className="max-w-screen-xl mx-auto flex items-center justify-between">
-            {/* Logo on left */}
+            
             <Link to="/" className="flex items-center gap-4">
               <img
                 src={navlogo}
@@ -91,14 +105,8 @@ const Header = () => {
                 </p>
               </div>
             </Link>
-
-
-            {/* Right side - Theme + Auth + Hamburger */}
-            <div className="flex items-center gap-6">
-              {/* Theme Toggle */}
+            <div className="flex items-center gap-6"> 
               <ThemeToggle />
-
-              {/* Desktop Auth */}
               {isAuthenticated && user ? (
                 <div className="hidden md:flex items-center gap-3">
                   <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-full">
@@ -131,8 +139,6 @@ const Header = () => {
                   </Link>
                 </div>
               )}
-
-              {/* Hamburger icon */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle menu"
@@ -148,7 +154,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-
       
       {isMobileMenuOpen && (
         <div
@@ -156,8 +161,6 @@ const Header = () => {
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
-
-      {/* Slide-in Menu (right side) */}
       {isMobileMenuOpen && (
         <motion.div
           initial={{ x: "100%" }}
@@ -188,8 +191,6 @@ const Header = () => {
                 </NavLink>
               ))}
             </div>
-
-            
             <div className="p-4 border-t space-y-2 md:hidden">
               {isAuthenticated && user ? (
                 <>
@@ -229,8 +230,8 @@ const Header = () => {
           </div>
         </motion.div>
       )}
-    </div>
+    </>
   );
-};
+}
 
 export default Header;
