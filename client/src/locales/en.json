@@ -1,0 +1,208 @@
+{
+  "common": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "blog": "Blog",
+    "news": "News",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "settings": "Settings",
+    "search": "Search",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "view": "View",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "close": "Close"
+  },
+  "header": {
+    "title": "Infant Care Compass",
+    "subtitle": "Your trusted companion for infant care",
+    "navigation": {
+      "home": "Home",
+      "careCoPilot": "Care Co-Pilot",
+      "growthTracker": "Growth Tracker",
+      "learningHub": "Learning Hub",
+      "consultation": "Consultation",
+      "blog": "Blog",
+      "news": "News",
+      "about": "About",
+      "contact": "Contact"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Welcome to Infant Care Compass",
+      "subtitle": "Your comprehensive guide to nurturing and caring for your little one",
+      "description": "Get expert advice, track your baby's growth, connect with healthcare professionals, and access valuable resources all in one place.",
+      "getStarted": "Get Started",
+      "learnMore": "Learn More"
+    },
+    "features": {
+      "growthTracking": {
+        "title": "Growth Tracking",
+        "description": "Monitor your baby's development with our comprehensive growth tracking tools"
+      },
+      "aiAssistant": {
+        "title": "AI Care Assistant",
+        "description": "Get instant answers to your parenting questions with our AI-powered assistant"
+      },
+      "consultation": {
+        "title": "Expert Consultation",
+        "description": "Connect with qualified healthcare professionals for personalized advice"
+      },
+      "learningResources": {
+        "title": "Learning Resources",
+        "description": "Access expert articles, guides, and educational content for new parents"
+      }
+    }
+  },
+  "auth": {
+    "signIn": {
+      "title": "Sign In",
+      "email": "Email",
+      "password": "Password",
+      "forgotPassword": "Forgot Password?",
+      "signInButton": "Sign In",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign Up"
+    },
+    "signUp": {
+      "title": "Create Account",
+      "fullName": "Full Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "signUpButton": "Create Account",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign In"
+    }
+  },
+  "growthTracker": {
+    "title": "Growth Tracker",
+    "subtitle": "Monitor your baby's growth journey",
+    "addEntry": "Add New Entry",
+    "height": "Height (cm)",
+    "weight": "Weight (kg)",
+    "date": "Date",
+    "notes": "Notes",
+    "save": "Save Entry",
+    "entries": "Growth Entries",
+    "chart": "Growth Chart",
+    "insights": "Growth Insights",
+    "stats": "Statistics"
+  },
+  "blog": {
+    "title": "Expert Insights",
+    "subtitle": "Discover evidence-based articles, expert advice, and practical tips",
+    "featured": "Featured Articles",
+    "latest": "Latest Articles",
+    "readMore": "Read More",
+    "categories": {
+      "all": "All",
+      "newbornCare": "Newborn Care",
+      "health": "Health",
+      "nutrition": "Nutrition",
+      "sleep": "Sleep",
+      "safety": "Safety",
+      "development": "Development"
+    },
+    "search": "Search articles...",
+    "noResults": "No articles found",
+    "tryAdjusting": "Try adjusting your search terms or category filters"
+  },
+  "news": {
+    "title": "Latest News & Updates",
+    "subtitle": "Stay informed with the latest developments in childcare, health, and technology",
+    "readMore": "Read More",
+    "loadMore": "Load More Articles"
+  },
+  "admin": {
+    "dashboard": "Admin Dashboard",
+    "analytics": "Analytics",
+    "users": "Users",
+    "doctors": "Doctors",
+    "consultations": "Consultations",
+    "reports": "Reports",
+    "settings": "Settings",
+    "totalUsers": "Total Users",
+    "activeUsers": "Active Users",
+    "totalConsultations": "Total Consultations",
+    "pendingApprovals": "Pending Approvals"
+  },
+  "about": {
+    "title": "About Infant Care Compass",
+    "subtitle": "Empowering Parents, Nurturing Futures",
+    "description": "At Infant Care Compass, we believe that every parent deserves access to reliable, expert guidance for their child's health and development. Our platform combines cutting-edge technology with pediatric expertise to create a supportive community where parents can thrive.",
+    "stats": {
+      "happyParents": "10K+ Happy Parents",
+      "expertDoctors": "50+ Expert Doctors",
+      "consultations": "25K+ Consultations",
+      "availability": "24/7 Support"
+    },
+    "services": {
+      "consultation": {
+        "title": "24/7 Consultation",
+        "description": "We connect parents with pediatric experts for one-on-one virtual consultations, available around the clock. This ensures access to professional advice at any time, making it easier to handle both emergencies and routine health concerns from the comfort of your home.",
+        "features": [
+          "24/7 Availability",
+          "Expert Pediatricians",
+          "Virtual Consultations",
+          "Emergency Support"
+        ]
+      },
+      "education": {
+        "title": "Childcare Education",
+        "description": "Our platform offers a library of expertly curated articles and educational content, guiding parents at every stage of their child's development. From nutrition and safety to growth tips, we ensure you have the knowledge needed for excellent child care.",
+        "features": [
+          "Curated Content",
+          "Development Guides",
+          "Safety Tips",
+          "Nutrition Advice"
+        ]
+      },
+      "news": {
+        "title": "News and Updates",
+        "description": "Stay informed with our regularly updated news section, featuring the latest developments in pediatric health, safety, and childcare practices. We make sure you're equipped with accurate and timely information to make the best decisions for your family.",
+        "features": [
+          "Latest Updates",
+          "Health News",
+          "Safety Alerts",
+          "Expert Insights"
+        ]
+      },
+      "ai": {
+        "title": "AI-Driven First Aid",
+        "description": "Our intelligent AI-powered first aid guide provides parents with step-by-step instructions for handling common infant health issues. Whether it's a fever or minor injury, you can trust our tool to guide you until professional help is available.",
+        "features": [
+          "AI-Powered",
+          "Step-by-Step Guide",
+          "Emergency Response",
+          "Instant Help"
+        ]
+      }
+    },
+    "cta": {
+      "title": "Ready to Get Started?",
+      "description": "Join thousands of parents who trust InfantCareCompass for their child's health and development needs.",
+      "buttons": {
+        "trial": "Start Free Trial",
+        "learnMore": "Learn More"
+      }
+    },
+    "learnMore": "Learn More"
+  }
+}

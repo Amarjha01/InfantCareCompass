@@ -33,6 +33,7 @@ const InputField = ({
         onFocus={onFocus}
         onBlur={onBlur}
         placeholder={placeholder}
+        aria-label={placeholder}
         className={`w-full pl-12 pr-4 py-4 border-2 rounded-xl transition-all duration-300 bg-white ${error
           ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
           : isFocused
@@ -223,6 +224,7 @@ const ContactUs = () => {
                   ? 'bg-gray-400 cursor-not-allowed'
                   : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 hover:scale-105 hover:shadow-xl active:scale-95'
                   } focus:outline-none focus:ring-4 focus:ring-indigo-500/50`}
+                aria-label="Send your contact message to Infant Care Compass support"
               >
                 <div className="flex items-center justify-center space-x-2">
                   {isSubmitting ? (

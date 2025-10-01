@@ -18,6 +18,7 @@ import GrowthTracker from "../pages/GrowthTracker";
 import DoctorDetails from "../pages/DoctorDetails";
 import LearningHub from "../pages/LearningHub";
 import Services from "../pages/Services";
+import AdminDashboard from "../pages/AdminDashboard";
 
 import ConsultationPage from "../pages/consult";
 
@@ -85,6 +86,7 @@ const router = createBrowserRouter([
       { path: "terms-of-service", element: <TermsOfService /> },
       { path: "cookie-policy", element: <CookiePolicy /> },
       { path: "services", element: <Services /> },
+      { path: "admin-dashboard", element: <AdminDashboard /> },
 
       { path: "*", element: <NotFoundPage />, handle: { noLayout: true } },
 

@@ -16,10 +16,13 @@ import {
   LogOut,
   UserCircle,
   TrendingUp,
+  Shield,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import navlogo from "/logo.png";
 import ThemeToggle from "./ThemeToggle";
+import { useTranslation } from "react-i18next";
+import { Globe } from "lucide-react";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -27,6 +30,7 @@ export default function Header() {
   const { user, isAuthenticated } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { i18n, t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -34,11 +38,16 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Handle user logout by clearing local storage and redirecting
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userData');
     dispatch(logout());
     navigate('/');
+  };
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
   };
 
   useEffect(() => {
@@ -53,24 +62,24 @@ export default function Header() {
   }, [isMobileMenuOpen]);
 
   const navItems = [
-    { to: "/", label: "Home", icon: <Home className="w-4 h-4" /> },
-    { to: "/about", label: "About", icon: <User className="w-4 h-4" /> },
-    { to: "/blog", label: "Blog", icon: <BookOpen className="w-4 h-4" /> },
-    { to: "/contactus", label: "Contact", icon: <Mail className="w-4 h-4" /> },
-    { to: "/news", label: "News", icon: <Newspaper className="w-4 h-4" /> },
+    { to: "/", label: t("header.navigation.home"), icon: <Home className="w-4 h-4" /> },
+    { to: "/about", label: t("header.navigation.about"), icon: <User className="w-4 h-4" /> },
+    { to: "/blog", label: t("header.navigation.blog"), icon: <BookOpen className="w-4 h-4" /> },
+    { to: "/contactus", label: t("header.navigation.contact"), icon: <Mail className="w-4 h-4" /> },
+    { to: "/news", label: t("header.navigation.news"), icon: <Newspaper className="w-4 h-4" /> },
     {
       to: "/consultation",
-      label: "Consultation",
+      label: t("header.navigation.consultation"),
       icon: <Phone className="w-4 h-4" />,
     },
     {
       to: "/care-co-pilot",
-      label: "Care Co-Pilot",
+      label: t("header.navigation.careCoPilot"),
       icon: <Heart className="w-4 h-4" />,
     },
     {
       to: "/growth-tracker",
-      label: "Growth Tracker",
+      label: t("header.navigation.growthTracker"),
       icon: <TrendingUp className="w-4 h-4" />,
     },
     {
@@ -78,6 +87,12 @@ export default function Header() {
       label: "Contributors",
       icon: <Users className="w-4 h-4" />,
     },
+    // Admin dashboard - only show for admin users
+    ...(user?.role === 'admin' ? [{
+      to: "/admin-dashboard",
+      label: "Admin Dashboard",
+      icon: <Shield className="w-4 h-4" />,
+    }] : []),
   ];
 
   return (
@@ -96,7 +111,7 @@ export default function Header() {
 
               <img
                 src={navlogo}
-                alt="Logo"
+                alt="InfantCare Compass logo"
                 className="h-12 w-12 rounded-full shadow-lg"
               />
               <div className="leading-tight">
@@ -131,11 +146,44 @@ export default function Header() {
               ))}
             </div>
 
+
+            {/* Theme Toggle & Language Switcher */}
+            <div className="hidden lg:flex items-center ml-2 mr-4 gap-2">
+
             {/* Theme Toggle */}
 
             <div className="hidden lg:flex items-center gap-3 ml-auto">
 
+
               <ThemeToggle />
+              
+              {/* Language Switcher */}
+              <div className="relative">
+                <button className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-purple-100 dark:hover:bg-gray-800 rounded-full transition-all duration-300" aria-label="Select language - current language is English">
+                  <Globe className="w-4 h-4" />
+                  <span className="uppercase">{i18n.language}</span>
+                </button>
+                <div className="absolute top-full right-0 mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg py-1 min-w-[80px] z-50">
+                  <button
+                    onClick={() => changeLanguage('en')}
+                    className={`w-full text-left px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
+                      i18n.language === 'en' ? 'bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-400' : 'text-gray-700 dark:text-gray-200'
+                    }`}
+                    aria-label="Switch to English language"
+                  >
+                    English
+                  </button>
+                  <button
+                    onClick={() => changeLanguage('hi')}
+                    className={`w-full text-left px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
+                      i18n.language === 'hi' ? 'bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-400' : 'text-gray-700 dark:text-gray-200'
+                    }`}
+                    aria-label="Switch to Hindi language"
+                  >
+                    हिंदी
+                  </button>
+                </div>
+              </div>
             </div>
 
             {/* Auth Buttons */}
@@ -162,13 +210,13 @@ export default function Header() {
                     to="/signin"
                     className="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-4 py-1.5 text-sm font-medium rounded-full transition whitespace-nowrap"
                   >
-                    Sign In
+                    {t("common.login")}
                   </Link>
                   <Link
                     to="/registration"
                     className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-1.5 ml-2 text-sm font-semibold rounded-full shadow hover:scale-105 transition-transform whitespace-nowrap"
                   >
-                    Get Started
+                    {t("common.register")}
                   </Link>
                 </>
               )}
@@ -231,9 +279,33 @@ export default function Header() {
                 </NavLink>
               ))}
               
-              {/* Theme Toggle in Mobile Menu */}
-              <div className="flex items-center justify-center p-3 mt-4">
+              {/* Theme Toggle & Language Switcher in Mobile Menu */}
+              <div className="flex items-center justify-center gap-4 p-3 mt-4">
                 <ThemeToggle />
+                
+                {/* Mobile Language Switcher */}
+                <div className="flex bg-gray-100 dark:bg-gray-800 rounded-full p-1">
+                  <button
+                    onClick={() => changeLanguage('en')}
+                    className={`px-3 py-1 text-sm font-medium rounded-full transition-all duration-300 ${
+                      i18n.language === 'en'
+                        ? 'bg-white dark:bg-gray-700 text-purple-600 dark:text-purple-400 shadow'
+                        : 'text-gray-600 dark:text-gray-300'
+                    }`}
+                  >
+                    EN
+                  </button>
+                  <button
+                    onClick={() => changeLanguage('hi')}
+                    className={`px-3 py-1 text-sm font-medium rounded-full transition-all duration-300 ${
+                      i18n.language === 'hi'
+                        ? 'bg-white dark:bg-gray-700 text-purple-600 dark:text-purple-400 shadow'
+                        : 'text-gray-600 dark:text-gray-300'
+                    }`}
+                  >
+                    हिंदी
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -261,14 +333,14 @@ export default function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="w-full text-purple-600 border border-purple-600 px-4 py-2 rounded-full text-center text-sm font-medium hover:bg-purple-600 hover:text-white transition"
                   >
-                    Sign In
+                    {t("common.login")}
                   </Link>
                   <Link
                     to="/registration"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="w-full bg-gradient-to-r from-pink-500 to-purple-600 px-4 py-2 text-white rounded-full text-center text-sm font-semibold hover:scale-105 transition-transform"
                   >
-                    Get Started
+                    {t("common.register")}
                   </Link>
                 </>
               )}

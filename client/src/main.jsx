@@ -7,6 +7,7 @@ import { store } from './store/store.jsx';
 import MagicCursorTrail from "./components/magiccursortrail.jsx"
 import Loader from "./components/Loader.jsx";
 import { useState, useEffect } from "react";
+import './i18n';
 
 // Ensure initial theme is applied before React mounts to avoid flashes
 (function applyInitialTheme() {

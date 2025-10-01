@@ -277,7 +277,7 @@ export default function Registration() {
     <div className="main-body flex">
       {/* Left Section */}
       <div className="w-2/5 h-screen fixed flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600">
-        <img src={Baby} alt="Baby" className="max-w-xs md:max-w-sm lg:max-w-md" />
+        <img src={Baby} alt="Cute baby illustration welcoming users to InfantCare Compass" className="max-w-xs md:max-w-sm lg:max-w-md" />
       </div>
 
     {/* Right Section */}

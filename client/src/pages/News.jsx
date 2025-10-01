@@ -79,6 +79,8 @@ const categoryColors = {
 const News = () => {
   const [likedArticles, setLikedArticles] = useState(new Set());
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
   const navigate = useNavigate();
 
   const toggleLike = (articleId) => {
@@ -89,6 +91,12 @@ const News = () => {
       return newSet;
     });
   };
+
+  // Pagination logic
+  const totalPages = Math.ceil(newsData.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentNews = newsData.slice(startIndex, endIndex);
 
   const NewsCard = ({ news, index }) => {
     const isLiked = likedArticles.has(news.id);
@@ -241,7 +249,7 @@ const News = () => {
       {/* News Grid */}
       <div className="max-w-6xl mx-auto px-4 pb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {newsData.map((news, index) => (
+          {currentNews.map((news, index) => (
             <div key={news.id} className="animate-slideUp h-full">
               <NewsCard news={news} index={index} />
             </div>
@@ -249,12 +257,61 @@ const News = () => {
         </div>
       </div>
 
-      {/* Load More */}
-      <div className="text-center pb-20">
-        <button className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
-          Load More Articles
-        </button>
-      </div>
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="text-center pb-20">
+          <div className="flex items-center justify-center space-x-2 mb-4">
+            {/* Previous Button */}
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                currentPage === 1
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:scale-105 shadow-lg"
+              }`}
+            >
+              ← Previous
+            </button>
+
+            {/* Page Numbers */}
+            <div className="flex space-x-1">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`px-3 py-2 rounded-lg font-medium transition-all duration-300 ${
+                    currentPage === page
+                      ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+
+            {/* Next Button */}
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                currentPage === totalPages
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:scale-105 shadow-lg"
+              }`}
+            >
+              Next →
+            </button>
+          </div>
+
+          {/* Page Info */}
+          <div className="text-gray-600">
+            Showing {startIndex + 1}-{Math.min(endIndex, newsData.length)} of {newsData.length} articles
+            {totalPages > 1 && ` (Page ${currentPage} of ${totalPages})`}
+          </div>
+        </div>
+      )}
 
 
       <style>{`
