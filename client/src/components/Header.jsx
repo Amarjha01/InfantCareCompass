@@ -58,50 +58,26 @@ export default function Header() {
     { to: "/blog", label: "Blog", icon: <BookOpen className="w-4 h-4" /> },
     { to: "/contactus", label: "Contact", icon: <Mail className="w-4 h-4" /> },
     { to: "/news", label: "News", icon: <Newspaper className="w-4 h-4" /> },
-    {
-      to: "/consultation",
-      label: "Consultation",
-      icon: <Phone className="w-4 h-4" />,
-    },
-    {
-      to: "/care-co-pilot",
-      label: "Care Co-Pilot",
-      icon: <Heart className="w-4 h-4" />,
-    },
-    {
-      to: "/growth-tracker",
-      label: "Growth Tracker",
-      icon: <TrendingUp className="w-4 h-4" />,
-    },
-    {
-      to: "/contributors",
-      label: "Contributors",
-      icon: <Users className="w-4 h-4" />,
-    },
+    { to: "/consultation", label: "Consultation", icon: <Phone className="w-4 h-4" /> },
+    { to: "/care-co-pilot", label: "Care Co-Pilot", icon: <Heart className="w-4 h-4" /> },
+    { to: "/growth-tracker", label: "Growth Tracker", icon: <TrendingUp className="w-4 h-4" /> },
+    { to: "/contributors", label: "Contributors", icon: <Users className="w-4 h-4" /> },
   ];
 
   return (
     <>
       <div
-        className={`fixed top-0 left-0 h-[80px] flex items-center right-0 z-50 transition-all duration-300 
-          ${isScrolled ? "shadow-md" : ""} 
+        className={`fixed top-0 left-0 right-0 h-[80px] flex items-center z-50 transition-all duration-300
+          ${isScrolled ? "shadow-md" : ""}
           bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700`}
       >
         <div className="w-full px-4 py-2">
           <div className="max-w-screen-xl mx-auto flex items-center justify-between">
             <Link to="/" className="flex items-center gap-4">
-              <img
-                src={navlogo}
-                alt="Logo"
-                className="h-16 w-16 rounded-full shadow-lg"
-              />
+              <img src={navlogo} alt="Logo" className="h-16 w-16 rounded-full shadow-lg" />
               <div className="leading-tight">
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  InfantCare
-                </h1>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Compass
-                </p>
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">InfantCare</h1>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Compass</p>
               </div>
             </Link>
 
@@ -113,8 +89,7 @@ export default function Header() {
                   <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-full">
                     <UserCircle className="w-5 h-5 text-purple-600" />
                     <span className="text-sm font-medium text-purple-800">
-                      {user.name} (
-                      {user.role === "doctor" ? "Doctor" : "Patient"})
+                      {user.name} ({user.role === "doctor" ? "Doctor" : "Patient"})
                     </span>
                   </div>
                   <button
@@ -175,9 +150,7 @@ export default function Header() {
         >
           <div className="h-full flex flex-col">
             <div className="p-4 border-b flex justify-between items-center">
-              <span className="font-bold text-gray-900 dark:text-white">
-                Menu
-              </span>
+              <span className="font-bold text-gray-900 dark:text-white">Menu</span>
               <button onClick={() => setIsMobileMenuOpen(false)}>
                 <X className="w-7 h-7 text-gray-900 dark:text-white" />
               </button>
@@ -203,8 +176,7 @@ export default function Header() {
                   <div className="flex items-center gap-2 px-4 py-2 bg-purple-50 rounded-full mb-2">
                     <UserCircle className="w-4 h-4 text-purple-600" />
                     <span className="text-sm font-medium text-purple-800">
-                      {user.name} (
-                      {user.role === "doctor" ? "Doctor" : "Patient"})
+                      {user.name} ({user.role === "doctor" ? "Doctor" : "Patient"})
                     </span>
                   </div>
                   <button
