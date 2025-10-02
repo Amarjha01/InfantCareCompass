@@ -97,7 +97,7 @@ const News = () => {
 
     return (
       <div
-        className={`group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 flex flex-col h-full`}
+        className={`group relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 flex flex-col h-full`}
         style={{ animationDelay: `${index * 0.1}s` }}
         onMouseEnter={() => setHoveredCard(news.id)}
         onMouseLeave={() => setHoveredCard(null)}
@@ -168,24 +168,24 @@ const News = () => {
             >
               {news.category}
             </span>
-            <div className="flex items-center text-gray-500 text-sm">
+            <div className="flex items-center text-gray-400 text-sm">
               <Calendar className="w-4 h-4 mr-1" />
               {news.date}
             </div>
           </div>
 
           {/* Title */}
-          <h2 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-indigo-600 transition-colors duration-300">
+          <h2 className="text-xl font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors duration-300">
             {news.title}
           </h2>
 
           {/* Description */}
-          <p className="text-gray-600 mb-4 line-clamp-3 flex-grow">{news.description}</p>
+          <p className="text-gray-300 mb-4 line-clamp-3 flex-grow">{news.description}</p>
 
           {/* Footer */}
           <div className="mt-auto">
             <div className="flex items-center justify-between">
-              <div className="flex items-center text-sm text-gray-500">
+              <div className="flex items-center text-sm text-gray-400">
                 <Clock className="w-4 h-4 mr-1" />
                 {news.readTime}
               </div>
@@ -194,14 +194,14 @@ const News = () => {
                 href={news.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center text-indigo-600 hover:text-indigo-800 font-medium transition-colors duration-300 group/btn"
+                className="flex items-center text-indigo-400 hover:text-indigo-300 font-medium transition-colors duration-300 group/btn"
               >
                 <span className="mr-2">Read More</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
               </a>
             </div>
 
-            <div className="mt-4 pt-4 border-t border-gray-100">
+            <div className="mt-4 pt-4 border-t border-gray-600">
               <div className="flex items-center">
                 <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
                   {news.author
@@ -209,7 +209,7 @@ const News = () => {
                     .map((n) => n[0])
                     .join("")}
                 </div>
-                <span className="ml-3 text-sm text-gray-600">By {news.author}</span>
+                <span className="ml-3 text-sm text-gray-300">By {news.author}</span>
               </div>
             </div>
           </div>
@@ -219,7 +219,7 @@ const News = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-white overflow-hidden">
       {/* Header */}
       <div className="relative py-20 px-4">
         <div className="max-w-6xl mx-auto text-center">

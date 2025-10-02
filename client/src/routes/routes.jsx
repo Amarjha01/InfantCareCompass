@@ -39,7 +39,6 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: "about", element: <About /> },
-      { path: "blog", element: <Blog /> },
       { path: "contactus", element: <ContactUs /> },
       { path: "news", element: <News /> },
       { path: "contributors", element: <Contributors /> },
@@ -56,28 +55,6 @@ const router = createBrowserRouter([
           },
         ],
       },
-
-      {
-
-        path: "care-co-pilot",
-        element: <CareCoPilot />,
-      },
-      {
-        path: "*",
-        element: <NotFoundPage />,
-        handle: { noLayout: true },
-      },
-
-      {
-        path: "babyfeeder",
-        element: <BabyFeeder />,
-      },
-      {
-        path: "sleeper",
-        element: <Sleeper />,
-
-      },
-
       { path: "learning-hub", element: <LearningHub /> },
       { path: "vaccine-reminder", element: <VaccineReminder /> },
       { path: "growth-tracker", element: <GrowthTracker /> },
@@ -85,7 +62,6 @@ const router = createBrowserRouter([
       { path: "terms-of-service", element: <TermsOfService /> },
       { path: "cookie-policy", element: <CookiePolicy /> },
       { path: "services", element: <Services /> },
-
       { path: "*", element: <NotFoundPage />, handle: { noLayout: true } },
 
     ],
