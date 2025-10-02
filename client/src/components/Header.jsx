@@ -84,9 +84,9 @@ export default function Header() {
 		<>
 			<div
 				className={`fixed top-0 left-0 h-[80px] flex items-center right-0 z-50 transition-all duration-300 
-        ${isScrolled ? "shadow-md" : ""} 
-        bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700`}
-			>
+					${isScrolled ? "shadow-md" : ""} 
+					bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700`}
+				>
 				<div className="w-full px-4 py-2">
 					<div className="max-w-screen-xl mx-auto flex items-center justify-between">
 						<Link to="/" className="flex items-center gap-4">
