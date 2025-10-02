@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Baby from "./Baby.png"; 
 import {
   User,
   UserCheck,
@@ -272,8 +273,17 @@ export default function Registration() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center py-12 px-4">
-      <div className="w-full max-w-2xl">
+
+    <div className="main-body flex">
+      {/* Left Section */}
+      <div className="w-2/5 h-screen fixed flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600">
+        <img src={Baby} alt="Baby" className="max-w-xs md:max-w-sm lg:max-w-md" />
+      </div>
+
+    {/* Right Section */}
+    <div className="w-3/5 ml-[40%] bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center py-12 px-4">
+      <div className="w-1/2 max-w-2xl text-center">
+      {/* Gradient circle with icon */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-6 shadow-lg">
             <Heart className="w-8 h-8 text-white" />
@@ -456,5 +466,11 @@ export default function Registration() {
         <ToastContainer position="top-center" autoClose={3000} />
       </div>
     </div>
+
+
+    </div>
+
+
+
   );
 }

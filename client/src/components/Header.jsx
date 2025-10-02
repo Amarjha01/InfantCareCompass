@@ -82,7 +82,7 @@ export default function Header() {
 
   return (
     <>
-      <div
+      <div 
         className={`fixed top-0 left-0 h-[80px] flex items-center right-0 z-50 transition-all duration-300 
           ${isScrolled ? "shadow-md" : ""} 
           bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700`}
@@ -105,47 +105,80 @@ export default function Header() {
               </div>
             </Link>
 
-            <div className="flex items-center gap-6">
-              <ThemeToggle />
 
-              {isAuthenticated && user ? (
-                <div className="hidden md:flex items-center gap-3">
-                  <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-full">
-                    <UserCircle className="w-5 h-5 text-purple-600" />
-                    <span className="text-sm font-medium text-purple-800">
-                      {user.name} (
-                      {user.role === "doctor" ? "Doctor" : "Patient"})
-                    </span>
+            <div className="flex items-center gap-6">
+              {/* Desktop Nav */}
+              <div className="hidden lg:flex items-center gap-2 ml-20">
+                {navItems.map(({ to, label, icon }) => (
+                  <NavLink
+                    key={to}
+                    to={to}
+                    className={({ isActive }) =>
+                      `flex items-center gap-1.5 px-2.5 py-1.5 text-sm font-medium rounded-full transition-all duration-300 whitespace-nowrap ${
+                        isActive
+                          ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow"
+                          : "text-gray-700 dark:text-gray-200 hover:bg-purple-100 dark:hover:bg-gray-800 hover:text-purple-600 dark:hover:text-purple-400"
+                      }`
+                    }
+                  >
+                    {icon}
+                    {label}
+                  </NavLink>
+                ))}
+              </div>
+
+              {/* Theme Toggle */}
+              <div className="hidden lg:flex items-center ml-2 mr-4">
+                <ThemeToggle />
+              </div>
+
+              {/* Auth Buttons */}
+              <div className="hidden lg:flex items-center w-150">
+                {isAuthenticated && user ? (
+                  <div className="hidden md:flex items-center gap-3">
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-full">
+                      <UserCircle className="w-5 h-5 text-purple-600" />
+                      <span className="text-sm font-medium text-purple-800">
+                        {user.name} (
+                        {user.role === "doctor" ? "Doctor" : "Patient"})
+                      </span>
+                    </div>
+                    <button
+                      onClick={handleLogout}
+                      className="flex items-center gap-1 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-3 py-1 text-sm font-medium rounded-full transition"
+                    >
+                      <LogOut className="w-5 h-5" />
+                      Logout
+                    </button>
                   </div>
-                  <button
-                    onClick={handleLogout}
-                    className="flex items-center gap-1 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-3 py-1 text-sm font-medium rounded-full transition"
-                  >
-                    <LogOut className="w-5 h-5" />
-                    Logout
-                  </button>
-                </div>
-              ) : (
-                <div className="hidden md:flex items-center gap-4">
-                  <Link
-                    to="/signin"
-                    className="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-3 py-1.5 text-sm font-medium rounded-full transition"
-                  >
-                    Sign In
-                  </Link>
-                  <Link
-                    to="/registration"
-                    className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-1.5 text-sm font-semibold rounded-full shadow hover:scale-105 transition-transform"
-                  >
-                    Get Started
-                  </Link>
-                </div>
-              )}
+                ) : (
+					<div className="hidden md:flex items-center gap-4">
+					<Link
+						to="/signin"
+
+						className="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-3 py-1.5 text-sm font-medium rounded-full transition"
+
+						
+					>
+						Sign In
+					</Link>
+					<Link
+						to="/registration"
+
+						className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-1.5 text-sm font-semibold rounded-full shadow hover:scale-105 transition-transform"
+
+					
+					>
+						Get Started
+					</Link>
+                  </div>
+                )}
+              </div>
 
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle menu"
-                className="p-2 rounded-md bg-purple-100 dark:bg-gray-100 hover:bg-purple-200 dark:hover:bg-gray-200"
+                className="lg:hidden p-2 rounded-md bg-purple-100 dark:bg-gray-100 hover:bg-purple-200 dark:hover:bg-gray-200"
               >
                 {isMobileMenuOpen ? (
                   <X className="w-7 h-7 text-gray-900 dark:text-gray-800" />
@@ -165,6 +198,7 @@ export default function Header() {
         />
       )}
 
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <motion.div
           initial={{ x: "100%" }}
@@ -240,4 +274,3 @@ export default function Header() {
     </>
   );
 }
-
