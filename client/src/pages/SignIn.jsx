@@ -336,6 +336,15 @@ export default function Signin() {
   };
 
   
+const handleGitHubLogin = async () => {
+  try {
+    toast.info("GitHub login feature is coming soon! Please use email/password login.");
+  } catch (error) {
+    console.error("GitHub login error:", error);
+    toast.error("GitHub login is currently unavailable. Please use email login.");
+  }
+};
+  
   
    return (
     <> 
