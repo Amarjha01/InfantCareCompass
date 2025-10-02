@@ -27,19 +27,17 @@ const InputField = ({
       <Component
         name={name}
         type={type}
-        rows={rows}
         value={value}
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
         placeholder={placeholder}
-        className={`w-full pl-12 pr-4 py-4 border-2 rounded-xl transition-all duration-300 bg-white ${error
+        className={`w-full pl-12 pr-4 py-4 border-2 rounded-xl transition-all duration-300 bg-white text-gray-900 placeholder-gray-500 ${error
           ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
           : isFocused
             ? 'border-indigo-500 focus:border-indigo-600 focus:ring-indigo-500/20 shadow-lg'
             : 'border-gray-200 hover:border-gray-300'
           } focus:outline-none focus:ring-4 ${rows ? 'resize-none' : ''}`}
-        style={{ backgroundColor: value === '' ? '#f3e8ff' : 'white' }} // Light placeholder color when empty
       />
 
       {error && (
