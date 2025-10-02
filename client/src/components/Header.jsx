@@ -87,9 +87,11 @@ const Header = () => {
           ${isScrolled ? "shadow-md" : ""} 
           bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700`}
       >
+
         <div className="w-full px-4 py-2">
           <div className="max-w-screen-xl mx-auto flex items-center justify-between">
             <Link to="/" className="flex items-center gap-4">
+
               <img
                 src={navlogo}
                 alt="Logo"
@@ -105,8 +107,32 @@ const Header = () => {
               </div>
             </Link>
 
+
             <div className="flex items-center gap-6">
-              <ThemeToggle />
+              {/* Desktop Nav */}
+              <div className="hidden lg:flex items-center gap-2 ml-20">
+                {navItems.map(({ to, label, icon }) => (
+                  <NavLink
+                    key={to}
+                    to={to}
+                    className={({ isActive }) =>
+                      `flex items-center gap-1.5 px-2.5 py-1.5 text-sm font-medium rounded-full transition-all duration-300 whitespace-nowrap ${
+                        isActive
+                          ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow"
+                          : "text-gray-700 dark:text-gray-200 hover:bg-purple-100 dark:hover:bg-gray-800 hover:text-purple-600 dark:hover:text-purple-400"
+                      }`
+                    }
+                  >
+                    {icon}
+                    {label}
+                  </NavLink>
+                ))}
+              </div>
+
+              {/* Theme Toggle */}
+              <div className="hidden lg:flex items-center ml-2 mr-4">
+                <ThemeToggle />
+              </div>
 
 							{isAuthenticated && user ? (
 								<div className="hidden md:flex items-center gap-3">
