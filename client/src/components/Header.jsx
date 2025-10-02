@@ -87,9 +87,11 @@ export default function Header() {
           ${isScrolled ? "shadow-md" : ""} 
           bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700`}
       >
+
         <div className="w-full px-4 py-2">
           <div className="max-w-screen-xl mx-auto flex items-center justify-between">
             <Link to="/" className="flex items-center gap-4">
+
               <img
                 src={navlogo}
                 alt="Logo"
@@ -104,6 +106,7 @@ export default function Header() {
                 </p>
               </div>
             </Link>
+
 
 
             <div className="flex items-center gap-6">
@@ -126,6 +129,7 @@ export default function Header() {
                   </NavLink>
                 ))}
               </div>
+
 
               {/* Theme Toggle */}
               <div className="hidden lg:flex items-center ml-2 mr-4">
