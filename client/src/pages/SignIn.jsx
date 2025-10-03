@@ -206,6 +206,22 @@ export default function Signin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // In SignIn.jsx
+  const handleGitHubLogin = () => {
+    const backendUrl = import.meta.env.VITE_API_BASE_URL;
+    if (!backendUrl) {
+      console.error("VITE_API_BASE_URL is not defined!");
+      return;
+    }
+
+    // This is the correct route: /api/auth/github
+    window.location.href = `${backendUrl}/api/auth/github`; 
+
+    // The old, now-missing route: window.location.href = `${backendUrl}/api/github/oauth/login`;
+  };
+  
+  
+
   const validateForm = () => {
     const newErrors = {};
 
