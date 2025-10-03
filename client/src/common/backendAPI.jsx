@@ -1,34 +1,38 @@
-const backendDomain = "http://localhost:5000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 const commnApiEndpoint = {
    register:{
-    url:`${backendDomain}/api/signup`,
+    url:`${API_BASE_URL}/api/signup`,
     method:'post'
    },
    signin:{
-    url:`${backendDomain}/api/signin`,
+    url:`${API_BASE_URL}/api/signin`,
     method:'post'
    },
    logout:{
-    url:`${backendDomain}/api/logout`,
+    url:`${API_BASE_URL}/api/logout`,
     method:'post'
    },
    doctorInfo:{
-    url:`${backendDomain}/api/doctorinfo`,
+    url:`${API_BASE_URL}/api/doctorinfo`,
     method:'get'
    },
    submitQuestion:{
-    url:`${backendDomain}/api/questions`,
+    url:`${API_BASE_URL}/api/questions`,
     method:'post'
    },
    getQuestions:{
-    url:`${backendDomain}/api/questions`,
+    url:`${API_BASE_URL}/api/questions`,
     method:'get'
    },
    newsletter:{
-    url:`${backendDomain}/api/subscribe-newsletter`,
+    url:`${API_BASE_URL}/api/subscribe-newsletter`,
     method:'post'
    },
+   getUserInfo:{
+    url:`${API_BASE_URL}/api/user/me`,
+    method:'get'
+   }
 }
 
 export default commnApiEndpoint;
