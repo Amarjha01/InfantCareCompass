@@ -69,8 +69,8 @@ export default function Header() {
           <Link to="/" className="flex items-center gap-3 flex-shrink-0">
             <img src={navlogo} alt="Logo" className="h-16 w-16 rounded-full shadow-lg" />
             <div className="leading-tight">
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">InfantCare</h1>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Compass</p>
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white">InfantCare</h1>
+              <p className="text-xm text-gray-600 dark:text-gray-400">Compass</p>
             </div>
           </Link>
 

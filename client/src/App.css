@@ -17,3 +17,92 @@
 .custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
+/* ===== Navbar Base Styles ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.navbar-toggle {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ===== Small Phones (max-width: 480px) ===== */
+@media (max-width: 480px) {
+  .navbar-links {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .navbar-toggle {
+    display: block;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+  }
+}
+
+/* ===== Medium Phones (481px – 768px) ===== */
+@media (min-width: 481px) and (max-width: 768px) {
+  .navbar-links {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .navbar-toggle {
+    display: block;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+  }
+}
+
+/* ===== Tablets (769px – 1024px) ===== */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .navbar-links {
+    gap: 1.25rem;
+    font-size: 1rem;
+  }
+}
+
+/* ===== Laptops (1025px – 1440px) ===== */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .navbar-links {
+    gap: 1.5rem;
+    font-size: 1.05rem;
+  }
+}
+
+/* ===== Desktops (1441px and up) ===== */
+@media (min-width: 1441px) {
+  .navbar-links {
+    gap: 2rem;
+    font-size: 1.1rem;
+  }
+}
