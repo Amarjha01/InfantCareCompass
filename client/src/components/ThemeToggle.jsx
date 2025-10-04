@@ -21,11 +21,14 @@ const ThemeToggle = () => {
           isDarkMode ? 'opacity-0' : 'opacity-100'
         }`}
       />
-      <Moon
-        className={`absolute right-1.5 h-4 w-4 text-blue-400 transition-opacity duration-300 ${
-          isDarkMode ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
+      
+      <div className="relative flex items-center justify-center h-10 w-10">
+        <Moon
+          className={`h-6 w-6 text-blue-400 transition-opacity duration-300 ${
+            isDarkMode ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+      </div>
     </button>
   );
 };
