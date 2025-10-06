@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-
 // Pages
 import HomePage from "../pages/Home";
 import About from "../pages/About";
@@ -20,8 +19,8 @@ import LearningHub from "../pages/LearningHub";
 import Services from "../pages/Services";
 import AdminDashboard from "../pages/AdminDashboard";
 
-import ConsultationPage from "../pages/consult";
 
+import ConsultationPage from "../pages/consult"; 
 
 // Components
 import BabyFeeder from "../components/BabyFeeder";
@@ -31,7 +30,6 @@ import PrivacyPolicy from "../pages/PrivacyPolicy";
 import TermsOfService from "../pages/TermsOfService";
 import CookiePolicy from "../pages/CookiePolicy";
 import OAuthSuccess from "../pages/OAuthSuccess";
-
 
 const router = createBrowserRouter([
   {
@@ -86,7 +84,7 @@ const router = createBrowserRouter([
       { path: "terms-of-service", element: <TermsOfService /> },
       { path: "cookie-policy", element: <CookiePolicy /> },
       { path: "services", element: <Services /> },
-      { path: "admin-dashboard", element: <AdminDashboard /> },
+      { path: "github-login-redirect", element: <githubLoginRedirect/> },
 
       { path: "*", element: <NotFoundPage />, handle: { noLayout: true } },
 
@@ -104,3 +102,4 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
+
