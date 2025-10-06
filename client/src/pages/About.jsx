@@ -12,10 +12,12 @@ import {
   CheckCircle,
   Sparkles,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeCard, setActiveCard] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setIsVisible(true);
@@ -24,62 +26,58 @@ const About = () => {
   const services = [
     {
       id: 1,
-      title: "24/7 Consultation",
+      title: t('about.services.consultation.title'),
       icon: <Clock className="w-8 h-8" />,
-      description:
-        "We connect parents with pediatric experts for one-on-one virtual consultations, available around the clock. This ensures access to professional advice at any time, making it easier to handle both emergencies and routine health concerns from the comfort of your home.",
+      description: t('about.services.consultation.description'),
       gradient: "from-amber-400 via-orange-500 to-yellow-500",
       bgColor: "bg-gradient-to-br from-amber-50 to-orange-50",
       features: [
-        "24/7 Availability",
-        "Expert Pediatricians",
-        "Virtual Consultations",
-        "Emergency Support",
+        t('about.services.consultation.features[0]'),
+        t('about.services.consultation.features[1]'),
+        t('about.services.consultation.features[2]'),
+        t('about.services.consultation.features[3]'),
       ],
     },
     {
       id: 2,
-      title: "Childcare Education",
+      title: t('about.services.education.title'),
       icon: <BookOpen className="w-8 h-8" />,
-      description:
-        "Our platform offers a library of expertly curated articles and educational content, guiding parents at every stage of their child's development. From nutrition and safety to growth tips, we ensure you have the knowledge needed for excellent child care.",
+      description: t('about.services.education.description'),
       gradient: "from-blue-500 via-purple-500 to-indigo-600",
       bgColor: "bg-gradient-to-br from-blue-50 to-purple-50",
       features: [
-        "Curated Content",
-        "Development Guides",
-        "Safety Tips",
-        "Nutrition Advice",
+        t('about.services.education.features[0]'),
+        t('about.services.education.features[1]'),
+        t('about.services.education.features[2]'),
+        t('about.services.education.features[3]'),
       ],
     },
     {
       id: 3,
-      title: "News and Updates",
+      title: t('about.services.news.title'),
       icon: <Newspaper className="w-8 h-8" />,
-      description:
-        "Stay informed with our regularly updated news section, featuring the latest developments in pediatric health, safety, and childcare practices. We make sure you're equipped with accurate and timely information to make the best decisions for your family.",
+      description: t('about.services.news.description'),
       gradient: "from-green-500 via-teal-500 to-cyan-600",
       bgColor: "bg-gradient-to-br from-green-50 to-teal-50",
       features: [
-        "Latest Updates",
-        "Health News",
-        "Safety Alerts",
-        "Expert Insights",
+        t('about.services.news.features[0]'),
+        t('about.services.news.features[1]'),
+        t('about.services.news.features[2]'),
+        t('about.services.news.features[3]'),
       ],
     },
     {
       id: 4,
-      title: "AI-Driven First Aid",
+      title: t('about.services.ai.title'),
       icon: <Heart className="w-8 h-8" />,
-      description:
-        "Our intelligent AI-powered first aid guide provides parents with step-by-step instructions for handling common infant health issues. Whether it's a fever or minor injury, you can trust our tool to guide you until professional help is available.",
+      description: t('about.services.ai.description'),
       gradient: "from-pink-500 via-rose-500 to-red-500",
       bgColor: "bg-gradient-to-br from-pink-50 to-rose-50",
       features: [
-        "AI-Powered",
-        "Step-by-Step Guide",
-        "Emergency Response",
-        "Instant Help",
+        t('about.services.ai.features[0]'),
+        t('about.services.ai.features[1]'),
+        t('about.services.ai.features[2]'),
+        t('about.services.ai.features[3]'),
       ],
     },
   ];
@@ -104,23 +102,23 @@ const About = () => {
 
   const stats = [
     {
-      number: "50K+",
-      label: "Happy Parents",
+      number: t('about.stats.happyParents'),
+      label: t('about.stats.happyParents'),
       icon: <Users className="w-6 h-6" />,
     },
     {
-      number: "24/7",
-      label: "Expert Support",
+      number: t('about.stats.availability'),
+      label: t('about.stats.availability'),
       icon: <Shield className="w-6 h-6" />,
     },
     {
-      number: "98%",
-      label: "Satisfaction Rate",
+      number: t('about.stats.expertDoctors'),
+      label: t('about.stats.expertDoctors'),
       icon: <Star className="w-6 h-6" />,
     },
     {
-      number: "1000+",
-      label: "Health Articles",
+      number: t('about.stats.consultations'),
+      label: t('about.stats.consultations'),
       icon: <BookOpen className="w-6 h-6" />,
     },
   ];
@@ -154,17 +152,11 @@ const About = () => {
               </div>
 
               <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
-                About Us
+                {t('about.title')}
               </h1>
 
               <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                At{" "}
-                <span className="font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  InfantCareCompass
-                </span>
-                , we are committed to supporting parents and caregivers by
-                offering comprehensive child care services, including 24/7
-                consultations, insightful news, and educational resources.
+                {t('about.description')}
               </p>
             </div>
           </div>
@@ -286,8 +278,8 @@ const About = () => {
 
                     {/* Learn More Button */}
                     <div className="mt-8">
-                      <button className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 font-medium transition-all duration-300 group-hover:gap-4">
-                        <span>Learn More</span>
+                      <button className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 font-medium transition-all duration-300 group-hover:gap-4" aria-label="Learn more about this service feature">
+                        <span>{t('about.learnMore')}</span>
                         <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>
@@ -306,18 +298,17 @@ const About = () => {
           <div className="container mx-auto max-w-4xl">
             <div className="text-center bg-gradient-to-r from-purple-600/20 to-pink-600/20 backdrop-blur-sm border border-purple-500/30 rounded-3xl p-12">
               <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
-                Ready to Get Started?
+                {t('about.cta.title')}
               </h2>
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                Join thousands of parents who trust InfantCareCompass for their
-                child's health and development needs.
+                {t('about.cta.description')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25">
-                  Start Free Trial
+                <button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25" aria-label="Start your free trial of Infant Care Compass">
+                  {t('about.cta.buttons.trial')}
                 </button>
-                <button className="bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105">
-                  Learn More
+                <button className="bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105" aria-label="Learn more about Infant Care Compass features and benefits">
+                  {t('about.cta.buttons.learnMore')}
                 </button>
               </div>
             </div>

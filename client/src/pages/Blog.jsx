@@ -123,6 +123,8 @@ const Blog = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [likedPosts, setLikedPosts] = useState(new Set());
   const [isVisible, setIsVisible] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   const filteredBlogs = blogs.filter((blog) => {
     const matchesCategory =
@@ -133,8 +135,19 @@ const Blog = () => {
     return matchesCategory && matchesSearch;
   });
 
-  const featuredBlogs = filteredBlogs.filter((blog) => blog.featured);
-  const regularBlogs = filteredBlogs.filter((blog) => !blog.featured);
+  // Pagination logic
+  const totalPages = Math.ceil(filteredBlogs.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentBlogs = filteredBlogs.slice(startIndex, endIndex);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, searchTerm]);
+
+  const featuredBlogs = currentBlogs.filter((blog) => blog.featured);
+  const regularBlogs = currentBlogs.filter((blog) => !blog.featured);
 
   const handleLike = (blogId) => {
     setLikedPosts((prev) => {
@@ -400,15 +413,59 @@ const Blog = () => {
           </div>
         )}
 
-        {/* Load More Button */}
-        {filteredBlogs.length > 0 && (
-          <div className="text-center mt-16">
-            <button className="group px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30">
-              <div className="flex items-center gap-2">
-                Load More Articles
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </div>
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center mt-16 space-x-2">
+            {/* Previous Button */}
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                currentPage === 1
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:scale-105 shadow-lg hover:shadow-blue-500/30"
+              }`}
+            >
+              ← Previous
             </button>
+
+            {/* Page Numbers */}
+            <div className="flex space-x-1">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`px-3 py-2 rounded-lg font-medium transition-all duration-300 ${
+                    currentPage === page
+                      ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
+                      : "bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white"
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+
+            {/* Next Button */}
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                currentPage === totalPages
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:scale-105 shadow-lg hover:shadow-blue-500/30"
+              }`}
+            >
+              Next →
+            </button>
+          </div>
+        )}
+
+        {/* Page Info */}
+        {filteredBlogs.length > 0 && (
+          <div className="text-center mt-8 text-gray-400">
+            Showing {startIndex + 1}-{Math.min(endIndex, filteredBlogs.length)} of {filteredBlogs.length} articles
+            {totalPages > 1 && ` (Page ${currentPage} of ${totalPages})`}
           </div>
         )}
       </div>

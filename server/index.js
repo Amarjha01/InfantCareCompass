@@ -64,13 +64,15 @@ app.use('/api', router);
 //   }
 // });
 
+// GitHub webhook routes for handling repository events
 app.use("/api/github", githubWebhook);
 // app.use('/api/github/oauth', githubOAuth);
 //error handling 
 app.use((req,res,next)=>{
   res.status(404).json({message:'Route Not Found'});
 });
-//500 error handling
+
+// 500 handler for server errors
 app.use((err,req,res,next)=>{
   console.error(err.stack);
   res.status(500).json({message:'internal server error'});

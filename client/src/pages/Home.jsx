@@ -20,9 +20,11 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const HomePage = () => {
-  const navigate = useNavigate(); // ✅ Add this if missing
+  const navigate = useNavigate(); // Hook for programmatic navigation
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState({});
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -210,23 +212,7 @@ const HomePage = () => {
 
             <div className="max-w-3xl mx-auto">
               <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed">
-                Revolutionary AI-powered platform transforming how parents
-                navigate their child's early years with
-                <span className="text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text font-semibold">
-                  {" "}
-                  confidence
-                </span>
-                ,
-                <span className="text-transparent bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text font-semibold">
-                  {" "}
-                  support
-                </span>
-                , and
-                <span className="text-transparent bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text font-semibold">
-                  {" "}
-                  love
-                </span>
-                .
+                {t('home.hero.description')}
               </p>
             </div>
 
@@ -234,10 +220,11 @@ const HomePage = () => {
               <button
                 className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30"
                 onClick={() => navigate("/signin")}
+                aria-label="Start your journey with Infant Care Compass - sign in to access features"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
                 <div className="relative flex items-center gap-2">
-                  Start Your Journey
+                  {t('home.hero.getStarted')}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </button>
@@ -248,6 +235,7 @@ const HomePage = () => {
                   const demoSection = document.getElementById("demo");
                   demoSection.scrollIntoView({ behavior: "smooth" });
                 }}
+                aria-label="Watch demo video to learn about Infant Care Compass features"
               >
                 <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 Watch Demo
@@ -345,7 +333,7 @@ const HomePage = () => {
                       />
                     </div>
 
-                    <button className="text-blue-400 hover:text-blue-300 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
+                    <button className="text-blue-400 hover:text-blue-300 font-medium flex items-center gap-2 group-hover:gap-3 transition-all" aria-label="Learn more about this service">
                       <Link to={service.link}>Learn More</Link>
                       <ArrowRight className="w-4 h-4" />
                     </button>
@@ -433,6 +421,7 @@ const HomePage = () => {
                hover:from-pink-600 hover:to-rose-600
                 focus:outline-none focus:ring-4 focus:ring-pink-300/50
               "
+              aria-label="Join the Infant Care Compass community - sign in to connect with other parents"
               >
                 Join Our Community
               </button>
@@ -453,7 +442,7 @@ const HomePage = () => {
                   <div className="group relative overflow-hidden rounded-2xl">
                     <img
                       src={src}
-                      alt={`Happy moment ${index + 1}`}
+                      alt="Happy family moment with newborn baby"
                       className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -490,12 +479,12 @@ const HomePage = () => {
               ></iframe>
             </div>
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group hover:bg-white/30 transition-all duration-300 cursor-pointer">
+              <button className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group hover:bg-white/30 transition-all duration-300 cursor-pointer" aria-label="Play demo video">
                 <Play
                   className="w-12 h-12 text-white ml-2 group-hover:scale-110 transition-transform"
                   fill="currentColor"
                 />
-              </div>
+              </button>
             </div>
           </div>
 
@@ -606,7 +595,7 @@ const HomePage = () => {
     </Swiper>
 
    {/* Custom Prev Button */}
-<button className="custom-prev absolute left-6 top-1/2 -translate-y-1/2 z-20">
+<button className="custom-prev absolute left-6 top-1/2 -translate-y-1/2 z-20" aria-label="Previous testimonial">
   <div className="relative group">
     <svg className="w-14 h-14 transform -rotate-90" viewBox="0 0 56 56">
       <circle cx="28" cy="28" r="24" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="3" />
@@ -627,7 +616,7 @@ const HomePage = () => {
 </button>
 
 {/* Custom Next Button */}
-<button className="custom-next absolute right-6 top-1/2 -translate-y-1/2 z-20">
+<button className="custom-next absolute right-6 top-1/2 -translate-y-1/2 z-20" aria-label="Next testimonial">
   <div className="relative group">
     <svg className="w-14 h-14 transform -rotate-90" viewBox="0 0 56 56">
       <circle cx="28" cy="28" r="24" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="3" />
@@ -661,6 +650,7 @@ const HomePage = () => {
               <button
                 className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30"
                 onClick={() => navigate("/signin")}
+                aria-label="Get started with Infant Care Compass for free - sign in to begin your journey"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
                 <div className="relative flex justify-center items-center gap-2">
@@ -672,6 +662,7 @@ const HomePage = () => {
               <button
                 className="px-8 py-4 border-2 border-white/30 rounded-full hover:bg-white/10 transition-all duration-300"
                 onClick={() => navigate("/signin")}
+                aria-label="Schedule a demo to see Infant Care Compass features in action"
               >
                 Schedule Demo
               </button>

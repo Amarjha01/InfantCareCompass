@@ -166,6 +166,7 @@ const Footer = () => {
             <input
               type="email"
               placeholder="Enter your email"
+              aria-label="Email address for newsletter subscription"
               required
               className="w-full px-4 py-3 bg-white/15 backdrop-blur-sm border border-white/30 rounded-xl focus:outline-none focus:border-purple-400 focus:bg-white/25 transition-all text-white placeholder-gray-300 text-lg"
             />

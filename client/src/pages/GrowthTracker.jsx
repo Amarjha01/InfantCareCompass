@@ -16,6 +16,7 @@ import {
 import { Line, Bar } from 'react-chartjs-2';
 import growthTrackerAPI from '../api/growthTrackerAPI';
 import { toast } from 'react-hot-toast';
+import SkeletonLoader from '../components/SkeletonLoader';
 
 // Register Chart.js components
 ChartJS.register(
@@ -27,6 +28,40 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend
+);
+
+// Skeleton Components
+const ChartSkeleton = () => (
+  <div className="chart-container">
+    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 animate-pulse">
+      <div className="h-6 bg-slate-700 rounded w-1/3 mb-6"></div>
+      <div className="h-64 bg-slate-700/50 rounded-lg"></div>
+    </div>
+  </div>
+);
+
+const StatsSkeleton = () => (
+  <div className="insight-card">
+    <div className="h-6 bg-slate-700 rounded w-1/4 mb-4"></div>
+    <div className="stats-grid">
+      <div className="stat-item">
+        <div className="h-4 bg-slate-700 rounded w-3/4 mb-2"></div>
+        <div className="h-6 bg-slate-700 rounded w-1/2"></div>
+      </div>
+      <div className="stat-item">
+        <div className="h-4 bg-slate-700 rounded w-3/4 mb-2"></div>
+        <div className="h-6 bg-slate-700 rounded w-1/2"></div>
+      </div>
+      <div className="stat-item">
+        <div className="h-4 bg-slate-700 rounded w-3/4 mb-2"></div>
+        <div className="h-6 bg-slate-700 rounded w-1/2"></div>
+      </div>
+      <div className="stat-item">
+        <div className="h-4 bg-slate-700 rounded w-3/4 mb-2"></div>
+        <div className="h-6 bg-slate-700 rounded w-1/2"></div>
+      </div>
+    </div>
+  </div>
 );
 
 const GrowthTracker = () => {
@@ -405,7 +440,9 @@ const GrowthTracker = () => {
       )}
 
       {/* Growth Insights */}
-      {insight && (
+      {loading ? (
+        <StatsSkeleton />
+      ) : insight ? (
         <div className={`insight-card ${insight.status}`}>
           <h3>💡 Growth Insight</h3>
           <p>{insight.message}</p>
@@ -430,7 +467,7 @@ const GrowthTracker = () => {
             </div>
           )}
         </div>
-      )}
+      ) : null}
 
       {/* Chart Controls */}
       <div className="chart-controls">
@@ -453,7 +490,9 @@ const GrowthTracker = () => {
 
       {/* Growth Chart */}
       <div className="chart-container">
-        {growthLogs.length > 0 ? (
+        {loading ? (
+          <ChartSkeleton />
+        ) : growthLogs.length > 0 ? (
           chartType === 'line' ? (
             <Line data={chartData} options={chartOptions} />
           ) : (

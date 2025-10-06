@@ -55,7 +55,7 @@ function App() {
   return (
     <ThemeProvider>
       <div className="w-full min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-        <MagicCursorTrail />   {/* cursor trail effect */}
+        <MagicCursorTrail />   {/* Custom cursor trail animation effect */}
         <ScrollRestoration />
         {!hideLayout && <Header />}
 
