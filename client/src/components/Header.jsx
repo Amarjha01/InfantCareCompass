@@ -187,7 +187,7 @@ export default function Header() {
             </div>
 
             {/* Auth Buttons */}
-            <div className="hidden lg:flex items-center w-150">
+            <div className="hidden lg:flex items-center w-[150px]">
               {isAuthenticated && user ? (
                 <>
                   <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-full">
@@ -348,6 +348,7 @@ export default function Header() {
           </div>
         </motion.div>
       )}
+    </div>
     </>
   );
 }
