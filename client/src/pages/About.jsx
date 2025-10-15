@@ -31,12 +31,7 @@ const About = () => {
       description: t('about.services.consultation.description'),
       gradient: "from-amber-400 via-orange-500 to-yellow-500",
       bgColor: "bg-gradient-to-br from-amber-50 to-orange-50",
-      features: [
-        t('about.services.consultation.features[0]'),
-        t('about.services.consultation.features[1]'),
-        t('about.services.consultation.features[2]'),
-        t('about.services.consultation.features[3]'),
-      ],
+      features:  t('about.services.consultation.features', { returnObjects: true }),
     },
     {
       id: 2,
@@ -45,12 +40,7 @@ const About = () => {
       description: t('about.services.education.description'),
       gradient: "from-blue-500 via-purple-500 to-indigo-600",
       bgColor: "bg-gradient-to-br from-blue-50 to-purple-50",
-      features: [
-        t('about.services.education.features[0]'),
-        t('about.services.education.features[1]'),
-        t('about.services.education.features[2]'),
-        t('about.services.education.features[3]'),
-      ],
+      features: t('about.services.ai.features', { returnObjects: true }),
     },
     {
       id: 3,
@@ -59,12 +49,7 @@ const About = () => {
       description: t('about.services.news.description'),
       gradient: "from-green-500 via-teal-500 to-cyan-600",
       bgColor: "bg-gradient-to-br from-green-50 to-teal-50",
-      features: [
-        t('about.services.news.features[0]'),
-        t('about.services.news.features[1]'),
-        t('about.services.news.features[2]'),
-        t('about.services.news.features[3]'),
-      ],
+      features: t('about.services.news.features', { returnObjects: true }),
     },
     {
       id: 4,
@@ -73,12 +58,7 @@ const About = () => {
       description: t('about.services.ai.description'),
       gradient: "from-pink-500 via-rose-500 to-red-500",
       bgColor: "bg-gradient-to-br from-pink-50 to-rose-50",
-      features: [
-        t('about.services.ai.features[0]'),
-        t('about.services.ai.features[1]'),
-        t('about.services.ai.features[2]'),
-        t('about.services.ai.features[3]'),
-      ],
+      features: t('about.services.ai.features', { returnObjects: true }),
     },
   ];
 
@@ -257,24 +237,18 @@ const About = () => {
                     </p>
 
                     {/* Features */}
-                    <div className="space-y-3">
-                      {service.features.map((feature, featureIndex) => (
-                        <div
-                          key={featureIndex}
-                          className={`flex items-center gap-3 transition-all duration-300 ${
-                            activeCard === service.id
-                              ? "opacity-100 translate-x-0"
-                              : "opacity-70 translate-x-2"
-                          }`}
-                          style={{ transitionDelay: `${featureIndex * 100}ms` }}
-                        >
-                          <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
-                          <span className="text-gray-300 group-hover:text-white transition-colors duration-300">
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+                   <div className="space-y-3">
+  {(Array.isArray(service.features) ? service.features : String(service.features).split(',')).map(
+    (feature, idx) => (
+      <div key={idx} className="flex items-center gap-3">
+        <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+        <span className="text-gray-300">{String(feature).trim()}</span>
+      </div>
+    )
+  )}
+</div>
+
+
 
                     {/* Learn More Button */}
                     <div className="mt-8">
