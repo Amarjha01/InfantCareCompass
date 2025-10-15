@@ -227,7 +227,7 @@ const News = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-white overflow-hidden">
       {/* Header */}
       <div className="relative py-20 px-4">
         <div className="max-w-6xl mx-auto text-center">
@@ -238,7 +238,7 @@ const News = () => {
             Latest News & Updates
           </h1>
           <p
-            className="text-xl text-gray-600 max-w-2xl mx-auto animate-fadeIn"
+            className="text-xl text-gray-300 max-w-2xl mx-auto animate-fadeIn"
             style={{ animationDelay: "0.2s" }}
           >
             Stay informed with the latest developments in childcare, health, and technology.
