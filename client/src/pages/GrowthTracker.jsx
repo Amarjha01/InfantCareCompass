@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { useSelector } from 'react-redux';
+import { Navigate } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+
+
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -294,48 +298,78 @@ const GrowthTracker = () => {
 
   const insight = getGrowthInsight();
 
+
   // Show authentication prompt if not logged in
-  if (!isAuthenticated) {
-    return (
-      <div className="growth-container">
-        <h1 className="title">🌱 Growth Tracker</h1>
-        
-        <div className="auth-prompt">
-          <div className="auth-card">
-            <h2>🔐 Sign In Required</h2>
-            <p>To track your child's growth and access all features, please sign in to your account.</p>
-            
-            <div className="auth-buttons">
-              <button 
-                className="signin-button"
-                onClick={() => navigate('/signin')}
-              >
-                🔑 Sign In
-              </button>
-              <button 
-                className="register-button"
-                onClick={() => navigate('/registration')}
-              >
-                📝 Create Account
-              </button>
-            </div>
-            
-            <div className="feature-preview">
-              <h3>✨ What you'll get:</h3>
-              <ul>
-                <li>📊 Track height and weight over time</li>
-                <li>📈 Interactive growth charts</li>
-                <li>💡 AI-powered growth insights</li>
-                <li>🔔 Customizable reminders</li>
-                <li>📋 Milestone tracking</li>
-                <li>📱 Multi-child support</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+if (!isAuthenticated) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-black-100 p-6">
+      <div className="max-w-md w-full bg-white rounded-3xl shadow-lg p-8 text-center">
+        <h2 className="text-3xl font-bold text-indigo-600 mb-4">
+          Welcome!
+        </h2>
+        <p className="text-gray-700 mb-4">Here's what you'll get:</p>
+        <ul className="text-left list-disc list-inside space-y-2 text-blue-600 mb-6">
+          <li>📊 Track height and weight over time</li>
+          <li>📈 Interactive growth charts</li>
+          <li>💡 AI-powered growth insights</li>
+          <li>🔔 Customizable reminders</li>
+          <li>📋 Milestone tracking</li>
+          <li>📱 Multi-child support</li>
+        </ul>
+        <button
+          onClick={() => navigate("/signin")}
+          className="w-full py-3 px-6 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500/50"
+        >
+         Login
+        </button>
       </div>
-    );
-  }
+    </div>
+  );
+}
+
+
+
+  // if (!isAuthenticated) {
+  //   return (
+  //     <div className="growth-container">
+  //       <h1 className="title">🌱 Growth Tracker</h1>
+        
+  //       <div className="auth-prompt">
+  //         <div className="auth-card">
+  //           <h2>🔐 Sign In Required</h2>
+  //           <p>To track your child's growth and access all features, please sign in to your account.</p>
+            
+  //           <div className="auth-buttons">
+  //             <button 
+  //               className="signin-button"
+  //               onClick={() => navigate('/signin')}
+  //             >
+  //               🔑 Sign In
+  //             </button>
+  //             <button 
+  //               className="register-button"
+  //               onClick={() => navigate('/registration')}
+  //             >
+  //               📝 Create Account
+  //             </button>
+  //           </div>
+            
+  //           <div className="feature-preview">
+  //             <h3>✨ What you'll get:</h3>
+  //             <ul>
+  //               <li>📊 Track height and weight over time</li>
+  //               <li>📈 Interactive growth charts</li>
+  //               <li>💡 AI-powered growth insights</li>
+  //               <li>🔔 Customizable reminders</li>
+  //               <li>📋 Milestone tracking</li>
+  //               <li>📱 Multi-child support</li>
+  //             </ul>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="growth-container">
