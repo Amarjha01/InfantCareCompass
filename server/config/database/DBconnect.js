@@ -12,14 +12,15 @@ async function dbConnect() {
       );
     }
     
-    await mongoose.connect(mongoUri);
+    const conn = await mongoose.connect(mongoUri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     
-    console.log("Successfully connected to MongoDB");
+    console.log(`Successfully connected to MongoDB: ${conn.connection.host}`);
   } catch (error) {
-
     console.error("Error connecting to MongoDB:", error.message);
     process.exit(1);
-
   }
 }
 
