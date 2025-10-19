@@ -9,7 +9,7 @@ const MagicCursorTrail = () => {
     for (let i = 0; i < trailCount; i++) {
       const dot = document.createElement("div");
       dot.className =
-        "magic-cursor-dot fixed w-2 h-2 bg-pink-500 rounded-full pointer-events-none opacity-80 z-50 transition-transform duration-75";
+        "magic-cursor-dot fixed w-2 h-2 bg-pink-500 rounded-full pointer-events-none opacity-80 z-10 transition-transform duration-75";
       document.body.appendChild(dot);
       trailDots.push(dot);
     }
@@ -46,7 +46,7 @@ const MagicCursorTrail = () => {
       for (let i = 0; i < 10; i++) {
         const burst = document.createElement("div");
         burst.className =
-          "fixed w-2 h-2 rounded-full pointer-events-none z-50 opacity-80";
+          "fixed w-2 h-2 rounded-full pointer-events-none z-10 opacity-80";
         burst.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         burst.style.left = `${e.clientX}px`;
         burst.style.top = `${e.clientY}px`;
