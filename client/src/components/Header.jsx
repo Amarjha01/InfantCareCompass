@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/slices/userSlice.jsx";
@@ -27,6 +27,8 @@ import { Globe } from "lucide-react";
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
+  const langMenuRef = useRef(null);
   const { user, isAuthenticated } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,6 +39,30 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close language menu on outside click or ESC key
+  useEffect(() => {
+    if (!isLangOpen) return;
+
+    const handleClickOutside = (event) => {
+      if (langMenuRef.current && !langMenuRef.current.contains(event.target)) {
+        setIsLangOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setIsLangOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isLangOpen]);
 
   // Handle user logout by clearing local storage and redirecting
   const handleLogout = () => {
@@ -99,12 +125,13 @@ export default function Header() {
     <>
       {/* HEADER */}
       <div
-        className={`fixed top-0 left-0 h-[80px] flex right-0 z-50 transition-all duration-300 
+        className={`fixed top-0 left-0 h-[80px] flex right-0 z-[9999] transition-all duration-300 
         ${isScrolled ? "shadow-md" : ""} 
         bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700`}
       >
 
         <div className="w-full  flex items-center px-4 py-2">
+          {/* Left: Logo */}
           <div className="flex items-center gap-5 flex-shrink-0">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3 ">
@@ -124,10 +151,11 @@ export default function Header() {
               </div>
             </Link>
 
-            {/* Desktop Nav */}
+          </div>
 
-            <div className="hidden lg:flex items-center gap-2 mx-auto">
-
+          {/* Center: Desktop Nav (scrollable to avoid overlap) */}
+          <div className="hidden lg:flex flex-1 mx-4 overflow-x-auto whitespace-nowrap items-center">
+            <div className="inline-flex items-center gap-2">
               {navItems.map(({ to, label, icon }) => (
                 <NavLink
                   key={to}
@@ -145,27 +173,22 @@ export default function Header() {
                 </NavLink>
               ))}
             </div>
+          </div>
 
 
-            {/* Theme Toggle & Language Switcher */}
-            <div className="hidden lg:flex items-center ml-2 mr-4 gap-2">
-
-            {/* Theme Toggle */}
-
-            <div className="hidden lg:flex items-center gap-3 ml-auto">
-
-
-              <ThemeToggle />
-              
-              {/* Language Switcher */}
-              <div className="relative">
-                <button className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-purple-100 dark:hover:bg-gray-800 rounded-full transition-all duration-300" aria-label="Select language - current language is English">
-                  <Globe className="w-4 h-4" />
-                  <span className="uppercase">{i18n.language}</span>
-                </button>
-                <div className="absolute top-full right-0 mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg py-1 min-w-[80px] z-50">
+          {/* Right: Theme/Language + Auth */}
+          <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
+            <ThemeToggle />
+            {/* Language Switcher */}
+            <div className="relative" ref={langMenuRef}>
+              <button onClick={() => setIsLangOpen(!isLangOpen)} aria-expanded={isLangOpen} aria-haspopup="menu" className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-purple-100 dark:hover:bg-gray-800 rounded-full transition-all duration-300" aria-label="Select language">
+                <Globe className="w-4 h-4" />
+                <span className="uppercase">{i18n.language}</span>
+              </button>
+              {isLangOpen && (
+                <div role="menu" className="absolute top-full right-0 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg py-1 min-w-[120px] z-[100]">
                   <button
-                    onClick={() => changeLanguage('en')}
+                    onClick={() => { changeLanguage('en'); setIsLangOpen(false); }}
                     className={`w-full text-left px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
                       i18n.language === 'en' ? 'bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-400' : 'text-gray-700 dark:text-gray-200'
                     }`}
@@ -174,7 +197,7 @@ export default function Header() {
                     English
                   </button>
                   <button
-                    onClick={() => changeLanguage('hi')}
+                    onClick={() => { changeLanguage('hi'); setIsLangOpen(false); }}
                     className={`w-full text-left px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
                       i18n.language === 'hi' ? 'bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-400' : 'text-gray-700 dark:text-gray-200'
                     }`}
@@ -183,11 +206,11 @@ export default function Header() {
                     हिंदी
                   </button>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Auth Buttons */}
-            <div className="hidden lg:flex items-center w-[150px]">
+            <div className="flex items-center gap-2">
               {isAuthenticated && user ? (
                 <>
                   <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-full">
@@ -214,28 +237,28 @@ export default function Header() {
                   </Link>
                   <Link
                     to="/registration"
-                    className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-1.5 ml-2 text-sm font-semibold rounded-full shadow hover:scale-105 transition-transform whitespace-nowrap"
+                    className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-1.5 text-sm font-semibold rounded-full shadow hover:scale-105 transition-transform whitespace-nowrap"
                   >
                     {t("common.register")}
                   </Link>
                 </>
               )}
             </div>
+          </div>
 
-            {/* Hamburger */}
-            <div className="lg:hidden">
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                aria-label="Toggle mobile menu"
-                className="p-2 rounded-md bg-purple-100 dark:bg-gray-100 hover:bg-purple-200 dark:hover:bg-gray-200"
-              >
-                {isMobileMenuOpen ? (
-                  <X className="w-6 h-6 " />
-                ) : (
-                  <Menu className="w-6 h-6 " />
-                )}
-              </button>
-            </div>
+          {/* Hamburger */}
+          <div className="lg:hidden ml-auto">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle mobile menu"
+              className="p-2 rounded-md bg-purple-100 dark:bg-gray-100 hover:bg-purple-200 dark:hover:bg-gray-200"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6 " />
+              ) : (
+                <Menu className="w-6 h-6 " />
+              )}
+            </button>
           </div>
         </div>
       </div>
@@ -348,7 +371,6 @@ export default function Header() {
           </div>
         </motion.div>
       )}
-    </div>
     </>
   );
 }
