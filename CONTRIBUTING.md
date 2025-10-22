@@ -13,14 +13,18 @@ Thank you for your interest in contributing to InfantCareCompass! Your support h
 ### Setting Up the Project
 
 1. **Fork the Repository**
+   
    Start by forking the repo on GitHub to have your own copy. Then clone it locally:
+   
     ```bash
    git clone https://github.com/YOUR_USERNAME/InfantCareCompass.git
    cd InfantCareCompass
    ```
 
-2. **Install Dependencies**
+3. **Install Dependencies**
+   
    Install the necessary packages for both backend and frontend:
+   
    ```bash
    # Install root dependencies
    npm install
@@ -35,7 +39,9 @@ Thank you for your interest in contributing to InfantCareCompass! Your support h
    ```
 
 3. **Set Up Environment Variables**
+   
    Create a `.env` file in the root directory with the following variables:
+   
    ```env
    PORT=5000
    MONGO_URI=your_mongodb_uri
@@ -44,7 +50,10 @@ Thank you for your interest in contributing to InfantCareCompass! Your support h
    CLOUDINARY_API_SECRET=your_cloudinary_api_secret
    TOKEN_SECRET_KEY=your_jwt_secret_key
    ```
+   
 >💡 Tip: Never share your .env file or secrets publicly.
+
+---
 
 
 ## ✨ Making Changes
@@ -79,12 +88,29 @@ git checkout -b feature/your-feature-name
    git commit -m "feat: add your feature description"
    ```
 
-### Code Style Guidelines
+## 🧑‍💻 Code Style Guidelines
 
-- Use meaningful commit messages
-- Follow the existing code formatting
-- Add comments for complex logic
-- Test your changes before submitting
+To maintain a clean and consistent codebase, please follow these best practices:
+
+- ✅ **Use Meaningful Commit Messages**  
+  Clearly describe what your commit does.  
+  Example:  
+  ```bash
+  git commit -m "Fix: Resolve crash on login when credentials are empty"
+  ```
+- 🧹 **Follow Existing Code Formatting**
+  
+  Stick to the project's code style conventions. Use linters or formatters where applicable (e.g., Prettier, ESLint).
+
+- 💬 **Comment Complex Logic**
+
+  Add comments to explain why something is done a certain way — especially for non-obvious or tricky implementations.
+
+- 🧪 **Test Before You Commit**
+
+   Make sure your changes don't break existing features. Run tests and check the functionality locally.
+
+> 🔍 Tip: If you're unsure about any part of the code style, look at existing files and follow the established patterns.
 
 ## Submitting Changes
 
@@ -108,10 +134,17 @@ git checkout -b feature/your-feature-name
 - Ensure all tests pass
 - Update documentation if needed
 
-## Need Help?
+## ❓ Need Help?
 
-- Check existing issues and discussions
-- Join our Discord community
-- Contact the maintainers
+If you run into issues or have questions, here are a few ways to get support:
+
+- 📂 **Check Existing Issues & Discussions**  
+   Browse the **Issues** and **Discussions** tabs — your question might already be answered!
+
+- 💬 **Join Our Discord Community**  
+  Connect with other contributors, ask questions, and get help in real time. *(Link to your Discord server here)*
+
+- 📫 **Contact the Maintainers**  
+  Still stuck? Reach out to the maintainers via GitHub or through the contact info listed in the repository.
 
 Thank you for contributing to InfantCareCompass! 🚀
