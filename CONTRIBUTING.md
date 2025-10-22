@@ -13,13 +13,14 @@ Thank you for your interest in contributing to InfantCareCompass! Your support h
 ### Setting Up the Project
 
 1. **Fork the Repository**
-   ```bash
-   # Fork the repository on GitHub first, then clone your fork
+   Start by forking the repo on GitHub to have your own copy. Then clone it locally:
+    ```bash
    git clone https://github.com/YOUR_USERNAME/InfantCareCompass.git
    cd InfantCareCompass
    ```
 
 2. **Install Dependencies**
+   Install the necessary packages for both backend and frontend:
    ```bash
    # Install root dependencies
    npm install
@@ -43,10 +44,13 @@ Thank you for your interest in contributing to InfantCareCompass! Your support h
    CLOUDINARY_API_SECRET=your_cloudinary_api_secret
    TOKEN_SECRET_KEY=your_jwt_secret_key
    ```
+>💡 Tip: Never share your .env file or secrets publicly.
 
-## Making Changes
+
+## ✨ Making Changes
 
 ### Creating a Feature Branch
+Always create a new branch for your work to keep changes organized:
 
 ```bash
 git checkout -b feature/your-feature-name
