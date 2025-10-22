@@ -1,8 +1,8 @@
 # Contributing to InfantCareCompass
 
-Thank you for your interest in contributing to InfantCareCompass! This document provides guidelines for contributing to this project.
+Thank you for your interest in contributing to InfantCareCompass! Your support helps us improve this project for caregivers everywhere. This guide will walk you through setting up the project, coding guidelines, and how to submit your changes smoothly.
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
