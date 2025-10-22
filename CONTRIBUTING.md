@@ -51,7 +51,7 @@ Thank you for your interest in contributing to InfantCareCompass! Your support h
    TOKEN_SECRET_KEY=your_jwt_secret_key
    ```
    
->💡 Tip: Never share your .env file or secrets publicly.
+>💡 **Tip**: Never share your .env file or secrets publicly.
 
 ---
 
@@ -87,6 +87,7 @@ git checkout -b feature/your-feature-name
    git add .
    git commit -m "feat: add your feature description"
    ```
+---
 
 ## 🧑‍💻 Code Style Guidelines
 
@@ -110,10 +111,13 @@ To maintain a clean and consistent codebase, please follow these best practices:
 
    Make sure your changes don't break existing features. Run tests and check the functionality locally.
 
-> 🔍 Tip: If you're unsure about any part of the code style, look at existing files and follow the established patterns.
+> 🔍 **Tip**: If you're unsure about any part of the code style, look at existing files and follow the established patterns.
 
-## Submitting Changes
+---
 
+## 🚀 Submitting Changes
+
+Follow these steps to submit your changes for review:
 1. **Push Your Branch**
    ```bash
    git push origin feature/your-feature-name
@@ -125,14 +129,29 @@ To maintain a clean and consistent codebase, please follow these best practices:
    - Select your feature branch
    - Fill out the PR template
    - Submit the PR
+---
 
-## Pull Request Guidelines
+## 🔀 Pull Request Guidelines
 
-- Provide a clear description of your changes
-- Include screenshots if UI changes are made
-- Reference any related issues
-- Ensure all tests pass
-- Update documentation if needed
+To help us review and merge your contribution smoothly, please follow these guidelines:
+
+- 📝 **Provide a Clear Description of Your Changes**  
+  Explain what your PR does and why. Keep it concise but informative.
+
+- 🖼️ **Include Screenshots for UI Changes**  
+  If your changes affect the UI, attach before/after screenshots or screen recordings.
+
+- 🔗 **Reference Any Related Issues**  
+  Link to relevant issues using GitHub keywords.  
+  Example:  
+  ```markdown
+  Fixes #123
+  ```
+- ✅ **Ensure All Tests Pass**
+Run all tests locally before submitting your PR. Don't break the build!
+
+>💡 **Tip**: Keep pull requests focused. It’s better to submit smaller, scoped PRs than large, sweeping ones.
+---
 
 ## ❓ Need Help?
 
