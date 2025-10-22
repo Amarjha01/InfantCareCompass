@@ -166,4 +166,7 @@ If you run into issues or have questions, here are a few ways to get support:
 - 📫 **Contact the Maintainers**  
   Still stuck? Reach out to the maintainers via GitHub or through the contact info listed in the repository.
 
-Thank you for contributing to InfantCareCompass! 🚀
+---
+
+Thank you for contributing to **InfantCareCompass**! 🚀  
+Your time and effort help make this project better for everyone. ️
