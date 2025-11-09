@@ -1,129 +1,318 @@
-import ScrollToTop from '../components/ScrollToTop';
+import React from 'react';
+import { Shield, Lock, Eye, FileText, Mail, Phone, MapPin, Baby, UserCheck, Bell, Database, AlertCircle, Calendar, Users } from 'lucide-react';
+
+const ScrollToTop = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return null;
+};
 
 const PrivacyPolicy = () => {
   return (
     <>
       <ScrollToTop />
-      <div className="min-h-screen bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-white relative overflow-hidden">
-        {/* Background Elements */}
+      <div className="min-h-screen bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 text-white relative overflow-hidden">
+        {/* Animated Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_rgba(139,92,246,0.15),_transparent_50%)]"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,_rgba(236,72,153,0.15),_transparent_50%)]"></div>
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-l from-pink-500/10 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute top-20 left-20 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-pink-500/10 rounded-full blur-3xl"></div>
         </div>
 
-        <div className="relative z-10 container mx-auto px-6 py-20 max-w-5xl">
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl shadow-2xl p-8 md:p-12">
-            <h1 className="text-5xl font-bold text-white mb-8 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+        {/* Header */}
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 py-16">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl mb-6 shadow-lg">
+              <Shield className="w-10 h-10 text-white" />
+            </div>
+            <h1 className="text-5xl sm:text-6xl font-bold mb-4 text-white">
               Privacy Policy
             </h1>
-            
-            <div className="text-gray-300 text-sm mb-8 bg-white/5 backdrop-blur-sm rounded-lg p-4">
-              <p><strong className="text-purple-300">Effective Date:</strong> January 1, 2024</p>
-              <p><strong className="text-purple-300">Last Updated:</strong> January 1, 2024</p>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              Your trust is our priority. Learn how we protect your family's data.
+            </p>
+          </div>
+
+          {/* Date Info Card */}
+          <div className="max-w-6xl mx-auto mb-12">
+            <div className="bg-slate-700/50 backdrop-blur-sm border border-slate-600 rounded-xl p-5 shadow-lg">
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-5 h-5 text-purple-400" />
+                  <span className="text-gray-400">Effective Date:</span>
+                  <span className="text-white font-semibold">January 1, 2024</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <AlertCircle className="w-5 h-5 text-pink-400" />
+                  <span className="text-gray-400">Last Updated:</span>
+                  <span className="text-white font-semibold">January 1, 2024</span>
+                </div>
+              </div>
             </div>
+          </div>
 
-            <div className="prose prose-lg max-w-none text-gray-200">
+          {/* Main Content */}
+          <div className="max-w-6xl mx-auto space-y-8">
+            
+            {/* Introduction */}
+            <section className="bg-slate-700/30 backdrop-blur-sm border border-slate-600 rounded-2xl p-8 shadow-lg">
+              <div className="flex items-start gap-4 mb-6">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-xl">1</span>
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-3xl font-bold text-white mb-3">Introduction</h2>
+                </div>
+              </div>
               
-              <section className="mb-10">
-                <h2 className="text-3xl font-semibold text-white mb-6 flex items-center">
-                  <span className="w-2 h-8 bg-gradient-to-b from-blue-400 to-purple-500 rounded-full mr-4"></span>
-                  1. Introduction
-                </h2>
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                  <p className="mb-4 text-gray-200 leading-relaxed">
-                    InfantCare Compass (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy and the privacy of your children. 
-                    This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our 
-                    healthcare platform designed to assist parents in managing their child&apos;s healthcare needs.
-                  </p>
-                  <div className="bg-blue-500/20 border-l-4 border-blue-400 p-4 rounded-r-lg">
-                    <p className="text-blue-200">
-                      <strong>Important:</strong> This platform deals with children&apos;s health information. We comply with the Children&apos;s 
-                      Online Privacy Protection Act (COPPA) and take extra precautions to protect children&apos;s data.
-                    </p>
-                  </div>
-                </div>
-              </section>
-
-              <section className="mb-10">
-                <h2 className="text-3xl font-semibold text-white mb-6 flex items-center">
-                  <span className="w-2 h-8 bg-gradient-to-b from-purple-400 to-pink-500 rounded-full mr-4"></span>
-                  2. Information We Collect
-                </h2>
+              <div className="space-y-4 text-gray-300 leading-relaxed">
+                <p>
+                  InfantCare Compass ("we," "our," or "us") is committed to protecting your privacy and the privacy of your children. 
+                  This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our 
+                  healthcare platform designed to assist parents in managing their child's healthcare needs.
+                </p>
                 
-                <div className="space-y-6">
-                  <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                    <h3 className="text-xl font-medium text-purple-300 mb-4">2.1 Personal Information</h3>
-                    <ul className="list-disc pl-6 mb-4 space-y-2">
-                      <li className="text-gray-200">Parent/Guardian contact information (name, email, phone number)</li>
-                      <li className="text-gray-200">Account credentials (username, encrypted password)</li>
-                      <li className="text-gray-200">Profile information and preferences</li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                    <h3 className="text-xl font-medium text-purple-300 mb-4">2.2 Child Health Information</h3>
-                    <ul className="list-disc pl-6 mb-4 space-y-2">
-                      <li className="text-gray-200">Child&apos;s name, date of birth, and basic demographics</li>
-                      <li className="text-gray-200">Vaccination records and schedules</li>
-                      <li className="text-gray-200">Health-related notes and reminders</li>
-                      <li className="text-gray-200">Consultation records (with explicit consent)</li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                    <h3 className="text-xl font-medium text-purple-300 mb-4">2.3 Technical Information</h3>
-                    <ul className="list-disc pl-6 mb-4 space-y-2">
-                      <li className="text-gray-200">Device information and browser type</li>
-                      <li className="text-gray-200">IP address and location data (when permitted)</li>
-                      <li className="text-gray-200">Usage analytics and interaction data</li>
-                      <li className="text-gray-200">Cookies and similar tracking technologies</li>
-                    </ul>
+                <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-5 mt-6">
+                  <div className="flex gap-3">
+                    <Baby className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
+                    <div>
+                      <p className="text-blue-300 font-semibold mb-2">Important Notice</p>
+                      <p className="text-blue-200/80 text-sm leading-relaxed">
+                        This platform deals with children's health information. We comply with the Children's 
+                        Online Privacy Protection Act (COPPA) and take extra precautions to protect children's data.
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </section>
+              </div>
+            </section>
 
-              <section className="mb-10">
-                <h2 className="text-3xl font-semibold text-white mb-6 flex items-center">
-                  <span className="w-2 h-8 bg-gradient-to-b from-pink-400 to-red-500 rounded-full mr-4"></span>
-                  3. How We Use Your Information
-                </h2>
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                  <ul className="list-disc pl-6 mb-4 space-y-3">
-                    <li className="text-gray-200"><strong className="text-blue-300">Healthcare Management:</strong> Track vaccination schedules and send reminders</li>
-                    <li className="text-gray-200"><strong className="text-blue-300">Educational Content:</strong> Provide personalized parenting resources</li>
-                    <li className="text-gray-200"><strong className="text-blue-300">Communication:</strong> Send important health notifications and updates</li>
-                    <li className="text-gray-200"><strong className="text-blue-300">Platform Improvement:</strong> Analyze usage to enhance our services</li>
-                    <li className="text-gray-200"><strong className="text-blue-300">Safety &amp; Security:</strong> Protect against fraud and ensure platform security</li>
-                    <li className="text-gray-200"><strong className="text-blue-300">Legal Compliance:</strong> Meet regulatory requirements and legal obligations</li>
+            {/* Information We Collect */}
+            <section className="bg-slate-700/30 backdrop-blur-sm border border-slate-600 rounded-2xl p-8 shadow-lg">
+              <div className="flex items-start gap-4 mb-8">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-xl">2</span>
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-3xl font-bold text-white mb-3">Information We Collect</h2>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                {/* Personal Information */}
+                <div className="bg-gradient-to-br from-purple-500/10 to-transparent border border-purple-500/30 rounded-xl p-6 hover:border-purple-500/50 transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-4">
+                    <UserCheck className="w-6 h-6 text-purple-400" />
+                    <h3 className="text-xl font-semibold text-white">Personal Information</h3>
+                  </div>
+                  <ul className="space-y-2 text-gray-300">
+                    <li className="flex items-start gap-3">
+                      <span className="text-purple-400 mt-1">•</span>
+                      <span>Parent/Guardian contact information (name, email, phone number)</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-purple-400 mt-1">•</span>
+                      <span>Account credentials (username, encrypted password)</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-purple-400 mt-1">•</span>
+                      <span>Profile information and preferences</span>
+                    </li>
                   </ul>
                 </div>
-              </section>
 
-              <section className="mb-10">
-                <h2 className="text-3xl font-semibold text-white mb-6 flex items-center">
-                  <span className="w-2 h-8 bg-gradient-to-b from-green-400 to-teal-500 rounded-full mr-4"></span>
-                  4. Contact Information
-                </h2>
-                <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-sm rounded-xl p-6 border border-purple-300/30">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="text-center">
-                      <p className="text-purple-300 font-semibold">Email</p>
-                      <p className="text-white">privacy@infantcarecompass.live</p>
+                {/* Child Health Information */}
+                <div className="bg-gradient-to-br from-pink-500/10 to-transparent border border-pink-500/30 rounded-xl p-6 hover:border-pink-500/50 transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Baby className="w-6 h-6 text-pink-400" />
+                    <h3 className="text-xl font-semibold text-white">Child Health Information</h3>
+                  </div>
+                  <ul className="space-y-2 text-gray-300">
+                    <li className="flex items-start gap-3">
+                      <span className="text-pink-400 mt-1">•</span>
+                      <span>Child's name, date of birth, and basic demographics</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-pink-400 mt-1">•</span>
+                      <span>Vaccination records and schedules</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-pink-400 mt-1">•</span>
+                      <span>Health-related notes and reminders</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-pink-400 mt-1">•</span>
+                      <span>Consultation records (with explicit consent)</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Technical Information */}
+                <div className="bg-gradient-to-br from-blue-500/10 to-transparent border border-blue-500/30 rounded-xl p-6 hover:border-blue-500/50 transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Database className="w-6 h-6 text-blue-400" />
+                    <h3 className="text-xl font-semibold text-white">Technical Information</h3>
+                  </div>
+                  <ul className="space-y-2 text-gray-300">
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-400 mt-1">•</span>
+                      <span>Device information and browser type</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-400 mt-1">•</span>
+                      <span>IP address and location data (when permitted)</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-400 mt-1">•</span>
+                      <span>Usage analytics and interaction data</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-400 mt-1">•</span>
+                      <span>Cookies and similar tracking technologies</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            {/* How We Use Your Information */}
+            <section className="bg-slate-700/30 backdrop-blur-sm border border-slate-600 rounded-2xl p-8 shadow-lg">
+              <div className="flex items-start gap-4 mb-8">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-xl">3</span>
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-3xl font-bold text-white mb-3">How We Use Your Information</h2>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Healthcare Management */}
+                <div className="bg-gradient-to-br from-green-500/10 to-transparent border border-green-500/20 rounded-xl p-5 hover:border-green-500/40 transition-all duration-300">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 bg-green-500/20 rounded-lg">
+                      <Bell className="w-5 h-5 text-green-400" />
                     </div>
-                    <div className="text-center">
-                      <p className="text-purple-300 font-semibold">Phone</p>
-                      <p className="text-white">+91 919956****</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-purple-300 font-semibold">Address</p>
-                      <p className="text-white">InfantCare Compass Privacy Office</p>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Healthcare Management</h4>
+                      <p className="text-gray-400 text-sm">Track vaccination schedules and send reminders</p>
                     </div>
                   </div>
                 </div>
-              </section>
 
+                {/* Educational Content */}
+                <div className="bg-gradient-to-br from-blue-500/10 to-transparent border border-blue-500/20 rounded-xl p-5 hover:border-blue-500/40 transition-all duration-300">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 bg-blue-500/20 rounded-lg">
+                      <FileText className="w-5 h-5 text-blue-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Educational Content</h4>
+                      <p className="text-gray-400 text-sm">Provide personalized parenting resources</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Communication */}
+                <div className="bg-gradient-to-br from-purple-500/10 to-transparent border border-purple-500/20 rounded-xl p-5 hover:border-purple-500/40 transition-all duration-300">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 bg-purple-500/20 rounded-lg">
+                      <Mail className="w-5 h-5 text-purple-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Communication</h4>
+                      <p className="text-gray-400 text-sm">Send important health notifications and updates</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Platform Improvement */}
+                <div className="bg-gradient-to-br from-pink-500/10 to-transparent border border-pink-500/20 rounded-xl p-5 hover:border-pink-500/40 transition-all duration-300">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 bg-pink-500/20 rounded-lg">
+                      <Eye className="w-5 h-5 text-pink-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Platform Improvement</h4>
+                      <p className="text-gray-400 text-sm">Analyze usage to enhance our services</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Safety & Security */}
+                <div className="bg-gradient-to-br from-yellow-500/10 to-transparent border border-yellow-500/20 rounded-xl p-5 hover:border-yellow-500/40 transition-all duration-300">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 bg-yellow-500/20 rounded-lg">
+                      <Lock className="w-5 h-5 text-yellow-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Safety & Security</h4>
+                      <p className="text-gray-400 text-sm">Protect against fraud and ensure platform security</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Legal Compliance */}
+                <div className="bg-gradient-to-br from-cyan-500/10 to-transparent border border-cyan-500/20 rounded-xl p-5 hover:border-cyan-500/40 transition-all duration-300">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 bg-cyan-500/20 rounded-lg">
+                      <Shield className="w-5 h-5 text-cyan-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Legal Compliance</h4>
+                      <p className="text-gray-400 text-sm">Meet regulatory requirements and legal obligations</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Contact Information */}
+            <section className="bg-slate-700/30 backdrop-blur-sm border border-slate-600 rounded-2xl p-8 shadow-lg">
+              <div className="flex items-start gap-4 mb-8">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-xl">4</span>
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-3xl font-bold text-white mb-3">Contact Information</h2>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-slate-800/50 rounded-xl p-6 text-center border border-slate-600 hover:border-purple-500/50 transition-all duration-300 group">
+                  <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <Mail className="w-7 h-7 text-white" />
+                  </div>
+                  <p className="text-purple-400 font-semibold mb-2 text-sm uppercase tracking-wide">Email</p>
+                  <p className="text-white text-sm break-all">privacy@infantcarecompass.live</p>
+                </div>
+
+                <div className="bg-slate-800/50 rounded-xl p-6 text-center border border-slate-600 hover:border-pink-500/50 transition-all duration-300 group">
+                  <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <Phone className="w-7 h-7 text-white" />
+                  </div>
+                  <p className="text-pink-400 font-semibold mb-2 text-sm uppercase tracking-wide">Phone</p>
+                  <p className="text-white text-sm">+91 919956****</p>
+                </div>
+
+                <div className="bg-slate-800/50 rounded-xl p-6 text-center border border-slate-600 hover:border-blue-500/50 transition-all duration-300 group">
+                  <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <MapPin className="w-7 h-7 text-white" />
+                  </div>
+                  <p className="text-blue-400 font-semibold mb-2 text-sm uppercase tracking-wide">Address</p>
+                  <p className="text-white text-sm">InfantCare Compass<br/>Privacy Office</p>
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+          {/* Footer Note */}
+          <div className="max-w-6xl mx-auto mt-12 text-center">
+            <div className="inline-flex items-center gap-2 text-gray-500 text-sm">
+              <Shield className="w-4 h-4" />
+              <span>Thank you for trusting InfantCare Compass with your family's healthcare journey.</span>
             </div>
           </div>
         </div>
