@@ -82,7 +82,8 @@ const githubCallback = asyncHandler(async (req, res) => {
     const tokenOptions = {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict"
+        sameSite: "lax", // "strict" can cause issues with cross-site redirects
+        path: "/"
     };
 
     // 7. Prepare response data
@@ -103,10 +104,9 @@ const githubCallback = asyncHandler(async (req, res) => {
     console.log(responseData);
     return res
         .cookie("token", token, tokenOptions)
-        .status(200)
         .redirect(
-            `${process.env.FRONTEND_URL}/`
-        )        
+            `${process.env.FRONTEND_URL}/oauth-success`
+        );
 });
 
 export default githubCallback;

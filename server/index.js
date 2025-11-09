@@ -1,41 +1,24 @@
-
 import express from 'express';
 import 'dotenv/config';
-import cors from 'cors';
+import cors from "cors";
 import dbConnect from './config/database/DBconnect.js';
 import router from './routes/routes.js';
 import githubWebhook from './routes/githubWebhook.js';
-
-
+import githubOAuth from './routes/githubOAuth.js';
+import cookieParser from "cookie-parser";
 const PORT = process.env.PORT || 5000;
 const app = express();
 
 
 // Middleware
 app.use(
-  cors({
-    origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps or curl)
-      if (!origin) return callback(null, true);
-      
-      // Allow any localhost port
-      if (origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
-        return callback(null, true);
-      }
-      
-      // Allow the production domain
-      if (origin === 'https://infantcarecompass.live') {
-        return callback(null, true);
-      }
-      
-      // Reject other origins
-      callback(new Error('Not allowed by CORS'));
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
+  cookieParser()
 );
+
+app.use(cors({
+  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  credentials: true
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -83,9 +66,8 @@ app.use('/api', router);
 
 // GitHub webhook routes for handling repository events
 app.use("/api/github", githubWebhook);
-
-// Global error handling middleware
-// 404 handler for undefined routes
+// app.use('/api/github/oauth', githubOAuth);
+//error handling 
 app.use((req,res,next)=>{
   res.status(404).json({message:'Route Not Found'});
 });

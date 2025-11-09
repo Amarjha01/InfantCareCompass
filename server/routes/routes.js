@@ -13,7 +13,7 @@ import upload from '../middleware/multer.js';
 import { reviewDoctor } from '../controller/user/adminDashboard.js';
 import isAdmin from '../middleware/isAdmin.js'; 
 import { create } from "domain";
-
+import getUserInfo from "../controller/user/getUserInfo.js"; 
 router.post('/signup', upload.single('document'), signUp);
 
 import {
@@ -45,6 +45,7 @@ import {
 router.post('/signin', signIn);
 router.post('/signup', signUp);
 router.post('/logout', logout);
+router.get('/user/me', authtoken, getUserInfo);
 
 // Doctor and consultation
 router.post('/consultation', authtoken, consultation);
